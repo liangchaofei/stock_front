@@ -1,0 +1,148 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-12-17 19:52:10
+ * @LastEditTime : 2020-01-03 18:09:55
+ * @LastEditors  : Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /gp/static/component/list.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>知修数据</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="../css/person.css">
+</head>
+
+<body>
+    <div class="person_top">
+        <img src="" alt="头像" class="tx">
+        <div class="name"></div>
+        <div class="count">
+            <span>经验：<span class="expires">0</span></span>
+            <span>查询次数：<span class="flet_count">0</span></span>
+        </div>
+    </div>
+
+    <div>
+        <!-- <div class="weui-cell">
+            <div class="weui-cell__hd"><label for="name" class="weui-label">地址</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" id="address" type="text" value="湖北省 武汉市 武昌区" readonly="">
+            </div>
+        </div> -->
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label for="name" class="weui-label">手机</label></div>
+            <div class="weui-cell__bd">
+                <div class="weui-input" id="phone"></div>
+                <!-- <input class="weui-input" id="phone" type="text" value=""> -->
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label for="name" class="weui-label">加入时间</label></div>
+            <div class="weui-cell__bd">
+                <div class="weui-input" id="joinTime" ></div class="weui-input" id="joinTime">
+                <!-- <input class="weui-input" id="joinTime" type="text" value=""> -->
+            </div>
+        </div>
+        <!-- <div class="weui-cell">
+            <div class="weui-cell__hd"><label for="name" class="weui-label">我的条件</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" id="other" type="text" value="" readonly="" data-values="1,2,3">
+            </div>
+        </div> -->
+    </div>
+    <div class="weui-tabbar">
+        <a href="/component/search.html" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="../img/icon_nav_button.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">查询</p>
+        </a>
+        <a href="javascript:;" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="../img/icon_nav_article.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">头条</p>
+        </a>
+        <a href="/component/person.html" class="weui-tabbar__item weui-bar__item--on">
+            <div class="weui-tabbar__icon">
+                <img src="../img/icon_nav_cell.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">我</p>
+        </a>
+    </div>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+    </script>
+    <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/swiper.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/city-picker.min.js"></script>
+    <script>    
+
+function getUrlParam(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+    var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+    if (r != null) return unescape(r[2]); return null; //返回参数值
+}
+
+        $.ajax({
+            url: 'https://stock.zhixiutec.com/api/user',
+            type: 'get',
+            success: function (res) {
+                console.log('res', res)
+                var data = res.data;
+                if (res.error_code === 2) {
+                    window.open(data,"_self");
+                }else{
+                    console.log('aaa',data.CreatedAt)
+                    $('.tx').attr('src',data.avatar);
+                    $('.name').text(data.user_name);
+                    $('.flet_count').text(data.query_left)
+                    $('.expires').text(data.exp)
+                    $('#phone').text(data.phone)
+                    $('#joinTime').text(data.CreatedAt.substring(0,10))
+                }
+
+            }
+        })
+
+        $.ajax({
+            url: 'https://stock.zhixiutec.com/api/my_conditions',
+            type: 'get',
+            success: function (res) {
+                var data = res.data;
+                var arr = [];
+                var allConditions = [];
+                data.map(item => {
+                    var conditions = item.conditions;
+                    var belongs = conditions.belongs;
+                    var concepts = conditions.concepts;
+                    var labels = conditions.labels;
+                    var locations = conditions.locations;
+                    var organizational_form = conditions.organizational_form;
+                    var predicts = conditions.predicts;
+
+                    allConditions = belongs.concat(concepts).concat(labels).concat(locations).concat(organizational_form).concat(predicts)
+
+                    console.log('allConditions', allConditions.join(','))
+                    arr.push(allConditions.join(','))
+                })
+                console.log('arr', arr)
+                $("#other").select({
+                    title: "选择我的条件",
+                    items: arr,
+                    onClose: function (e) {
+                        console.log('eee', e)
+                    }
+                });
+            }
+        })
+    </script>
+</body>
+
+</html>

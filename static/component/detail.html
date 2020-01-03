@@ -1,0 +1,242 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-12-18 19:50:58
+ * @LastEditTime : 2020-01-03 19:52:41
+ * @LastEditors  : Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /gp/static/component/detail.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="../css/detail.css">
+    <link rel="stylesheet" href="../css//bootstrap.min.css">
+    <link rel="stylesheet" href="../css/page.css">
+</head>
+
+<body>
+    
+    <div id="daykline" class="weui-tab__bd-item weui-tab__bd-item--active"></div>
+    <div class="weui-tab">
+        <div class="weui-navbar">
+            <a class="weui-navbar__item weui-bar__item--on" href="#tab1">
+                信息
+            </a>
+            <a class="weui-navbar__item" href="#tab2">
+                数据
+            </a>
+        </div>
+        <div class="weui-tab__bd">
+            <div style="width:100%" id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
+               
+                <div id="stock_cash_flow" style="width:100%;height:400px;margin-bottom: 40px;"></div>
+
+                <div id="stock_liabilities" style="width:100%;height:400px;margin-bottom: 40px;"></div>
+
+                <div id="stock_profit" style="width:100%;height:400px;margin-bottom: 40px;"></div>
+            </div>
+            <div style="width:100%" id="tab2" class="weui-tab__bd-item">
+                <div class="weui-panel weui-panel_access" style="margin-bottom: 20px;">
+                    <!-- <div class="weui-panel__hd">命中条件</div> -->
+                    <div class="weui-panel__bd">
+                        <div class="weui-media-box weui-media-box_text">
+                            <div style="display:flex">
+                                <div style="flex:1">
+                                    <!-- <h4 class="weui-media-box__title">日期</h4> -->
+                                    <p class="weui-media-box__desc" id="percits_date"></p>
+                                </div>
+                                <div style="flex:1">
+                                    <!-- <h4 class="weui-media-box__title">股票名称</h4> -->
+                                    <p class="weui-media-box__desc" id="percits_name"></p>
+                                </div>
+                                <div style="flex:1">
+                                    <!-- <h4 class="weui-media-box__title">股票代码</h4> -->
+                                    <p class="weui-media-box__desc" id="percits_code"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="weui-media-box weui-media-box_text">
+                            <div style="display:flex">
+                                <div style="flex:1">
+                                    <!-- <h4 class="weui-media-box__title">价格</h4> -->
+                                    <p class="weui-media-box__desc" id="percits_price"></p>
+                                </div>
+                                <div style="flex:1">
+                                    <!-- <h4 class="weui-media-box__title">私募数量</h4> -->
+                                    <p class="weui-media-box__desc" id="percits_sm_count"></p>
+                                </div>
+                                <div style="flex:1">
+                                    <!-- <h4 class="weui-media-box__title">基金数量</h4> -->
+                                    <p class="weui-media-box__desc" id="percits_fund_count"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="weui-media-box weui-media-box_text">
+                            <h4 class="weui-media-box__title">优势</h4>
+                            <p class="weui-media-box__desc" id="percits_condition"></p>
+                        </div>
+                        <div class="weui-media-box weui-media-box_text">
+                            <h4 class="weui-media-box__title">劣势</h4>
+                            <p class="weui-media-box__desc" id="percits_bad_condition"></p>
+                        </div>
+                        <div class="weui-media-box weui-media-box_text">
+                            <h4 class="weui-media-box__title">财务指标</h4>
+                            <p class="weui-media-box__desc" id="percits_finance"></p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- 详情 -->
+                <div class="weui-panel weui-panel_access" style="margin-bottom: 20px;">
+                    <div class="weui-panel__hd">基本详情</div>
+                    <div class="weui-media-box weui-media-box_text">
+                        <div style="display: flex;">
+                            <div style="flex:1">
+                                <p class="weui-media-box__desc" id="detail_location"></p>
+                            </div>
+                            <div style="flex:1">
+                                <p class="weui-media-box__desc" id="detail_organizational_form"></p>
+                            </div>
+                            <div style="flex:1">
+                                <p class="weui-media-box__desc" id="detail_belong"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="weui-media-box weui-media-box_text">
+                        <div style="display:flex;">
+                            <div style="flex:1">
+                                <h4 class="weui-media-box__title">上市日期</h4>
+                                <p class="weui-media-box__desc" id="detail_listing_date"></p>
+                            </div>
+                            <div style="flex:1">
+                                <h4 class="weui-media-box__title">历史名称</h4>
+                                <p class="weui-media-box__desc" id="detail_history_names"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="weui-media-box weui-media-box_text">
+                        <h4 class="weui-media-box__title">经营范围</h4>
+                        <p class="weui-media-box__desc" id="detail_business_scope"></p>
+                    </div>
+                    <div class="weui-media-box weui-media-box_text">
+                        <h4 class="weui-media-box__title">地点</h4>
+                        <p class="weui-media-box__desc" id="detail_address"></p>
+                    </div>
+                    <div class="weui-media-box weui-media-box_text">
+                        <h4 class="weui-media-box__title">公司名称</h4>
+                        <p class="weui-media-box__desc" id="detail_company_name"></p>
+                    </div>
+                    <div class="weui-media-box weui-media-box_text">
+                        <h4 class="weui-media-box__title">概念</h4>
+                        <p class="weui-media-box__desc" id="detail_concept"></p>
+                    </div>
+
+                    <div class="weui-media-box weui-media-box_text">
+                        <h4 class="weui-media-box__title">主营业务</h4>
+                        <p class="weui-media-box__desc" id="detail_major_businesses"></p>
+                    </div>
+                    <div class="weui-media-box weui-media-box_text">
+                        <h4 class="weui-media-box__title">官网</h4>
+                        <p class="weui-media-box__desc" id="detail_net_address"></p>
+                    </div>
+
+                </div>
+
+
+                <!-- <div class="container-fluid">
+                    <div id="left_div">
+                        <div id="left_div1">
+                            <table id="left_table1" class="table table-bordered">
+                                <tr>
+                                    <th>名称</th>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="left_div2">
+                            <table id="left_table2" class="table table-bordered">
+                            </table>
+                        </div>
+                    </div>
+                    <div id="right_div">
+                        <div id="right_div1">
+                            <div id="right_divx">
+                                <table id="right_table1" class="table table-bordered">
+                                    <tr>
+                                        <th>变化</th>
+                                        <th>code</th>
+                                        <th>percent</th>
+                                        <th>count</th>
+                                        <th>holder_name</th>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="right_div2">
+                            <table id="right_table2" class="table table-bordered">
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-fluid">
+                    <div id="left_div_jg">
+                        <div id="left_div1_jg">
+                            <table id="left_table1_jg" class="table table-bordered">
+                                <tr>
+                                    <th>名称</th>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="left_div2_jg">
+                            <table id="left_table2_jg" class="table table-bordered">
+                            </table>
+                        </div>
+                    </div>
+                    <div id="right_div_jg">
+                        <div id="right_div1_jg">
+                            <div id="right_divx_jg">
+                                <table id="right_table1_jg" class="table table-bordered">
+                                    <tr>
+                                        <th>变化</th>
+                                        <th>code</th>
+                                        <th>count</th>
+                                        <th>fund_code</th>
+                                        <th>percent_jingzhi</th>
+                                        <th>price</th>
+                                        <th>percent_signal_stock</th>
+                                        <th>percent_liutong</th>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="right_div2_jg">
+                            <table id="right_table2_jg" class="table table-bordered">
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div id="pagination1" class="page fl"></div> -->
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/swiper.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/city-picker.min.js"></script>
+    <script src="../js/echarts.min.js"></script>
+    <script src="../js/stock_cash_flow.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/detail.js"></script>
+    <script src="../js/page.js"></script>
+  
+</body>
+
+</html>

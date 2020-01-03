@@ -1,0 +1,1193 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-12-17 19:52:10
+ * @LastEditTime : 2020-01-03 18:38:24
+ * @LastEditors  : Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /gp/static/component/list.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>知修数据</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="../css/search.css">
+</head>
+
+<body>
+    <!-- <button id="back">返回</button> -->
+    <!-- <svg id="back" t="1577202541121" class="icon" viewBox="0 0 1024 1024" version="1.1"
+        xmlns="http://www.w3.org/2000/svg" p-id="1109" width="2rem" height="2rem">
+        <path
+            d="M789.12 818.016s-5.632 14.496-13.12 0c0 0-83.808-252.896-288.064-189.216v78.496s-3.264 46.144-43.52 16.096l-200.832-173.376s-42.592-23.168 2.592-54.88l202.976-174.4s30.528-21.76 37.856 13.92l0.224 84.704c0 0.064 380.704 18.304 301.888 398.656z"
+            p-id="1110" fill="#1296db"></path>
+    </svg> -->
+
+
+
+    <!-- 搜索 -->
+    <div class="weui-search-bar" id="searchBar">
+        <form class="weui-search-bar__form">
+          <div class="weui-search-bar__box">
+            <i class="weui-icon-search"></i>
+            <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required="">
+            <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+          </div>
+          <label class="weui-search-bar__label" id="searchText">
+            <i class="weui-icon-search"></i>
+            <span>请输入证券代码或证券名称</span>
+          </label>
+        </form>
+        <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+      </div>
+
+
+      <!-- 基础信息 -->
+
+      <div class="weui-panel weui-panel_access">
+        <div class="weui-panel__hd" id="open">
+            基础信息<i class="down"></i><i class="up" style="display:none;"></i>
+           <span style="float:right">
+            共
+            <span class="basic_count" style="color: red;">0</span>
+            查询条件
+           </span>
+        </div>
+        <div class="weui-panel__bd" id="open_content">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label for="name" class="weui-label">所属行业</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="job" type="text" value="" readonly="">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label for="name" class="weui-label">城市</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="city" type="text" value="" readonly="" data-values="1,2,3">
+                </div>
+            </div>
+        </div>
+      </div>
+
+      <!-- 概念划分 -->
+      <div class="weui-panel weui-panel_access">
+        <div class="weui-panel__hd" id="concect_open">
+            概念划分<i class="down"></i><i class="up" style="display:none;"></i>
+            <span style="float:right">
+                共
+                <span class="concect_count" style="color: red;">0</span>
+                查询条件
+               </span>
+        </div>
+        <div class="weui-panel__bd" id="concect_content">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label for="name" class="weui-label">概念</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="idea" type="text" value="" readonly="" data-values="1,2,3">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label for="name" class="weui-label">标签</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="tag" type="text" value="" readonly="" data-values="1,2,3">
+                </div>
+            </div>
+        </div>
+      </div>
+
+      <!-- 特定条件 -->
+      <div class="weui-panel weui-panel_access">
+        <div class="weui-panel__hd" id="must_open">
+            特定条件<i class="down"></i><i class="up" style="display:none;"></i>
+            <span style="float:right">
+                共
+                <span class="must_count" style="color: red;">0</span>
+                查询条件
+               </span>
+        </div>
+        <div class="weui-panel__bd" id="must_content">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label for="name" class="weui-label">K线形态</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="kline" type="text" value="" readonly="" data-values="1,2,3">
+                </div>
+            </div>
+    
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label for="name" class="weui-label">机构持仓情况</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="jigou" type="text" value="" readonly="" data-values="1,2,3">
+                </div>
+            </div>
+    
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label for="name" class="weui-label">财务数据</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="moneyData" type="text" value="" readonly="" data-values="1,2,3">
+                </div>
+            </div>
+    
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label for="name" class="weui-label">量价形态</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="priceData" type="text" value="" readonly="" data-values="1,2,3">
+                </div>
+            </div>
+    
+            <!-- <div class="weui-cell">
+                <div class="weui-cell__hd"><label for="name" class="weui-label">其他</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="other" type="text" value="" readonly="" data-values="1,2,3">
+                </div>
+            </div> -->
+        </div>
+      </div>
+
+
+      <!-- 高级查询 -->
+      <div class="weui-panel weui-panel_access">
+        <div class="weui-panel__hd" id="high_open">
+            高级筛选<i class="down"></i><i class="up" style="display:none;"></i>
+        </div>
+        <div class="weui-panel__bd" id="high_content">
+            <div class="weui-cell weui-cell_vcode">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">收益调整后的区间 </label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="fisrtMin" placeholder="请输入最小值">
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="fisrtMax" placeholder="请输入最大值">
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_vcode">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">每股净资产范围 </label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="secondMin" placeholder="请输入最小值">
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="secondMax" placeholder="请输入最大值">
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_vcode">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">每股经营性现金流 </label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="thirdMin" placeholder="请输入最小值">
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="thirdMax" placeholder="请输入最大值">
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_vcode">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">每股资本公积金 </label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="fourMin" placeholder="请输入最小值">
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="fourMax" placeholder="请输入最大值">
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_vcode">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">每股未分配利润 </label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="fiveMin" placeholder="请输入最小值">
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="fiveMax" placeholder="请输入最大值">
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_vcode">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">昨日涨幅区间 </label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="sixMin" placeholder="请输入最小值">
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="sixMax" placeholder="请输入最大值">
+                </div>
+            </div>
+    
+            <div class="weui-cell weui-cell_vcode">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">昨日振幅区间 </label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="sevenMin" placeholder="请输入最小值">
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="sevenMax" placeholder="请输入最大值">
+                </div>
+            </div>
+    
+            <div class="weui-cell weui-cell_vcode">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">昨日换手率区间 </label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="eightMin" placeholder="请输入最小值">
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="eightMax" placeholder="请输入最大值">
+                </div>
+            </div>
+    
+            <div class="weui-cell weui-cell_vcode">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">昨日收盘股价区间 </label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="nineMin" placeholder="请输入最小值">
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="nineMax" placeholder="请输入最大值">
+                </div>
+            </div>
+    
+    
+            <div class="weui-cell weui-cell_vcode">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">总资产利润率 </label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="tenMin" placeholder="请输入最小值">
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="tenMax" placeholder="请输入最大值">
+                </div>
+            </div>
+    
+    
+            <div class="weui-cell weui-cell_vcode">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">主营业务利润率 </label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="elevenMin" placeholder="请输入最小值">
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="elevenMax" placeholder="请输入最大值">
+                </div>
+            </div>
+    
+    
+            <div class="weui-cell weui-cell_vcode">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">总资产净利润率 </label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="twelveMin" placeholder="请输入最小值">
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="twelveMax" placeholder="请输入最大值">
+                </div>
+            </div>
+    
+    
+            <div class="weui-cell weui-cell_vcode">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">营业利润率 </label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="thirteenMin" placeholder="请输入最小值">
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="thirteenMax" placeholder="请输入最大值">
+                </div>
+            </div>
+    
+            <div class="weui-cell weui-cell_vcode">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">销售净利率 </label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="fourteenMin" placeholder="请输入最小值">
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="fourteenMax" placeholder="请输入最大值">
+                </div>
+            </div>
+    
+    
+            <div class="weui-cell weui-cell_vcode">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">股本报酬率 </label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="fifteenMin" placeholder="请输入最小值">
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="fifteenMax" placeholder="请输入最大值">
+                </div>
+            </div>
+    
+            <div class="weui-cell weui-cell_vcode">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">净资产报酬率 </label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="sixteenMin" placeholder="请输入最小值">
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="sixteenMax" placeholder="请输入最大值">
+                </div>
+            </div>
+    
+            <div class="weui-cell weui-cell_vcode">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">资产报酬率 </label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="seventeenMin" placeholder="请输入最小值">
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="seventeenMax" placeholder="请输入最大值">
+                </div>
+            </div>
+    
+    
+            <div class="weui-cell weui-cell_vcode">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">主营业务收入增长率 </label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="eighteenMin" placeholder="请输入最小值">
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="eighteenMax" placeholder="请输入最大值">
+                </div>
+            </div>
+    
+            <div class="weui-cell weui-cell_vcode">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">净利润增长率 </label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="nineteenMin" placeholder="请输入最小值">
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="nineteenMax" placeholder="请输入最大值">
+                </div>
+            </div>
+    
+            <div class="weui-cell weui-cell_vcode">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">净资产增长率 </label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="twentyMin" placeholder="请输入最小值">
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="twentyMax" placeholder="请输入最大值">
+                </div>
+            </div>
+    
+    
+            <div class="weui-cell weui-cell_vcode">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">总资产增长率 </label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="twentyoneMin" placeholder="请输入最小值">
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="twentyoneMax" placeholder="请输入最大值">
+                </div>
+            </div>
+    
+    
+            <div class="weui-cell weui-cell_vcode">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">应收账款周转率 </label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="twentytwoMin" placeholder="请输入最小值">
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="twentytwoMax" placeholder="请输入最大值">
+                </div>
+            </div>
+    
+    
+            <div class="weui-cell weui-cell_vcode">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">存货周转率 </label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="twentythreeMin" placeholder="请输入最小值">
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="twentythreeMax" placeholder="请输入最大值">
+                </div>
+            </div>
+    
+    
+            <div class="weui-cell weui-cell_vcode">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">流动资产周转率 </label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="twentyfourMin" placeholder="请输入最小值">
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="twentyfourMax" placeholder="请输入最大值">
+                </div>
+            </div>
+    
+    
+            <div class="weui-cell weui-cell_vcode">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">总资产周转率 </label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="twentyfiveMin" placeholder="请输入最小值">
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="twentyfiveMax" placeholder="请输入最大值">
+                </div>
+            </div>
+    
+            <div class="weui-cell weui-cell_vcode">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">股东权益周转率 </label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="twentysixMin" placeholder="请输入最小值">
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="twentysixMax" placeholder="请输入最大值">
+                </div>
+            </div>
+        </div>
+      </div>
+    <!-- 查询条件 -->
+
+
+    <div class="weui-cells weui-cells_form" style="margin-top:0">
+   
+        <div class="weui-btn-area">
+            <a href="javascript:;" style="font-size:0.5rem" class="weui-btn weui-btn_primary open-popup" data-target="#full" onclick="searchPg()" id="showTooltips">查询</a>
+        </div>
+    </div>
+
+
+    <!-- 查询列表 -->
+    <!-- <p class="search_result">查询结果：</p> -->
+    <!-- <p class="no_result">暂无结果</p> -->
+    <div id="full" class="weui-popup__container">
+        <div class="weui-popup__overlay"></div>
+        <div class="weui-popup__modal">
+            <a href="javascript:;" class="weui-btn weui-btn_primary close-popup">关闭</a>
+          <div class="weui-cells gp_list">
+        </div>
+        </div>
+      </div>
+
+    <div class="weui-tabbar" style="position: fixed;">
+        <a href="/component/search.html" class="weui-tabbar__item weui-bar__item--on">
+            <div class="weui-tabbar__icon">
+                <img src="../img/icon_nav_button.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">查询</p>
+        </a>
+        <a href="javascript:;" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="../img/icon_nav_article.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">头条</p>
+        </a>
+        <a href="/component/person.html" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="../img/icon_nav_cell.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">我</p>
+        </a>
+    </div>
+
+
+    <script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/swiper.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/city-picker.min.js"></script>
+    <script src="../js/search.js"></script>
+    <script>
+        // 返回上一页
+        $('#back').on('click', function () {
+            window.history.go(-1)
+        })
+        var date = '',
+            belongs = [],
+            locations = [],
+            organizational_form = [],
+            concepts = [],
+            labels = [],
+            shouyiafter = {},
+            jinzichanafter = {},
+            jingyingxianjinliu = {},
+            gubengongjijin = {},
+            weifenpeilirun = {},
+            save = false,
+            predicts = [],
+
+            last_percent = {},
+            last_amplitude = {},
+            last_turnoverrate = {},
+            last_price = {},
+
+
+
+            // yl_ability 是盈利区间条件
+            yl_zongzichanlirunlv = {},
+            yl_zhuyingyewulirunlv = {},
+            yl_zongzichanjinglirunlv = {},
+            yl_yingyelirunlv = {},
+            yl_xiaoshoujinglilv = {},
+            yl_gubenbaochoulv = {},
+            yl_jingzichanbaochoulv = {},
+            yl_zichanbaochoulv = {},
+
+
+            //成长能力 
+            cz_zhuyingyewushouruzengzhanglv = {},
+            cz_jinglirunzengzhanglv = {},
+            cz_jingzichanzengzhanglv = {},
+            cz_zongzichanzengzhanglv = {},
+
+            // 运营能力
+            yy_yingshouzhangkuanzhouzhuanlv = {},
+            yy_cunhuozhouzhuanglv = {},
+            yy_liudongzichanzhouzhuanglv = {},
+            yy_zongzichanzhouzhuanglv = {},
+            yy_gudongquanyizhouzhuanglv = {};
+
+        var fiveMin = 0, fiveMax = 0;
+        var fourMin = 0, fourMax = 0;
+        var thirdMin = 0, thirdMax = 0;
+        var secondMin = 0, secondMax = 0;
+        var firstMin = 0, firstMax = 0;
+        var sixMin = 0, sixMax = 0;
+        var seventMin = 0, sevenMax = 0;
+        var eightMin = 0, eightMax = 0;
+        var nineMin = 0, nineMax = 0;
+
+
+        var tenMin = 0, tenMax = 0;
+        var elevenMin = 0, elevenMax = 0;
+        var twelveMin = 0, twelveMax = 0;
+        var thirteenMin = 0, thirteenMax = 0;
+        var fourteenMin = 0, fourteenMax = 0;
+        var fifteenMin = 0, fifteenMax = 0;
+        var sixteenMin = 0, sixteenMax = 0;
+        var seventeenMin = 0, seventeenMax = 0;
+
+
+        var eighteenMin = 0, eighteenMax = 0;
+        var nineteenMin = 0, nineteenMax = 0;
+        var twentyMin = 0, twentyMax = 0;
+        var twentyoneMin = 0, twentyoneMax = 0;
+
+
+        var twentytwoMin = 0, twentytwoMax = 0;
+        var twentythreeMin = 0, twentythreeMax = 0;
+        var twentyfourMin = 0, twentyfourMax = 0;
+        var twentyfiveMin = 0, twentyfiveMax = 0;
+        var twentysixMin = 0, twentysixMax = 0;
+
+        var url = 'https://stock.zhixiutec.com/api/predicts_list';
+
+
+        $('#twentysixMin').bind('input propertychange', function (e) {
+            twentysixMin = parseInt(e.delegateTarget.value)
+        })
+        $('#twentysixMax').bind('input propertychange', function (e) {
+            twentysixMax = parseInt(e.delegateTarget.value)
+            console.log('firstMax', firstMax)
+        })
+
+        $('#twentyfiveMin').bind('input propertychange', function (e) {
+            twentyfiveMin = parseInt(e.delegateTarget.value)
+        })
+        $('#twentyfiveMax').bind('input propertychange', function (e) {
+            twentyfiveMax = parseInt(e.delegateTarget.value)
+            console.log('firstMax', firstMax)
+        })
+
+
+        $('#twentyfourMin').bind('input propertychange', function (e) {
+            twentyfourMin = parseInt(e.delegateTarget.value)
+        })
+        $('#twentyfourMax').bind('input propertychange', function (e) {
+            twentyfourMax = parseInt(e.delegateTarget.value)
+            console.log('firstMax', firstMax)
+        })
+
+
+        $('#twentythreeMin').bind('input propertychange', function (e) {
+            twentythreeMin = parseInt(e.delegateTarget.value)
+        })
+        $('#twentythreeMax').bind('input propertychange', function (e) {
+            twentythreeMax = parseInt(e.delegateTarget.value)
+            console.log('firstMax', firstMax)
+        })
+
+        $('#twentytwoMin').bind('input propertychange', function (e) {
+            twentytwoMin = parseInt(e.delegateTarget.value)
+        })
+        $('#twentytwoMax').bind('input propertychange', function (e) {
+            twentytwoMax = parseInt(e.delegateTarget.value)
+            console.log('firstMax', firstMax)
+        })
+        // 21
+        $('#twentyoneMin').bind('input propertychange', function (e) {
+            twentyoneMin = parseInt(e.delegateTarget.value)
+        })
+        $('#twentyoneMax').bind('input propertychange', function (e) {
+            twentyoneMax = parseInt(e.delegateTarget.value)
+            console.log('firstMax', firstMax)
+        })
+        // 20 
+        $('#twentyMin').bind('input propertychange', function (e) {
+            twentyMin = parseInt(e.delegateTarget.value)
+        })
+        $('#twentyMax').bind('input propertychange', function (e) {
+            twentyMax = parseInt(e.delegateTarget.value)
+            console.log('firstMax', firstMax)
+        })
+
+        // 19
+        $('#nineteenMin').bind('input propertychange', function (e) {
+            nineteenMin = parseInt(e.delegateTarget.value)
+        })
+        $('#nineteenMax').bind('input propertychange', function (e) {
+            nineteenMax = parseInt(e.delegateTarget.value)
+            console.log('firstMax', firstMax)
+        })
+
+
+        $('#eighteenMin').bind('input propertychange', function (e) {
+            eighteenMin = parseInt(e.delegateTarget.value)
+        })
+        $('#eighteenMax').bind('input propertychange', function (e) {
+            eighteenMax = parseInt(e.delegateTarget.value)
+            console.log('firstMax', firstMax)
+        })
+
+
+
+
+
+
+        $('#seventeenMin').bind('input propertychange', function (e) {
+            seventeenMin = parseInt(e.delegateTarget.value)
+        })
+        $('#seventeenMax').bind('input propertychange', function (e) {
+            seventeenMax = parseInt(e.delegateTarget.value)
+            console.log('firstMax', firstMax)
+        })
+
+
+        $('#sixteenMin').bind('input propertychange', function (e) {
+            sixteenMin = parseInt(e.delegateTarget.value)
+        })
+        $('#sixteenMax').bind('input propertychange', function (e) {
+            sixteenMax = parseInt(e.delegateTarget.value)
+            console.log('firstMax', firstMax)
+        })
+
+
+        $('#fifteenMin').bind('input propertychange', function (e) {
+            fifteenMin = parseInt(e.delegateTarget.value)
+        })
+        $('#fifteenMax').bind('input propertychange', function (e) {
+            fifteenMax = parseInt(e.delegateTarget.value)
+            console.log('firstMax', firstMax)
+        })
+
+        $('#fourteenMin').bind('input propertychange', function (e) {
+            fourteenMin = parseInt(e.delegateTarget.value)
+        })
+        $('#fourteenMax').bind('input propertychange', function (e) {
+            fourteenMax = parseInt(e.delegateTarget.value)
+            console.log('firstMax', firstMax)
+        })
+
+        $('#thirteenMin').bind('input propertychange', function (e) {
+            thirteenMin = parseInt(e.delegateTarget.value)
+        })
+        $('#thirteenMax').bind('input propertychange', function (e) {
+            thirteenMax = parseInt(e.delegateTarget.value)
+            console.log('firstMax', firstMax)
+        })
+
+        $('#twelveMin').bind('input propertychange', function (e) {
+            twelveMin = parseInt(e.delegateTarget.value)
+        })
+        $('#twelveMax').bind('input propertychange', function (e) {
+            twelveMax = parseInt(e.delegateTarget.value)
+            console.log('firstMax', firstMax)
+        })
+
+        $('#elevenMin').bind('input propertychange', function (e) {
+            elevenMin = parseInt(e.delegateTarget.value)
+        })
+        $('#elevenMax').bind('input propertychange', function (e) {
+            elevenMax = parseInt(e.delegateTarget.value)
+            console.log('firstMax', firstMax)
+        })
+
+        $('#tenMin').bind('input propertychange', function (e) {
+            tenMin = parseInt(e.delegateTarget.value)
+        })
+        $('#tenMax').bind('input propertychange', function (e) {
+            tenMax = parseInt(e.delegateTarget.value)
+            console.log('firstMax', firstMax)
+        })
+
+
+
+        $('#nineMin').bind('input propertychange', function (e) {
+            nineMin = parseInt(e.delegateTarget.value)
+        })
+        $('#nineMax').bind('input propertychange', function (e) {
+            nineMax = parseInt(e.delegateTarget.value)
+            console.log('firstMax', firstMax)
+        })
+
+
+        $('#eightMin').bind('input propertychange', function (e) {
+            eightMin = parseInt(e.delegateTarget.value)
+        })
+        $('#eightMax').bind('input propertychange', function (e) {
+            eightMax = parseInt(e.delegateTarget.value)
+        })
+
+
+        $('#sevenMin').bind('input propertychange', function (e) {
+            sevenMin = parseInt(e.delegateTarget.value)
+        })
+        $('#sevenMax').bind('input propertychange', function (e) {
+            sevenMax = parseInt(e.delegateTarget.value)
+        })
+
+
+        $('#sixMin').bind('input propertychange', function (e) {
+            sixMin = parseInt(e.delegateTarget.value)
+        })
+        $('#sixtMax').bind('input propertychange', function (e) {
+            sixtMax = parseInt(e.delegateTarget.value)
+        })
+
+
+        $('#fiveMin').bind('input propertychange', function (e) {
+            fiveMin = parseInt(e.delegateTarget.value)
+        })
+        $('#fiveMax').bind('input propertychange', function (e) {
+            fiveMax = parseInt(e.delegateTarget.value)
+        })
+
+        $('#fourMin').bind('input propertychange', function (e) {
+            fourMin = parseInt(e.delegateTarget.value)
+        })
+        $('#fourMax').bind('input propertychange', function (e) {
+            fourMax = parseInt(e.delegateTarget.value)
+        })
+
+        $('#thirdMin').bind('input propertychange', function (e) {
+            thirdMin = parseInt(e.delegateTarget.value)
+        })
+        $('#thirdMax').bind('input propertychange', function (e) {
+            thirdMax = parseInt(e.delegateTarget.value)
+        })
+
+        $('#secondMin').bind('input propertychange', function (e) {
+            secondMin = parseInt(e.delegateTarget.value)
+        })
+        $('#secondMax').bind('input propertychange', function (e) {
+            secondMax = parseInt(e.delegateTarget.value)
+        })
+        var highCount = 0;
+        $('#fisrtMin').bind('input propertychange', function (e) {
+            firstMin = parseInt(e.delegateTarget.value)
+        })
+        $('#fisrtMax').bind('input propertychange', function (e) {
+            firstMax = parseInt(e.delegateTarget.value)
+        })
+
+        
+        $('#searchInput').bind('input propertychange', function(e) {
+	        console.log('eee',e.target.value)
+	    });
+
+        function searchPg() {
+            var data ={
+    "query":{
+        "predicts":[],
+        "belongs":[],
+        "locations":[],
+        "concepts":[],
+        "labels":[],
+        "per_tickets":{
+            "shouyiafter":{},
+            "jinzichanafter":{},
+            "jingyingxianjinliu":{},
+            "gubengongjijin":{},
+            "weifenpeilirun":{}
+        },
+        "last_day_range": {"last_percent":{}, "last_amplitude":{}, "last_turnoverrate":{}, "last_price":{"min":1}},
+        "yl_ability": {"yl_zongzichanlirunlv":{}, "yl_zhuyingyewulirunlv":{}, "yl_zongzichanjinglirunlv":{}, "yl_yingyelirunlv":{}, "yl_xiaoshoujinglilv":{}, "yl_gubenbaochoulv":{}, "yl_jingzichanbaochoulv":{}, "yl_zichanbaochoulv":{}},
+        "cz_ability": {"cz_zhuyingyewushouruzengzhanglv":{}, "cz_jinglirunzengzhanglv":{}, "cz_jingzichanzengzhanglv":{}, "cz_zongzichanzengzhanglv":{}},
+        "yy_ability": {"yy_yingshouzhangkuanzhouzhuanlv":{}, "yy_cunhuozhouzhuanglv":{}, "yy_liudongzichanzhouzhuanglv":{}, "yy_zongzichanzhouzhuanglv":{}, "yy_gudongquanyizhouzhuanglv":{}}
+    },
+    "date":"2020-01-02",
+    "save":false,
+    "order":"score"
+};
+            // save 参数是表示是否保存条件
+            // order 表示按照那个字段排序， 支持"score", "percent", "price", "fund_count", "sm_count" 分别代表 分数，涨幅， 价格， 基金持仓数量， 私募数量
+            // var data = {
+            //     "query": {
+            //         "predicts": ["6日均线上扬"],
+            //         "belongs": belongs,
+            //         "locations": locations,
+            //         "organizational_form": organizational_form,
+            //         "concepts": concepts,
+            //         "labels": labels,
+            //         "per_tickets": {
+            //             "shouyiafter": {
+            //                 min: firstMin,
+            //                 max: firstMax
+            //             },
+            //             "jinzichanafter": {
+            //                 min: secondMin,
+            //                 max: secondMax
+            //             },
+            //             "jingyingxianjinliu": {
+            //                 min: thirdMin,
+            //                 max: thirdMax
+            //             },
+            //             "gubengongjijin": {
+            //                 min: fourMin,
+            //                 max: fourMax
+            //             },
+            //             "weifenpeilirun": {
+            //                 min: fiveMin,
+            //                 max: fiveMax
+            //             }
+            //         },
+            //         "last_day_range": {
+            //             "last_percent": { "min": sixMin, "max": sixMax },
+            //             "last_amplitude": { "min": seventMin, "max": sevenMax },
+            //             "last_turnoverrate": { "min": eightMin, "max": eightMax },
+            //             "last_price": { "min": nineMin, "max": nineMax }
+            //         },
+
+
+            //         "yl_ability": {
+            //             "yl_zongzichanlirunlv": {
+            //                 min: tenMin,
+            //                 max: tenMax
+            //             },
+            //             "yl_zhuyingyewulirunlv": {
+            //                 min: elevenMin,
+            //                 max: elevenMax
+            //             },
+            //             "yl_zongzichanjinglirunlv": {
+            //                 min: twelveMin,
+            //                 max: twelveMax
+            //             },
+            //             "yl_yingyelirunlv": {
+            //                 min: thirteenMin,
+            //                 max: thirteenMax
+            //             },
+            //             "yl_xiaoshoujinglilv": {
+            //                 min: fourteenMin,
+            //                 max: fourteenMax
+            //             },
+            //             "yl_gubenbaochoulv": {
+            //                 min: fifteenMin,
+            //                 max: fifteenMax
+            //             },
+            //             "yl_jingzichanbaochoulv": {
+            //                 min: sixteenMin,
+            //                 max: sixteenMax
+            //             },
+            //             "yl_zichanbaochoulv": {
+            //                 min: seventeenMin,
+            //                 max: seventeenMax
+            //             }
+            //         },
+
+            //         "cz_ability": {
+            //             "cz_zhuyingyewushouruzengzhanglv":{
+            //                 min: eighteenMin,
+            //                 max: eighteenMax
+            //             }, 
+            //             "cz_jinglirunzengzhanglv":{
+            //                 min: nineteenMin,
+            //                 max: nineteenMax
+            //             }, 
+            //             "cz_jingzichanzengzhanglv":{
+            //                 min: twentyMin,
+            //                 max: twentyMax
+            //             }, 
+            //             "cz_zongzichanzengzhanglv":{
+            //                 min: twentyoneMin,
+            //                 max: twentyoneMax
+            //             }
+            //             },
+            //         "yy_ability": {
+            //             "yy_yingshouzhangkuanzhouzhuanlv":{
+            //                 min: twentytwoMin,
+            //                 max: twentytwoMax
+            //             }, 
+            //             "yy_cunhuozhouzhuanglv":{
+            //                 min: twentythreeMin,
+            //                 max: twentythreeMax
+            //             }, 
+            //             "yy_liudongzichanzhouzhuanglv":{
+            //                 min: twentyfourMin,
+            //                 max: twentyfourMax
+            //             }, 
+            //             "yy_zongzichanzhouzhuanglv":{
+            //                 min: twentyfiveMin,
+            //                 max: twentyfiveMax
+            //             }, 
+            //             "yy_gudongquanyizhouzhuanglv":{
+            //                 min: twentysixMin,
+            //                 max: twentysixMax
+            //             }
+            //         }
+            //     },
+            //     "date": date,
+            //     "save": true
+            // }
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: JSON.stringify(data),
+                success: function (res) {
+                    $('.no_result').css("display", "none")
+                    var data = res.data.result;
+                    console.log('data', data)
+                    var dom_val = '';
+                    data && data.map(item => {
+                        var bigPercent = item.percent >= 0 ? "winner" : "loser";
+                        var str = item.percent >= 0 ? "+" : "";
+                        dom_val += `
+                        <a style="display:inline-block;width:15rem;" class="weui-cell weui-cell_access goDetail" href=/component/detail.html?code=${item.code}&date=${item.date}>
+                            <div class="weui-cell__bd">
+                                <span>${item.name}</span>
+                                <span class=${bigPercent}>${item.price}元</span>
+                                <span class=${bigPercent}>${str}${item.percent}%</span>
+                                <span>${item.code}</span>
+                                <span class="score">${item.score}</span>
+                                <span>${item.location}</span>
+                            </div>
+                            <div class="weui-cell__bd">
+                                <span class="form">${item.form}</span>
+                                <span class="belong">${item.belong}</span>
+                                <span>基金：${item.fund_count}</span>
+                                <span>私募数量：${item.simu_count}</span>
+                            </div>
+                            <div class="weui-cell__bd">
+                                <span class="conditions"><span style="color:red">优势：</span>${item.conditions}</span>
+                            </div>
+                            <div class="weui-cell__bd">
+                                <span class="conditions"><span style="color:green">劣势：</span>${item.bad_conditions}</span>
+                            </div>
+                            <div class="weui-cell__bd">
+                                <span class="conditions"><span style="color:blue">财务：</span>${item.finance}</span>
+                            </div>
+                            <div class="weui-cell__bd">
+                                <span class="weui-cell__ft condition">${item.date}</span>
+                            </div>
+                        </a>
+                        `
+                    })
+                    $('.gp_list').append(dom_val)
+                },
+            })
+        }
+
+
+        $.ajax({
+            url: 'https://stock.zhixiutec.com/api/conditions',
+            success: function (res) {
+                var data = res.data;
+                console.log('price', data)
+                var moneyArr = data['财务数据'];
+                var priceArr = data['量价形态'];
+                var kData = data['K线形态'];
+                var otherData = data['其它'];
+                var jigouchicang = data = ['机构持仓情况'];
+
+                console.log('moneyArr', moneyArr)
+                var mustCount = 0;
+                $("#kline").select({
+                    title: "选择K线形态",
+                    items: kData,
+                    onClose: function (e) {
+                        var kVal = e.data.values;
+                        predicts.push(kVal)
+                        mustCount+=predicts.length;
+                        console.log('mustCount',mustCount)
+                        $('.must_count').text(mustCount)
+                    }
+                });
+
+                $("#jigou").select({
+                    title: "选择机构持仓情况",
+                    items: jigouchicang,
+                    onClose: function (e) {
+                        var jigouchicangVal = e.data.values;
+                        predicts.push(jigouchicangVal)
+                        mustCount+=predicts.length;
+                        $('.must_count').text(mustCount)
+                    }
+                });
+
+                $("#moneyData").select({
+                    title: "选择财务数据",
+                    items: moneyArr,
+                    onClose: function (e) {
+                        var moneyDataVal = e.data.values;
+                        predicts.push(moneyDataVal)
+                        mustCount+=predicts.length;
+                        $('.must_count').text(mustCount)
+                    }
+                });
+
+                $("#priceData").select({
+                    title: "选择量价形态",
+                    items: priceArr,
+                    onClose: function (e) {
+                        var priceDataVal = e.data.values;
+                        predicts.push(priceDataVal)
+                        mustCount+=predicts.length;
+                        $('.must_count').text(mustCount)
+                    }
+                });
+
+                // $("#other").select({
+                //     title: "选择其他",
+                //     items: otherData,
+                //     onClose: function (e) {
+                //         var otherVal = e.data.values;
+                //         predicts.push(otherVal)
+                //     }
+                // });
+            }
+        })
+
+        $.ajax({
+            url: 'https://stock.zhixiutec.com/api/predicts_dates',
+            success: function (res) {
+                var data = res.data;
+                var date = [];
+                data.forEach(item => {
+                    date.push(item.date)
+                })
+                console.log('date', date)
+                $("#date").select({
+                    title: "选择日期",
+                    items: date,
+                    onClose: function (e) {
+                        date = e.data.values;
+                    }
+                });
+            }
+        })
+
+
+        var basicCount = 0;
+        $.ajax({
+            url: 'https://stock.zhixiutec.com/api/belongs',
+            success: function (res) {
+                var data = res.data;
+                $("#job").select({
+                    title: "选择行业",
+                    multi: true,
+                    items: data,
+                    onClose: function (e) {
+                        var belongsData = e.data.values;
+                        belongs = belongsData.split(',')
+                        console.log('belongs',belongs)
+                        basicCount += belongs.length;
+                        $('.basic_count').text(basicCount)
+                    }
+                });
+            }
+        })
+
+        $.ajax({
+            url: 'https://stock.zhixiutec.com/api/locations',
+            success: function (res) {
+                var data = res.data;
+                $("#city").select({
+                    title: "选择城市",
+                    multi: true,
+                    items: data,
+                    onClose: function (e) {
+                        var locationsData = e.data.values;
+                        locations = locationsData.split(',');
+                        basicCount += locations.length;
+                        $('.basic_count').text(basicCount)
+                    }
+                });
+            }
+        })
+
+
+        var concectCount = 0; 
+        $.ajax({
+            url: 'https://stock.zhixiutec.com/api/concepts',
+            success: function (res) {
+                var data = res.data;
+                $("#idea").select({
+                    title: "选择概念",
+                    multi: true,
+                    items: data,
+                    onClose: function (e) {
+                        var conceptsData = e.data.values;
+                        concepts = conceptsData.split(',')
+                        concectCount += concepts.length;
+                        $('.concect_count').text(concectCount)
+                    }
+                });
+            }
+        })
+        $.ajax({
+            url: 'https://stock.zhixiutec.com/api/labels',
+            success: function (res) {
+                var data = res.data;
+                $("#tag").select({
+                    title: "选择标签",
+                    multi: true,
+                    items: data,
+                    onClose: function (e) {
+                        var labelsData = e.data.values;
+                        labels = labelsData.split(',')
+                        concectCount += labels.length;
+                        $('.concect_count').text(concectCount)
+                    }
+                });
+            }
+        })
+    </script>
+</body>
+
+</html>

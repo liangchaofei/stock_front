@@ -1,0 +1,97 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-12-15 18:33:06
+ * @LastEditTime : 2020-01-03 16:32:26
+ * @LastEditors  : Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /gp/static/index2.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知修数据</title>
+
+    <link href="css/animate.css" rel="stylesheet">
+
+<script src="js/jquery-1.9.1.min.js"></script>
+<script src="js/jquery.lettering.js"></script>
+<script src="js/jquery.textillate.js"></script>
+<script src="./js/oauth.js"></script>
+<script>
+$(function () {
+	$('.text1').textillate({ in: { effect: 'rollIn' } });
+	$('.text2').textillate({
+		initialDelay: 1000, 	//设置动画开始时间
+		in: { effect: 'flipInX'	//设置动画名称
+		}
+	});
+	$('.text3').textillate({
+		initialDelay: 9000,
+		in: { effect: 'bounceInDown' }
+	});
+})
+
+</script>
+<style type="text/css">
+body {background:red;}
+div {width:100%;margin:0 auto;font-size: 100px;}
+.text1,.text2,.text3 {visibility:hidden;}
+.text1,.text2 {color:#fff;color:#fff;}
+.text1 {margin:50px;text-align:center;font-size:1.5rem;text-shadow:0.025em 0.025em 0.025em rgba(0, 0, 0, 0.8);}
+.text2 {font-family:microsoft yahei;font-size:1.5rem;line-height:4rem;text-shadow:0.1em 0.1em 0.1em rgba(0, 0, 0, 0.8)}
+.go_div{
+	text-align: center;
+}
+.go_btn{
+	color: #fff;
+	border-color: #1890ff;
+	background-color: rgb(24, 144, 255);
+	text-shadow: 0 -1px 0 rgba(0,0,0,0.12);
+	box-shadow: 0 2px 0 rgba(0,0,0,0.045);
+	line-height: 1.499;
+    position: relative;
+    display: inline-block;
+    font-weight: 400;
+    white-space: nowrap;
+    text-align: center;
+    background-image: none;
+    border: 1px solid transparent;
+    -webkit-box-shadow: 0 2px 0 rgba(0,0,0,0.015);
+    box-shadow: 0 2px 0 rgba(0,0,0,0.015);
+    cursor: pointer;
+    -webkit-transition: all .3s cubic-bezier(.645, .045, .355, 1);
+    transition: all .3s cubic-bezier(.645, .045, .355, 1);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    height: 32px;
+    padding: 0 15px;
+    font-size: 14px;
+	border-radius: 4px;
+	cursor: pointer;
+}
+</style>
+</head>
+<body id="box" style="display:none;">
+    <div>
+		<div>
+			<p class="text1">是爱上爱上爱上爱上爱上</p>
+			<p class="text2">是爱上爱上爱上爱上上爱上爱上上是爱上爱上爱上爱上爱上</p>
+		</div>
+		<div class="go_div">
+				<button class="go_btn" onclick="goList()">点击开始赚钱之路</button>
+		</div>
+	</div>
+
+	<script>
+	function goList(){
+		window.location.href = '/component/search.html'
+	}
+	</script>
+</body>
+</html>

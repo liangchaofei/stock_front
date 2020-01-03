@@ -1,0 +1,17 @@
+.person_top{
+    text-align: center;
+    background: #2db7f5;
+}
+.tx{
+    width:4rem;
+    height:4rem;
+    border-radius: 50%;
+    padding-top: 0.6rem;
+}
+.name,.count{
+    color: #fff;
+}
+.count{
+    font-size: 0.7rem;
+    padding: 0.3rem 0;
+}

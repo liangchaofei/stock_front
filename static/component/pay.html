@@ -1,0 +1,140 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-12-17 19:52:10
+ * @LastEditTime : 2020-01-03 15:35:07
+ * @LastEditors  : Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /gp/static/component/list.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>知修数据</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="../css/person.css">
+</head>
+
+<body>
+    <div class="weui-cell weui-cell_select">
+        <div class="weui-cell__bd">
+            <select class="weui-select" id="wechat">
+                <option value='' disabled selected style='display:none;'>请选择会员等级</option>
+            </select>
+        </div>
+    </div>
+    <div class="weui-btn-area">
+        <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">确定</a>
+    </div>
+    <button id="share">分享</button>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+    </script>
+    <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/swiper.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/city-picker.min.js"></script>
+    <script src="../js/jwerixin.js"></script>
+    <script>
+
+
+
+
+
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r != null) return unescape(r[2]); return null; //返回参数值
+        }
+
+
+        $.ajax({
+            url: 'https://stock.zhixiutec.com/api/user',
+            type: 'get',
+            success: function (res) {
+                var data = res.data;
+                if (res.error_code === 2) {
+                    window.open(data, "_self");
+                    window.open('/')
+                } else {
+                    $.ajax({
+                        url: 'https://stock.zhixiutec.com/api/is_member',
+                        success: function (res) {
+                            var is_member = res.data;
+                            if (is_member === false) {
+                                $.ajax({
+                                    url: 'https://stock.zhixiutec.com/api/payments',
+                                    success: function (result) {
+                                        var leader = result.data;
+                                        var member = '';
+                                        for (var i = 0; i < leader.length; i++) {
+                                            $("#wechat").append(`<option value=${leader[i].id}>${leader[i].type_desc}</option>`);
+                                        }
+                                        $('#wechat').on('change', function (e) {
+                                            member = parseInt(e.target.value);
+                                            $.ajax({
+                                                url: 'https://stock.zhixiutec.com/api/jsapi_pay',
+                                                type: 'post',
+                                                data: JSON.stringify({ "id": member }),
+                                                success: function (res) {
+                                                    console.log('res', res)
+                                                    var result = res.data;
+                                                    console.log('result',result)
+                                                    wx.config({
+                                                        debug: false,
+                                                        appId: result["appId"],
+                                                        timestamp: result["timeStamp"],
+                                                        nonceStr: result["nonceStr"],
+                                                        signature: result["signature"],
+                                                        jsApiList: [
+                                                            'chooseWXPay',
+                                                        ]
+                                                    });
+                                                    wx.ready(function () {
+                                                        wx.chooseWXPay({
+                                                            appId: result["appId"],
+                                                            timestamp: result["timeStamp"], // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+                                                            nonceStr: result["nonceStr"], // 支付签名随机串，不长于 32 位
+                                                            package: result["package"], // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
+                                                            signType: result["signType"], // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+                                                            paySign: result["sign"], // 支付签名
+                                                            success: function (res) {
+                                                                console.log('res',res)
+                                                            },
+
+                                                            fail: function (res) {
+                                                                // $.hideLoading()
+                                                                alert('支付失败!');
+                                                                // toast("支付失败！请检查微信配置");
+                                                            },
+                                                            cancel: function (res) {
+                                                                alert('土豪！ 来一毛再走，该让一小部分人富起来了😺');
+
+                                                                // //支付取消
+                                                                // $.hideLoading()
+                                                                // toast("已取消支付！");
+                                                            }
+                                                        });
+                                                    });
+
+                                                }
+                                            })
+                                        })
+
+                                    }
+                                })
+                            }
+                        }
+                    })
+                }
+
+            }
+        })
+
+
+    </script>
+</body>
+
+</html>
