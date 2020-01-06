@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-03 20:37:33
+ * @LastEditTime : 2020-01-05 21:38:30
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -11,7 +11,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0;">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>知修数据</title>
     <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
@@ -47,16 +47,17 @@
       </div>
 
 
-      <!-- 基础信息 -->
+     <div>
+          <!-- 基础信息 -->
 
       <div class="weui-panel weui-panel_access">
         <div class="weui-panel__hd" id="open">
             基础信息<i class="down"></i><i class="up" style="display:none;"></i>
-           <span style="float:right">
+           <!-- <span style="float:right">
             共
             <span class="basic_count" style="color: red;">0</span>
             查询条件
-           </span>
+           </span> -->
         </div>
         <div class="weui-panel__bd" id="open_content">
             <div class="weui-cell">
@@ -78,23 +79,29 @@
       <div class="weui-panel weui-panel_access">
         <div class="weui-panel__hd" id="concect_open">
             概念划分<i class="down"></i><i class="up" style="display:none;"></i>
-            <span style="float:right">
+            <!-- <span style="float:right">
                 共
                 <span class="concect_count" style="color: red;">0</span>
                 查询条件
-               </span>
+               </span> -->
         </div>
         <div class="weui-panel__bd" id="concect_content">
             <div class="weui-cell">
-                <div class="weui-cell__hd"><label for="name" class="weui-label">概念</label></div>
+                <div class="weui-cell__hd"><label for="name" class="weui-label">所属概念</label></div>
                 <div class="weui-cell__bd">
                     <input class="weui-input" id="idea" type="text" value="" readonly="" data-values="1,2,3">
                 </div>
             </div>
             <div class="weui-cell">
-                <div class="weui-cell__hd"><label for="name" class="weui-label">标签</label></div>
+                <div class="weui-cell__hd"><label for="name" class="weui-label">行业标签</label></div>
                 <div class="weui-cell__bd">
                     <input class="weui-input" id="tag" type="text" value="" readonly="" data-values="1,2,3">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label for="name" class="weui-label">组织形式</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="froms" type="text" value="" readonly="" data-values="1,2,3">
                 </div>
             </div>
         </div>
@@ -104,11 +111,14 @@
       <div class="weui-panel weui-panel_access">
         <div class="weui-panel__hd" id="must_open">
             特定条件<i class="down"></i><i class="up" style="display:none;"></i>
-            <span style="float:right">
+            <span style="float: right;">
+                <svg id="must_data" style="width:1.5em;height:1.5em;z-index:11" t="1578228911759" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1928" width="200" height="200"><path d="M855.7568 366.7968c-18.7392-44.4416-45.6704-84.2752-79.9744-118.5792-34.2016-34.304-74.1376-61.1328-118.5792-79.9744-45.9776-19.456-94.8224-29.2864-145.2032-29.2864-50.3808 0-99.2256 9.8304-145.2032 29.2864-44.4416 18.7392-84.2752 45.6704-118.5792 79.9744s-61.1328 74.1376-79.9744 118.5792c-19.456 45.9776-29.2864 94.8224-29.2864 145.2032s9.8304 99.2256 29.2864 145.2032c18.7392 44.4416 45.6704 84.2752 79.9744 118.5792 34.304 34.304 74.1376 61.1328 118.5792 79.9744 45.9776 19.456 94.8224 29.2864 145.2032 29.2864 50.3808 0 99.2256-9.8304 145.2032-29.2864 44.4416-18.7392 84.2752-45.6704 118.5792-79.9744 34.304-34.304 61.1328-74.1376 79.9744-118.5792 19.456-45.9776 29.2864-94.8224 29.2864-145.2032s-9.8304-99.2256-29.2864-145.2032zM512 844.0832c-183.0912 0-332.0832-148.992-332.0832-332.0832S328.9088 179.9168 512 179.9168 844.0832 328.9088 844.0832 512 695.0912 844.0832 512 844.0832z" p-id="1929"></path><path d="M512 709.4272m-30.72 0a30.72 30.72 0 1 0 61.44 0 30.72 30.72 0 1 0-61.44 0Z" p-id="1930"></path><path d="M514.6624 283.9552c-30.9248-0.2048-57.9584 6.656-80.6912 20.5824-18.5344 11.4688-33.792 27.2384-45.1584 47.104-16.1792 28.16-19.8656 55.9104-20.5824 64.4096-0.1024 0.7168-0.1024 1.4336-0.2048 2.1504v1.4336c0 16.9984 13.7216 30.72 30.72 30.72 16.4864 0 30.0032-13.0048 30.72-29.3888 0.512-4.7104 3.1744-22.9376 13.5168-40.1408 14.336-23.8592 37.2736-35.4304 69.8368-35.4304h1.2288c32.3584 0.3072 55.1936 9.1136 67.9936 26.3168 14.336 19.2512 13.312 44.2368 11.264 51.2-5.12 17.92-26.2144 38.912-46.6944 59.1872-17.1008 16.9984-34.7136 34.5088-46.4896 53.5552-18.432 29.696-17.92 85.4016-17.6128 96.256 0.4096 16.6912 14.1312 29.9008 30.72 29.9008h0.8192c16.9984-0.512 30.3104-14.6432 29.9008-31.5392-0.6144-22.016 2.6624-52.9408 8.3968-62.1568 8.0896-13.0048 22.4256-27.3408 37.6832-42.496 26.0096-25.8048 52.8384-52.5312 62.3616-85.7088 5.5296-19.1488 8.192-65.7408-21.0944-104.96-16.9984-22.9376-51.0976-50.4832-116.6336-50.9952z" p-id="1931"></path></svg>
+            </span>
+            <!-- <span style="float:right">
                 共
                 <span class="must_count" style="color: red;">0</span>
                 查询条件
-               </span>
+               </span> -->
         </div>
         <div class="weui-panel__bd" id="must_content">
             <div class="weui-cell">
@@ -477,12 +487,13 @@
     <!-- 查询条件 -->
 
 
-    <div class="weui-cells weui-cells_form" style="margin-top:0">
+    <div class="weui-cells weui-cells_form" style="margin-bottom:50px">
    
         <div class="weui-btn-area">
             <a href="javascript:;" style="font-size:0.5rem" class="weui-btn weui-btn_primary open-popup" data-target="#full" onclick="searchPg()" id="showTooltips">查询</a>
         </div>
     </div>
+     </div>
 
 
     <!-- 查询列表 -->
@@ -504,12 +515,6 @@
             </div>
             <p class="weui-tabbar__label">查询</p>
         </a>
-        <a href="/component/pay.html" class="weui-tabbar__item">
-            <div class="weui-tabbar__icon">
-                <img src="../img/icon_nav_article.png" alt="">
-            </div>
-            <p class="weui-tabbar__label">充值</p>
-        </a>
         <a href="/component/person.html" class="weui-tabbar__item">
             <div class="weui-tabbar__icon">
                 <img src="../img/icon_nav_cell.png" alt="">
@@ -525,6 +530,10 @@
     <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/city-picker.min.js"></script>
     <script src="../js/search.js"></script>
     <script>
+        $('#must_data').on('click',function(){
+            $.toast("该条件组合会精确匹配", "text");
+        })
+        
         // 返回上一页
         $('#back').on('click', function () {
             window.history.go(-1)
@@ -535,6 +544,7 @@
             organizational_form = [],
             concepts = [],
             labels = [],
+            forms=[],
             shouyiafter = {},
             jinzichanafter = {},
             jingyingxianjinliu = {},
@@ -829,7 +839,19 @@
 
         
         $('#searchInput').bind('input propertychange', function(e) {
-	        console.log('eee',e.target.value)
+            var searchVal = e.target.value;
+            $('#search_input').keydown(function(e){
+                console.log('aa',e.keyCode)
+                if(e.keyCode==13){
+                    e.preventDefault();
+                    $.ajax({
+                        url: `https://stock.zhixiutec.com/api/stock/detail?code=${searchVal}&date=2020-01-03`,
+                        success:function(res){
+                            window.open(`/component/detail.html?code=${searchVal}&date=2020-01-03`,"_self")
+                        }
+                    })
+                }
+            });
 	    });
 
         function searchPg() {
@@ -840,6 +862,7 @@
         "locations":[],
         "concepts":[],
         "labels":[],
+        "forms":[],
         "per_tickets":{
             "shouyiafter":{},
             "jinzichanafter":{},
@@ -852,7 +875,7 @@
         "cz_ability": {"cz_zhuyingyewushouruzengzhanglv":{}, "cz_jinglirunzengzhanglv":{}, "cz_jingzichanzengzhanglv":{}, "cz_zongzichanzengzhanglv":{}},
         "yy_ability": {"yy_yingshouzhangkuanzhouzhuanlv":{}, "yy_cunhuozhouzhuanglv":{}, "yy_liudongzichanzhouzhuanglv":{}, "yy_zongzichanzhouzhuanglv":{}, "yy_gudongquanyizhouzhuanglv":{}}
     },
-    "date":"2020-01-02",
+    "date":"2020-01-03",
     "save":false,
     "order":"score"
 };
@@ -1040,6 +1063,7 @@
                 $("#kline").select({
                     title: "选择K线形态",
                     items: kData,
+                    multi: true,
                     onClose: function (e) {
                         var kVal = e.data.values;
                         predicts.push(kVal)
@@ -1051,6 +1075,7 @@
 
                 $("#jigou").select({
                     title: "选择机构持仓情况",
+                    multi: true,
                     items: jigouchicang,
                     onClose: function (e) {
                         var jigouchicangVal = e.data.values;
@@ -1062,6 +1087,7 @@
 
                 $("#moneyData").select({
                     title: "选择财务数据",
+                    multi: true,
                     items: moneyArr,
                     onClose: function (e) {
                         var moneyDataVal = e.data.values;
@@ -1073,6 +1099,7 @@
 
                 $("#priceData").select({
                     title: "选择量价形态",
+                    multi: true,
                     items: priceArr,
                     onClose: function (e) {
                         var priceDataVal = e.data.values;
@@ -1092,55 +1119,30 @@
                 // });
             }
         })
-
+        var basicCount = 0,concectCount = 0;
         $.ajax({
-            url: 'https://stock.zhixiutec.com/api/predicts_dates',
-            success: function (res) {
+            url:'https://stock.zhixiutec.com/api/query_list',
+            success:function(res){
                 var data = res.data;
-                var date = [];
-                data.forEach(item => {
-                    date.push(item.date)
-                })
-                console.log('date', date)
-                $("#date").select({
-                    title: "选择日期",
-                    items: date,
-                    onClose: function (e) {
-                        date = e.data.values;
-                    }
-                });
-            }
-        })
-
-
-        var basicCount = 0;
-        $.ajax({
-            url: 'https://stock.zhixiutec.com/api/belongs',
-            success: function (res) {
-                var data = res.data;
+                var belong = data.belong;
+                var concept = data.concept;
+                var forms = data.forms;
+                var label = data.label;
+                var location = data.location;
                 $("#job").select({
                     title: "选择行业",
                     multi: true,
-                    items: data,
+                    items: belong,
                     onClose: function (e) {
                         var belongsData = e.data.values;
                         belongs = belongsData.split(',')
-                        console.log('belongs',belongs)
-                        basicCount += belongs.length;
-                        $('.basic_count').text(basicCount)
                     }
                 });
-            }
-        })
 
-        $.ajax({
-            url: 'https://stock.zhixiutec.com/api/locations',
-            success: function (res) {
-                var data = res.data;
                 $("#city").select({
                     title: "选择城市",
                     multi: true,
-                    items: data,
+                    items: location,
                     onClose: function (e) {
                         var locationsData = e.data.values;
                         locations = locationsData.split(',');
@@ -1148,19 +1150,12 @@
                         $('.basic_count').text(basicCount)
                     }
                 });
-            }
-        })
 
 
-        var concectCount = 0; 
-        $.ajax({
-            url: 'https://stock.zhixiutec.com/api/concepts',
-            success: function (res) {
-                var data = res.data;
                 $("#idea").select({
                     title: "选择概念",
                     multi: true,
-                    items: data,
+                    items: concept,
                     onClose: function (e) {
                         var conceptsData = e.data.values;
                         concepts = conceptsData.split(',')
@@ -1168,19 +1163,26 @@
                         $('.concect_count').text(concectCount)
                     }
                 });
-            }
-        })
-        $.ajax({
-            url: 'https://stock.zhixiutec.com/api/labels',
-            success: function (res) {
-                var data = res.data;
+
                 $("#tag").select({
                     title: "选择标签",
                     multi: true,
-                    items: data,
+                    items: label,
                     onClose: function (e) {
                         var labelsData = e.data.values;
                         labels = labelsData.split(',')
+                        concectCount += labels.length;
+                        $('.concect_count').text(concectCount)
+                    }
+                });
+
+                $("#froms").select({
+                    title: "选择组织形式",
+                    multi: true,
+                    items: forms,
+                    onClose: function (e) {
+                        var labelsData = e.data.values;
+                        forms = labelsData.split(',')
                         concectCount += labels.length;
                         $('.concect_count').text(concectCount)
                     }

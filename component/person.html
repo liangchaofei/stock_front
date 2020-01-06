@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-03 18:09:55
+ * @LastEditTime : 2020-01-05 21:22:02
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -22,11 +22,7 @@
 <body>
     <div class="person_top">
         <img src="" alt="头像" class="tx">
-        <div class="name"></div>
-        <div class="count">
-            <span>经验：<span class="expires">0</span></span>
-            <span>查询次数：<span class="flet_count">0</span></span>
-        </div>
+        <div class="name" style="padding-bottom: 10px;"></div>
     </div>
 
     <div>
@@ -37,14 +33,14 @@
             </div>
         </div> -->
         <div class="weui-cell">
-            <div class="weui-cell__hd"><label for="name" class="weui-label">手机</label></div>
+            <div class="weui-cell__hd"><label for="name" class="weui-label" style="padding-right: 10px;">会员到期时间:</label></div>
             <div class="weui-cell__bd">
-                <div class="weui-input" id="phone"></div>
+                <div class="weui-input" id="time"></div>
                 <!-- <input class="weui-input" id="phone" type="text" value=""> -->
             </div>
         </div>
         <div class="weui-cell">
-            <div class="weui-cell__hd"><label for="name" class="weui-label">加入时间</label></div>
+            <div class="weui-cell__hd"><label for="name" class="weui-label" style="padding-right: 10px;">查询剩余次数:</label></div>
             <div class="weui-cell__bd">
                 <div class="weui-input" id="joinTime" ></div class="weui-input" id="joinTime">
                 <!-- <input class="weui-input" id="joinTime" type="text" value=""> -->
@@ -63,12 +59,6 @@
                 <img src="../img/icon_nav_button.png" alt="">
             </div>
             <p class="weui-tabbar__label">查询</p>
-        </a>
-        <a href="javascript:;" class="weui-tabbar__item">
-            <div class="weui-tabbar__icon">
-                <img src="../img/icon_nav_article.png" alt="">
-            </div>
-            <p class="weui-tabbar__label">头条</p>
         </a>
         <a href="/component/person.html" class="weui-tabbar__item weui-bar__item--on">
             <div class="weui-tabbar__icon">
@@ -99,13 +89,10 @@ function getUrlParam(name) {
                 if (res.error_code === 2) {
                     window.open(data,"_self");
                 }else{
-                    console.log('aaa',data.CreatedAt)
                     $('.tx').attr('src',data.avatar);
                     $('.name').text(data.user_name);
-                    $('.flet_count').text(data.query_left)
-                    $('.expires').text(data.exp)
-                    $('#phone').text(data.phone)
-                    $('#joinTime').text(data.CreatedAt.substring(0,10))
+                    $('#joinTime').text(data.query_left)
+                    $('#time').text(data.member_expire_time.substring(0,10))
                 }
 
             }
