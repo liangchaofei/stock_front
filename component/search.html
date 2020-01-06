@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-06 20:11:59
+ * @LastEditTime : 2020-01-06 20:15:46
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -1013,11 +1013,11 @@
                 data: JSON.stringify(data),
                 success: function (res) {
                     $('.no_result').css("display", "none")
-                    var data = res.data.result;
+                    var data = res && res.data && res.data.result;
                     var dom_val = '', today_date = '';
                     var err_code = res.error_code;
                     var err_msg = res.err_msg;
-                   if(data.length>0 && err_code === 0){
+                   if(data && data.length>0 && err_code === 0){
                     data && data.map(item => {
                         var bigPercent = item.percent >= 0 ? "winner" : "loser";
                         var str = item.percent >= 0 ? "+" : "";
@@ -1056,7 +1056,7 @@
                             </div>`)
                     $('.gp_list').append(dom_val)
                     }else if(err_code === 1){
-                        $('.gp_list').append(`<div>${err_msg}</div>`)
+                        $('.gp_list').append(`<div style="text-align:center;padding: 10px 0;">${err_msg}</div>`)
                     }
                 },
             })
