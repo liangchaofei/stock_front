@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-06 16:36:43
+ * @LastEditTime : 2020-01-06 17:56:01
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -33,22 +33,25 @@
             </div>
         </div> -->
         <div class="weui-cell">
-            <div class="weui-cell__hd"><label for="name" class="weui-label" style="padding-right: 10px;">会员到期时间:</label></div>
+            <div class="weui-cell__hd"><label for="name" class="weui-label" style="padding-right: 10px;">会员到期时间:</label>
+            </div>
             <div class="weui-cell__bd">
                 <div class="weui-input" id="time"></div>
                 <!-- <input class="weui-input" id="phone" type="text" value=""> -->
             </div>
         </div>
         <div class="weui-cell">
-            <div class="weui-cell__hd"><label for="name" class="weui-label" style="padding-right: 10px;">查询剩余次数:</label></div>
+            <div class="weui-cell__hd"><label for="name" class="weui-label" style="padding-right: 10px;">查询剩余次数:</label>
+            </div>
             <div class="weui-cell__bd">
-                <div class="weui-input" id="joinTime" ></div class="weui-input" id="joinTime">
+                <div class="weui-input" id="joinTime"></div class="weui-input" id="joinTime">
                 <!-- <input class="weui-input" id="joinTime" type="text" value=""> -->
             </div>
         </div>
 
         <div class="weui-cell">
-            <div class="weui-cell__hd"><label for="name" class="weui-label" style="padding-right: 10px;">充值:</label></div>
+            <div class="weui-cell__hd"><label for="name" class="weui-label" style="padding-right: 10px;">充值:</label>
+            </div>
             <div class="weui-cell__bd">
                 <div class="weui-cell weui-cell_select">
                     <div class="weui-cell__bd">
@@ -61,7 +64,7 @@
         </div>
 
 
-      
+
         <div class="weui-btn-area" id="pay_btn">
             <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">确定</a>
         </div>
@@ -92,13 +95,13 @@
     <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/swiper.min.js"></script>
     <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/city-picker.min.js"></script>
     <script src="../js/jwerixin.js"></script>
-    <script>    
+    <script>
 
-function getUrlParam(name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-    var r = window.location.search.substr(1).match(reg);  //匹配目标参数
-    if (r != null) return unescape(r[2]); return null; //返回参数值
-}
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r != null) return unescape(r[2]); return null; //返回参数值
+        }
 
         $.ajax({
             url: 'https://stock.zhixiutec.com/api/user',
@@ -107,12 +110,12 @@ function getUrlParam(name) {
                 console.log('res', res)
                 var data = res.data;
                 if (res.error_code === 2) {
-                    window.open(data,"_self");
-                }else{
-                    $('.tx').attr('src',data.avatar);
+                    window.open(data, "_self");
+                } else {
+                    $('.tx').attr('src', data.avatar);
                     $('.name').text(data.user_name);
                     $('#joinTime').text(data.query_left)
-                    $('#time').text(data.member_expire_time.substring(0,10))
+                    $('#time').text(data.member_expire_time.substring(0, 10))
                     $.ajax({
                         url: 'https://stock.zhixiutec.com/api/is_member',
                         success: function (res) {
@@ -128,55 +131,55 @@ function getUrlParam(name) {
                                         }
                                         $('#wechat').on('change', function (e) {
                                             member = parseInt(e.target.value);
-                                            $('#pay_btn').on('click',function(){
+                                            $('#pay_btn').on('click', function () {
                                                 $.ajax({
-                                                url: 'https://stock.zhixiutec.com/api/jsapi_pay',
-                                                type: 'post',
-                                                data: JSON.stringify({ "id": member }),
-                                                success: function (res) {
-                                                    console.log('res', res)
-                                                    var result = res.data;
-                                                    console.log('result',result)
-                                                    wx.config({
-                                                        debug: false,
-                                                        appId: result["appId"],
-                                                        timestamp: result["timeStamp"],
-                                                        nonceStr: result["nonceStr"],
-                                                        signature: result["signature"],
-                                                        jsApiList: [
-                                                            'chooseWXPay',
-                                                        ]
-                                                    });
-                                                    wx.ready(function () {
-                                                        wx.chooseWXPay({
+                                                    url: 'https://stock.zhixiutec.com/api/jsapi_pay',
+                                                    type: 'post',
+                                                    data: JSON.stringify({ "id": member }),
+                                                    success: function (res) {
+                                                        console.log('res', res)
+                                                        var result = res.data;
+                                                        console.log('result', result)
+                                                        wx.config({
+                                                            debug: false,
                                                             appId: result["appId"],
-                                                            timestamp: result["timeStamp"], // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
-                                                            nonceStr: result["nonceStr"], // 支付签名随机串，不长于 32 位
-                                                            package: result["package"], // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
-                                                            signType: result["signType"], // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
-                                                            paySign: result["sign"], // 支付签名
-                                                            success: function (res) {
-                                                                console.log('res',res)
-                                                            },
-
-                                                            fail: function (res) {
-                                                                $.hideLoading()
-                                                                // alert('支付失败!');
-                                                                toast("支付失败！请检查微信配置");
-                                                            },
-                                                            cancel: function (res) {
-
-                                                                // //支付取消
-                                                                $.hideLoading()
-                                                                toast("已取消支付！");
-                                                            }
+                                                            timestamp: result["timeStamp"],
+                                                            nonceStr: result["nonceStr"],
+                                                            signature: result["signature"],
+                                                            jsApiList: [
+                                                                'chooseWXPay',
+                                                            ]
                                                         });
-                                                    });
+                                                        wx.ready(function () {
+                                                            wx.chooseWXPay({
+                                                                appId: result["appId"],
+                                                                timestamp: result["timeStamp"], // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+                                                                nonceStr: result["nonceStr"], // 支付签名随机串，不长于 32 位
+                                                                package: result["package"], // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
+                                                                signType: result["signType"], // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+                                                                paySign: result["sign"], // 支付签名
+                                                                success: function (res) {
+                                                                    console.log('res', res)
+                                                                },
 
-                                                }
+                                                                fail: function (res) {
+                                                                    $.hideLoading()
+                                                                    // alert('支付失败!');
+                                                                    toast("支付失败！请检查微信配置");
+                                                                },
+                                                                cancel: function (res) {
+
+                                                                    // //支付取消
+                                                                    $.hideLoading()
+                                                                    toast("已取消支付！");
+                                                                }
+                                                            });
+                                                        });
+
+                                                    }
+                                                })
                                             })
-                                            })
-                                           
+
                                         })
 
                                     }
@@ -184,42 +187,50 @@ function getUrlParam(name) {
                             }
                         }
                     })
+
+                    // 我的邀请
+                    $.ajax({
+                        url:'https://stock.zhixiutec.com/api/my_invites',
+                        success:function(res){
+                            console.log('111',res)
+                        }
+                    })
                 }
 
             }
         })
 
-        $.ajax({
-            url: 'https://stock.zhixiutec.com/api/my_conditions',
-            type: 'get',
-            success: function (res) {
-                var data = res.data;
-                var arr = [];
-                var allConditions = [];
-                data.map(item => {
-                    var conditions = item.conditions;
-                    var belongs = conditions.belongs;
-                    var concepts = conditions.concepts;
-                    var labels = conditions.labels;
-                    var locations = conditions.locations;
-                    var organizational_form = conditions.organizational_form;
-                    var predicts = conditions.predicts;
+        // $.ajax({
+        //     url: 'https://stock.zhixiutec.com/api/my_conditions',
+        //     type: 'get',
+        //     success: function (res) {
+        //         var data = res.data;
+        //         var arr = [];
+        //         var allConditions = [];
+        //         data.map(item => {
+        //             var conditions = item.conditions;
+        //             var belongs = conditions.belongs;
+        //             var concepts = conditions.concepts;
+        //             var labels = conditions.labels;
+        //             var locations = conditions.locations;
+        //             var organizational_form = conditions.organizational_form;
+        //             var predicts = conditions.predicts;
 
-                    allConditions = belongs.concat(concepts).concat(labels).concat(locations).concat(organizational_form).concat(predicts)
+        //             allConditions = belongs.concat(concepts).concat(labels).concat(locations).concat(organizational_form).concat(predicts)
 
-                    console.log('allConditions', allConditions.join(','))
-                    arr.push(allConditions.join(','))
-                })
-                console.log('arr', arr)
-                $("#other").select({
-                    title: "选择我的条件",
-                    items: arr,
-                    onClose: function (e) {
-                        console.log('eee', e)
-                    }
-                });
-            }
-        })
+        //             console.log('allConditions', allConditions.join(','))
+        //             arr.push(allConditions.join(','))
+        //         })
+        //         console.log('arr', arr)
+        //         $("#other").select({
+        //             title: "选择我的条件",
+        //             items: arr,
+        //             onClose: function (e) {
+        //                 console.log('eee', e)
+        //             }
+        //         });
+        //     }
+        // })
     </script>
 </body>
 
