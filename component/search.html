@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-05 21:38:30
+ * @LastEditTime : 2020-01-06 16:52:04
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -32,10 +32,11 @@
 
     <!-- 搜索 -->
     <div class="weui-search-bar" id="searchBar">
-        <form class="weui-search-bar__form">
+        <form class="weui-search-bar__form" id="search_form">
           <div class="weui-search-bar__box">
             <i class="weui-icon-search"></i>
             <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required="">
+            <iframe name='frameFile' style="display: none;"></iframe>
             <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
           </div>
           <label class="weui-search-bar__label" id="searchText">
@@ -72,6 +73,12 @@
                     <input class="weui-input" id="city" type="text" value="" readonly="" data-values="1,2,3">
                 </div>
             </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label for="name" class="weui-label">组织形式</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="froms" type="text" value="" readonly="" data-values="1,2,3">
+                </div>
+            </div>
         </div>
       </div>
 
@@ -98,12 +105,7 @@
                     <input class="weui-input" id="tag" type="text" value="" readonly="" data-values="1,2,3">
                 </div>
             </div>
-            <div class="weui-cell">
-                <div class="weui-cell__hd"><label for="name" class="weui-label">组织形式</label></div>
-                <div class="weui-cell__bd">
-                    <input class="weui-input" id="froms" type="text" value="" readonly="" data-values="1,2,3">
-                </div>
-            </div>
+         
         </div>
       </div>
 
@@ -125,13 +127,6 @@
                 <div class="weui-cell__hd"><label for="name" class="weui-label">K线形态</label></div>
                 <div class="weui-cell__bd">
                     <input class="weui-input" id="kline" type="text" value="" readonly="" data-values="1,2,3">
-                </div>
-            </div>
-    
-            <div class="weui-cell">
-                <div class="weui-cell__hd"><label for="name" class="weui-label">机构持仓情况</label></div>
-                <div class="weui-cell__bd">
-                    <input class="weui-input" id="jigou" type="text" value="" readonly="" data-values="1,2,3">
                 </div>
             </div>
     
@@ -837,167 +832,179 @@
             firstMax = parseInt(e.delegateTarget.value)
         })
 
-        
-        $('#searchInput').bind('input propertychange', function(e) {
-            var searchVal = e.target.value;
-            $('#search_input').keydown(function(e){
-                console.log('aa',e.keyCode)
-                if(e.keyCode==13){
-                    e.preventDefault();
+        $("form").submit(function(){
+            var searchVal = $("#searchInput").val()
                     $.ajax({
                         url: `https://stock.zhixiutec.com/api/stock/detail?code=${searchVal}&date=2020-01-03`,
                         success:function(res){
-                            window.open(`/component/detail.html?code=${searchVal}&date=2020-01-03`,"_self")
+                             window.open(`/component/detail.html?code=${searchVal}&date=2020-01-03`,"_self")
                         }
                     })
-                }
-            });
-	    });
+        })
+
+        // document.getElementById('search_form').onsubmit = function(){
+        //     alert("123");
+        // }
+        // $('#searchInput').bind('input propertychange', function(e) {
+        //     var searchVal = e.target.value;
+        //     $('#search_input').keydown(function(e){
+        //         console.log('aa',e.keyCode)
+        //         if(e.keyCode==13){
+        //             e.preventDefault();
+        //             $.ajax({
+        //                 url: `https://stock.zhixiutec.com/api/stock/detail?code=${searchVal}&date=2020-01-03`,
+        //                 success:function(res){
+        //                     window.open(`/component/detail.html?code=${searchVal}&date=2020-01-03`,"_self")
+        //                 }
+        //             })
+        //         }
+        //     });
+	    // });
 
         function searchPg() {
-            var data ={
-    "query":{
-        "predicts":[],
-        "belongs":[],
-        "locations":[],
-        "concepts":[],
-        "labels":[],
-        "forms":[],
-        "per_tickets":{
-            "shouyiafter":{},
-            "jinzichanafter":{},
-            "jingyingxianjinliu":{},
-            "gubengongjijin":{},
-            "weifenpeilirun":{}
-        },
-        "last_day_range": {"last_percent":{}, "last_amplitude":{}, "last_turnoverrate":{}, "last_price":{"min":1}},
-        "yl_ability": {"yl_zongzichanlirunlv":{}, "yl_zhuyingyewulirunlv":{}, "yl_zongzichanjinglirunlv":{}, "yl_yingyelirunlv":{}, "yl_xiaoshoujinglilv":{}, "yl_gubenbaochoulv":{}, "yl_jingzichanbaochoulv":{}, "yl_zichanbaochoulv":{}},
-        "cz_ability": {"cz_zhuyingyewushouruzengzhanglv":{}, "cz_jinglirunzengzhanglv":{}, "cz_jingzichanzengzhanglv":{}, "cz_zongzichanzengzhanglv":{}},
-        "yy_ability": {"yy_yingshouzhangkuanzhouzhuanlv":{}, "yy_cunhuozhouzhuanglv":{}, "yy_liudongzichanzhouzhuanglv":{}, "yy_zongzichanzhouzhuanglv":{}, "yy_gudongquanyizhouzhuanglv":{}}
-    },
-    "date":"2020-01-03",
-    "save":false,
-    "order":"score"
-};
+//             var data ={
+//     "query":{
+//         "predicts":[],
+//         "belongs":[],
+//         "locations":[],
+//         "concepts":[],
+//         "labels":[],
+//         "forms":[],
+//         "per_tickets":{
+//             "shouyiafter":{},
+//             "jinzichanafter":{},
+//             "jingyingxianjinliu":{},
+//             "gubengongjijin":{},
+//             "weifenpeilirun":{}
+//         },
+//         "last_day_range": {"last_percent":{}, "last_amplitude":{}, "last_turnoverrate":{}, "last_price":{"min":1}},
+//         "yl_ability": {"yl_zongzichanlirunlv":{}, "yl_zhuyingyewulirunlv":{}, "yl_zongzichanjinglirunlv":{}, "yl_yingyelirunlv":{}, "yl_xiaoshoujinglilv":{}, "yl_gubenbaochoulv":{}, "yl_jingzichanbaochoulv":{}, "yl_zichanbaochoulv":{}},
+//         "cz_ability": {"cz_zhuyingyewushouruzengzhanglv":{}, "cz_jinglirunzengzhanglv":{}, "cz_jingzichanzengzhanglv":{}, "cz_zongzichanzengzhanglv":{}},
+//         "yy_ability": {"yy_yingshouzhangkuanzhouzhuanlv":{}, "yy_cunhuozhouzhuanglv":{}, "yy_liudongzichanzhouzhuanglv":{}, "yy_zongzichanzhouzhuanglv":{}, "yy_gudongquanyizhouzhuanglv":{}}
+//     },
+//     "date":"2019-12-27",
+//     "save":true,
+//     "order":"score"
+// };
             // save 参数是表示是否保存条件
             // order 表示按照那个字段排序， 支持"score", "percent", "price", "fund_count", "sm_count" 分别代表 分数，涨幅， 价格， 基金持仓数量， 私募数量
-            // var data = {
-            //     "query": {
-            //         "predicts": ["6日均线上扬"],
-            //         "belongs": belongs,
-            //         "locations": locations,
-            //         "organizational_form": organizational_form,
-            //         "concepts": concepts,
-            //         "labels": labels,
-            //         "per_tickets": {
-            //             "shouyiafter": {
-            //                 min: firstMin,
-            //                 max: firstMax
-            //             },
-            //             "jinzichanafter": {
-            //                 min: secondMin,
-            //                 max: secondMax
-            //             },
-            //             "jingyingxianjinliu": {
-            //                 min: thirdMin,
-            //                 max: thirdMax
-            //             },
-            //             "gubengongjijin": {
-            //                 min: fourMin,
-            //                 max: fourMax
-            //             },
-            //             "weifenpeilirun": {
-            //                 min: fiveMin,
-            //                 max: fiveMax
-            //             }
-            //         },
-            //         "last_day_range": {
-            //             "last_percent": { "min": sixMin, "max": sixMax },
-            //             "last_amplitude": { "min": seventMin, "max": sevenMax },
-            //             "last_turnoverrate": { "min": eightMin, "max": eightMax },
-            //             "last_price": { "min": nineMin, "max": nineMax }
-            //         },
+            var data = {
+                "query": {
+                    "predicts": predicts,
+                    "belongs": belongs,
+                    "locations": locations,
+                    "organizational_form": organizational_form,
+                    "concepts": concepts,
+                    "labels": labels,
+                    "per_tickets": {
+                        "shouyiafter": {
+                            min: firstMin,
+                            max: firstMax
+                        },
+                        "jinzichanafter": {
+                            min: secondMin,
+                            max: secondMax
+                        },
+                        "jingyingxianjinliu": {
+                            min: thirdMin,
+                            max: thirdMax
+                        },
+                        "gubengongjijin": {
+                            min: fourMin,
+                            max: fourMax
+                        },
+                        "weifenpeilirun": {
+                            min: fiveMin,
+                            max: fiveMax
+                        }
+                    },
+                    "last_day_range": {
+                        "last_percent": { "min": sixMin, "max": sixMax },
+                        "last_amplitude": { "min": seventMin, "max": sevenMax },
+                        "last_turnoverrate": { "min": eightMin, "max": eightMax },
+                        "last_price": { "min": nineMin, "max": nineMax }
+                    },
 
 
-            //         "yl_ability": {
-            //             "yl_zongzichanlirunlv": {
-            //                 min: tenMin,
-            //                 max: tenMax
-            //             },
-            //             "yl_zhuyingyewulirunlv": {
-            //                 min: elevenMin,
-            //                 max: elevenMax
-            //             },
-            //             "yl_zongzichanjinglirunlv": {
-            //                 min: twelveMin,
-            //                 max: twelveMax
-            //             },
-            //             "yl_yingyelirunlv": {
-            //                 min: thirteenMin,
-            //                 max: thirteenMax
-            //             },
-            //             "yl_xiaoshoujinglilv": {
-            //                 min: fourteenMin,
-            //                 max: fourteenMax
-            //             },
-            //             "yl_gubenbaochoulv": {
-            //                 min: fifteenMin,
-            //                 max: fifteenMax
-            //             },
-            //             "yl_jingzichanbaochoulv": {
-            //                 min: sixteenMin,
-            //                 max: sixteenMax
-            //             },
-            //             "yl_zichanbaochoulv": {
-            //                 min: seventeenMin,
-            //                 max: seventeenMax
-            //             }
-            //         },
+                    "yl_ability": {
+                        "yl_zongzichanlirunlv": {
+                            min: tenMin,
+                            max: tenMax
+                        },
+                        "yl_zhuyingyewulirunlv": {
+                            min: elevenMin,
+                            max: elevenMax
+                        },
+                        "yl_zongzichanjinglirunlv": {
+                            min: twelveMin,
+                            max: twelveMax
+                        },
+                        "yl_yingyelirunlv": {
+                            min: thirteenMin,
+                            max: thirteenMax
+                        },
+                        "yl_xiaoshoujinglilv": {
+                            min: fourteenMin,
+                            max: fourteenMax
+                        },
+                        "yl_gubenbaochoulv": {
+                            min: fifteenMin,
+                            max: fifteenMax
+                        },
+                        "yl_jingzichanbaochoulv": {
+                            min: sixteenMin,
+                            max: sixteenMax
+                        },
+                        "yl_zichanbaochoulv": {
+                            min: seventeenMin,
+                            max: seventeenMax
+                        }
+                    },
 
-            //         "cz_ability": {
-            //             "cz_zhuyingyewushouruzengzhanglv":{
-            //                 min: eighteenMin,
-            //                 max: eighteenMax
-            //             }, 
-            //             "cz_jinglirunzengzhanglv":{
-            //                 min: nineteenMin,
-            //                 max: nineteenMax
-            //             }, 
-            //             "cz_jingzichanzengzhanglv":{
-            //                 min: twentyMin,
-            //                 max: twentyMax
-            //             }, 
-            //             "cz_zongzichanzengzhanglv":{
-            //                 min: twentyoneMin,
-            //                 max: twentyoneMax
-            //             }
-            //             },
-            //         "yy_ability": {
-            //             "yy_yingshouzhangkuanzhouzhuanlv":{
-            //                 min: twentytwoMin,
-            //                 max: twentytwoMax
-            //             }, 
-            //             "yy_cunhuozhouzhuanglv":{
-            //                 min: twentythreeMin,
-            //                 max: twentythreeMax
-            //             }, 
-            //             "yy_liudongzichanzhouzhuanglv":{
-            //                 min: twentyfourMin,
-            //                 max: twentyfourMax
-            //             }, 
-            //             "yy_zongzichanzhouzhuanglv":{
-            //                 min: twentyfiveMin,
-            //                 max: twentyfiveMax
-            //             }, 
-            //             "yy_gudongquanyizhouzhuanglv":{
-            //                 min: twentysixMin,
-            //                 max: twentysixMax
-            //             }
-            //         }
-            //     },
-            //     "date": date,
-            //     "save": true
-            // }
+                    "cz_ability": {
+                        "cz_zhuyingyewushouruzengzhanglv":{
+                            min: eighteenMin,
+                            max: eighteenMax
+                        }, 
+                        "cz_jinglirunzengzhanglv":{
+                            min: nineteenMin,
+                            max: nineteenMax
+                        }, 
+                        "cz_jingzichanzengzhanglv":{
+                            min: twentyMin,
+                            max: twentyMax
+                        }, 
+                        "cz_zongzichanzengzhanglv":{
+                            min: twentyoneMin,
+                            max: twentyoneMax
+                        }
+                        },
+                    "yy_ability": {
+                        "yy_yingshouzhangkuanzhouzhuanlv":{
+                            min: twentytwoMin,
+                            max: twentytwoMax
+                        }, 
+                        "yy_cunhuozhouzhuanglv":{
+                            min: twentythreeMin,
+                            max: twentythreeMax
+                        }, 
+                        "yy_liudongzichanzhouzhuanglv":{
+                            min: twentyfourMin,
+                            max: twentyfourMax
+                        }, 
+                        "yy_zongzichanzhouzhuanglv":{
+                            min: twentyfiveMin,
+                            max: twentyfiveMax
+                        }, 
+                        "yy_gudongquanyizhouzhuanglv":{
+                            min: twentysixMin,
+                            max: twentysixMax
+                        }
+                    }
+                },
+                "date": date,
+                "save": true
+            }
             $.ajax({
                 type: 'POST',
                 url: url,

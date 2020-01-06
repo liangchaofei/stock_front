@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-05 21:22:02
+ * @LastEditTime : 2020-01-06 16:36:43
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -11,7 +11,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0;">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>知修数据</title>
     <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
@@ -46,6 +46,25 @@
                 <!-- <input class="weui-input" id="joinTime" type="text" value=""> -->
             </div>
         </div>
+
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label for="name" class="weui-label" style="padding-right: 10px;">充值:</label></div>
+            <div class="weui-cell__bd">
+                <div class="weui-cell weui-cell_select">
+                    <div class="weui-cell__bd">
+                        <select class="weui-select" id="wechat">
+                            <option value='' disabled selected style='display:none;'>请选择会员等级</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+      
+        <div class="weui-btn-area" id="pay_btn">
+            <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">确定</a>
+        </div>
         <!-- <div class="weui-cell">
             <div class="weui-cell__hd"><label for="name" class="weui-label">我的条件</label></div>
             <div class="weui-cell__bd">
@@ -72,6 +91,7 @@
     <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
     <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/swiper.min.js"></script>
     <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/city-picker.min.js"></script>
+    <script src="../js/jwerixin.js"></script>
     <script>    
 
 function getUrlParam(name) {
@@ -93,6 +113,77 @@ function getUrlParam(name) {
                     $('.name').text(data.user_name);
                     $('#joinTime').text(data.query_left)
                     $('#time').text(data.member_expire_time.substring(0,10))
+                    $.ajax({
+                        url: 'https://stock.zhixiutec.com/api/is_member',
+                        success: function (res) {
+                            var is_member = res.data;
+                            if (is_member === false) {
+                                $.ajax({
+                                    url: 'https://stock.zhixiutec.com/api/payments',
+                                    success: function (result) {
+                                        var leader = result.data;
+                                        var member = '';
+                                        for (var i = 0; i < leader.length; i++) {
+                                            $("#wechat").append(`<option value=${leader[i].id}>${leader[i].type_desc}</option>`);
+                                        }
+                                        $('#wechat').on('change', function (e) {
+                                            member = parseInt(e.target.value);
+                                            $('#pay_btn').on('click',function(){
+                                                $.ajax({
+                                                url: 'https://stock.zhixiutec.com/api/jsapi_pay',
+                                                type: 'post',
+                                                data: JSON.stringify({ "id": member }),
+                                                success: function (res) {
+                                                    console.log('res', res)
+                                                    var result = res.data;
+                                                    console.log('result',result)
+                                                    wx.config({
+                                                        debug: false,
+                                                        appId: result["appId"],
+                                                        timestamp: result["timeStamp"],
+                                                        nonceStr: result["nonceStr"],
+                                                        signature: result["signature"],
+                                                        jsApiList: [
+                                                            'chooseWXPay',
+                                                        ]
+                                                    });
+                                                    wx.ready(function () {
+                                                        wx.chooseWXPay({
+                                                            appId: result["appId"],
+                                                            timestamp: result["timeStamp"], // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+                                                            nonceStr: result["nonceStr"], // 支付签名随机串，不长于 32 位
+                                                            package: result["package"], // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
+                                                            signType: result["signType"], // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+                                                            paySign: result["sign"], // 支付签名
+                                                            success: function (res) {
+                                                                console.log('res',res)
+                                                            },
+
+                                                            fail: function (res) {
+                                                                $.hideLoading()
+                                                                // alert('支付失败!');
+                                                                toast("支付失败！请检查微信配置");
+                                                            },
+                                                            cancel: function (res) {
+
+                                                                // //支付取消
+                                                                $.hideLoading()
+                                                                toast("已取消支付！");
+                                                            }
+                                                        });
+                                                    });
+
+                                                }
+                                            })
+                                            })
+                                           
+                                        })
+
+                                    }
+                                })
+                            }
+                        }
+                    })
                 }
 
             }
