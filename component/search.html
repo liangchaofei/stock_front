@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-06 18:08:50
+ * @LastEditTime : 2020-01-06 19:56:04
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -1021,14 +1021,14 @@
                         var str = item.percent >= 0 ? "+" : "";
                         today_date = item.date;
                         dom_val += `
-                        <a style="display:inline-block;width:15rem;" class="weui-cell weui-cell_access goDetail" href=/component/detail.html?code=${item.code}&date=${item.date}>
+                        <a style="display:inline-block;width:100%;" class="weui-cell weui-cell_access goDetail" href=/component/detail.html?code=${item.code}&date=${item.date}>
                             <div class="weui-cell__bd">
-                                <span>${item.name}</span>
+                                <span style="font-size:16px">${item.name}</span>
                                 <span class=${bigPercent}>${item.price}元</span>
                                 <span class=${bigPercent}>${str}${item.percent}%</span>
                                 <span>${item.code}</span>
-                                <span class="score">${item.score}</span>
                                 <span>${item.location}</span>
+                                <span class="score">${item.score}</span>
                             </div>
                             <div class="weui-cell__bd">
                                 <span class="form">${item.form}</span>
