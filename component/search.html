@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-06 19:56:04
+ * @LastEditTime : 2020-01-06 20:11:59
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -497,9 +497,9 @@
     <div id="full" class="weui-popup__container">
         <div class="weui-popup__overlay"></div>
         <div class="weui-popup__modal">
-            <a href="javascript:;" class="weui-btn weui-btn_primary close-popup" style="background: red;position: fixed;top: 0;">
+            <div href="javascript:;" class="weui-btn weui-btn_primary close-popup" style="background: red;position: sticky;top: 0;">
                 <svg style="width:1.5em;height:1.5em;position:relative;top:0.4em;" t="1578304608249" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1752" width="200" height="200"><path d="M511.998966 1023.99998c-282.766789 0-511.998966-229.234225-511.998966-512.003062C0 229.230129 229.232177 0 511.998966 0c282.768837 0 512.001014 229.230129 512.001014 511.996918C1023.99998 794.765755 794.767803 1023.99998 511.998966 1023.99998zM511.998966 64.001919c-247.420428 0-447.999095 200.576619-447.999095 447.997047 0 247.422476 200.576619 447.999095 447.999095 447.999095 247.424524 0 448.001143-200.576619 448.001143-447.999095C960.000109 264.57649 759.421442 64.001919 511.998966 64.001919zM557.433754 512.179189l135.58347 135.581422c12.496871 12.498919 12.496871 32.757694 0 45.256613-12.496871 12.498919-32.757694 12.498919-45.254565 0l-135.585518-135.585518-136.507116 136.507116c-12.597223 12.591079-33.015741 12.591079-45.610916 0-12.595175-12.595175-12.595175-33.013693 0-45.608868l136.509164-136.509164-135.585518-135.585518c-12.498919-12.496871-12.498919-32.757694 0-45.252517 12.496871-12.500967 32.755646-12.500967 45.254565 0l135.587566 135.585518 137.51473-137.51473c12.593127-12.597223 33.015741-12.597223 45.610916 0 12.593127 12.593127 12.593127 33.015741 0 45.60682L557.433754 512.179189z" p-id="1753" fill="#ffffff"></path></svg>
-            </a>
+            </div>
           <div class="weui-cells gp_list">
         </div>
         </div>
@@ -1015,7 +1015,9 @@
                     $('.no_result').css("display", "none")
                     var data = res.data.result;
                     var dom_val = '', today_date = '';
-                   if(data.length>0){
+                    var err_code = res.error_code;
+                    var err_msg = res.err_msg;
+                   if(data.length>0 && err_code === 0){
                     data && data.map(item => {
                         var bigPercent = item.percent >= 0 ? "winner" : "loser";
                         var str = item.percent >= 0 ? "+" : "";
@@ -1053,8 +1055,8 @@
                         本数据更新于${today_date}
                             </div>`)
                     $('.gp_list').append(dom_val)
-                    }else{
-                        $('.gp_list').append(`<div>根据您筛选条件，未查询到数据</div>`)
+                    }else if(err_code === 1){
+                        $('.gp_list').append(`<div>${err_msg}</div>`)
                     }
                 },
             })
