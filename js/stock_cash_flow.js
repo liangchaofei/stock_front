@@ -437,6 +437,39 @@ $.ajax({
 
 
 
+        // 分数
+        var myChart_stock_score = echarts.init(document.getElementById('stock_score'))
+
+        var stock_score ={
+            tooltip: {
+                formatter: '{a} <br/>{b} : {c}%'
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                // bottom: '1%',
+                top:'3%',
+                containLabel: true
+            },
+            // toolbox: {
+            //     feature: {
+            //         restore: {},
+            //         saveAsImage: {}
+            //     }
+            // },
+            series: [
+                {
+                    name: '系统评分',
+                    type: 'gauge',
+                    // detail: {formatter: '{value}%'},
+                    data: [{value: predict.score, name: '系统评分'}],
+                    radius:	"100%",
+                }
+            ]
+        };
+
+        // option.series[0].data[0].value = (Math.random() * 100).toFixed(2) - 0;
+        myChart_stock_score.setOption(stock_score, true);
 
         // 利润
         var myChart_stock_profit  = echarts.init(document.getElementById('stock_profit'))
