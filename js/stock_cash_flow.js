@@ -379,7 +379,7 @@ $.ajax({
             });
             var data = splitData(dayData);
             var option={
-                backgroundColor: '#fff',
+                backgroundColor: '#000',
                 animation: false,
                 legend: {
                     // bottom: 10,
@@ -387,25 +387,28 @@ $.ajax({
                     x:'top',
                     y:'center',
                     top:10,
-                    data: ['日线', 'MA5', 'MA10', 'MA20', 'MA30']
+                    data: ['日线', 'MA5', 'MA10', 'MA30', 'MA60'],
+                    textStyle: {
+                        color: '#fff'
+                    }
                 },
                 tooltip: {
-                    trigger: 'axis',
-                    axisPointer: {
-                        type: 'cross'
-                    },
-                    backgroundColor: 'rgba(245, 245, 245, 0.8)',
-                    borderWidth: 1,
-                    borderColor: '#ccc',
-                    padding: 10,
-                    textStyle: {
-                        color: '#000'
-                    },
-                    position: function (pos, params, el, elRect, size) {
-                        var obj = {top: 10};
-                        obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 30;
-                        return obj;
-                    }
+                    // trigger: 'axis',
+                    // axisPointer: {
+                    //     type: 'cross'
+                    // },
+                    // backgroundColor: 'rgba(245, 245, 245, 0.8)',
+                    // borderWidth: 1,
+                    // borderColor: '#ccc',
+                    // padding: 10,
+                    // textStyle: {
+                    //     color: '#000'
+                    // },
+                    // position: function (pos, params, el, elRect, size) {
+                    //     var obj = {top: 10};
+                    //     obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 30;
+                    //     return obj;
+                    // },
                     // extraCssText: 'width: 170px'
                 },
                 axisPointer: {
@@ -463,7 +466,7 @@ $.ajax({
                         data: data.categoryData,
                         scale: true,
                         boundaryGap: false,
-                        axisLine: {onZero: false},
+                        axisLine: {onZero: false,lineStyle: { color: '#8392A5' }},
                         splitLine: {show: false},
                         splitNumber: 20,
                         min: 'dataMin',
@@ -478,7 +481,7 @@ $.ajax({
                         data: data.categoryData,
                         scale: true,
                         boundaryGap: false,
-                        axisLine: {onZero: false},
+                        axisLine: {onZero: false,lineStyle: { color: '#8392A5' }},
                         axisTick: {show: false},
                         splitLine: {show: false},
                         axisLabel: {show: false},
@@ -492,6 +495,13 @@ $.ajax({
                         scale: true,
                         splitArea: {
                             show: true
+                        },
+                        axisLine: { lineStyle: { color: '#8392A5' } },
+                        splitArea:{
+                            show:true,
+                            areaStyle:{
+                                color:['#000']
+                            }
                         }
                     },
                     {
@@ -526,31 +536,35 @@ $.ajax({
                         type: 'candlestick',
                         data: data.values,
                         itemStyle: {
-                            color: upColor,
-                            color0: downColor,
+                            color: downColor,
+                            color0: upColor,
                             borderColor: null,
                             borderColor0: null
                         },
-                        tooltip: {
-                            formatter: function (param) {
-                                param = param[0];
-                                return [
-                                    'Date: ' + param.name + '<hr size=1 style="margin: 3px 0">',
-                                    'Open: ' + param.data[0] + '<br/>',
-                                    'Close: ' + param.data[1] + '<br/>',
-                                    'Lowest: ' + param.data[2] + '<br/>',
-                                    'Highest: ' + param.data[3] + '<br/>'
-                                ].join('');
-                            }
-                        }
+                        // tooltip: {
+                        //     formatter: function (param) {
+                        //         param = param[0];
+                        //         return [
+                        //             'Date: ' + param.name + '<hr size=1 style="margin: 3px 0">',
+                        //             'Open: ' + param.data[0] + '<br/>',
+                        //             'Close: ' + param.data[1] + '<br/>',
+                        //             'Lowest: ' + param.data[2] + '<br/>',
+                        //             'Highest: ' + param.data[3] + '<br/>'
+                        //         ].join('');
+                        //     }
+                        // }
                     },
                     {
                         name: 'MA5',
                         type: 'line',
                         data: calculateMA(5, data),
                         smooth: true,
-                        lineStyle: {
-                            opacity: 0.5
+                        itemStyle:{
+                            normal:{
+                                lineStyle:{
+                                    color:'#fff'
+                                }
+                            }
                         }
                     },
                     {
@@ -560,15 +574,13 @@ $.ajax({
                         smooth: true,
                         lineStyle: {
                             opacity: 0.5
-                        }
-                    },
-                    {
-                        name: 'MA20',
-                        type: 'line',
-                        data: calculateMA(20, data),
-                        smooth: true,
-                        lineStyle: {
-                            opacity: 0.5
+                        },
+                        itemStyle:{
+                            normal:{
+                                lineStyle:{
+                                    color:'rgb(255,251,63)'
+                                }
+                            }
                         }
                     },
                     {
@@ -578,10 +590,33 @@ $.ajax({
                         smooth: true,
                         lineStyle: {
                             opacity: 0.5
+                        },
+                        itemStyle:{
+                            normal:{
+                                lineStyle:{
+                                    color:'rgb(255,16,251)'
+                                }
+                            }
                         }
                     },
                     {
-                        name: 'Volume',
+                        name: 'MA60',
+                        type: 'line',
+                        data: calculateMA(60, data),
+                        smooth: true,
+                        lineStyle: {
+                            opacity: 0.5
+                        },
+                        itemStyle:{
+                            normal:{
+                                lineStyle:{
+                                    color:'rgb(0,254,55)'
+                                }
+                            }
+                        }
+                    },
+                    {
+                        name: '成交量',
                         type: 'bar',
                         xAxisIndex: 1,
                         yAxisIndex: 1,
