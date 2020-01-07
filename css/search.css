@@ -72,16 +72,19 @@
 .loser{
     color: green;
 }
+.static{
+    margin-right: 5px;
+}
 .score{
     padding: 0.08rem;
     background: #108ee9;
     border-radius: 0.2rem;
-    /* float: right; */
+    float: right;
     color: #fff;
     margin-top: 0.2rem;
 }
 .belong{
-    width: 5rem;
+    /* width: 5rem; */
     display: inline-block;
     overflow:hidden; 
     text-overflow:ellipsis; 
