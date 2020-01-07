@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-07 11:56:24
+ * @LastEditTime : 2020-01-07 12:44:14
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -535,18 +535,18 @@
         $('#back').on('click', function () {
             window.history.go(-1)
         })
-        var loading = false;
-        pullup ();
-        $(document.body).infinite(100).on("infinite", function() {
-    if(loading) return;
-    loading = true;
-    setTimeout(function(){
-        pullup ();
-    },1500);
-});
-function pullup (){
-    $('.gp_list').append('<div>111</div')
-}
+//         var loading = false;
+//         pullup ();
+//         $(document.body).infinite(100).on("infinite", function() {
+//     if(loading) return;
+//     loading = true;
+//     setTimeout(function(){
+//         pullup ();
+//     },1500);
+// });
+// function pullup (){
+//     $('.gp_list').append('<div>111</div')
+// }
         var date = '',
             belongs = [],
             locations = [],
