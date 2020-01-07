@@ -18,11 +18,20 @@
     float:right;
 }
 .conditions{
-    display: inline-block;
+    /* display: inline-block;
     width: 15rem;
     overflow:hidden; 
     text-overflow:ellipsis; 
-    white-space:nowrap; 
+    white-space:nowrap;  */
+    overflow:hidden; 
+
+text-overflow:ellipsis;
+
+display:-webkit-box; 
+
+-webkit-box-orient:vertical;
+
+-webkit-line-clamp:2; 
 }
 #back1{
     margin-left: 0.6rem;
