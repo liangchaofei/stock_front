@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-30 22:17:16
- * @LastEditTime : 2020-01-03 18:40:00
+ * @LastEditTime : 2020-01-07 17:40:49
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/js/detail.js
@@ -15,6 +15,44 @@
 var code = getUrlParam('code');
 
 
+
+// 基础信息开关
+$('#basic_info_content').css({"display":"none"})
+$('.stock_btn').on('click',function(){
+    $('#basic_info_content').slideToggle("fast");
+    $(".stock_btn .up").toggle();
+    $(".stock_btn .down").toggle();
+})
+
+// 运营
+$('#yy_content').css({"display":"none"})
+$('#yy_open').on('click',function(){
+    $('#yy_content').slideToggle("fast");
+    $("#yy_open .up_open").toggle();
+    $("#yy_open .down_open").toggle();
+})
+// 成长
+$('#cz_content').css({"display":"none"})
+$('#cz_open').on('click',function(){
+    $('#cz_content').slideToggle("fast");
+    $("#cz_open .up_open").toggle();
+    $("#cz_open .down_open").toggle();
+})
+// 每股
+$('#mg_content').css({"display":"none"})
+$('#mg_open').on('click',function(){
+    $('#mg_content').slideToggle("fast");
+    $("#mg_open .up_open").toggle();
+    $("#mg_open .down_open").toggle();
+})
+
+// 每股
+$('#yl_content').css({"display":"none"})
+$('#yl_open').on('click',function(){
+    $('#yl_content').slideToggle("fast");
+    $("#yl_open .up_open").toggle();
+    $("#yl_open .down_open").toggle();
+})
 // function renderTable(current){
 //     $.ajax({
 //         url:`https://stock.zhixiutec.com/api/stock/fund?code=000001&page=${current}&page_size=10`,

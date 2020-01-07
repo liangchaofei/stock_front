@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-18 19:50:58
- * @LastEditTime : 2020-01-03 19:52:41
+ * @LastEditTime : 2020-01-07 17:59:16
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/detail.html
@@ -22,141 +22,214 @@
 </head>
 
 <body>
-    
+
     <div id="daykline" class="weui-tab__bd-item weui-tab__bd-item--active"></div>
-    <div class="weui-tab">
-        <div class="weui-navbar">
-            <a class="weui-navbar__item weui-bar__item--on" href="#tab1">
-                信息
-            </a>
-            <a class="weui-navbar__item" href="#tab2">
-                数据
-            </a>
-        </div>
-        <div class="weui-tab__bd">
-            <div style="width:100%" id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
-               
-                <div id="stock_cash_flow" style="width:100%;height:400px;margin-bottom: 40px;"></div>
 
-                <div id="stock_liabilities" style="width:100%;height:400px;margin-bottom: 40px;"></div>
+    <div class="weui-tab__bd">
+        <div style="width:100%" id="tab2" class="weui-tab__bd-item weui-tab__bd-item--active">
 
-                <div id="stock_profit" style="width:100%;height:400px;margin-bottom: 40px;"></div>
+
+            <!-- <div class="weui-panel weui-panel_access">
+                    <div class="weui-panel__hd" id="stock_btn">基本信息
+                        <i class="down"></i><i class="up" style="display:none;"></i>
+                    </div>
+                    <div class="weui-panel__bd" id="stock_info">
+                      <div class="weui-media-box weui-media-box_text">
+                        <h4 class="weui-media-box__title">标题一</h4>
+                        <p class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+                      </div>
+                      <div class="weui-media-box weui-media-box_text">
+                        <h4 class="weui-media-box__title">标题二</h4>
+                        <p class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+                      </div>
+                    </div>
+                  </div> -->
+
+
+            <div style="margin-top: 10px;" class="stock_btn">
+                <p class="weui-media-box__desc" id="percits_date" style="text-align: center;"></p>
+                <p style="padding-left: 15px;font-weight: 400;
+                ">基本信息</p>
+                <div style="display:flex;text-align: center;">
+                    <div style="flex:1">
+                        <!-- <h4 class="weui-media-box__title">日期</h4> -->
+                        <p class="weui-media-box__desc" id="percits_name" style="font-size: 16px;"></p>
+                    </div>
+                    <div style="flex:2">
+                        <!-- <h4 class="weui-media-box__title">股票名称</h4> -->
+                        <p class="weui-media-box__desc" id="percits_price"></p>
+                    </div>
+                    <div style="flex:1">
+                    </div>
+                </div>
+
+                <div style="display:flex;text-align: center;">
+                    <div style="flex:1">
+                        <p class="weui-media-box__desc" id="percits_code"></p>
+                    </div>
+                    <div style="flex:1">
+                        <p class="weui-media-box__desc" id="percits_location"></p>
+                    </div>
+                    <div style="flex:1">
+                        <p class="weui-media-box__desc" id="percits_organizational_form"></p>
+                    </div>
+                    <div style="flex:1">
+                        <p class="weui-media-box__desc" id="percits_belong"></p>
+                    </div>
+                </div>
+                <div id="basic_info_content">
+                    <div class="basic_info">
+                        <span>公司名称：</span>
+                        <span id="stock_company_name"></span>
+                    </div>
+                    <div class="basic_info">
+                        <span>历史名称变更记录：</span>
+                        <span id="detail_history_names"></span>
+                    </div>
+                    <div class="basic_info">
+                        <span>机构类型：</span>
+                        <span id="stock_institutional_type"></span>
+                    </div>
+
+                    <div class="basic_info">
+                        <span>办公地址：</span>
+                        <span id="detail_address"></span>
+                    </div>
+                    <div class="basic_info">
+                        <span>官方网站：</span>
+                        <span id="detail_net_address"></span>
+                    </div>
+                    <div class="basic_info">
+                        <span>成立时间：</span>
+                        <span id="stock_establishment_time"></span>
+                    </div>
+                    <div class="basic_info">
+                        <span>上市时间：</span>
+                        <span id="detail_listing_date"></span>
+                    </div>
+                    <div class="basic_info">
+                        <span>主营业务：</span>
+                        <span id="detail_major_businesses"></span>
+                    </div>
+                    <div class="basic_info">
+                        <span>业务范围：</span>
+                        <span id="detail_business_scope"></span>
+                    </div>
+                </div>
+                <div style="text-align: center;" id="stock_btn">
+                    <div style="text-align: center;">
+                        <svg style="width:14px;height:14px;" t="1578383044016" class="icon down" viewBox="0 0 1042 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="937" width="16" height="16"><path d="M516.881 878.059l446.986-413.033v-75.301h-94.68l-352.306 325.56-352.319-325.561h-95.946v74.103z" p-id="938" fill="#cdcdcd"></path><path d="M882.481 220.866v-75.311h-94.68l-270.919 244.184-270.934-244.184h-95.946v74.115l366.88 332.84z" p-id="939" fill="#cdcdcd"></path><path d="M942.535 145.555v0.099l0.079-0.099z" p-id="940" fill="#cdcdcd"></path><path d="M1023.921 389.725v0.099l0.079-0.099z" p-id="941" fill="#cdcdcd"></path></svg>
+                        <svg style="width:14px;height:14px;display:none" t="1578382997704" class="icon up" viewBox="0 0 1042 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="700" width="16" height="16"><path d="M528.451694 145.94086 81.465406 558.973848 81.465406 634.274858 176.145789 634.274858 528.451694 308.714084 880.771925 634.274858 976.718137 634.274858 976.718137 560.171116Z" p-id="701" fill="#cdcdcd"></path><path d="M162.852018 803.133683 162.852018 878.444926 257.532401 878.444926 528.451694 634.260531 799.385313 878.444926 895.331525 878.444926 895.331525 804.330952 528.451694 471.491401Z" p-id="702" fill="#cdcdcd"></path><path d="M81.465406 878.444926 81.465406 878.345666 81.386612 878.444926Z" p-id="703" fill="#cdcdcd"></path><path d="M0.078795 634.274858 0.078795 634.175597 0 634.274858Z" p-id="704" fill="#cdcdcd"></path></svg>
+                    </div>
+                    <hr style="margin-top: 0;">
+                </div>
+
             </div>
-            <div style="width:100%" id="tab2" class="weui-tab__bd-item">
-                <div class="weui-panel weui-panel_access" style="margin-bottom: 20px;">
-                    <!-- <div class="weui-panel__hd">命中条件</div> -->
-                    <div class="weui-panel__bd">
-                        <div class="weui-media-box weui-media-box_text">
-                            <div style="display:flex">
-                                <div style="flex:1">
-                                    <!-- <h4 class="weui-media-box__title">日期</h4> -->
-                                    <p class="weui-media-box__desc" id="percits_date"></p>
-                                </div>
-                                <div style="flex:1">
-                                    <!-- <h4 class="weui-media-box__title">股票名称</h4> -->
-                                    <p class="weui-media-box__desc" id="percits_name"></p>
-                                </div>
-                                <div style="flex:1">
-                                    <!-- <h4 class="weui-media-box__title">股票代码</h4> -->
-                                    <p class="weui-media-box__desc" id="percits_code"></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="weui-media-box weui-media-box_text">
-                            <div style="display:flex">
-                                <div style="flex:1">
-                                    <!-- <h4 class="weui-media-box__title">价格</h4> -->
-                                    <p class="weui-media-box__desc" id="percits_price"></p>
-                                </div>
-                                <div style="flex:1">
-                                    <!-- <h4 class="weui-media-box__title">私募数量</h4> -->
-                                    <p class="weui-media-box__desc" id="percits_sm_count"></p>
-                                </div>
-                                <div style="flex:1">
-                                    <!-- <h4 class="weui-media-box__title">基金数量</h4> -->
-                                    <p class="weui-media-box__desc" id="percits_fund_count"></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="weui-media-box weui-media-box_text">
-                            <h4 class="weui-media-box__title">优势</h4>
-                            <p class="weui-media-box__desc" id="percits_condition"></p>
-                        </div>
-                        <div class="weui-media-box weui-media-box_text">
-                            <h4 class="weui-media-box__title">劣势</h4>
-                            <p class="weui-media-box__desc" id="percits_bad_condition"></p>
-                        </div>
-                        <div class="weui-media-box weui-media-box_text">
-                            <h4 class="weui-media-box__title">财务指标</h4>
-                            <p class="weui-media-box__desc" id="percits_finance"></p>
-                        </div>
+
+
+
+            <div class="" style="margin-bottom: 20px;">
+                <!-- <div class="weui-panel__hd">命中条件</div> -->
+                <div style="margin-top: -20px;">
+                    <div class="weui-media-box weui-media-box_text" style="padding-top: 2px;">
+                        <h6 style="font-size: 14px;" class="weui-media-box__title">优势</h6 style="font-size: 14px;">
+                        <p class="weui-media-box__desc" id="percits_condition" style="margin:0"></p>
+                    </div>
+                    <div class="weui-media-box weui-media-box_text" style="padding-top: 2px;">
+                        <h4 style="font-size: 14px;" class="weui-media-box__title">劣势</h4>
+                        <p class="weui-media-box__desc" id="percits_bad_condition" style="margin:0"></p>
+                    </div>
+                    <div class="weui-media-box weui-media-box_text" style="padding-top: 2px;padding-bottom: 0;">
+                        <h4 style="font-size: 14px;" class="weui-media-box__title">财务指标</h4>
+                        <p class="weui-media-box__desc" id="percits_finance" style="margin:0"></p>
                     </div>
                 </div>
+            </div>
 
-
-                <!-- 详情 -->
-                <div class="weui-panel weui-panel_access" style="margin-bottom: 20px;">
-                    <div class="weui-panel__hd">基本详情</div>
-                    <div class="weui-media-box weui-media-box_text">
-                        <div style="display: flex;">
-                            <div style="flex:1">
-                                <p class="weui-media-box__desc" id="detail_location"></p>
-                            </div>
-                            <div style="flex:1">
-                                <p class="weui-media-box__desc" id="detail_organizational_form"></p>
-                            </div>
-                            <div style="flex:1">
-                                <p class="weui-media-box__desc" id="detail_belong"></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="weui-media-box weui-media-box_text">
-                        <div style="display:flex;">
-                            <div style="flex:1">
-                                <h4 class="weui-media-box__title">上市日期</h4>
-                                <p class="weui-media-box__desc" id="detail_listing_date"></p>
-                            </div>
-                            <div style="flex:1">
-                                <h4 class="weui-media-box__title">历史名称</h4>
-                                <p class="weui-media-box__desc" id="detail_history_names"></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="weui-media-box weui-media-box_text">
-                        <h4 class="weui-media-box__title">经营范围</h4>
-                        <p class="weui-media-box__desc" id="detail_business_scope"></p>
-                    </div>
-                    <div class="weui-media-box weui-media-box_text">
-                        <h4 class="weui-media-box__title">地点</h4>
-                        <p class="weui-media-box__desc" id="detail_address"></p>
-                    </div>
-                    <div class="weui-media-box weui-media-box_text">
-                        <h4 class="weui-media-box__title">公司名称</h4>
-                        <p class="weui-media-box__desc" id="detail_company_name"></p>
-                    </div>
-                    <div class="weui-media-box weui-media-box_text">
-                        <h4 class="weui-media-box__title">概念</h4>
-                        <p class="weui-media-box__desc" id="detail_concept"></p>
-                    </div>
-
-                    <div class="weui-media-box weui-media-box_text">
-                        <h4 class="weui-media-box__title">主营业务</h4>
-                        <p class="weui-media-box__desc" id="detail_major_businesses"></p>
-                    </div>
-                    <div class="weui-media-box weui-media-box_text">
-                        <h4 class="weui-media-box__title">官网</h4>
-                        <p class="weui-media-box__desc" id="detail_net_address"></p>
-                    </div>
-
+            <div id="count_static">
+                <p style="font-size: 14px;padding-left: 15px;">数量统计</p>
+                <div class="weui-panel__ft">
+                    <a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link">
+                      <div class="weui-cell__bd">
+                          <span>基金持仓数量：</span>
+                          <span id="per_fund_count">111</span>
+                      </div>
+                      <span class="weui-cell__ft">查看详情</span>
+                    </a>    
                 </div>
-
-
-                <!-- <div class="container-fluid">
+                <div class="weui-panel__ft">
+                    <a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link">
+                      <div class="weui-cell__bd">
+                          <span>私募持仓数量：</span>
+                          <span id="per_sm_count">111</span>
+                      </div>
+                      <span class="weui-cell__ft">查看详情</span>
+                    </a>    
+                </div>
+                <div class="weui-panel__ft">
+                    <a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link">
+                      <div class="weui-cell__bd">
+                          <span>控股公司数量：</span>
+                          <span id="per_subcomp_count">111</span>
+                      </div>
+                      <span class="weui-cell__ft">查看详情</span>
+                    </a>    
+                </div>
+                <div class="weui-panel__ft">
+                    <a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link">
+                      <div class="weui-cell__bd">
+                          <span>分红次数：</span>
+                          <span id="per_fenghong_count">111</span>
+                      </div>
+                      <span class="weui-cell__ft">查看详情</span>
+                    </a>    
+                </div>
+                <div class="weui-panel__ft">
+                    <a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link">
+                      <div class="weui-cell__bd">
+                          <span>送股次数：</span>
+                          <span id="per_songgu_count">111</span>
+                      </div>
+                      <span class="weui-cell__ft">查看详情</span>
+                    </a>    
+                </div>
+                <div class="weui-panel__ft">
+                    <a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link">
+                      <div class="weui-cell__bd">
+                          <span>转增次数：</span>
+                          <span id="per_zhuangzeng_count">111</span>
+                      </div>
+                      <span class="weui-cell__ft">查看详情</span>
+                    </a>    
+                </div>
+                <div class="weui-panel__ft">
+                    <a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link">
+                      <div class="weui-cell__bd">
+                          <span>配股次数：</span>
+                          <span id="per_peigu_count">111</span>
+                      </div>
+                      <span class="weui-cell__ft">查看详情</span>
+                    </a>    
+                </div>
+                <div class="weui-panel__ft">
+                    <a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link">
+                      <div class="weui-cell__bd">
+                          <span>增发次数：</span>
+                          <span id="per_zengfa_count">111</span>
+                      </div>
+                      <span class="weui-cell__ft">查看详情</span>
+                    </a>    
+                </div>
+                
+            </div>
+            <!-- <p style="font-size: 14px;padding-left: 15px;margin-top: 10px;">十大流动股东</p>
+            <div class="container-fluid">
+                
                     <div id="left_div">
                         <div id="left_div1">
                             <table id="left_table1" class="table table-bordered">
                                 <tr>
-                                    <th>名称</th>
+                                    <th>股东名称</th>
                                 </tr>
                             </table>
                         </div>
@@ -170,11 +243,9 @@
                             <div id="right_divx">
                                 <table id="right_table1" class="table table-bordered">
                                     <tr>
+                                        <th>持仓数量</th>
+                                        <th>占流通百分比</th>
                                         <th>变化</th>
-                                        <th>code</th>
-                                        <th>percent</th>
-                                        <th>count</th>
-                                        <th>holder_name</th>
                                     </tr>
                                 </table>
                             </div>
@@ -184,9 +255,9 @@
                             </table>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
-                <div class="container-fluid">
+                <!-- <div class="container-fluid">
                     <div id="left_div_jg">
                         <div id="left_div1_jg">
                             <table id="left_table1_jg" class="table table-bordered">
@@ -224,19 +295,68 @@
                     </div>
                 </div>
                 <div id="pagination1" class="page fl"></div> -->
-            </div>
         </div>
+     
+        <div style="width:100%" id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
+            <p style="font-size: 14px;padding-left:15px;margin-top: 10px;">财务数据</p>
+           
+            <div>
+                <div class="weui-panel weui-panel_access">
+                    <div class="weui-panel__hd" id="yy_open">
+                        运营能力<i class="down_open"></i><i class="up_open" style="display:none;"></i>
+                    </div>
+                    <div class="weui-panel__bd" id="yy_content">
+                        
+                        
+                    </div>
+                </div>
+
+                <div class="weui-panel weui-panel_access">
+                    <div class="weui-panel__hd" id="cz_open">
+                        成长能力<i class="down_open"></i><i class="up_open" style="display:none;"></i>
+                    </div>
+                    <div class="weui-panel__bd" id="cz_content">
+                    </div>
+                </div>
+                <div class="weui-panel weui-panel_access">
+                    <div class="weui-panel__hd" id="yl_open">
+                        盈利能力<i class="down_open"></i><i class="up_open" style="display:none;"></i>
+                    </div>
+                    <div class="weui-panel__bd" id="yl_content">
+                    </div>
+                </div>
+
+                <div class="weui-panel weui-panel_access">
+                    <div class="weui-panel__hd" id="mg_open">
+                        每股财务指标<i class="down_open"></i><i class="up_open" style="display:none;"></i>
+                    </div>
+                    <div class="weui-panel__bd" id="mg_content">
+                    </div>
+                </div>
+
+              
+
+            </div>
+            <div id="stock_cash_flow" style="width:100%;height:210px;"></div>
+
+            <div id="stock_liabilities" style="width:100%;height:210px;"></div>
+
+            <div id="stock_profit" style="width:100%;height:210px"></div>
+        </div>
+       
+
     </div>
     <script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
     <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/swiper.min.js"></script>
     <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/city-picker.min.js"></script>
     <script src="../js/echarts.min.js"></script>
+    <script src="../js/oauth.js"></script>
     <script src="../js/stock_cash_flow.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/detail.js"></script>
     <script src="../js/page.js"></script>
-  
+
 </body>
 
 </html>

@@ -54,33 +54,125 @@ $.ajax({
         var per_ticket = data.per_ticket;
         // 条件命中的标签 
         var predict = data.predict;
+        var stock = data.stock;
         var str = predict.percent >= 0 ? " +" : " ";
         if(predict.percent>0){
             $('#percits_price').addClass('winner')
         }else{
             $('#percits_price').addClass('loser')
         }
-        $('#percits_date').text(predict.date)
+
+        // 财务数据
+        // 运营能力
+        var yy_data = per_ticket.yy;
+        var yy_str = '';
+        yy_data.forEach(item => {
+            yy_str += `
+            <div class="weui-panel__ft">
+                            <a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link">
+                              <div class="weui-cell__bd">
+                                  <span class="yy_name">${item.key}：</span>
+                                  <span class="yy_count">${item.value}</span>
+                              </div>
+                            </a>    
+                        </div>
+            `
+        })
+        $('#yy_content').append(yy_str)
+
+        // 成长能力
+        var cz_data = per_ticket.cz;
+        var cz_str = '';
+        cz_data.forEach(item => {
+            cz_str += `
+            <div class="weui-panel__ft">
+                            <a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link">
+                              <div class="weui-cell__bd">
+                                  <span class="yy_name">${item.key}：</span>
+                                  <span class="yy_count">${item.value}</span>
+                              </div>
+                            </a>    
+                        </div>
+            `
+        })
+        $('#cz_content').append(cz_str)
+
+        // 每股指标
+        var mg_data = per_ticket.mg;
+        var mg_str = '';
+        mg_data.forEach(item => {
+            mg_str += `
+            <div class="weui-panel__ft">
+                            <a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link">
+                              <div class="weui-cell__bd">
+                                  <span class="yy_name">${item.key}：</span>
+                                  <span class="yy_count">${item.value}</span>
+                              </div>
+                            </a>    
+                        </div>
+            `
+        })
+        $('#mg_content').append(mg_str)
+
+        // 盈利能力
+        var yl_data = per_ticket.yl;
+        var yl_str = '';
+        yl_data.forEach(item => {
+            yl_str += `
+            <div class="weui-panel__ft">
+                            <a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link">
+                              <div class="weui-cell__bd">
+                                  <span class="yy_name">${item.key}：</span>
+                                  <span class="yy_count">${item.value}</span>
+                              </div>
+                            </a>    
+                        </div>
+            `
+        })
+        $('#yl_content').append(yl_str)
+        // 数量统计
+        $('#per_fund_count').text(`${predict.fund_count}个`)
+        $('#per_sm_count').text(`${predict.sm_count}个`)
+        $('#per_subcomp_count').text(`${predict.subcomp_count}个`)
+        $('#per_fenghong_count').text(`${predict.fenghong_count}次`)
+        $('#per_songgu_count').text(`${predict.songgu_count}次`)
+        $('#per_zhuangzeng_count').text(`${predict.zhuangzeng_count}次`)
+        $('#per_peigu_count').text(`${predict.peigu_count}次`)
+        $('#per_zengfa_count').text(`${predict.zengfa_count}次`)
+        // 基本数据
+        $('#percits_date').text('本数据更新于'+predict.date)
         $('#percits_name').text(predict.name)
         $('#percits_code').text(predict.code)
+
+        $('#percits_location').text(stock.location)
+        $('#percits_belong').text(stock.belong)
+        $('#percits_organizational_form').text(stock.organizational_form)
+
+
+        $('#stock_company_name').text(stock.company_name)
+        $('#stock_institutional_type').text(stock.institutional_type)
+        $('#stock_establishment_time').text(stock.establishment_time)
+
+
+
         var conditionText = "";
         predict.condition.split('; ').map(item => {
-            conditionText += `<span class="ant-tag-red">${item}</span>`
+            conditionText += `<span class=${item ? 'ant-tag-red':''}>${item}</span>`
         })
         $('#percits_condition').html(conditionText)
         var badconditionText = "";
         predict.bad_condition.split('; ').map(item => {
-            badconditionText += `<span class="ant-tag-red">${item}</span>`
+            badconditionText += `<span class=${item ? 'ant-tag-green':''}>${item}</span>`
         })
         $('#percits_bad_condition').html(badconditionText)
 
         var financeText = "";
         predict.finance.split('; ').map(item => {
-            financeText += `<span class="ant-tag-red">${item}</span>`
+            financeText += `<span class=${item ? 'ant-tag-gold':''}>${item}</span>`
         })
         $('#percits_finance').html(financeText)
 
-        $('#percits_price').text(`${predict.price}${str}${predict.percent}%`)
+        $('#percits_price').html(`<span style="margin-right:10px">${predict.price}¥</span>${str}${predict.percent}%`)
         $('#percits_sm_count').text(predict.sm_count)
         $('#percits_fund_count').text(predict.fund_count)
         // 股票的详情数据
@@ -88,6 +180,7 @@ $.ajax({
         $('#detail_address').text(stock.address);
         $('#detail_belong').text(stock.belong);
         $('#detail_address').text(stock.address);
+        
 
       
 
@@ -206,8 +299,8 @@ $.ajax({
             data: net_profit
         }]
         // 股票十大流通股东， 主要为了展示想比上一个季度报表的 change 变化情况
-        var stockholder = data.stockholder;
-        //固定和滚动
+        // var stockholder = data.stockholder;
+        // //固定和滚动
         // var right_div2 = document.getElementById("right_div2");
         // right_div2.onscroll = function () {
         //     var right_div2_top = this.scrollTop;
@@ -224,8 +317,8 @@ $.ajax({
 
 
         // for (var i = 0; i < stockholder.length; i++) {
-        //     $("#left_table2").append(`<tr><th>${stockholder[i].name}</th></tr>`);
-        //     $("#right_table2").append("<tr><td>" + stockholder[i].change + "</td><td>" + stockholder[i].code + "</td><td>" + stockholder[i].percent + "</td><td>" + stockholder[i].count + "</td><td>" + stockholder[i].holder_name + "</td></tr>");
+        //     $("#left_table2").append(`<tr><th>${stockholder[i].holder_name}</th></tr>`);
+        //     $("#right_table2").append("<tr><td>" + stockholder[i].count + "</td><td>" + stockholder[i].percent + "</td><td>" + stockholder[i].change + "</td></tr>");
         // }
         // day
         var ticket_history = data.ticket_history;
@@ -240,8 +333,12 @@ $.ajax({
         var myChart_stock_cash_flow = echarts.init(document.getElementById('stock_cash_flow'))
 
         var stock_cash_flow = {
+            backgroundColor: '#000',
             title: {
-                text: '现金流量表趋势'
+                text: '现金流量表趋势',
+                textStyle:{
+                    color:'#fff'
+                }
             },
             tooltip: {
                 trigger: 'axis'
@@ -252,8 +349,11 @@ $.ajax({
             grid: {
                 left: '3%',
                 right: '4%',
-                bottom: '3%',
+                // bottom: '1%',
+                // top:'1%',
                 containLabel: true,
+                height:'150px',
+                padding:'0px'
             },
             toolbox: {
                 show: false,
@@ -270,10 +370,15 @@ $.ajax({
             xAxis: {
                 type: 'category',
                 boundaryGap: false,
-                data: date
+                data: date,
+                axisLine: { lineStyle: { color: '#8392A5' } }
             },
             yAxis: {
-                type: 'value'
+                type: 'value',
+                splitLine:{
+                    show:false
+                },
+                axisLine: { lineStyle: { color: '#8392A5' } },
             },
             series: stock_cash_flowData
         };
@@ -286,8 +391,12 @@ $.ajax({
         var myChart_stock_liabilities = echarts.init(document.getElementById('stock_liabilities'))
 
         var stock_liabilities = {
+            backgroundColor: '#000',
             title: {
-                text: '资产负债趋势'
+                text: '资产负债趋势',
+                textStyle:{
+                    color:'#fff'
+                }
             },
             tooltip: {
                 trigger: 'axis'
@@ -310,10 +419,15 @@ $.ajax({
             xAxis: {
                 type: 'category',
                 boundaryGap: false,
-                data: date
+                data: date,
+                axisLine: { lineStyle: { color: '#8392A5' } }
             },
             yAxis: {
-                type: 'value'
+                type: 'value',
+                splitLine:{
+                    show:false
+                },
+                axisLine: { lineStyle: { color: '#8392A5' } },
             },
             series: stock_liabilitiesData
         };
@@ -328,8 +442,12 @@ $.ajax({
         var myChart_stock_profit  = echarts.init(document.getElementById('stock_profit'))
 
         var stock_profit  = {
+            backgroundColor: '#000',
             title: {
-                text: '利润趋势'
+                text: '利润趋势',
+                textStyle:{
+                    color:'#fff'
+                }
             },
             tooltip: {
                 trigger: 'axis'
@@ -352,10 +470,15 @@ $.ajax({
             xAxis: {
                 type: 'category',
                 boundaryGap: false,
-                data: date
+                data: date,
+                axisLine: { lineStyle: { color: '#8392A5' } }
             },
             yAxis: {
-                type: 'value'
+                type: 'value',
+                splitLine:{
+                    show:false
+                },
+                axisLine: { lineStyle: { color: '#8392A5' } },
             },
             series: stock_profitData
         };
@@ -366,7 +489,7 @@ $.ajax({
         var mainContainer = document.getElementById('daykline');
         var resizeMainContainer = function () {
                 mainContainer.style.width = window.innerWidth+'px';
-                mainContainer.style.height = window.innerHeight*0.8+'px';
+                mainContainer.style.height = window.innerHeight*0.5+'px';
             };
             //设置div容器高宽
             resizeMainContainer();
@@ -451,13 +574,13 @@ $.ajax({
                     {
                         left: '10%',
                         right: '8%',
-                        height: '50%'
+                        height: '45%'
                     },
                     {
                         left: '10%',
                         right: '8%',
-                        top: '63%',
-                        height: '16%'
+                        top: '79%',
+                        height: '19%'
                     }
                 ],
                 xAxis: [
@@ -500,8 +623,11 @@ $.ajax({
                         splitArea:{
                             show:true,
                             areaStyle:{
-                                color:['#000']
+                                color:['#000',]
                             }
+                        },
+                        splitLine:{
+                            show:false
                         }
                     },
                     {
@@ -514,22 +640,22 @@ $.ajax({
                         splitLine: {show: false}
                     }
                 ],
-                dataZoom: [
-                    {
-                        type: 'inside',
-                        xAxisIndex: [0, 1],
-                        start: 1,
-                        end: 100
-                    },
-                    {
-                        show: true,
-                        xAxisIndex: [0, 1],
-                        type: 'slider',
-                        top: '85%',
-                        start: 98,
-                        end: 100
-                    }
-                ],
+                // dataZoom: [
+                //     {
+                //         type: 'inside',
+                //         xAxisIndex: [0, 1],
+                //         start: 1,
+                //         end: 100
+                //     },
+                //     {
+                //         show: true,
+                //         xAxisIndex: [0, 1],
+                //         type: 'slider',
+                //         top: '85%',
+                //         start: 98,
+                //         end: 100
+                //     }
+                // ],
                 series: [
                     {
                         name: '日线',
@@ -559,10 +685,16 @@ $.ajax({
                         type: 'line',
                         data: calculateMA(5, data),
                         smooth: true,
+                        lineStyle:{
+                            normal:{
+                                width:1
+                            }
+                        },
                         itemStyle:{
                             normal:{
                                 lineStyle:{
-                                    color:'#fff'
+                                    color:'#fff',
+                                    // width:'10px'
                                 }
                             }
                         }
@@ -573,7 +705,10 @@ $.ajax({
                         data: calculateMA(10, data),
                         smooth: true,
                         lineStyle: {
-                            opacity: 0.5
+                            opacity: 0.5,
+                            normal:{
+                                width:1
+                            }
                         },
                         itemStyle:{
                             normal:{
@@ -589,7 +724,10 @@ $.ajax({
                         data: calculateMA(30, data),
                         smooth: true,
                         lineStyle: {
-                            opacity: 0.5
+                            opacity: 0.5,
+                            normal:{
+                                width:1
+                            }
                         },
                         itemStyle:{
                             normal:{
@@ -605,7 +743,10 @@ $.ajax({
                         data: calculateMA(60, data),
                         smooth: true,
                         lineStyle: {
-                            opacity: 0.5
+                            opacity: 0.5,
+                            normal:{
+                                width:1
+                            }
                         },
                         itemStyle:{
                             normal:{
