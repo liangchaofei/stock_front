@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-07 18:56:02
+ * @LastEditTime : 2020-01-08 17:32:43
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -917,6 +917,7 @@
             //     "save": true,
             //     // "order":"score"
             // };
+
             // save 参数是表示是否保存条件
             // order 表示按照那个字段排序， 支持"score", "percent", "price", "fund_count", "sm_count" 分别代表 分数，涨幅， 价格， 基金持仓数量， 私募数量
             var data = {
@@ -1124,24 +1125,21 @@
             url: 'https://stock.zhixiutec.com/api/conditions',
             success: function (res) {
                 var data = res.data;
-                console.log('price', data)
                 var moneyArr = data['财务数据'];
                 var priceArr = data['量价形态'];
                 var kData = data['K线形态'];
                 var otherData = data['其它'];
                 var jigouchicang = data = ['机构持仓情况'];
 
-                console.log('moneyArr', moneyArr)
                 var mustCount = 0;
                 $("#kline").select({
                     title: "选择K线形态",
                     items: kData,
                     multi: true,
                     onClose: function (e) {
-                        var kVal = e.data.values;
-                        predicts.push(kVal)
+                        var kVal = e.data.values.split(',');
+                        predicts.push(...kVal)
                         mustCount += predicts.length;
-                        console.log('mustCount', mustCount)
                         $('.must_count').text(mustCount)
                     }
                 });
@@ -1151,8 +1149,8 @@
                     multi: true,
                     items: jigouchicang,
                     onClose: function (e) {
-                        var jigouchicangVal = e.data.values;
-                        predicts.push(jigouchicangVal)
+                        var jigouchicangVal = e.data.values.split(',');
+                        predicts.push(...jigouchicangVal)
                         mustCount += predicts.length;
                         $('.must_count').text(mustCount)
                     }
@@ -1163,8 +1161,8 @@
                     multi: true,
                     items: moneyArr,
                     onClose: function (e) {
-                        var moneyDataVal = e.data.values;
-                        predicts.push(moneyDataVal)
+                        var moneyDataVal = e.data.values.split(',');
+                        predicts.push(...moneyDataVal)
                         mustCount += predicts.length;
                         $('.must_count').text(mustCount)
                     }
@@ -1175,21 +1173,14 @@
                     multi: true,
                     items: priceArr,
                     onClose: function (e) {
-                        var priceDataVal = e.data.values;
-                        predicts.push(priceDataVal)
+                        var priceDataVal = e.data.values.split(',');
+                        predicts.push(...priceDataVal)
                         mustCount += predicts.length;
                         $('.must_count').text(mustCount)
                     }
                 });
 
-                // $("#other").select({
-                //     title: "选择其他",
-                //     items: otherData,
-                //     onClose: function (e) {
-                //         var otherVal = e.data.values;
-                //         predicts.push(otherVal)
-                //     }
-                // });
+             
             }
         })
         var basicCount = 0, concectCount = 0;
