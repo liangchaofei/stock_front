@@ -139,7 +139,7 @@
 #right_table1_jg tbody tr th:nth-child(8){
     width: 93px;
 }
-.ant-tag-red,.ant-tag-green,.ant-tag-gold{
+.ant-tag-red,.ant-tag-green,.ant-tag-gold,.ant-tag-blue{
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     margin: 0;
@@ -181,6 +181,11 @@
     color: #fff;
     border-color: #FFC125;
     background: #FFC125;
+}
+.ant-tag-blue{
+    color: #fff;
+    border-color: #3370ff;
+    background: #3370ff;
 }
 /* 分页 */
 

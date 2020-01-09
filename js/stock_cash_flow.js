@@ -172,6 +172,14 @@ $.ajax({
         })
         $('#percits_finance').html(financeText)
 
+
+        var conceptText = "";
+        stock.concept.split(',').map(item => {
+            conceptText += `<span class=${item ? 'ant-tag-blue':''}>${item}</span>`
+        })
+        $('#percits_concept').html(conceptText)
+
+
         $('#percits_price').html(`<span style="margin-right:10px">${predict.price}¥</span>${str}${predict.percent}%`)
         $('#percits_sm_count').text(predict.sm_count)
         $('#percits_fund_count').text(predict.fund_count)
