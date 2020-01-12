@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-09 23:30:02
+ * @LastEditTime : 2020-01-11 21:16:42
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -28,13 +28,19 @@
         <div class="weui-cells weui-cells_radio" id="wechat">
             
         </div>
-        <label for="weuiAgree" class="weui-agree">
+        <div style="margin:10px">
+            <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
+            <span class="weui-agree__text" style="font-size: 14px;">
+                阅读并同意<a href="https://mp.weixin.qq.com/s/ts2UbPURxMzPqIUa92byRA">《相关条款》</a>
+              </span>
+        </div>
+        <!-- <label for="weuiAgree" class="weui-agree">
             <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
             <span class="weui-agree__text">
               阅读并同意<a href="https://mp.weixin.qq.com/s/ts2UbPURxMzPqIUa92byRA">《相关条款》</a>
             </span>
           </label>
-        <div class="weui-btn-area">
+        <div class="weui-btn-area"> -->
             <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">确定</a>
         </div>
     </div>

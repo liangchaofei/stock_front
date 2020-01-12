@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-09 22:57:19
+ * @LastEditTime : 2020-01-11 20:49:42
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -76,13 +76,7 @@
               </div>
             </a>
           </div>
-        <div class="weui-panel weui-panel_access" style="margin: 0px;">
-            <div class="weui-panel__hd" id="open">
-                邀请记录<i class="down"></i><i class="up" style="display:none;"></i>
-
-            </div>
-            <div id="invite_dom"></div>
-        </div>
+    
 
 
         <div class="weui-cells"style="margin: 0px;" >
@@ -95,7 +89,21 @@
               </div>
             </a>
           </div>
+          <div class="weui-panel weui-panel_access" style="margin: 0px;">
+            <div class="weui-panel__hd" id="open">
+                邀请记录<i class="down"></i><i class="up" style="display:none;"></i>
 
+            </div>
+            <div id="invite_dom"></div>
+        </div>
+
+        <div class="weui-panel weui-panel_access" style="margin: 0px;">
+            <div class="weui-panel__hd" id="issue_open">
+                我的需求<i class="down"></i><i class="up" style="display:none;"></i>
+
+            </div>
+            <div id="my_issue"></div>
+        </div>
 
  
         <!-- <div class="weui-cell">
@@ -138,11 +146,19 @@
             $("#open .up").toggle();
             $("#open .down").toggle();
         })
+
+
+        $('#my_issue').css({ "display": "none" })
+        $('#issue_open').on('click', function () {
+            $('#my_issue').slideToggle("slow");
+            $("#issue_open .up").toggle();
+            $("#issue_open .down").toggle();
+        })
+
         $.ajax({
             url: 'https://stock.zhixiutec.com/api/user',
             type: 'get',
             success: function (res) {
-                console.log('res', res)
                 var data = res.data;
                 if (res.error_code === 2) {
                     window.open(data, "_self");
@@ -152,6 +168,36 @@
                     $('#joinTime').text(data.query_left)
                     $('#time').text(data.member_expire_time.substring(0, 10))
                     $('#exp_val').text(data.exp)
+                    // 获取我的需求
+                    $.ajax({
+                        url:'https://stock.zhixiutec.com/api/my_comments',
+                        success:function(res){
+                            var issue = res.data;
+                            var issue_val = ''
+                            if(issue.length>0){
+                                issue.forEach(item => {
+                                    issue_val += `
+                                    <div class="weui-panel__bd" id="open_content">
+                                        <div class="weui-media-box weui-media-box_small-appmsg">
+                                            <div class="weui-cells">
+                                                <a class="weui-cell weui-cell_access" href="javascript:;">
+                                                    <div class="weui-cell__hd" style="font-size:14px;color:#333;margin-right:10px;">
+                                                        ${item.CreatedAt.substring(0,10)}</div>
+                                                    <div class="weui-cell__bd weui-cell_primary">
+                                                        <p style="font-size:14px;color:#333">${item.response}</p>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    `
+                                })
+                                $('#my_issue').append(issue_val)
+                            }else{
+
+                            }
+                        }
+                    })
                     $.ajax({
                         url: 'https://stock.zhixiutec.com/api/is_member',
                         success: function (res) {

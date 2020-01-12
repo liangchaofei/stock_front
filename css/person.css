@@ -15,7 +15,7 @@
     font-size: 0.7rem;
     padding: 0.3rem 0;
 }
-#open i,#concect_open i,#must_open i,#high_open i {
+#open i,#concect_open i,#must_open i,#high_open i,#issue_open i {
     border: solid #ddd;
     border-width: 0 3px 3px 0;
     display: inline-block;

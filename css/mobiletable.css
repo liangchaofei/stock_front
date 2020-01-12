@@ -1,0 +1,85 @@
+/*类似于excel机制的表格表头和第一列固定 begin*/
+.table-container{
+    /* padding-right: -40px; */
+    width:400px;
+    /*  height:99%;  */
+    overflow: auto;
+    /*border: 1px solid #DDD;*/
+}
+.table-container table{
+    width: 100%;
+    border-width: 0;
+    border-collapse: collapse;
+    font-family: "Hiragino Sans GB";
+}
+.table-container table td{
+    padding: 0;
+    border-bottom: 1px solid #DDD;
+    background: #FFF;
+}
+/**
+ * .table-lt--表头第一列（固定）
+ * .table-top--其余表头
+ * .table-left--表内容第一列（固定）
+ * .table-right--表内容的其他列
+ */
+.table-container .table-top td:last-child{
+    border-right: 0px solid #DDD;
+}
+.table-container .table-right td:last-child{
+    border-right: 0px solid #DDD;
+}
+.table-container .table-right tr:last-child td{
+    border-bottom: 0px solid #DDD;
+}
+.table-container .table-left tr:last-child td{
+    border-bottom: 0px solid #DDD;
+}
+
+.table-container .table-lt{
+    position: fixed;
+    z-index:3;
+}
+.table-container .table-top{
+    position: fixed;
+    overflow:hidden;
+    z-index:2;
+}
+.table-container .table-left{
+    position: fixed;
+    overflow:hidden;
+    z-index:2;
+}
+.table-container .table-right{
+    position: relative;
+    z-index:1;
+}
+.table-container .table-mask{
+    position: relative;
+}
+.table-container td div{
+    margin:2px 5px;
+}
+.table-container .table-lt td{
+    height: 45px;
+    width: 100px;
+    text-align: center;
+    color: #01B9EF;
+}
+.table-container .table-top td{
+    height: 45px;
+    width: 100px;
+    color: #01B9EF;
+    text-align: center;
+}
+.table-container .table-left td{
+    height: 65px;
+    text-align: center;
+    background: #E9E9E9;
+}
+
+.table-container .table-right td{
+    height: 65px;
+    text-align: center;
+}
+/*类似于excel机制的表格表头和第一列固定 end*/

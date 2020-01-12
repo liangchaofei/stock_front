@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-09 22:51:25
+ * @LastEditTime : 2020-01-12 21:56:37
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -28,6 +28,7 @@
             right : 20px;
             bottom : 70px;
         }
+        .weui-actions_mask,.close-popup,.weui-popup__overlay{cursor:pointer;}
     </style>
 </head>
 
@@ -44,7 +45,7 @@
 
     <!-- 搜索 -->
     <div class="weui-search-bar" id="searchBar">
-        <form class="weui-search-bar__form" id="search_form">
+        <form target="frameFile" class="weui-search-bar__form" id="search_form">
             <div class="weui-search-bar__box">
                 <i class="weui-icon-search"></i>
                 <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required="">
@@ -893,19 +894,25 @@
             firstMax = parseInt(e.delegateTarget.value)
         })
 
-        $("form").submit(function () {
+        // $("form").submit(function () {
+        //     var searchVal = $("#searchInput").val()
+        //     $.ajax({
+        //         url: `https://stock.zhixiutec.com/api/stock/detail?code=${searchVal}`,
+        //         success: function (res) {
+        //             window.open(`/component/detail.html?code=${searchVal}`, "_self")
+        //         }
+        //     })
+        // })
+
+        document.getElementById('search_form').onsubmit = function(){
             var searchVal = $("#searchInput").val()
             $.ajax({
-                url: `https://stock.zhixiutec.com/api/stock/detail?code=${searchVal}&date=2020-01-03`,
+                url: `https://stock.zhixiutec.com/api/stock/detail?code=${searchVal}`,
                 success: function (res) {
-                    window.open(`/component/detail.html?code=${searchVal}&date=2020-01-03`, "_self")
+                    window.open(`/component/detail.html?code=${searchVal}`, "_self")
                 }
             })
-        })
-
-        // document.getElementById('search_form').onsubmit = function(){
-        //     alert("123");
-        // }
+        }
         // $('#searchInput').bind('input propertychange', function(e) {
         //     var searchVal = e.target.value;
         //     $('#search_input').keydown(function(e){

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-18 19:50:58
- * @LastEditTime : 2020-01-09 22:51:51
+ * @LastEditTime : 2020-01-12 21:39:43
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/detail.html
@@ -19,7 +19,14 @@
     <link rel="stylesheet" href="../css/detail.css">
     <link rel="stylesheet" href="../css//bootstrap.min.css">
     <link rel="stylesheet" href="../css/page.css">
+    <link rel="stylesheet" href="../css/mobiletable.css">
     <style type="text/css">
+    *{padding: 0; margin: 0}
+        html, body{
+            height: 100%;
+            width: 100%;
+        }
+        .test{width: 100% !important;height: 100% !important}
         .goTop >img{
             width: 50px;
             height: 50px;
@@ -34,7 +41,10 @@
 </head>
 
 <body>
-
+    <div id="search_count">
+        
+    </div>
+   <div id="search_detail">
     <div id="daykline" class="weui-tab__bd-item weui-tab__bd-item--active"></div>
 
     <div class="weui-tab__bd">
@@ -240,81 +250,12 @@
             </div>
 
             <div id="stock_score" style="width:100%;height:260px"></div>
-            <!-- <p style="font-size: 14px;padding-left: 15px;margin-top: 10px;">十大流动股东</p>
-            <div class="container-fluid">
-                
-                    <div id="left_div">
-                        <div id="left_div1">
-                            <table id="left_table1" class="table table-bordered">
-                                <tr>
-                                    <th>股东名称</th>
-                                </tr>
-                            </table>
-                        </div>
-                        <div id="left_div2">
-                            <table id="left_table2" class="table table-bordered">
-                            </table>
-                        </div>
-                    </div>
-                    <div id="right_div">
-                        <div id="right_div1">
-                            <div id="right_divx">
-                                <table id="right_table1" class="table table-bordered">
-                                    <tr>
-                                        <th>持仓数量</th>
-                                        <th>占流通百分比</th>
-                                        <th>变化</th>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <div id="right_div2">
-                            <table id="right_table2" class="table table-bordered">
-                            </table>
-                        </div>
-                    </div>
-                </div> -->
-
-                <!-- <div class="container-fluid">
-                    <div id="left_div_jg">
-                        <div id="left_div1_jg">
-                            <table id="left_table1_jg" class="table table-bordered">
-                                <tr>
-                                    <th>名称</th>
-                                </tr>
-                            </table>
-                        </div>
-                        <div id="left_div2_jg">
-                            <table id="left_table2_jg" class="table table-bordered">
-                            </table>
-                        </div>
-                    </div>
-                    <div id="right_div_jg">
-                        <div id="right_div1_jg">
-                            <div id="right_divx_jg">
-                                <table id="right_table1_jg" class="table table-bordered">
-                                    <tr>
-                                        <th>变化</th>
-                                        <th>code</th>
-                                        <th>count</th>
-                                        <th>fund_code</th>
-                                        <th>percent_jingzhi</th>
-                                        <th>price</th>
-                                        <th>percent_signal_stock</th>
-                                        <th>percent_liutong</th>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <div id="right_div2_jg">
-                            <table id="right_table2_jg" class="table table-bordered">
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div id="pagination1" class="page fl"></div> -->
+         
         </div>
-     
+        <div>
+            <p style="font-size: 14px;padding-left:15px;margin-top: 10px;">十大流动股东</p>
+            <div id="test" class="test"></div>
+        </div>
         <div style="width:100%" id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
             <p style="font-size: 14px;padding-left:15px;margin-top: 10px;">财务数据</p>
            
@@ -364,6 +305,7 @@
         <div class="goTop" id="js-go_top"><img src="data:image/png;base64,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" alt="回到顶部图片"></div>
 
     </div>
+   </div>
     <script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
     <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/swiper.min.js"></script>
@@ -375,6 +317,9 @@
     <script src="../js/detail.js"></script>
     <script src="../js/page.js"></script>
     <script src="../js/GoToTop.js"></script>
+    <script src="../js/mobiletable.js"></script>
+
+    </script>
     <script>
         //示例
         $('#js-go_top').gotoTop({

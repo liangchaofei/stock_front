@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-09 22:30:20
- * @LastEditTime : 2020-01-09 22:37:27
+ * @LastEditTime : 2020-01-11 20:40:57
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp2/static/component/feedback.html
@@ -36,16 +36,24 @@
     <script>
 
         $('#showTooltips').on('click',function(){
+            var res = JSON.stringify({
+                    content:$('#feed_content').val(),
+                    type:'平台建议'
+                })
             $.ajax({
-            url:"https://stock.zhixiutec.com/api/make_command",
-            type:'post',
-            data:{
-                content:$('#feed_content').val()
-            },
-            success:function(res){
-                console.log('aaa',res)
-            }
-        })
+                url:"https://stock.zhixiutec.com/api/make_comment",
+                type:'post',
+                data:res,
+                success:function(res){
+                    console.log('aaa',res)
+                    if(res.error_code === 0 ){
+                        $.toast(res.data);
+                        window.open('/component/person.html','_self')
+                    }else{
+                        $.toast(res.err_msg);
+                    }
+                }
+            })
         })
         
     </script>
