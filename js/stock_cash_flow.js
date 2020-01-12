@@ -57,6 +57,14 @@ $.ajax({
         } else {
             $('#search_detail').css("display", "block")
             $('#search_count').css("display", "none")
+            // 设置href
+            $('#ch_count').attr('href',`/component/table.html?code=${code}&type=ch`)
+            $('#zf_count').attr('href',`/component/table.html?code=${code}&type=zf`)
+            $('#pg_count').attr('href',`/component/pg.html?code=${code}&type=pg`)
+            $('#zz_count').attr('href',`/component/zz.html?code=${code}&type=zz`)
+            $('#sg_count').attr('href',`/component/sg.html?code=${code}&type=sg`)
+            $('#fh_count').attr('href',`/component/fh.html?code=${code}&type=fh`)
+            $('#kg_count').attr('href',`/component/kg.html?code=${code}`)
             var data = res.data;
             // 股东
             var stockholder = data.stockholder;
