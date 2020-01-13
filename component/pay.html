@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-11 21:16:42
+ * @LastEditTime : 2020-01-13 21:43:37
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -74,7 +74,6 @@
                             url: 'https://stock.zhixiutec.com/api/is_member',
                             success: function (res) {
                                 var is_member = res.data;
-                                if (is_member === false) {
                                     $('#member_val').css("display", "none")
                                     $('#is_hy').css("display", "none")
                                     $.ajax({
@@ -158,7 +157,6 @@
 
                                         }
                                     })
-                                }
                             }
                         })
                     }
