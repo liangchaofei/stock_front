@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-12 21:56:37
+ * @LastEditTime : 2020-01-13 14:33:48
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -148,12 +148,17 @@
             </div>
             <div class="weui-panel__bd" id="must_content">
                 <div class="weui-cell">
-                    <div class="weui-cell__hd"><label for="name" class="weui-label">K线形态</label></div>
+                    <div class="weui-cell__hd"><label for="name" class="weui-label">日线形态</label></div>
                     <div class="weui-cell__bd">
                         <input class="weui-input" id="kline" type="text" value="" readonly="" data-values="1,2,3">
                     </div>
                 </div>
-
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label for="name" class="weui-label">周线形态</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" id="weekline" type="text" value="" readonly="" data-values="1,2,3">
+                    </div>
+                </div>
                 <div class="weui-cell">
                     <div class="weui-cell__hd"><label for="name" class="weui-label">财务数据</label></div>
                     <div class="weui-cell__bd">
@@ -595,6 +600,13 @@
                 searchPg(currentPage)
         });
 
+       
+        $.ajax({
+            url:'https://stock.zhixiutec.com/api/high_conditions',
+            success:function(res){
+                console.log('data',res)
+            }
+        })
         var date = '',
             belongs = [],
             locations = [],
@@ -682,7 +694,6 @@
         })
         $('#twentysixMax').bind('input propertychange', function (e) {
             twentysixMax = parseInt(e.delegateTarget.value)
-            console.log('firstMax', firstMax)
         })
 
         $('#twentyfiveMin').bind('input propertychange', function (e) {
@@ -690,7 +701,6 @@
         })
         $('#twentyfiveMax').bind('input propertychange', function (e) {
             twentyfiveMax = parseInt(e.delegateTarget.value)
-            console.log('firstMax', firstMax)
         })
 
 
@@ -699,7 +709,6 @@
         })
         $('#twentyfourMax').bind('input propertychange', function (e) {
             twentyfourMax = parseInt(e.delegateTarget.value)
-            console.log('firstMax', firstMax)
         })
 
 
@@ -708,7 +717,6 @@
         })
         $('#twentythreeMax').bind('input propertychange', function (e) {
             twentythreeMax = parseInt(e.delegateTarget.value)
-            console.log('firstMax', firstMax)
         })
 
         $('#twentytwoMin').bind('input propertychange', function (e) {
@@ -716,7 +724,6 @@
         })
         $('#twentytwoMax').bind('input propertychange', function (e) {
             twentytwoMax = parseInt(e.delegateTarget.value)
-            console.log('firstMax', firstMax)
         })
         // 21
         $('#twentyoneMin').bind('input propertychange', function (e) {
@@ -724,7 +731,6 @@
         })
         $('#twentyoneMax').bind('input propertychange', function (e) {
             twentyoneMax = parseInt(e.delegateTarget.value)
-            console.log('firstMax', firstMax)
         })
         // 20 
         $('#twentyMin').bind('input propertychange', function (e) {
@@ -732,7 +738,6 @@
         })
         $('#twentyMax').bind('input propertychange', function (e) {
             twentyMax = parseInt(e.delegateTarget.value)
-            console.log('firstMax', firstMax)
         })
 
         // 19
@@ -741,7 +746,6 @@
         })
         $('#nineteenMax').bind('input propertychange', function (e) {
             nineteenMax = parseInt(e.delegateTarget.value)
-            console.log('firstMax', firstMax)
         })
 
 
@@ -750,20 +754,12 @@
         })
         $('#eighteenMax').bind('input propertychange', function (e) {
             eighteenMax = parseInt(e.delegateTarget.value)
-            console.log('firstMax', firstMax)
         })
-
-
-
-
-
-
         $('#seventeenMin').bind('input propertychange', function (e) {
             seventeenMin = parseInt(e.delegateTarget.value)
         })
         $('#seventeenMax').bind('input propertychange', function (e) {
             seventeenMax = parseInt(e.delegateTarget.value)
-            console.log('firstMax', firstMax)
         })
 
 
@@ -772,7 +768,6 @@
         })
         $('#sixteenMax').bind('input propertychange', function (e) {
             sixteenMax = parseInt(e.delegateTarget.value)
-            console.log('firstMax', firstMax)
         })
 
 
@@ -781,7 +776,6 @@
         })
         $('#fifteenMax').bind('input propertychange', function (e) {
             fifteenMax = parseInt(e.delegateTarget.value)
-            console.log('firstMax', firstMax)
         })
 
         $('#fourteenMin').bind('input propertychange', function (e) {
@@ -789,7 +783,6 @@
         })
         $('#fourteenMax').bind('input propertychange', function (e) {
             fourteenMax = parseInt(e.delegateTarget.value)
-            console.log('firstMax', firstMax)
         })
 
         $('#thirteenMin').bind('input propertychange', function (e) {
@@ -797,7 +790,6 @@
         })
         $('#thirteenMax').bind('input propertychange', function (e) {
             thirteenMax = parseInt(e.delegateTarget.value)
-            console.log('firstMax', firstMax)
         })
 
         $('#twelveMin').bind('input propertychange', function (e) {
@@ -805,7 +797,6 @@
         })
         $('#twelveMax').bind('input propertychange', function (e) {
             twelveMax = parseInt(e.delegateTarget.value)
-            console.log('firstMax', firstMax)
         })
 
         $('#elevenMin').bind('input propertychange', function (e) {
@@ -813,7 +804,6 @@
         })
         $('#elevenMax').bind('input propertychange', function (e) {
             elevenMax = parseInt(e.delegateTarget.value)
-            console.log('firstMax', firstMax)
         })
 
         $('#tenMin').bind('input propertychange', function (e) {
@@ -821,7 +811,6 @@
         })
         $('#tenMax').bind('input propertychange', function (e) {
             tenMax = parseInt(e.delegateTarget.value)
-            console.log('firstMax', firstMax)
         })
 
 
@@ -831,7 +820,6 @@
         })
         $('#nineMax').bind('input propertychange', function (e) {
             nineMax = parseInt(e.delegateTarget.value)
-            console.log('firstMax', firstMax)
         })
 
 
@@ -894,15 +882,7 @@
             firstMax = parseInt(e.delegateTarget.value)
         })
 
-        // $("form").submit(function () {
-        //     var searchVal = $("#searchInput").val()
-        //     $.ajax({
-        //         url: `https://stock.zhixiutec.com/api/stock/detail?code=${searchVal}`,
-        //         success: function (res) {
-        //             window.open(`/component/detail.html?code=${searchVal}`, "_self")
-        //         }
-        //     })
-        // })
+     
 
         document.getElementById('search_form').onsubmit = function(){
             var searchVal = $("#searchInput").val()
@@ -913,50 +893,9 @@
                 }
             })
         }
-        // $('#searchInput').bind('input propertychange', function(e) {
-        //     var searchVal = e.target.value;
-        //     $('#search_input').keydown(function(e){
-        //         console.log('aa',e.keyCode)
-        //         if(e.keyCode==13){
-        //             e.preventDefault();
-        //             $.ajax({
-        //                 url: `https://stock.zhixiutec.com/api/stock/detail?code=${searchVal}&date=2020-01-03`,
-        //                 success:function(res){
-        //                     window.open(`/component/detail.html?code=${searchVal}&date=2020-01-03`,"_self")
-        //                 }
-        //             })
-        //         }
-        //     });
-        // });
+       
      
         function searchPg(currentPage) {
-            // var data = {
-            //     "query": {
-            //         "predicts": [],
-            //         "belongs": [],
-            //         "locations": [],
-            //         "concepts": [],
-            //         "labels": [],
-            //         "forms": [],
-            //         "per_tickets": {
-            //             "shouyiafter": {},
-            //             "jinzichanafter": {},
-            //             "jingyingxianjinliu": {},
-            //             "gubengongjijin": {},
-            //             "weifenpeilirun": {}
-            //         },
-            //         "last_day_range": { "last_percent": {}, "last_amplitude": {}, "last_turnoverrate": {}, "last_price": { "min": 1 } },
-            //         "yl_ability": { "yl_zongzichanlirunlv": {}, "yl_zhuyingyewulirunlv": {}, "yl_zongzichanjinglirunlv": {}, "yl_yingyelirunlv": {}, "yl_xiaoshoujinglilv": {}, "yl_gubenbaochoulv": {}, "yl_jingzichanbaochoulv": {}, "yl_zichanbaochoulv": {} },
-            //         "cz_ability": { "cz_zhuyingyewushouruzengzhanglv": {}, "cz_jinglirunzengzhanglv": {}, "cz_jingzichanzengzhanglv": {}, "cz_zongzichanzengzhanglv": {} },
-            //         "yy_ability": { "yy_yingshouzhangkuanzhouzhuanlv": {}, "yy_cunhuozhouzhuanglv": {}, "yy_liudongzichanzhouzhuanglv": {}, "yy_zongzichanzhouzhuanglv": {}, "yy_gudongquanyizhouzhuanglv": {} }
-            //     },
-            //     "date": "2020-01-06",
-            //     "save": true,
-            //     // "order":"score"
-            // };
-
-            // save 参数是表示是否保存条件
-            // order 表示按照那个字段排序， 支持"score", "percent", "price", "fund_count", "sm_count" 分别代表 分数，涨幅， 价格， 基金持仓数量， 私募数量
             var data = {
                 "query": {
                     "predicts": predicts,
@@ -1086,7 +1025,6 @@
                     var dom_val = '', today_date = '';
                     var err_code = res.error_code;
                     var err_msg = res.err_msg;
-                    // currentPage++
                     if (data && data.length > 0 && err_code === 0) {
                         data && data.map(item => {
                             var bigPercent = item.percent >= 0 ? "winner" : "loser";
@@ -1164,13 +1102,14 @@
                 var data = res.data;
                 var moneyArr = data['财务数据'];
                 var priceArr = data['量价形态'];
-                var kData = data['K线形态'];
+                var kData = data['日线形态'];
                 var otherData = data['其它'];
-                var jigouchicang = data = ['机构持仓情况'];
+                var jigouchicang = data['机构持仓情况'];
+                var weekData  = data['周线形态']
 
                 var mustCount = 0;
                 $("#kline").select({
-                    title: "选择K线形态",
+                    title: "选择日线形态",
                     items: kData,
                     multi: true,
                     onClose: function (e) {
@@ -1180,7 +1119,17 @@
                         $('.must_count').text(mustCount)
                     }
                 });
-
+                $("#weekline").select({
+                    title: "选择周线形态",
+                    items: weekData,
+                    multi: true,
+                    onClose: function (e) {
+                        var kVal = e.data.values.split(',');
+                        predicts.push(...kVal)
+                        mustCount += predicts.length;
+                        $('.must_count').text(mustCount)
+                    }
+                });
                 $("#jigou").select({
                     title: "选择机构持仓情况",
                     multi: true,

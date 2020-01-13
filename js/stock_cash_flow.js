@@ -82,8 +82,9 @@ $.ajax({
             // 十大流动股东
             var cirListColumns = [
                 [
-                    { field: 'name', title: '名称', width: 180, fixed: true },
-                    { field: 'code', title: '股票代号', width: 150 },
+                    { field: 'holder_name', title: '股东', width: 180, fixed: true },
+                    { field: 'percent', title: '持有比例', width: 150 },
+                    { field: 'count', title: '本期持有股', width: 150 },
                     { field: 'change', title: '变化', width: 180 },
                 ]
             ];
@@ -91,7 +92,7 @@ $.ajax({
             var stockholderData = [];
             stockholder.forEach((item, index) => {
                 stockholderData.push({
-                    name: item.holder_name, code: item.code, change: item.change
+                    holder_name: item.holder_name, percent: item.percent,count:item.count, change: item.change
                 })
 
             })
@@ -99,8 +100,12 @@ $.ajax({
                 "data": stockholderData,
                 "columns": cirListColumns,
                 "click": function (index, row) {
-                    console.log(index);
-                    console.log(row);
+                    // $.ajax({
+                    //     url:`https://stock.zhixiutec.com/api/top_holder_hold?holder_name=${row.holder_name}`,
+                    //     success:function(res){
+                    //         console.log('qqq',res)
+                    //     }
+                    // })
                 }
             };
             $("#test").mobileTable(config);

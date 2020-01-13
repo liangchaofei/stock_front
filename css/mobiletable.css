@@ -73,13 +73,13 @@
     text-align: center;
 }
 .table-container .table-left td{
-    height: 65px;
+    height: 40px;
     text-align: center;
     background: #E9E9E9;
 }
 
 .table-container .table-right td{
-    height: 65px;
+    height: 40px;
     text-align: center;
 }
 /*类似于excel机制的表格表头和第一列固定 end*/

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-09 22:30:20
- * @LastEditTime : 2020-01-12 22:46:10
+ * @LastEditTime : 2020-01-13 14:39:07
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp2/static/component/feedback.html
@@ -86,7 +86,7 @@
                     exportTypes: ['csv', 'txt', 'xml'],
                     search: false,
                     clickToSelect: true,
-                    columns: [{ field: "way", title: "way", align: "center", valign: "middle", sortable: "true" }, { field: "price", title: "price", align: "center", valign: "middle", sortable: "true" }, { field: "cost_price", title: "cost_price", align: "center", valign: "middle", sortable: "true" }, { field: "all_price", title: "all_price", align: "center", valign: "middle", sortable: "true" }, { field: "all_count", title: "all_count", align: "center", valign: "middle", sortable: "true" }],
+                    columns: [{ field: "way", title: "发行方式", align: "center", valign: "middle", sortable: "true" }, { field: "price", title: "发行价格", align: "center", valign: "middle", sortable: "true" }, { field: "cost_price", title: "实际公司募集资金总额", align: "center", valign: "middle", sortable: "true" }, { field: "all_price", title: "发行费用总额", align: "center", valign: "middle", sortable: "true" }, { field: "all_count", title: "实际发行数量", align: "center", valign: "middle", sortable: "true" }],
                     data: zfData,
                     onPageChange: function (size, number) {
                         console.log('size', size)
