@@ -1,0 +1,90 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-01-09 22:30:20
+ * @LastEditTime : 2020-01-13 16:44:21
+ * @LastEditors  : Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /gp2/static/component/feedback.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0maximum-scale=1.0, user-scalable=0;">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>详情</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap/bootstrap.css" />
+    <link rel="stylesheet" href="./bootstrap-table/bootstrap-table.css" />
+
+ 
+    <style>
+        .fixed-table-container {
+            height: 800px !important
+        }
+    </style>
+</head>
+
+<body>
+
+    <div>
+        <p style="font-size: 14px;padding-left:15px;margin-top: 10px;">流通股东持仓</p>
+        <div id="test" class="test"></div>
+        <p style="margin-left: 15px;" id="nodata"></p>
+    </div>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+    </script>
+    <script src="./bootstrap/js/bootstrap.js"></script>
+    <script src="./bootstrap-table/bootstrap-table.js"></script>
+    <script src="./bootstrap-table/bootstrap-table-export.js"></script>
+    <script src="./extends/tableExport/jquery.base64.js"></script>
+    <script src="./extends/tableExport/tableExport.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+    <script type="text/javascript">
+        // 获取search参数
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r != null) return unescape(r[2]); return null; //返回参数值
+        }
+        
+        var holder_name = getUrlParam('holder_name');
+        $.ajax({
+            url: `https://stock.zhixiutec.com/api/top_holder_hold?holder_name=${holder_name}`,
+            success: function (res) {
+                var stockholder = res.data;
+                if(stockholder.length>0){
+                    var cirListColumns = [
+                    [
+                        { field: 'holder_name', title: '股东', width: 180, fixed: true },
+                        { field: 'percent', title: '持有比例', width: 150 },
+                        { field: 'count', title: '本期持有股', width: 150 },
+                        { field: 'change', title: '变化', width: 180 },
+                    ]
+                ];
+
+                var stockholderData = [];
+                stockholder.forEach((item, index) => {
+                    stockholderData.push({
+                        holder_name: item.holder_name, percent: item.percent, count: item.count, change: item.change
+                    })
+
+                })
+                var config = {
+                    "data": stockholderData,
+                    "columns": cirListColumns,
+                };
+                $("#test").mobileTable(config);
+                }else{
+                    $('#nodata').append(`<span>暂无数据</span>`)
+                }
+              
+            }
+        })
+
+    </script>
+</body>
+
+</html>

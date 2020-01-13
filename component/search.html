@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-13 14:33:48
+ * @LastEditTime : 2020-01-13 16:52:22
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -125,7 +125,7 @@
         <!-- 特定条件 -->
         <div class="weui-panel weui-panel_access">
             <div class="weui-panel__hd" id="must_open">
-                特定条件<i class="down"></i><i class="up" style="display:none;"></i>
+                K线形态<i class="down"></i><i class="up" style="display:none;"></i>
                 <span style="float: right;">
                     <svg id="must_data" style="width:1.5em;height:1.5em;z-index:11" t="1578228911759" class="icon"
                         viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1928" width="200"
@@ -160,7 +160,7 @@
                     </div>
                 </div>
                 <div class="weui-cell">
-                    <div class="weui-cell__hd"><label for="name" class="weui-label">财务数据</label></div>
+                    <div class="weui-cell__hd"><label for="name" class="weui-label">月线形态</label></div>
                     <div class="weui-cell__bd">
                         <input class="weui-input" id="moneyData" type="text" value="" readonly="" data-values="1,2,3">
                     </div>
@@ -1100,7 +1100,7 @@
             url: 'https://stock.zhixiutec.com/api/conditions',
             success: function (res) {
                 var data = res.data;
-                var moneyArr = data['财务数据'];
+                var moneyArr = data['月线形态'];
                 var priceArr = data['量价形态'];
                 var kData = data['日线形态'];
                 var otherData = data['其它'];
@@ -1143,7 +1143,7 @@
                 });
 
                 $("#moneyData").select({
-                    title: "选择财务数据",
+                    title: "选择月线形态",
                     multi: true,
                     items: moneyArr,
                     onClose: function (e) {

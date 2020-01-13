@@ -58,7 +58,7 @@ $.ajax({
             $('#search_detail').css("display", "block")
             $('#search_count').css("display", "none")
             // 设置href
-            $('#ch_count').attr('href',`/component/table.html?code=${code}&type=ch`)
+            $('#ch_count').attr('href',`/component/ch.html?code=${code}`)
             $('#zf_count').attr('href',`/component/table.html?code=${code}&type=zf`)
             $('#pg_count').attr('href',`/component/pg.html?code=${code}&type=pg`)
             $('#zz_count').attr('href',`/component/zz.html?code=${code}&type=zz`)
@@ -95,11 +95,12 @@ $.ajax({
                     holder_name: item.holder_name, percent: item.percent,count:item.count, change: item.change
                 })
 
-            })
+            })   
             var config = {
                 "data": stockholderData,
                 "columns": cirListColumns,
                 "click": function (index, row) {
+                    window.open(`/component/gd.html?holder_name=${encodeURIComponent(row.holder_name)}`,"_self")
                     // $.ajax({
                     //     url:`https://stock.zhixiutec.com/api/top_holder_hold?holder_name=${row.holder_name}`,
                     //     success:function(res){
