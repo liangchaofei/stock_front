@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-13 21:43:37
+ * @LastEditTime : 2020-01-14 22:43:02
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -31,7 +31,7 @@
         <div style="margin:10px">
             <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
             <span class="weui-agree__text" style="font-size: 14px;">
-                阅读并同意<a href="https://mp.weixin.qq.com/s/ts2UbPURxMzPqIUa92byRA">《相关条款》</a>
+                阅读并同意<a href="https://mp.weixin.qq.com/s/ts2UbPURxMzPqIUa92byRA">《知修数据服务公众号服务条款》</a>
               </span>
         </div>
         <!-- <label for="weuiAgree" class="weui-agree">
@@ -87,7 +87,7 @@
                                                     <div class="weui-cell__bd">
                                                         <p>
                                                             <span style="margin-right:10px">${leader[i].type_desc}</span>
-                                                            <span style="margin-right:10px">${leader[i].spend}元</span>
+                                                            <span style="margin-right:10px">${leader[i].spend/1000}元</span>
                                                             <span>${leader[i].month}个月</span>
                                                             </p>
                                                     </div>
@@ -102,7 +102,7 @@
                                                 member = parseInt(e.target.id);
                                             })
                                             $('#showTooltips').on('click', function () {
-                                                if(member){
+                                                if(member && $('#weuiAgree').is(':checked')){
                                                     $.ajax({
                                                         url: 'https://stock.zhixiutec.com/api/jsapi_pay',
                                                         type: 'post',
@@ -149,10 +149,11 @@
 
                                                         }
                                                     })
-                                                }else{
+                                                }else if(!member){
                                                     $.toast("请选择进行充值", "cancel");
+                                                }else if(!$('#weuiAgree').is(':checked')){
+                                                    $.toast("请勾选同意并阅读服务条款", "cancel");
                                                 }
-
                                             })
 
                                         }
