@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-13 22:03:55
+ * @LastEditTime : 2020-01-14 19:35:39
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -87,7 +87,7 @@
                     </div>
                 </div>
                 <div class="weui-cell">
-                    <div class="weui-cell__hd"><label for="name" class="weui-label">城市</label></div>
+                    <div class="weui-cell__hd"><label for="name" class="weui-label">省份/城市</label></div>
                     <div class="weui-cell__bd">
                         <input class="weui-input" id="city" type="text" value="" readonly="" data-values="1,2,3">
                     </div>
@@ -589,7 +589,7 @@
             <div class="weui-tabbar__icon">
                 <img src="../img/icon_nav_cell.png" alt="">
             </div>
-            <p class="weui-tabbar__label">我</p>
+            <p class="weui-tabbar__label">个人中心</p>
         </a>
     </div>
     <div class="goTop" id="js-go_top"><img
@@ -623,7 +623,7 @@
     <script>
         var currentPage = 1;
         $('#must_data').on('click', function () {
-            $.toast("该条件组合会精确匹配", "text");
+            $.toast("该条件会查找必须满足所选K线条件组合的股票", "text");
         })
 
         // 返回上一页
@@ -939,7 +939,7 @@
                     "predicts": predicts,
                     "belongs": belongs,
                     "locations": locations,
-                    "organizational_form": organizational_form,
+                    "forms": forms,
                     "concepts": concepts,
                     "labels": labels,
                     "per_tickets": {
@@ -1078,7 +1078,7 @@
                                 <span class=${bigPercent}>${str}${item.percent}%</span>
                                
                                
-                                <span class="score">${item.score}</span>
+                                <span class="score">${item.score}分</span>
                             </div>
                             <div class="weui-cell__bd">
                                 <span style="display:inline-block;width:4rem;font-size:12px">${item.code}</span>
@@ -1118,7 +1118,7 @@
                         </a>
                         `
                         })
-                        $('.gp_list').append(`<div style="text-align:center;height:30px;margin: 15px">
+                        $('.gp_list').append(`<div style="text-align:center;font-size:13px;color:#ccc">
                         本数据更新于${today_date}
                             </div>`)
                         $('.gp_list').append(dom_val)
@@ -1271,6 +1271,7 @@
                     onClose: function (e) {
                         var labelsData = e.data.values;
                         forms = labelsData.split(',')
+                        console.log('forms',forms)
                         concectCount += labels.length;
                         $('.concect_count').text(concectCount)
                     }
