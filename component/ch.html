@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-09 22:30:20
- * @LastEditTime : 2020-01-13 22:11:56
+ * @LastEditTime : 2020-01-14 21:54:47
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp2/static/component/feedback.html
@@ -25,11 +25,6 @@
      <script src="./bootstrap-table/bootstrap-table-export.js"></script>
      <script src="./extends/tableExport/jquery.base64.js"></script>
      <script src="./extends/tableExport/tableExport.js"></script>
-     <style>
-         .fixed-table-container {
-             height: 800px !important
-         }
-     </style>
  </head>
  
  <body>
@@ -62,7 +57,11 @@
                  var zfData = []
                  data.forEach(item => {
                      zfData.push({
+                        fund_name:item.fund_name,
                         count: item.count,
+                        change:item.change,
+                        percent_jingzhi:item.percent_jingzhi,
+                        percent_liutong:item.percent_liutong,
                          price: item.price,
                          number: item.number,
                      })
@@ -83,7 +82,15 @@
                      exportTypes: ['csv', 'txt', 'xml'],
                      search: false,
                      clickToSelect: true,
-                     columns: [{ field: "count", title: "持股数量", align: "center", valign: "middle", sortable: "true" }, { field: "price", title: "持股市值(万元)", align: "center", valign: "middle", sortable: "true" }, ],
+                     columns: [
+                     { field: "fund_name", title: "基金名称", align: "center", valign: "middle", sortable: "true" },
+                     { field: "count", title: "持股数量(手)", align: "center", valign: "middle", sortable: "true" }, 
+                     { field: "change", title: "变化趋势", align: "center", valign: "middle", sortable: "true" },
+                     { field: "percent_jingzhi", title: "占基金的净值比例", align: "center", valign: "middle", sortable: "true" },
+                     { field: "percent_liutong", title: "占股票流通比例", align: "center", valign: "middle", sortable: "true" },
+                        
+                         { field: "price", title: "持股市值(万元)", align: "center", valign: "middle", sortable: "true" }, 
+                        ],
                      data: zfData,
                      onPageChange: function (size, number) {
                          console.log('size', size)

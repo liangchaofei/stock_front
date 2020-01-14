@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-09 22:30:20
- * @LastEditTime : 2020-01-13 16:44:21
+ * @LastEditTime : 2020-01-14 21:54:59
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp2/static/component/feedback.html
@@ -18,20 +18,22 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
     <link rel="stylesheet" href="./bootstrap/css/bootstrap/bootstrap.css" />
     <link rel="stylesheet" href="./bootstrap-table/bootstrap-table.css" />
-
+    <link rel="stylesheet" href="../css/page.css">
  
-    <style>
-        .fixed-table-container {
-            height: 800px !important
-        }
-    </style>
 </head>
 
 <body>
 
     <div>
-        <p style="font-size: 14px;padding-left:15px;margin-top: 10px;">流通股东持仓</p>
-        <div id="test" class="test"></div>
+        <div id="content" style="margin-top: 10px;">
+            <div id="content-body">
+                <div id="reportTableDiv" class="span10">
+                    <p style="margin-left: 10px;">流通股东持仓</p>
+                    <table id="reportTable">
+                    </table>
+                </div>
+            </div>
+        </div>
         <p style="margin-left: 15px;" id="nodata"></p>
     </div>
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
@@ -50,7 +52,7 @@
             if (r != null) return unescape(r[2]); return null; //返回参数值
         }
         
-        var holder_name = getUrlParam('holder_name');
+        var holder_name = escape(getUrlParam('holder_name'));
         $.ajax({
             url: `https://stock.zhixiutec.com/api/top_holder_hold?holder_name=${holder_name}`,
             success: function (res) {
@@ -72,18 +74,47 @@
                     })
 
                 })
-                var config = {
-                    "data": stockholderData,
-                    "columns": cirListColumns,
-                };
-                $("#test").mobileTable(config);
+            
+
+                const columns = [
+                    { field: "holder_name", title: "股东", align: "center", valign: "middle", sortable: "true" }, 
+                    { field: "percent", title: "持有比例", align: "center", valign: "middle", sortable: "true" },
+                    { field: "count", title: "本期持有股", align: "center", valign: "middle", sortable: "true" },
+                    { field: "change", title: "变化", align: "center", valign: "middle", sortable: "true" },
+                ]
+
+                $('#reportTable').bootstrapTable({
+                     method: 'get',
+                     cache: false,
+                     height: 400,
+                     striped: true,
+                     pagination: true,
+                     pageSize: 10,
+                     pageNumber: 1,
+                     pageList: [10, 20, 50, 100, 200, 500],
+                     search: false,
+                     showColumns: false,
+                     showRefresh: false,
+                     showExport: false,
+                     exportTypes: ['csv', 'txt', 'xml'],
+                     search: false,
+                     clickToSelect: true,
+                     columns:columns,
+                     data: stockholderData,
+                     onPageChange: function (size, number) {
+                         console.log('size', size)
+                         console.log('num', number)
+                     },
+                 });
                 }else{
                     $('#nodata').append(`<span>暂无数据</span>`)
                 }
               
             }
         })
-
+        $(window).resize(function () {
+             $('#reportTable').bootstrapTable('resetView');
+         });
     </script>
 </body>
 

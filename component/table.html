@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-09 22:30:20
- * @LastEditTime : 2020-01-13 16:50:27
+ * @LastEditTime : 2020-01-14 21:56:55
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp2/static/component/feedback.html
@@ -25,11 +25,6 @@
     <script src="./bootstrap-table/bootstrap-table-export.js"></script>
     <script src="./extends/tableExport/jquery.base64.js"></script>
     <script src="./extends/tableExport/tableExport.js"></script>
-    <style>
-        .fixed-table-container {
-            height: 800px !important
-        }
-    </style>
 </head>
 
 <body>
@@ -86,7 +81,7 @@
                     exportTypes: ['csv', 'txt', 'xml'],
                     search: false,
                     clickToSelect: true,
-                    columns: [{ field: "way", title: "发行方式", align: "center", valign: "middle", sortable: "true" }, { field: "price", title: "发行价格", align: "center", valign: "middle", sortable: "true" }, { field: "cost_price", title: "实际公司募集资金总额", align: "center", valign: "middle", sortable: "true" }, { field: "all_price", title: "发行费用总额", align: "center", valign: "middle", sortable: "true" }, { field: "all_count", title: "实际发行数量", align: "center", valign: "middle", sortable: "true" }],
+                    columns: [{ field: "way", title: "发行方式", align: "center", valign: "middle", sortable: "true" }, { field: "price", title: "发行价格", align: "center", valign: "middle", sortable: "true" }, { field: "cost_price", title: "实际公司募集资金总额", align: "center", valign: "middle", sortable: "true" }, { field: "all_price", title: "发行费用总额", align: "center", valign: "middle", sortable: "true" }, { field: "all_count", title: "实际发行数量(每10股)", align: "center", valign: "middle", sortable: "true" }],
                     data: zfData,
                     onPageChange: function (size, number) {
                         console.log('size', size)

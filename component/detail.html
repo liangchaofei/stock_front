@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-18 19:50:58
- * @LastEditTime : 2020-01-14 19:24:55
+ * @LastEditTime : 2020-01-14 22:29:59
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/detail.html
@@ -44,29 +44,40 @@
     <div id="search_count">
         
     </div>
+    <img id="loadimg" src="../img/b.jpg" alt="" style="width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 99;">
    <div id="search_detail">
-    <div id="daykline" class="weui-tab__bd-item weui-tab__bd-item--active"></div>
+    <div class="weui-tab">
+        <div class="weui-navbar">
+          <a class="weui-navbar__item weui-bar__item--on" href="#tab1">
+            日线
+          </a>
+          <a class="weui-navbar__item" href="#tab2">
+            周线
+          </a>
+          <a class="weui-navbar__item" href="#tab3">
+            月线
+          </a>
+        </div>
+        <div class="weui-tab__bd">
+          
+          <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
+            <div id="daykline"></div>
+          </div>
+          <div id="tab2" class="weui-tab__bd-item">
+            <div id="weekline"></div>
+          </div>
+          <div id="tab3" class="weui-tab__bd-item">
+            <div id="monthline"></div>
+          </div>
+        </div>
+      </div>
 
-    <div class="weui-tab__bd">
+
+    <div class="weui-tab__bd" id="bottom_content">
         <div style="width:100%" id="tab2" class="weui-tab__bd-item weui-tab__bd-item--active">
-
-
-            <!-- <div class="weui-panel weui-panel_access">
-                    <div class="weui-panel__hd" id="stock_btn">基本信息
-                        <i class="down"></i><i class="up" style="display:none;"></i>
-                    </div>
-                    <div class="weui-panel__bd" id="stock_info">
-                      <div class="weui-media-box weui-media-box_text">
-                        <h4 class="weui-media-box__title">标题一</h4>
-                        <p class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
-                      </div>
-                      <div class="weui-media-box weui-media-box_text">
-                        <h4 class="weui-media-box__title">标题二</h4>
-                        <p class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
-                      </div>
-                    </div>
-                  </div> -->
-
 
             <div style="margin-top: 10px;" class="stock_btn">
                 <p class="weui-media-box__desc" id="percits_date" style="text-align: center;"></p>
@@ -101,40 +112,40 @@
                 </div>
                 <div id="basic_info_content">
                     <div class="basic_info">
-                        <span>公司名称：</span>
+                        <span class="besic_span">公司名称：</span>
                         <span id="stock_company_name"></span>
                     </div>
                     <div class="basic_info">
-                        <span>历史名称变更记录：</span>
+                        <span class="besic_span">历史名称变更记录：</span>
                         <span id="detail_history_names"></span>
                     </div>
                     <div class="basic_info">
-                        <span>机构类型：</span>
+                        <span class="besic_span">机构类型：</span>
                         <span id="stock_institutional_type"></span>
                     </div>
 
                     <div class="basic_info">
-                        <span>办公地址：</span>
+                        <span class="besic_span">办公地址：</span>
                         <span id="detail_address"></span>
                     </div>
                     <div class="basic_info">
-                        <span>官方网站：</span>
+                        <span class="besic_span">官方网站：</span>
                         <span id="detail_net_address"></span>
                     </div>
                     <div class="basic_info">
-                        <span>成立时间：</span>
+                        <span class="besic_span">成立时间：</span>
                         <span id="stock_establishment_time"></span>
                     </div>
                     <div class="basic_info">
-                        <span>上市时间：</span>
+                        <span class="besic_span">上市时间：</span>
                         <span id="detail_listing_date"></span>
                     </div>
                     <div class="basic_info">
-                        <span>主营业务：</span>
+                        <span class="besic_span">主营业务：</span>
                         <span id="detail_major_businesses"></span>
                     </div>
                     <div class="basic_info">
-                        <span>业务范围：</span>
+                        <span class="besic_span">业务范围：</span>
                         <span id="detail_business_scope"></span>
                     </div>
                 </div>

@@ -47,14 +47,16 @@ function calculateMA(dayCount, data) {
 var code = getUrlParam('code');
 var date = getUrlParam('date');
 var stock_cash_flowData = [], stock_liabilitiesData = [], stock_profitData = [];
+$('#loadimg').css("display","block")
 $.ajax({
     url: `https://stock.zhixiutec.com/api/stock/detail?code=${code}&date=${date}`,
     success: function (res) {
         console.log('res', res)
         if (res.error_code === 1) {
             $('#search_detail').css("display", "none")
-            $('#search_count').append(`<div>查询次数为0，请<a href="/component/pay.html">点击充值</a></div>`)
+            $('#search_count').append(`<div>${res.err_msg}</div>`)
         } else {
+            $('#loadimg').css("display","none")
             $('#search_detail').css("display", "block")
             $('#search_count').css("display", "none")
             // 设置href
@@ -379,6 +381,7 @@ $.ajax({
             // }
             // day
             var ticket_history = data.ticket_history;
+            console.log('ticket_history',ticket_history)
             var dayData = [];
             ticket_history.forEach(item => {
                 dayData.push([item.date, item.kai, item.shou, item.low, item.high, item.total_count])
@@ -591,6 +594,7 @@ $.ajax({
                 mainChart.resize();
             });
             var data = splitData(dayData);
+            console.log('dayData',dayData)
             var option = {
                 backgroundColor: '#000',
                 animation: false,
@@ -654,10 +658,10 @@ $.ajax({
                     dimension: 2,
                     pieces: [{
                         value: 1,
-                        color: downColor
+                        color: upColor
                     }, {
                         value: -1,
-                        color: upColor
+                        color: downColor
                     }]
                 },
                 grid: [
@@ -864,5 +868,595 @@ $.ajax({
 
 
 
+    }
+})
+
+
+$.ajax({
+    url:`https://stock.zhixiutec.com/api/stock/k/detail?code=${code}&type=week`,
+    success:function(res){
+        console.log('www',res)
+        var data = res.data;
+        var dayData = [];
+        data.forEach(item => {
+            dayData.push([item.date, item.kai, item.shou, item.low, item.high, item.total_count])
+        })
+        var mainContainer = document.getElementById('weekline');
+        var resizeMainContainer = function () {
+            mainContainer.style.width = window.innerWidth + 'px';
+            mainContainer.style.height = window.innerHeight * 0.5 + 'px';
+        };
+        //设置div容器高宽
+        resizeMainContainer();
+        // 初始化图表
+        var mainChart = echarts.init(mainContainer);
+        $(window).on('resize', function () {//
+            //屏幕大小自适应，重置容器高宽
+            resizeMainContainer();
+            mainChart.resize();
+        });
+        var data = splitData(dayData);
+        var option = {
+            backgroundColor: '#000',
+            animation: false,
+            legend: {
+                // bottom: 10,
+                // left: 'center',
+                x: 'top',
+                y: 'center',
+                top: 10,
+                data: ['周线', 'MA5', 'MA10', 'MA30', 'MA60'],
+                textStyle: {
+                    color: '#fff'
+                }
+            },
+            tooltip: {
+                // trigger: 'axis',
+                // axisPointer: {
+                //     type: 'cross'
+                // },
+                // backgroundColor: 'rgba(245, 245, 245, 0.8)',
+                // borderWidth: 1,
+                // borderColor: '#ccc',
+                // padding: 10,
+                // textStyle: {
+                //     color: '#000'
+                // },
+                // position: function (pos, params, el, elRect, size) {
+                //     var obj = {top: 10};
+                //     obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 30;
+                //     return obj;
+                // },
+                // extraCssText: 'width: 170px'
+            },
+            axisPointer: {
+                link: { xAxisIndex: 'all' },
+                label: {
+                    backgroundColor: '#777'
+                }
+            },
+            toolbox: {
+                show: false,
+                feature: {
+                    dataZoom: {
+                        yAxisIndex: false
+                    },
+                    brush: {
+                        type: ['lineX', 'clear']
+                    }
+                }
+            },
+            brush: {
+                xAxisIndex: 'all',
+                brushLink: 'all',
+                outOfBrush: {
+                    colorAlpha: 0.1
+                }
+            },
+            visualMap: {
+                show: false,
+                seriesIndex: 5,
+                dimension: 2,
+                pieces: [{
+                    value: 1,
+                    color: upColor
+                }, {
+                    value: -1,
+                    color: downColor
+                }]
+            },
+            grid: [
+                {
+                    left: '10%',
+                    right: '8%',
+                    height: '45%'
+                },
+                {
+                    left: '10%',
+                    right: '8%',
+                    top: '79%',
+                    height: '19%'
+                }
+            ],
+            xAxis: [
+                {
+                    type: 'category',
+                    data: data.categoryData,
+                    scale: true,
+                    boundaryGap: false,
+                    axisLine: { onZero: false, lineStyle: { color: '#8392A5' } },
+                    splitLine: { show: false },
+                    splitNumber: 20,
+                    min: 'dataMin',
+                    max: 'dataMax',
+                    axisPointer: {
+                        z: 100
+                    }
+                },
+                {
+                    type: 'category',
+                    gridIndex: 1,
+                    data: data.categoryData,
+                    scale: true,
+                    boundaryGap: false,
+                    axisLine: { onZero: false, lineStyle: { color: '#8392A5' } },
+                    axisTick: { show: false },
+                    splitLine: { show: false },
+                    axisLabel: { show: false },
+                    splitNumber: 20,
+                    min: 'dataMin',
+                    max: 'dataMax'
+                }
+            ],
+            yAxis: [
+                {
+                    scale: true,
+                    splitArea: {
+                        show: true
+                    },
+                    axisLine: { lineStyle: { color: '#8392A5' } },
+                    splitArea: {
+                        show: true,
+                        areaStyle: {
+                            color: ['#000',]
+                        }
+                    },
+                    splitLine: {
+                        show: false
+                    }
+                },
+                {
+                    scale: true,
+                    gridIndex: 1,
+                    splitNumber: 2,
+                    axisLabel: { show: false },
+                    axisLine: { show: false },
+                    axisTick: { show: false },
+                    splitLine: { show: false }
+                }
+            ],
+            // dataZoom: [
+            //     {
+            //         type: 'inside',
+            //         xAxisIndex: [0, 1],
+            //         start: 1,
+            //         end: 100
+            //     },
+            //     {
+            //         show: true,
+            //         xAxisIndex: [0, 1],
+            //         type: 'slider',
+            //         top: '85%',
+            //         start: 98,
+            //         end: 100
+            //     }
+            // ],
+            series: [
+                {
+                    name: '周线',
+                    type: 'candlestick',
+                    data: data.values,
+                    itemStyle: {
+                        color: downColor,
+                        color0: upColor,
+                        borderColor: null,
+                        borderColor0: null
+                    },
+                    // tooltip: {
+                    //     formatter: function (param) {
+                    //         param = param[0];
+                    //         return [
+                    //             'Date: ' + param.name + '<hr size=1 style="margin: 3px 0">',
+                    //             'Open: ' + param.data[0] + '<br/>',
+                    //             'Close: ' + param.data[1] + '<br/>',
+                    //             'Lowest: ' + param.data[2] + '<br/>',
+                    //             'Highest: ' + param.data[3] + '<br/>'
+                    //         ].join('');
+                    //     }
+                    // }
+                },
+                {
+                    name: 'MA5',
+                    type: 'line',
+                    data: calculateMA(5, data),
+                    smooth: true,
+                    lineStyle: {
+                        normal: {
+                            width: 1
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            lineStyle: {
+                                color: '#fff',
+                                // width:'10px'
+                            }
+                        }
+                    }
+                },
+                {
+                    name: 'MA10',
+                    type: 'line',
+                    data: calculateMA(10, data),
+                    smooth: true,
+                    lineStyle: {
+                        opacity: 0.5,
+                        normal: {
+                            width: 1
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            lineStyle: {
+                                color: 'rgb(255,251,63)'
+                            }
+                        }
+                    }
+                },
+                {
+                    name: 'MA30',
+                    type: 'line',
+                    data: calculateMA(30, data),
+                    smooth: true,
+                    lineStyle: {
+                        opacity: 0.5,
+                        normal: {
+                            width: 1
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            lineStyle: {
+                                color: 'rgb(255,16,251)'
+                            }
+                        }
+                    }
+                },
+                {
+                    name: 'MA60',
+                    type: 'line',
+                    data: calculateMA(60, data),
+                    smooth: true,
+                    lineStyle: {
+                        opacity: 0.5,
+                        normal: {
+                            width: 1
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            lineStyle: {
+                                color: 'rgb(0,254,55)'
+                            }
+                        }
+                    }
+                },
+                {
+                    name: '成交量',
+                    type: 'bar',
+                    xAxisIndex: 1,
+                    yAxisIndex: 1,
+                    data: data.volumes
+                }
+            ]
+        }
+
+
+        // 使用刚指定的配置项和数据显示图表。
+        mainChart.setOption(option, true);
+    }
+})
+
+$.ajax({
+    url:`https://stock.zhixiutec.com/api/stock/k/detail?code=${code}&type=month`,
+    success:function(res){
+        var data = res.data;
+        var dayData = [];
+        data.forEach(item => {
+            dayData.push([item.date, item.kai, item.shou, item.low, item.high, item.total_count])
+        })
+        var mainContainer = document.getElementById('monthline');
+        var resizeMainContainer = function () {
+            mainContainer.style.width = window.innerWidth + 'px';
+            mainContainer.style.height = window.innerHeight * 0.5 + 'px';
+        };
+        //设置div容器高宽
+        resizeMainContainer();
+        // 初始化图表
+        var mainChart = echarts.init(mainContainer);
+        $(window).on('resize', function () {//
+            //屏幕大小自适应，重置容器高宽
+            resizeMainContainer();
+            mainChart.resize();
+        });
+        var data = splitData(dayData);
+        var option = {
+            backgroundColor: '#000',
+            animation: false,
+            legend: {
+                // bottom: 10,
+                // left: 'center',
+                x: 'top',
+                y: 'center',
+                top: 10,
+                data: ['月线', 'MA5', 'MA10', 'MA30', 'MA60'],
+                textStyle: {
+                    color: '#fff'
+                }
+            },
+            tooltip: {
+                // trigger: 'axis',
+                // axisPointer: {
+                //     type: 'cross'
+                // },
+                // backgroundColor: 'rgba(245, 245, 245, 0.8)',
+                // borderWidth: 1,
+                // borderColor: '#ccc',
+                // padding: 10,
+                // textStyle: {
+                //     color: '#000'
+                // },
+                // position: function (pos, params, el, elRect, size) {
+                //     var obj = {top: 10};
+                //     obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 30;
+                //     return obj;
+                // },
+                // extraCssText: 'width: 170px'
+            },
+            axisPointer: {
+                link: { xAxisIndex: 'all' },
+                label: {
+                    backgroundColor: '#777'
+                }
+            },
+            toolbox: {
+                show: false,
+                feature: {
+                    dataZoom: {
+                        yAxisIndex: false
+                    },
+                    brush: {
+                        type: ['lineX', 'clear']
+                    }
+                }
+            },
+            brush: {
+                xAxisIndex: 'all',
+                brushLink: 'all',
+                outOfBrush: {
+                    colorAlpha: 0.1
+                }
+            },
+            visualMap: {
+                show: false,
+                seriesIndex: 5,
+                dimension: 2,
+                pieces: [{
+                    value: 1,
+                    color: upColor
+                }, {
+                    value: -1,
+                    color: downColor
+                }]
+            },
+            grid: [
+                {
+                    left: '10%',
+                    right: '8%',
+                    height: '45%'
+                },
+                {
+                    left: '10%',
+                    right: '8%',
+                    top: '79%',
+                    height: '19%'
+                }
+            ],
+            xAxis: [
+                {
+                    type: 'category',
+                    data: data.categoryData,
+                    scale: true,
+                    boundaryGap: false,
+                    axisLine: { onZero: false, lineStyle: { color: '#8392A5' } },
+                    splitLine: { show: false },
+                    splitNumber: 20,
+                    min: 'dataMin',
+                    max: 'dataMax',
+                    axisPointer: {
+                        z: 100
+                    }
+                },
+                {
+                    type: 'category',
+                    gridIndex: 1,
+                    data: data.categoryData,
+                    scale: true,
+                    boundaryGap: false,
+                    axisLine: { onZero: false, lineStyle: { color: '#8392A5' } },
+                    axisTick: { show: false },
+                    splitLine: { show: false },
+                    axisLabel: { show: false },
+                    splitNumber: 20,
+                    min: 'dataMin',
+                    max: 'dataMax'
+                }
+            ],
+            yAxis: [
+                {
+                    scale: true,
+                    splitArea: {
+                        show: true
+                    },
+                    axisLine: { lineStyle: { color: '#8392A5' } },
+                    splitArea: {
+                        show: true,
+                        areaStyle: {
+                            color: ['#000',]
+                        }
+                    },
+                    splitLine: {
+                        show: false
+                    }
+                },
+                {
+                    scale: true,
+                    gridIndex: 1,
+                    splitNumber: 2,
+                    axisLabel: { show: false },
+                    axisLine: { show: false },
+                    axisTick: { show: false },
+                    splitLine: { show: false }
+                }
+            ],
+            // dataZoom: [
+            //     {
+            //         type: 'inside',
+            //         xAxisIndex: [0, 1],
+            //         start: 1,
+            //         end: 100
+            //     },
+            //     {
+            //         show: true,
+            //         xAxisIndex: [0, 1],
+            //         type: 'slider',
+            //         top: '85%',
+            //         start: 98,
+            //         end: 100
+            //     }
+            // ],
+            series: [
+                {
+                    name: '月线',
+                    type: 'candlestick',
+                    data: data.values,
+                    itemStyle: {
+                        color: downColor,
+                        color0: upColor,
+                        borderColor: null,
+                        borderColor0: null
+                    },
+                    // tooltip: {
+                    //     formatter: function (param) {
+                    //         param = param[0];
+                    //         return [
+                    //             'Date: ' + param.name + '<hr size=1 style="margin: 3px 0">',
+                    //             'Open: ' + param.data[0] + '<br/>',
+                    //             'Close: ' + param.data[1] + '<br/>',
+                    //             'Lowest: ' + param.data[2] + '<br/>',
+                    //             'Highest: ' + param.data[3] + '<br/>'
+                    //         ].join('');
+                    //     }
+                    // }
+                },
+                {
+                    name: 'MA5',
+                    type: 'line',
+                    data: calculateMA(5, data),
+                    smooth: true,
+                    lineStyle: {
+                        normal: {
+                            width: 1
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            lineStyle: {
+                                color: '#fff',
+                                // width:'10px'
+                            }
+                        }
+                    }
+                },
+                {
+                    name: 'MA10',
+                    type: 'line',
+                    data: calculateMA(10, data),
+                    smooth: true,
+                    lineStyle: {
+                        opacity: 0.5,
+                        normal: {
+                            width: 1
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            lineStyle: {
+                                color: 'rgb(255,251,63)'
+                            }
+                        }
+                    }
+                },
+                {
+                    name: 'MA30',
+                    type: 'line',
+                    data: calculateMA(30, data),
+                    smooth: true,
+                    lineStyle: {
+                        opacity: 0.5,
+                        normal: {
+                            width: 1
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            lineStyle: {
+                                color: 'rgb(255,16,251)'
+                            }
+                        }
+                    }
+                },
+                {
+                    name: 'MA60',
+                    type: 'line',
+                    data: calculateMA(60, data),
+                    smooth: true,
+                    lineStyle: {
+                        opacity: 0.5,
+                        normal: {
+                            width: 1
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            lineStyle: {
+                                color: 'rgb(0,254,55)'
+                            }
+                        }
+                    }
+                },
+                {
+                    name: '成交量',
+                    type: 'bar',
+                    xAxisIndex: 1,
+                    yAxisIndex: 1,
+                    data: data.volumes
+                }
+            ]
+        }
+
+
+        // 使用刚指定的配置项和数据显示图表。
+        mainChart.setOption(option, true);
     }
 })

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-14 19:35:39
+ * @LastEditTime : 2020-01-14 21:37:05
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -195,6 +195,59 @@
                 高级筛选<i class="down"></i><i class="up" style="display:none;"></i>
             </div>
             <div class="weui-panel__bd" id="high_content">
+                  <!-- 收盘情况 -->
+                  <div class="weui-panel__hd" id="sp_qk">
+                    收盘情况<i class="down"></i><i class="up" style="display:none;"></i>
+                </div>
+                <div class="weui-panel__bd" id="sp_content">
+                    <div class="weui-cell weui-cell_vcode">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">昨日涨幅区间 </label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" id="sixMin" placeholder="请输入最小值">
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" id="sixMax" placeholder="请输入最大值">
+                        </div>
+                    </div>
+    
+                    <div class="weui-cell weui-cell_vcode">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">昨日振幅区间 </label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" id="sevenMin" placeholder="请输入最小值">
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" id="sevenMax" placeholder="请输入最大值">
+                        </div>
+                    </div>
+    
+                    <div class="weui-cell weui-cell_vcode">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">昨日换手率区间 </label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" id="eightMin" placeholder="请输入最小值">
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" id="eightMax" placeholder="请输入最大值">
+                        </div>
+                    </div>
+    
+                    <div class="weui-cell weui-cell_vcode">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">昨日收盘股价区间 </label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" id="nineMin" placeholder="请输入最小值">
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" id="nineMax" placeholder="请输入最大值">
+                        </div>
+                    </div>
+                </div>
                 <!-- 每股指标 -->
                 <div class="weui-panel__hd" id="mg_zb">
                     每股指标<i class="down"></i><i class="up" style="display:none;"></i>
@@ -256,59 +309,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- 收盘情况 -->
-                <div class="weui-panel__hd" id="sp_qk">
-                    收盘情况<i class="down"></i><i class="up" style="display:none;"></i>
-                </div>
-                <div class="weui-panel__bd" id="sp_content">
-                    <div class="weui-cell weui-cell_vcode">
-                        <div class="weui-cell__hd">
-                            <label class="weui-label">昨日涨幅区间 </label>
-                        </div>
-                        <div class="weui-cell__bd">
-                            <input class="weui-input" id="sixMin" placeholder="请输入最小值">
-                        </div>
-                        <div class="weui-cell__bd">
-                            <input class="weui-input" id="sixMax" placeholder="请输入最大值">
-                        </div>
-                    </div>
-    
-                    <div class="weui-cell weui-cell_vcode">
-                        <div class="weui-cell__hd">
-                            <label class="weui-label">昨日振幅区间 </label>
-                        </div>
-                        <div class="weui-cell__bd">
-                            <input class="weui-input" id="sevenMin" placeholder="请输入最小值">
-                        </div>
-                        <div class="weui-cell__bd">
-                            <input class="weui-input" id="sevenMax" placeholder="请输入最大值">
-                        </div>
-                    </div>
-    
-                    <div class="weui-cell weui-cell_vcode">
-                        <div class="weui-cell__hd">
-                            <label class="weui-label">昨日换手率区间 </label>
-                        </div>
-                        <div class="weui-cell__bd">
-                            <input class="weui-input" id="eightMin" placeholder="请输入最小值">
-                        </div>
-                        <div class="weui-cell__bd">
-                            <input class="weui-input" id="eightMax" placeholder="请输入最大值">
-                        </div>
-                    </div>
-    
-                    <div class="weui-cell weui-cell_vcode">
-                        <div class="weui-cell__hd">
-                            <label class="weui-label">昨日收盘股价区间 </label>
-                        </div>
-                        <div class="weui-cell__bd">
-                            <input class="weui-input" id="nineMin" placeholder="请输入最小值">
-                        </div>
-                        <div class="weui-cell__bd">
-                            <input class="weui-input" id="nineMax" placeholder="请输入最大值">
-                        </div>
-                    </div>
-                </div>
+              
                
                 <!-- 盈利能力 -->
                 <div class="weui-panel__hd" id="yl_nl">
@@ -934,6 +935,7 @@
 
 
         function searchPg(currentPage) {
+            console.log('forms',forms)
             var data = {
                 "query": {
                     "predicts": predicts,
@@ -1214,7 +1216,7 @@
                 var data = res.data;
                 var belong = data.belong;
                 var concept = data.concept;
-                var forms = data.forms;
+                var formsData = data.forms;
                 var label = data.label;
                 var location = data.location;
                 $("#job").select({
@@ -1267,13 +1269,11 @@
                 $("#froms").select({
                     title: "选择组织形式",
                     multi: true,
-                    items: forms,
+                    items: formsData,
                     onClose: function (e) {
                         var labelsData = e.data.values;
                         forms = labelsData.split(',')
                         console.log('forms',forms)
-                        concectCount += labels.length;
-                        $('.concect_count').text(concectCount)
                     }
                 });
             }

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-09 22:30:20
- * @LastEditTime : 2020-01-12 22:55:25
+ * @LastEditTime : 2020-01-14 21:56:21
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp2/static/component/feedback.html
@@ -25,11 +25,6 @@
      <script src="./bootstrap-table/bootstrap-table-export.js"></script>
      <script src="./extends/tableExport/jquery.base64.js"></script>
      <script src="./extends/tableExport/tableExport.js"></script>
-     <style>
-         .fixed-table-container {
-             height: 800px !important
-         }
-     </style>
  </head>
  
  <body>
@@ -83,7 +78,7 @@
                      exportTypes: ['csv', 'txt', 'xml'],
                      search: false,
                      clickToSelect: true,
-                     columns: [{ field: "date", title: "日期", align: "center", valign: "middle", sortable: "true" }, { field: "count", title: "数量", align: "center", valign: "middle", sortable: "true" },],
+                     columns: [{ field: "date", title: "日期", align: "center", valign: "middle", sortable: "true" }, { field: "count", title: "数量(每10股)", align: "center", valign: "middle", sortable: "true" },],
                      data: zfData,
                      onPageChange: function (size, number) {
                          console.log('size', size)

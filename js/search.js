@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-01-03 14:26:48
- * @LastEditTime : 2020-01-13 22:00:48
+ * @LastEditTime : 2020-01-14 21:42:22
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/js/search.js
@@ -43,11 +43,7 @@ $(function () {
         })
 
         $('#zb_content').css({ "display": "none" })
-        $('#mg_zb').on('click', function () {
-                $('#zb_content').slideToggle("slow");
-                $("#mg_zb .up").toggle();
-                $("#mg_zb .down").toggle();
-        })
+        
         $('#sp_content').css({ "display": "none" })
         $('#sp_qk').on('click', function () {
                 $('#sp_content').slideToggle("slow");
@@ -56,31 +52,57 @@ $(function () {
         })
 
         $('#yl_content').css({ "display": "none" })
-        $('#yl_nl').on('click', function () {
-                $('#yl_content').slideToggle("slow");
-                $("#yl_nl .up").toggle();
-                $("#yl_nl .down").toggle();
-        })
+      
 
         $('#cz_content').css({ "display": "none" })
-        $('#cz_nl').on('click', function () {
-                $('#cz_content').slideToggle("slow");
-                $("#cz_nl .up").toggle();
-                $("#cz_nl .down").toggle();
-        })
+     
 
         $('#yy_content').css({ "display": "none" })
-        $('#yy_nl').on('click', function () {
-                $('#yy_content').slideToggle("slow");
-                $("#yy_nl .up").toggle();
-                $("#yy_nl .down").toggle();
-        })
+       
         $.ajax({
                 url: 'https://stock.zhixiutec.com/api/is_member',
                 success: function (res) {
                         var is_member = res.data;
                         if (is_member === false) {
-                                $('#high_contions').attr("disabled", "true")
+                                $('#mg_zb').on('click',function(){
+                                        $.toast("该搜索条件只对会员开放", "forbidden");
+                                        $('#mg_zb').css("pointer-events", "none")
+                                })
+                                $('#cz_nl').on('click',function(){
+                                        $.toast("该搜索条件只对会员开放", "forbidden");
+                                        $('#cz_nl').css("pointer-events", "none")
+                                })
+                                $('#yl_nl').on('click',function(){
+                                        $.toast("该搜索条件只对会员开放", "forbidden");
+                                        $('#yl_nl').css("pointer-events", "none")
+                                })
+                                $('#yy_nl').on('click',function(){
+                                        $.toast("该搜索条件只对会员开放", "forbidden");
+                                        $('#yy_nl').css("pointer-events", "none")
+                                })
+
+                               
+                        }else{
+                                $('#mg_zb').on('click', function () {
+                                        $('#zb_content').slideToggle("slow");
+                                        $("#mg_zb .up").toggle();
+                                        $("#mg_zb .down").toggle();
+                                })
+                                $('#cz_nl').on('click', function () {
+                                        $('#cz_content').slideToggle("slow");
+                                        $("#cz_nl .up").toggle();
+                                        $("#cz_nl .down").toggle();
+                                })
+                                $('#yl_nl').on('click', function () {
+                                        $('#yl_content').slideToggle("slow");
+                                        $("#yl_nl .up").toggle();
+                                        $("#yl_nl .down").toggle();
+                                })
+                                $('#yy_nl').on('click', function () {
+                                        $('#yy_content').slideToggle("slow");
+                                        $("#yy_nl .up").toggle();
+                                        $("#yy_nl .down").toggle();
+                                })
                         }
                 }
         })

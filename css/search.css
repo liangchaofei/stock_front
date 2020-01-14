@@ -145,3 +145,7 @@ display:-webkit-box;
       transform: rotate(45deg);
       -webkit-transform: rotate(45deg);
   }
+
+  #mg_zb i, #sp_qk i,#yl_nl i,#cz_nl i, #yy_nl i {
+      float: right;
+  }
