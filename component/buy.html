@@ -1,0 +1,191 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-12-17 19:52:10
+ * @LastEditTime : 2020-01-15 22:08:02
+ * @LastEditors  : Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /gp/static/component/list.html
+ -->
+ <!DOCTYPE html>
+ <html lang="en">
+ 
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <title>知修数据</title>
+     <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+     <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+     <link rel="stylesheet" href="../css/person.css">
+ </head>
+ 
+ <body>
+ 
+ 
+     <div class="weui-cells__title">请选择：</div>
+     <div class="weui-cells weui-cells_form">
+         <div class="weui-cells weui-cells_radio" id="wechat">
+             
+         </div>
+         <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">邮箱：</label></div>
+            <div class="weui-cell__bd">
+              <input class="weui-input" type="email" id="email"  placeholder="请输入邮箱">
+            </div>
+          </div>
+          <div class="weui-cells__title">请选择下载类型：</div>
+          <div class="weui-cell weui-cell_select">
+            <div class="weui-cell__bd">
+              <select class="weui-select" name="select1" id="select_type">
+                <option value=".csv">.csv</option>
+                <option value=".sql">.sql</option>
+              </select>
+            </div>
+          </div>
+         <div style="margin:10px">
+             <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
+             <span class="weui-agree__text" style="font-size: 14px;">
+                 阅读并同意<a href="https://mp.weixin.qq.com/s/ts2UbPURxMzPqIUa92byRA">《知修数据服务公众号服务条款》</a>
+               </span>
+         </div>
+             <a style="margin-top: 50px;" class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">确认支付</a>
+         </div>
+     </div>
+ 
+ 
+     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+     </script>
+     <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+     <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/swiper.min.js"></script>
+     <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/city-picker.min.js"></script>
+     <script src="../js/jwerixin.js"></script>
+     <script>
+ 
+         $('.weui-check__label').on('click', function (e) {
+             console.log('res', e.target.id)
+         })
+             $.ajax({
+                 url: 'https://stock.zhixiutec.com/api/user',
+                 type: 'get',
+                 success: function (res) {
+                     var data = res.data;
+                     if (res.error_code === 2) {
+                         window.open(data, "_self");
+                     } else {
+                         $('.tx').attr('src', data.avatar);
+                         $('.name').text(data.user_name);
+                         $('#joinTime').text(data.query_left)
+                         $('#time').text(data.member_expire_time.substring(0, 10))
+                         $('#exp_val').text(data.exp)
+                         $('#left_count').text(data.query_left)
+                         $.ajax({
+                             url: 'https://stock.zhixiutec.com/api/is_member',
+                             success: function (res) {
+                                 var is_member = res.data;
+                                     $('#member_val').css("display", "none")
+                                     $('#is_hy').css("display", "none")
+                                     $.ajax({
+                                         url: 'https://stock.zhixiutec.com/api/payments?type=data',
+                                         success: function (result) {
+                                             var leader = result.data;
+                                             var member = '' ,contact_val ='',type_val = '.csv';
+                                             for (var i = 0; i < leader.length; i++) {
+                                                 $("#wechat").append(`
+                                                 <label class="weui-cell weui-check__label" for="${leader[i].id}">
+                                                     <div class="weui-cell__bd">
+                                                         <p>
+                                                             <span style="margin-right:10px">${leader[i].type_desc}</span>
+                                                             <span style="margin-right:10px">${leader[i].spend/1000}元</span>
+                                                             <span>${leader[i].count}个月</span>
+                                                             </p>
+                                                     </div>
+                                                     <div class="weui-cell__ft">
+                                                         <input type="radio" class="weui-check" name="radio1" id="${leader[i].id}">
+                                                         <span class="weui-icon-checked"></span>
+                                                     </div>
+                                                 </label>
+                                                 `);
+                                             }
+                                             $('.weui-check__label').on('click', function (e) {
+                                                 member = parseInt(e.target.id);
+                                             })
+                                             $('#email').on('input',function(e){
+                                                contact_val = e.target.value;
+                                             })
+                                             $('#select_type').on('change',function(res){
+                                                type_val = $(this).children('option:selected').val()
+                                             })
+                                             $('#showTooltips').on('click', function () {
+                                                 if(member && $('#weuiAgree').is(':checked') && contact_val){
+                                                     $.ajax({
+                                                         url: 'https://stock.zhixiutec.com/api/jsapi_pay',
+                                                         type: 'post',
+                                                         data: JSON.stringify({ "id": member,concat:`${contact_val}|${type_val}` }),
+                                                         success: function (res) {
+                                                             console.log('res', res)
+                                                             var result = res.data;
+                                                             console.log('result', result)
+                                                             wx.config({
+                                                                 debug: false,
+                                                                 appId: result["appId"],
+                                                                 timestamp: result["timeStamp"],
+                                                                 nonceStr: result["nonceStr"],
+                                                                 signature: result["signature"],
+                                                                 jsApiList: [
+                                                                     'chooseWXPay',
+                                                                 ]
+                                                             });
+                                                             wx.ready(function () {
+                                                                 wx.chooseWXPay({
+                                                                     appId: result["appId"],
+                                                                     timestamp: result["timeStamp"], // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+                                                                     nonceStr: result["nonceStr"], // 支付签名随机串，不长于 32 位
+                                                                     package: result["package"], // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
+                                                                     signType: result["signType"], // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+                                                                     paySign: result["sign"], // 支付签名
+                                                                     success: function (res) {
+                                                                         window.open('/component/person.html',"_self")
+                                                                     },
+ 
+                                                                     fail: function (res) {
+                                                                         $.hideLoading()
+                                                                         // alert('支付失败!');
+                                                                         toast("支付失败！请检查微信配置");
+                                                                     },
+                                                                     cancel: function (res) {
+ 
+                                                                         // //支付取消
+                                                                         $.hideLoading()
+                                                                         toast("已取消支付！");
+                                                                     }
+                                                                 });
+                                                             });
+ 
+                                                         }
+                                                     })
+                                                 }else if(!member){
+                                                     $.toast("请选择进行充值", "cancel");
+                                                 }else if(!$('#weuiAgree').is(':checked')){
+                                                     $.toast("请勾选同意并阅读服务条款", "cancel");
+                                                 }
+                                             })
+ 
+                                         }
+                                     })
+                             }
+                         })
+                     }
+ 
+                 }
+             })
+ 
+       
+ 
+ 
+     
+ 
+ 
+     </script>
+ </body>
+ 
+ </html>

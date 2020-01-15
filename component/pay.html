@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-14 22:43:02
+ * @LastEditTime : 2020-01-15 21:53:22
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -22,8 +22,8 @@
 <body>
 
 
-
-    <div class="weui-cells__title">请选择：</div>
+    <div style="margin:12px;">当前剩余查询次数：<span style="color: red;" id="left_count"></span></div>
+    <div class="weui-cells__title">请选择充值：</div>
     <div class="weui-cells weui-cells_form">
         <div class="weui-cells weui-cells_radio" id="wechat">
             
@@ -41,7 +41,7 @@
             </span>
           </label>
         <div class="weui-btn-area"> -->
-            <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">确定</a>
+            <a style="margin-top: 50px;" class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">确认支付</a>
         </div>
     </div>
 
@@ -70,12 +70,16 @@
                         $('#joinTime').text(data.query_left)
                         $('#time').text(data.member_expire_time.substring(0, 10))
                         $('#exp_val').text(data.exp)
+                        $('#left_count').text(data.query_left)
                         $.ajax({
                             url: 'https://stock.zhixiutec.com/api/is_member',
                             success: function (res) {
                                 var is_member = res.data;
                                     $('#member_val').css("display", "none")
                                     $('#is_hy').css("display", "none")
+                                    if(is_member === true){
+                                        $('#showTooltips').text('续费')
+                                    }
                                     $.ajax({
                                         url: 'https://stock.zhixiutec.com/api/payments',
                                         success: function (result) {
@@ -88,7 +92,7 @@
                                                         <p>
                                                             <span style="margin-right:10px">${leader[i].type_desc}</span>
                                                             <span style="margin-right:10px">${leader[i].spend/1000}元</span>
-                                                            <span>${leader[i].month}个月</span>
+                                                            <span>${leader[i].count}个月</span>
                                                             </p>
                                                     </div>
                                                     <div class="weui-cell__ft">

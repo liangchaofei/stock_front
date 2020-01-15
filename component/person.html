@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-14 19:19:42
+ * @LastEditTime : 2020-01-15 21:48:28
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -76,7 +76,16 @@
               </div>
             </a>
           </div>
-    
+          <div class="weui-cells" style="margin: 0px;">
+            <a class="weui-cell weui-cell_access" href="/component/buy.html">
+              <div class="weui-cell__bd">
+                <p style="color: #999;
+                font-size: 13px;">购买数据</p>
+              </div>
+              <div class="weui-cell__ft">
+              </div>
+            </a>
+          </div>
 
 
         <div class="weui-cells"style="margin: 0px;" >
@@ -182,8 +191,9 @@
                                             <div class="weui-cells">
                                                 <a class="weui-cell weui-cell_access" href="javascript:;">
                                                     <div class="weui-cell__hd" style="font-size:14px;color:#333;margin-right:10px;">
-                                                        ${item.CreatedAt.substring(0,10)}</div>
+                                                        ${item.CreatedAt.substring(0,10)}:</div>
                                                     <div class="weui-cell__bd weui-cell_primary">
+                                                        <p style="font-size:14px;color:#333">${item.content}</p>
                                                         <p style="font-size:14px;color:#333">${item.response}</p>
                                                     </div>
                                                 </a>

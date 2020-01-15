@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-14 21:37:05
+ * @LastEditTime : 2020-01-15 21:19:10
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -564,7 +564,7 @@
     <div id="full" class="weui-popup__container">
         <div class="weui-popup__overlay"></div>
         <div class="weui-popup__modal">
-            <div href="javascript:;" class="weui-btn weui-btn_primary close-popup"
+            <div id="close_btn"href="javascript:;" class="weui-btn weui-btn_primary close-popup"
                 style="background: red;position: sticky;top: 0;">
                 <svg style="width:1.5em;height:1.5em;position:relative;top:0.4em;" t="1578304608249" class="icon"
                     viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1752" width="200"
@@ -640,12 +640,7 @@
         });
 
 
-        $.ajax({
-            url: 'https://stock.zhixiutec.com/api/high_conditions',
-            success: function (res) {
-                console.log('data', res)
-            }
-        })
+   
         var date = '',
             belongs = [],
             locations = [],
@@ -724,8 +719,6 @@
         var twentyfourMin = -10000, twentyfourMax = 10000;
         var twentyfiveMin = -10000, twentyfiveMax = 10000;
         var twentysixMin = -10000, twentysixMax = 10000;
-
-
 
 
         $('#twentysixMin').bind('input propertychange', function (e) {
