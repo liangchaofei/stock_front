@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-15 21:19:10
+ * @LastEditTime : 2020-01-16 22:44:59
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -122,6 +122,32 @@
                     <div class="weui-cell__hd"><label for="name" class="weui-label">行业标签</label></div>
                     <div class="weui-cell__bd">
                         <input class="weui-input" id="tag" type="text" value="" readonly="" data-values="1,2,3">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- 排序 -->
+        <div class="weui-panel weui-panel_access">
+            <div class="weui-panel__hd" id="sort_open" style="font-size: 15px;">
+                排序<i class="down"></i><i class="up" style="display:none;"></i>
+                <!-- <span style="float:right">
+                共
+                <span class="concect_count" style="color: red;">0</span>
+                查询条件
+               </span> -->
+            </div>
+            <div class="weui-panel__bd" id="sort_content">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label for="name" class="weui-label">排序方式</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" id="sort_way" type="text" value="" readonly="" data-values="1,2,3">
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label for="name" class="weui-label">排序类型</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" id="sort_type" type="text" value="" readonly="" data-values="1,2,3">
                     </div>
                 </div>
 
@@ -551,7 +577,9 @@
         <div class="weui-cells weui-cells_form" style="margin-bottom:50px">
 
             <div class="weui-btn-area">
-                <a href="javascript:;" style="font-size:0.5rem" class="weui-btn weui-btn_primary open-popup"
+                <a style="height: 3em;
+                line-height: 3em;
+                font-size: 0.8em;"href="javascript:;"  class="weui-btn weui-btn_primary open-popup"
                     data-target="#full" onclick="searchPg(1)" id="showTooltips">查询</a>
             </div>
         </div>
@@ -643,6 +671,8 @@
    
         var date = '',
             belongs = [],
+            order_type = [],
+            order = [],
             locations = [],
             organizational_form = [],
             concepts = [],
@@ -720,6 +750,89 @@
         var twentyfiveMin = -10000, twentyfiveMax = 10000;
         var twentysixMin = -10000, twentysixMax = 10000;
 
+
+        $('#close_btn').on('click',function(){
+            date = '',
+            belongs = [],
+            order_type = [],
+            order = [],
+            locations = [],
+            organizational_form = [],
+            concepts = [],
+            labels = [],
+            forms = [],
+            shouyiafter = {},
+            jinzichanafter = {},
+            jingyingxianjinliu = {},
+            gubengongjijin = {},
+            weifenpeilirun = {},
+            save = false,
+            predicts = [],
+
+            last_percent = {},
+            last_amplitude = {},
+            last_turnoverrate = {},
+            last_price = {},
+
+
+
+            // yl_ability 是盈利区间条件
+            yl_zongzichanlirunlv = {},
+            yl_zhuyingyewulirunlv = {},
+            yl_zongzichanjinglirunlv = {},
+            yl_yingyelirunlv = {},
+            yl_xiaoshoujinglilv = {},
+            yl_gubenbaochoulv = {},
+            yl_jingzichanbaochoulv = {},
+            yl_zichanbaochoulv = {},
+
+
+            //成长能力 
+            cz_zhuyingyewushouruzengzhanglv = {},
+            cz_jinglirunzengzhanglv = {},
+            cz_jingzichanzengzhanglv = {},
+            cz_zongzichanzengzhanglv = {},
+
+            // 运营能力
+            yy_yingshouzhangkuanzhouzhuanlv = {},
+            yy_cunhuozhouzhuanglv = {},
+            yy_liudongzichanzhouzhuanglv = {},
+            yy_zongzichanzhouzhuanglv = {},
+            yy_gudongquanyizhouzhuanglv = {};
+
+        fiveMin = -10000, fiveMax = 10000;
+        fourMin = -10000, fourMax = 10000;
+        thirdMin = -10000, thirdMax = 10000;
+        secondMin = -10000, secondMax = 10000;
+        firstMin = -10000, firstMax = 10000;
+        sixMin = -10000, sixMax = 10000;
+        seventMin = -10000, sevenMax = 10000;
+        eightMin = -10000, eightMax = 10000;
+        nineMin = -10000, nineMax = 10000;
+
+
+        tenMin = -10000, tenMax = 10000;
+        elevenMin = -10000, elevenMax = 10000;
+        twelveMin = -10000, twelveMax = 10000;
+        thirteenMin = -10000, thirteenMax = 10000;
+        fourteenMin = -10000, fourteenMax = 10000;
+        fifteenMin = -10000, fifteenMax = 10000;
+        sixteenMin = -10000, sixteenMax = 10000;
+        seventeenMin = -10000, seventeenMax = 10000;
+
+
+        eighteenMin = -10000, eighteenMax = 10000;
+        nineteenMin = -10000, nineteenMax = 10000;
+        twentyMin = -10000, twentyMax = 10000;
+        twentyoneMin = -10000, twentyoneMax = 10000;
+
+
+        twentytwoMin = -10000, twentytwoMax = 10000;
+        twentythreeMin = -10000, twentythreeMax = 10000;
+        twentyfourMin = -10000, twentyfourMax = 10000;
+        twentyfiveMin = -10000, twentyfiveMax = 10000;
+        twentysixMin = -10000, twentysixMax = 10000;
+        })
 
         $('#twentysixMin').bind('input propertychange', function (e) {
             twentysixMin = parseInt(e.delegateTarget.value)
@@ -932,6 +1045,8 @@
             var data = {
                 "query": {
                     "predicts": predicts,
+                    "order_type":order_type,
+                    "order":order,
                     "belongs": belongs,
                     "locations": locations,
                     "forms": forms,
@@ -1152,6 +1267,8 @@
                         $('.must_count').text(mustCount)
                     }
                 });
+           
+
                 $("#weekline").select({
                     title: "选择周线形态",
                     items: weekData,
@@ -1212,6 +1329,7 @@
                 var formsData = data.forms;
                 var label = data.label;
                 var location = data.location;
+                console.log('belong',belong)
                 $("#job").select({
                     title: "选择行业",
                     multi: true,
@@ -1221,7 +1339,24 @@
                         belongs = belongsData.split(',')
                     }
                 });
-
+                var sortData = ['升序','降序']
+                $("#sort_way").select({
+                    title: "选择排序方式",
+                    items: sortData,
+                    onClose: function (e) {
+                        order_type.push(e.data.values)
+                    }
+                });
+                var sorttypeData = ["系统得分", "收盘涨幅", "收盘价格", "基金数量",'私募数量','分红数量',
+            '送股数量','转增数量','配股数量','增发数量','控股公司数量'
+            ]
+                $("#sort_type").select({
+                    title: "选择排序类型",
+                    items: sorttypeData,
+                    onClose: function (e) {
+                        order.push(e.data.values)
+                    }
+                });
                 $("#city").select({
                     title: "选择城市",
                     multi: true,

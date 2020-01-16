@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-01-03 14:26:48
- * @LastEditTime : 2020-01-14 21:42:22
+ * @LastEditTime : 2020-01-16 22:42:14
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/js/search.js
@@ -15,7 +15,12 @@ $(function () {
                 $("#open .down").toggle();
         })
 
-
+        $('#sort_content').css({ "display": "none" })
+        $('#sort_open').on('click', function () {
+                $('#sort_content').slideToggle("slow");
+                $("#sort_open .up").toggle();
+                $("#sort_open .down").toggle();
+        })
         // 概念划分开关
         $('#concect_content').css({ "display": "none" })
         $('#concect_open').on('click', function () {

@@ -118,7 +118,7 @@ display:-webkit-box;
 }
 
 
-#open i,#concect_open i,#must_open i,#high_open i,#mg_zb i,#sp_qk i ,#yl_nl i ,#cz_nl i,#yy_nl i{
+#sort_open i ,#open i,#concect_open i,#must_open i,#high_open i,#mg_zb i,#sp_qk i ,#yl_nl i ,#cz_nl i,#yy_nl i{
     border: solid #ddd;
     border-width: 0 3px 3px 0;
     display: inline-block;

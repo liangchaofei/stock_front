@@ -182,8 +182,28 @@ $.ajax({
             })
             $('#yl_content').append(yl_str)
             // 数量统计
+            if(predict.fund_count === 0 ){
+                $('#cc_count').css("display","none")
+            }
+            if(predict.subcomp_count === 0 ){
+                $('#kk_company').css("display","none")
+            }
+            if(predict.fenghong_count === 0 ){
+                $('#fg_count').css("display","none")
+            }
+            if(predict.songgu_count === 0 ){
+                $('#sg_count').css("display","none")
+            }
+            if(predict.zhuangzeng_count === 0 ){
+                $('#zz_count').css("display","none")
+            }
+            if(predict.peigu_count === 0 ){
+                $('#pg_count').css("display","none")
+            }
+            if(predict.zengfa_count === 0 ){
+                $('#zf_count').css("display","none")
+            }
             $('#per_fund_count').text(`${predict.fund_count}个`)
-            $('#per_sm_count').text(`${predict.sm_count}个`)
             $('#per_subcomp_count').text(`${predict.subcomp_count}个`)
             $('#per_fenghong_count').text(`${predict.fenghong_count}次`)
             $('#per_songgu_count').text(`${predict.songgu_count}次`)

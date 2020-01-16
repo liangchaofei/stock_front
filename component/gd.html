@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-09 22:30:20
- * @LastEditTime : 2020-01-14 21:54:59
+ * @LastEditTime : 2020-01-16 22:19:36
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp2/static/component/feedback.html
@@ -61,6 +61,8 @@
                     var cirListColumns = [
                     [
                         { field: 'holder_name', title: '股东', width: 180, fixed: true },
+                        { field: 'name', title: '公司', width: 150 },
+                        { field: 'code', title: '股票代号', width: 150 },
                         { field: 'percent', title: '持有比例', width: 150 },
                         { field: 'count', title: '本期持有股', width: 150 },
                         { field: 'change', title: '变化', width: 180 },
@@ -70,7 +72,10 @@
                 var stockholderData = [];
                 stockholder.forEach((item, index) => {
                     stockholderData.push({
-                        holder_name: item.holder_name, percent: item.percent, count: item.count, change: item.change
+                        holder_name: item.holder_name,
+                        name: item.name,
+                        code: item.code,
+                         percent: item.percent, count: item.count, change: item.change
                     })
 
                 })
@@ -78,6 +83,8 @@
 
                 const columns = [
                     { field: "holder_name", title: "股东", align: "center", valign: "middle", sortable: "true" }, 
+                    { field: "name", title: "公司", align: "center", valign: "middle", sortable: "true" },
+                    { field: "code", title: "股票代号", align: "center", valign: "middle", sortable: "true" },
                     { field: "percent", title: "持有比例", align: "center", valign: "middle", sortable: "true" },
                     { field: "count", title: "本期持有股", align: "center", valign: "middle", sortable: "true" },
                     { field: "change", title: "变化", align: "center", valign: "middle", sortable: "true" },
