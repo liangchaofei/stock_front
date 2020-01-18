@@ -207,19 +207,18 @@
                    </span> -->
                 </div>
                 <div class="weui-panel__bd" id="sort_content">
+                        <div class="weui-cell">
+                                <div class="weui-cell__hd"><label for="name" class="weui-label">排序类型</label></div>
+                                <div class="weui-cell__bd">
+                                    <input class="weui-input" id="sort_type" type="text" value="" readonly="" data-values="1,2,3">
+                                </div>
+                            </div>
                     <div class="weui-cell">
                         <div class="weui-cell__hd"><label for="name" class="weui-label">排序方式</label></div>
                         <div class="weui-cell__bd">
                             <input class="weui-input" id="sort_way" type="text" value="" readonly="" data-values="1,2,3">
                         </div>
                     </div>
-                    <div class="weui-cell">
-                        <div class="weui-cell__hd"><label for="name" class="weui-label">排序类型</label></div>
-                        <div class="weui-cell__bd">
-                            <input class="weui-input" id="sort_type" type="text" value="" readonly="" data-values="1,2,3">
-                        </div>
-                    </div>
-    
                 </div>
 
                   <!-- 收盘情况 -->
@@ -585,7 +584,7 @@
             </div>
         </div>
     </div>
-
+ 
 
     <!-- 查询列表 -->
     <!-- <p class="search_result">查询结果：</p> -->
@@ -605,6 +604,10 @@
             </div>
             <div class="weui-cells gp_list" style="overflow:auto;height: 100%">
             </div>
+            <div class="weui-infinite-scroll" id="scroll">
+                    <div class="infinite-preloader"></div>
+                     正在加载...
+                 </div>
         </div>
     </div>
 
@@ -633,6 +636,8 @@
     <script src="../js/search.js"></script>
     <script src="../js/oauth.js"></script>
     <script src="../js/GoToTop.js"></script>
+
+  
     <script>
         //示例
         $('#js-go_top').gotoTop({
@@ -660,12 +665,31 @@
         $('#back').on('click', function () {
             window.history.go(-1)
         })
-        var loading = false;
-        $('.gp_list').infinite(50).on("infinite", function () {
-            // if (loading) return;
+        var loading = false,dataList=[];
+        $(document.body).infinite(100);
+        $('.gp_list').infinite().on("infinite", function () {
+            // if (dataList == null) return;
+            if(loading) return;
+          loading = true;
             // loading = true;
             currentPage++
             searchPg(currentPage)
+
+
+            setTimeout(function() {
+            var length = dataList  &&  dataList.length;
+            if(length > 0 && havaData){
+                // 还有数据，继续加载
+                currentPage++
+            searchPg(currentPage)
+            }else{  
+                havaData = false;
+                $(document.body).destroyInfinite();
+                $("#scroll").hide();
+                return;
+            }
+            loading = false;
+          },500);   //模拟延迟
         });
 
 
@@ -1039,10 +1063,9 @@
                 }
             })
         }
-
+        var havaData = false;
 
         function searchPg(currentPage) {
-            console.log('forms',forms)
             var data = {
                 "query": {
                     "predicts": predicts,
@@ -1168,48 +1191,53 @@
                 type: 'POST',
                 url: url,
                 data: JSON.stringify(data),
+                async:false,
                 success: function (res) {
                     $('.no_result').css("display", "none")
-                    var data = res && res.data && res.data.result;
+                    $('.gp_list').empty()
+                    dataList = res && res.data && res.data.result;
                     var dom_val = '', today_date = '';
                     var err_code = res.error_code;
                     var err_msg = res.err_msg;
-                    if (data && data.length > 0 && err_code === 0) {
-                        data && data.map(item => {
-                            var bigPercent = item.percent >= 0 ? "winner" : "loser";
-                            var str = item.percent >= 0 ? "+" : "";
-                            var highScore = item.score > 60 ? "color:red" : '';
-                            var lowScore = item.score < 60 ? "color:green" : ''
-                            today_date = item.date;
+                    console.log('data',data)
+                    if (dataList && dataList.length > 0 && err_code === 0) {
+                        havaData = true;
+                        console.log('dataList',dataList)
+                        for(var i = 0 ; i <dataList.length;i++){
+                            var bigPercent = dataList[i].percent >= 0 ? "winner" : "loser";
+                            var str = dataList[i].percent >= 0 ? "+" : "";
+                            var highScore = dataList[i].score > 60 ? "color:red" : '';
+                            var lowScore = dataList[i].score < 60 ? "color:green" : ''
+                            today_date = dataList[i].date;
                             dom_val += `
-                        <a style="display:inline-block;" class="weui-cell weui-cell_access goDetail" href=/component/detail.html?code=${item.code}&date=${item.date}>
+                        <a style="display:inline-block;" class="weui-cell weui-cell_access goDetail" href=/component/detail.html?code=${dataList[i].code}&date=${dataList[i].date}>
                             <div class="weui-cell__bd">
-                                <span style="font-size:16px;display:inline-block;width:4rem">${item.name}</span>
-                                <span class=${bigPercent}>${item.price}元</span>
-                                <span class=${bigPercent}>${str}${item.percent}%</span>
+                                <span style="font-size:16px;display:inline-block;width:4rem">${dataList[i].name}</span>
+                                <span class=${bigPercent}>${dataList[i].price}元</span>
+                                <span class=${bigPercent}>${str}${dataList[i].percent}%</span>
                                
                                
-                                <span class="score">${item.score}分</span>
+                                <span class="score">${dataList[i].score}分</span>
                             </div>
                             <div class="weui-cell__bd">
-                                <span style="display:inline-block;width:4rem;font-size:12px">${item.code}</span>
-                                <span style="display:inline-block;width:2rem;font-size:13px">${item.location}</span>    
-                                <span class="form" style="display:inline-block;width:6rem;font-size:13px">${item.form}</span>
-                                <span class="belong" style="display:inline-block;font-size:13px;width:3rem">${item.belong}</span>
+                                <span style="display:inline-block;width:4rem;font-size:12px">${dataList[i].code}</span>
+                                <span style="display:inline-block;width:2rem;font-size:13px">${dataList[i].location}</span>    
+                                <span class="form" style="display:inline-block;width:6rem;font-size:13px">${dataList[i].form}</span>
+                                <span class="belong" style="display:inline-block;font-size:13px;width:3rem">${dataList[i].belong}</span>
                             </div>
                                
                             <div class="weui-cell__bd">
                                 <span>数量统计：</span>
-                                <span><span class="static">基金</span>(${item.fund_count})</span>
-                                <span><span class="static">私募</span>(${item.simu_count})</span>
-                                <span><span class="static">分红</span>(${item.fenghong_count})</span>
-                                <span><span class="static">控股公司</span>(${item.subcomp_count})</span>
+                                <span><span class="static">基金</span>(${dataList[i].fund_count})</span>
+                                <span><span class="static">私募</span>(${dataList[i].simu_count})</span>
+                                <span><span class="static">分红</span>(${dataList[i].fenghong_count})</span>
+                                <span><span class="static">控股公司</span>(${dataList[i].subcomp_count})</span>
                             </div>
                             <div class="weui-cell__bd">
                                 <span class="conditions"><span>
                                     <svg style="position: relative;top: 2px;" t="1578365341120" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1519" width="16" height="16"><path d="M619.054545 882.036364c-67.490909 0-153.6-9.309091-258.327272-25.6l-18.618182-2.327273V425.890909l9.309091-6.981818c2.327273 0 141.963636-97.745455 188.509091-256l2.327272-9.309091 6.981819-4.654545c6.981818-4.654545 62.836364-41.890909 104.727272-9.309091 41.890909 32.581818 39.563636 121.018182-9.309091 272.290909 65.163636 0 186.181818 6.981818 216.436364 65.163636 11.636364 25.6 6.981818 55.854545-18.618182 88.436364 6.981818 13.963636 16.290909 34.909091 9.309091 55.854545-4.654545 16.290909-13.963636 27.927273-30.254545 39.563637 6.981818 13.963636 13.963636 34.909091 9.309091 53.527272-2.327273 9.309091-9.309091 23.272727-20.945455 32.581818 9.309091 20.945455 11.636364 48.872727-2.327273 72.145455-20.945455 44.218182-83.781818 62.836364-188.509091 62.836364zM388.654545 814.545455c316.509091 48.872727 372.363636 2.327273 381.672728-13.963637 11.636364-18.618182-6.981818-44.218182-6.981818-44.218182l-18.618182-25.6 27.927272-11.636363c6.981818-2.327273 16.290909-6.981818 16.29091-13.963637 2.327273-9.309091-6.981818-27.927273-16.29091-37.236363l-23.272727-25.6 32.581818-11.636364c9.309091-2.327273 23.272727-9.309091 25.6-18.618182 2.327273-9.309091-6.981818-25.6-11.636363-30.254545l-13.963637-16.290909 13.963637-16.290909c11.636364-13.963636 30.254545-37.236364 23.272727-51.2-16.290909-32.581818-132.654545-41.890909-204.8-37.236364l-34.909091 4.654545 11.636364-32.581818c72.145455-211.781818 41.890909-249.018182 34.909091-253.672727-9.309091-6.981818-30.254545 0-44.218182 6.981818-44.218182 144.290909-158.254545 239.709091-193.163637 265.309091V814.545455z" p-id="1520" fill="#d81e06"></path><path d="M388.654545 896h-232.727272v-512h230.4v512z m-186.181818-46.545455h137.309091v-418.90909H202.472727v418.90909z" p-id="1521" fill="#d81e06"></path></svg>
                                 </span>
-                                    <span style=${highScore}>${item.conditions}</span>
+                                    <span style=${highScore}>${dataList[i].conditions}</span>
                                 </span>
                             </div>
                             <div class="weui-cell__bd">
@@ -1217,28 +1245,33 @@
                                     <span style="color:green">
                                         <svg style="position: relative;top: 2px;" t="1578365792181" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2568" width="16" height="16"><path d="M820.005495 644.02101 577.525657 644.02101c5.894465 23.541657 11.495434 45.909333 15.459556 61.663677 38.393535 152.614788-85.560889 210.169535-124.809051 202.105535-39.484768-8.124768-61.059879-26.599434-85.832404-83.505131-15.747879-36.177455-54.389657-145.539879-81.88897-224.627071-2.691879 0.245657-5.41996 0.402101-8.186828 0.402101L138.343434 600.060121 138.343434 116.482586l153.924525 0c0.665859 0 1.307152 0.03103 1.979475 0.03103l106.757172 0c0.409859 0 0.808081-0.03103 1.212768-0.03103l351.817697 0c48.580525 0 87.959273 39.359354 87.959273 87.923071l43.980283 351.662545C885.974626 604.633212 868.580848 644.02101 820.005495 644.02101L820.005495 644.02101zM270.267475 160.475798l0-0.03103L182.323717 160.444768l0 0.03103-0.010343 0 0 395.624727 0.479677 0 87.484768 0c4.994586 0 9.777131-0.896 14.25196-2.41002-0.191354-0.55596-0.378828-1.111919-0.56501-1.639434l8.287677-0.338747L292.252444 160.475798 270.267475 160.475798 270.267475 160.475798zM798.020525 204.405657c0-24.251475-19.677091-43.960889-43.985455-43.960889L424.192 160.444768l0 0.03103-87.954101 0 0 417.62004c0 1.018828-0.166788 1.975596-0.298667 2.96598 26.671838 74.329212 76.894384 213.443232 88.268283 238.775596 17.468768 38.957253 53.342384 45.414141 65.958788 43.991919 18.040242-2.007919 84.389495-50.788848 65.965253-131.88396l-32.974869-131.916283 274.863838 0c24.308364 0 43.980283-19.678384 43.980283-43.929859L798.020525 204.405657 798.020525 204.405657zM798.020525 204.405657" p-id="2569" fill="#226f0d"></path></svg>
                                     </span>
-                                    <span style=${lowScore}>${item.bad_conditions}</span
+                                    <span style=${lowScore}>${dataList[i].bad_conditions}</span
                                 </span>
                             </div>
                             <div class="weui-cell__bd">
                                 <span class="conditions"><span style="color:blue">
                                     <svg style="position: relative;top: 2px;" t="1578365995483" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2097" width="16" height="16"><path d="M868 355c5.4 0 10 4.6 10 10v503.3c0 5.4-4.6 10-10 10H158c-5.4 0-10-4.6-10-10V365c0-5.4 4.6-10 10-10h710m0-50H158c-33 0-60 27-60 60v503.3c0 33 27 60 60 60h710c33 0 60-27 60-60V365c0-33-27-60-60-60zM835.1 256H188.9c-13.8 0-25-11.2-25-25 0-13.7 11.2-25 25-25h646.2c13.8 0 25 11.2 25 25s-11.3 25-25 25zM776 151H248c-13.7 0-25-11.2-25-25 0-13.7 11.2-25 25-25h528c13.8 0 25 11.2 25 25s-11.2 25-25 25z" p-id="2098" fill="#ea9518"></path><path d="M656.8 582h-273c-13.8 0-25-11.3-25-25 0-13.8 11.2-25 25-25h273c13.8 0 25 11.2 25 25s-11.2 25-25 25zM656.8 687h-273c-13.8 0-25-11.3-25-25 0-13.8 11.2-25 25-25h273c13.8 0 25 11.2 25 25s-11.2 25-25 25z" p-id="2099" fill="#ea9518"></path><path d="M547 786.5v-264c0-13.7-11.3-25-25-25-13.8 0-25 11.3-25 25v264c0 13.8 11.3 25 25 25 13.8 0 25-11.2 25-25z" p-id="2100" fill="#ea9518"></path><path d="M481.8 531.6l-82.4-72.5c-10.3-9.1-11.3-25-2.3-35.3 9.1-10.3 25-11.3 35.3-2.3l82.4 72.5c10.3 9.1 11.3 25 2.3 35.3-9.1 10.3-25 11.4-35.3 2.3z" p-id="2101" fill="#ea9518"></path><path d="M558.4 529.9l82.4-72.5c10.3-9.1 11.3-25 2.3-35.3-9.1-10.3-25-11.3-35.3-2.3l-82.4 72.5c-10.3 9.1-11.3 25-2.3 35.3 9.1 10.4 25 11.4 35.3 2.3z" p-id="2102" fill="#ea9518"></path></svg>
-                                 </span>${item.finance}</span>
+                                 </span>${dataList[i].finance}</span>
                             </div>
                             
                         </a>
                         `
-                        })
+                        }
+                
                         $('.gp_list').append(`<div style="text-align:center;font-size:13px;color:#ccc">
                         本数据更新于${today_date}
                             </div>`)
-                        $('.gp_list').append(dom_val)
+                        $('.gp_list').append($(dom_val))
 
                     } else if (err_code === 1) {
+                        $("#scroll").hide();
                         $('.gp_list').append(`<div style="text-align:center;padding: 10px 0;">${err_msg}</div>`)
+                        $(document.body).destroyInfinite();
                     }
-                    else if (data === null) {
+                    else if (dataList === null) {
+                        $("#scroll").hide();
                         $('.gp_list').append(`<div style="text-align:center;padding: 10px 0;">暂未查询到数据， 可能是条件过于严苛</div>`)
+                        $(document.body).destroyInfinite();
                     }
                 },
             })
@@ -1330,7 +1363,6 @@
                 var formsData = data.forms;
                 var label = data.label;
                 var location = data.location;
-                console.log('belong',belong)
                 $("#job").select({
                     title: "选择行业",
                     multi: true,
