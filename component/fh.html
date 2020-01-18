@@ -54,7 +54,6 @@
              url: `https://stock.zhixiutec.com/api/stock/fhsgzz?code=${code}&type=${type}`,
              success: function (res) {
                  var data = res.data;
-                 console.log('data',data)
                  var zfData = []
                  data.forEach(item => {
                      zfData.push({
@@ -81,8 +80,6 @@
                      columns: [{ field: "date", title: "日期", align: "center", valign: "middle", sortable: "true" }, { field: "count", title: "数量(每10股)", align: "center", valign: "middle", sortable: "true" },],
                      data: zfData,
                      onPageChange: function (size, number) {
-                         console.log('size', size)
-                         console.log('num', number)
                      },
                  });
              }

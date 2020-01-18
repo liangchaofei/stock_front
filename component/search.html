@@ -1199,10 +1199,8 @@
                     var dom_val = '', today_date = '';
                     var err_code = res.error_code;
                     var err_msg = res.err_msg;
-                    console.log('data',data)
                     if (dataList && dataList.length > 0 && err_code === 0) {
                         havaData = true;
-                        console.log('dataList',dataList)
                         for(var i = 0 ; i <dataList.length;i++){
                             var bigPercent = dataList[i].percent >= 0 ? "winner" : "loser";
                             var str = dataList[i].percent >= 0 ? "+" : "";
@@ -1434,7 +1432,6 @@
                     onClose: function (e) {
                         var labelsData = e.data.values;
                         forms = labelsData.split(',')
-                        console.log('forms',forms)
                     }
                 });
             }

@@ -43,7 +43,8 @@ function calculateMA(dayCount, data) {
 }
 
 
-
+var ua = navigator.userAgent.toLowerCase();
+console.log('aaa',ua.match(/MicroMessenger/i) == "micromessenger")
 var code = getUrlParam('code');
 var date = getUrlParam('date');
 var stock_cash_flowData = [], stock_liabilitiesData = [], stock_profitData = [];
@@ -51,7 +52,6 @@ $('#loadimg').css("display","block")
 $.ajax({
     url: `https://stock.zhixiutec.com/api/stock/detail?code=${code}&date=${date}`,
     success: function (res) {
-        console.log('res', res)
         if (res.error_code === 1) {
             $('#search_detail').css("display", "none")
             $('#search_count').append(`<div>${res.err_msg}</div>`)
@@ -278,7 +278,6 @@ $.ajax({
             $('#detail_name').text(stock.name);
             $('#detail_net_address').text(stock.net_address);
             $('#detail_organizational_form').text(stock.organizational_form);
-            console.log('stock', stock)
             // 现金流量表 
             var stock_cash_flow = data.stock_cash_flow;
             var date = [], cash_remain = [], fundraising_cash_flow = [], invest_cash_flow = [], manage_cash_flow = [];
@@ -401,14 +400,12 @@ $.ajax({
             // }
             // day
             var ticket_history = data.ticket_history;
-            console.log('ticket_history',ticket_history)
             var dayData = [];
             ticket_history.forEach(item => {
                 dayData.push([item.date, item.kai, item.shou, item.low, item.high, item.total_count])
             })
             // week
             var ticket_history_weekly = data.ticket_history_weekly;
-            console.log('ticket_history_weekly', ticket_history_weekly)
 
             var myChart_stock_cash_flow = echarts.init(document.getElementById('stock_cash_flow'))
 
@@ -614,7 +611,6 @@ $.ajax({
                 mainChart.resize();
             });
             var data = splitData(dayData);
-            console.log('dayData',dayData)
             var option = {
                 backgroundColor: '#000',
                 animation: false,
@@ -895,7 +891,6 @@ $.ajax({
 $.ajax({
     url:`https://stock.zhixiutec.com/api/stock/k/detail?code=${code}&type=week`,
     success:function(res){
-        console.log('www',res)
         var data = res.data;
         var dayData = [];
         data.forEach(item => {

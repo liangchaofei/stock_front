@@ -241,7 +241,6 @@
                         url: 'https://stock.zhixiutec.com/api/is_member',
                         success: function (res) {
                             var is_member = res.data;
-                            console.log('res111',is_member === false)
 
                             if (is_member === false) {
                                 $('#member_val').css("display","none")
@@ -262,9 +261,7 @@
                                                     type: 'post',
                                                     data: JSON.stringify({ "id": member }),
                                                     success: function (res) {
-                                                        console.log('res', res)
                                                         var result = res.data;
-                                                        console.log('result', result)
                                                         wx.config({
                                                             debug: false,
                                                             appId: result["appId"],
@@ -284,7 +281,6 @@
                                                                 signType: result["signType"], // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
                                                                 paySign: result["sign"], // 支付签名
                                                                 success: function (res) {
-                                                                    console.log('res', res)
                                                                 },
 
                                                                 fail: function (res) {
@@ -317,7 +313,6 @@
                     $.ajax({
                         url: 'https://stock.zhixiutec.com/api/my_invites',
                         success: function (res) {
-                            console.log('111', res)
                             var data = res.data;
                             var invite = '';
                             if (data.length > 0) {

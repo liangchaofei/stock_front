@@ -58,7 +58,6 @@
              url: `https://stock.zhixiutec.com/api/stock/fund?code=${code}`,
              success: function (res) {
                  var data = res.data;
-                 console.log('data',data)
                  var zfData = []
                  data.forEach(item => {
                      zfData.push({
@@ -98,8 +97,6 @@
                         ],
                      data: zfData,
                      onPageChange: function (size, number) {
-                         console.log('size', size)
-                         console.log('num', number)
                      },
                  });
              }

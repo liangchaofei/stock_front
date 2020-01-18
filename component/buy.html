@@ -74,7 +74,6 @@
      <script>
  
          $('.weui-check__label').on('click', function (e) {
-             console.log('res', e.target.id)
          })
              $.ajax({
                  url: 'https://stock.zhixiutec.com/api/user',
@@ -133,9 +132,7 @@
                                                          type: 'post',
                                                          data: JSON.stringify({ "id": member,concat:`${contact_val}|${type_val}` }),
                                                          success: function (res) {
-                                                             console.log('res', res)
                                                              var result = res.data;
-                                                             console.log('result', result)
                                                              wx.config({
                                                                  debug: false,
                                                                  appId: result["appId"],

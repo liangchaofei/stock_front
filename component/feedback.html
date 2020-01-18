@@ -54,7 +54,6 @@
                 type:'post',
                 data:res,
                 success:function(res){
-                    console.log('aaa',res)
                     if(res.error_code === 0 ){
                         $.toast(res.data);
                         window.open('/component/person.html','_self')
