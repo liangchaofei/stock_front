@@ -146,6 +146,6 @@ display:-webkit-box;
       -webkit-transform: rotate(45deg);
   }
 
-  #mg_zb i, #sp_qk i,#yl_nl i,#cz_nl i, #yy_nl i {
+  #mg_zb i, #sp_qk i,#yl_nl i,#cz_nl i, #yy_nl i,#sort_open i {
       float: right;
   }

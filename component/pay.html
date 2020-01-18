@@ -25,7 +25,12 @@
     <div style="margin:12px;">当前剩余查询次数：<span style="color: red;" id="left_count"></span></div>
     <div class="weui-cells__title">请选择充值：</div>
     <div class="weui-cells weui-cells_form">
-        <div class="weui-cells weui-cells_radio" id="wechat">
+        <div style="font-size: 12px;">
+            <span style="display: inline-block;width: 50%;margin-left: 15px;">种类</span>
+            <span style="display: inline-block;width: 20%;">金额</span>
+            <span>时间</span>
+        </div>
+        <div class="weui-cells weui-cells_radio" id="wechat" style="margin-top: 10px;">
             
         </div>
         <div style="margin:10px">
@@ -41,10 +46,19 @@
             </span>
           </label>
         <div class="weui-btn-area"> -->
-            <a style="margin-top: 50px;" class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">确认支付</a>
+            <a style="margin-top: 20px;" class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">确认支付</a>
         </div>
     </div>
 
+    <div style="font-size: 12px;color:#999;margin-left:15px;margin-top:20px;">
+        <div style="margin-bottom: 5px;">功能须知：</div>
+        <div style="margin-bottom: 15px;">由于数据算力对服务器资源,性能,成本的影响，知修数据服务对功能使用做了如下的规格:</div>
+        <ul>
+            <li>普通用户可以购买查询套餐补充查询次数, 查询次数不会过期</li>
+            <li>普通用户每次发起查询搜索功能会消耗一次查询次数，邀请好友并首次登陆成功会获得额外的20次查询机会</li>
+            <li>会员可无限制使用查询，搜索， 获取股票最新详情信息， 且不消耗查询次数，如已经是会员， 再次购买会延长对应的过期时间</li>
+        </ul>
+    </div>
 
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
     </script>
@@ -89,10 +103,10 @@
                                                 $("#wechat").append(`
                                                 <label style="color:#333;font-size:13px" class="weui-cell weui-check__label" for="${leader[i].id}">
                                                     <div class="weui-cell__bd">
-                                                        <p>
-                                                            <span style="margin-right:10px">${leader[i].type_desc}</span>
-                                                            <span style="margin-right:10px">${leader[i].spend/100}元</span>
-                                                            <span>${leader[i].count}个月</span>
+                                                        <p style="font-size: 12px;">
+                                                            <span style="display:inline-block;width:50%;margin-right:10px;font-size:12px;">${leader[i].type_desc}</span>
+                                                            <span style="display:inline-block;width:20%;margin-right:10px;font-size:12px">${leader[i].spend/100}元</span>
+                                                            <span style=""font-size:12px>${leader[i].count}${leader[i].type === 'query' ? '次':'个月'}</span>
                                                             </p>
                                                     </div>
                                                     <div class="weui-cell__ft">

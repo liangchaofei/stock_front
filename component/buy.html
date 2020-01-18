@@ -24,19 +24,23 @@
  
      <div class="weui-cells__title">请选择：</div>
      <div class="weui-cells weui-cells_form">
-         <div class="weui-cells weui-cells_radio" id="wechat">
+            <div style="font-size: 12px;">
+                    <span style="display: inline-block;width: 50%;margin-left: 15px;">种类</span>
+                    <span style="display: inline-block;width: 20%;">金额</span>
+                </div>
+         <div class="weui-cells weui-cells_radio" id="wechat" style="margin-top: 10px;">
              
          </div>
          <div class="weui-cell">
             <div class="weui-cell__hd"><label class="weui-label" style="color:#333;font-size:13px" >邮箱：</label></div>
             <div class="weui-cell__bd">
-              <input class="weui-input" type="email" id="email"  placeholder="请输入您的邮箱">
+              <input class="weui-input" type="email" id="email"  placeholder="请输入您的邮箱" style="font-size: 12px;">
             </div>
           </div>
-          <div class="weui-cells__title">请选择下载类型：</div>
+          <div class="weui-cells__title" style="font-size: 12px;">请选择下载类型：</div>
           <div class="weui-cell weui-cell_select">
             <div class="weui-cell__bd">
-              <select class="weui-select" name="select1" id="select_type">
+              <select class="weui-select" name="select1" id="select_type" style="font-size: 12px;">
                 <option value=".csv">.csv</option>
                 <option value=".sql">.sql</option>
               </select>
@@ -48,10 +52,18 @@
                  阅读并同意<a href="https://mp.weixin.qq.com/s/ts2UbPURxMzPqIUa92byRA">《知修数据服务公众号服务条款》</a>
                </span>
          </div>
-             <a style="margin-top: 50px;" class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">确认支付</a>
+             <a style="margin-top: 20px;" class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">确认支付</a>
          </div>
      </div>
- 
+     <div style="font-size: 12px;color:#999;margin-left:15px;margin-top:20px;">
+            <div style="margin-bottom: 5px;">数据介绍:</div>
+            <ul>
+               <li>日线数据是全量从 1991-01-01 ~ 至今的所有上证股票数据</li>
+               <li>周线数据是从 1994-5-13 ~ 至今的所有上证股票数据, 已经精确考虑到 节假日, 个股停牌因素导致的周线不连续问题</li>
+               <li>月线数据是从 1991-1-31 ~ 至今的所有上证股票数据, 已经精确考虑到 节假日, 个股停牌因素导致的月线不连续问题</li>
+               <li>所有数据请放心购买使用， 适合股票分析者使用， 购买前请指定好数据发送的邮箱地址， 以及期望的数据格式， 方便我们可以将数据准确的提供给您使用</li>
+            </ul>
+        </div>
  
      <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
      </script>
@@ -93,9 +105,9 @@
                                                  $("#wechat").append(`
                                                  <label style="color:#333;font-size:13px"  class="weui-cell weui-check__label" for="${leader[i].id}">
                                                      <div class="weui-cell__bd">
-                                                         <p>
-                                                             <span style="margin-right:10px">${leader[i].type_desc}</span>
-                                                             <span style="margin-right:10px">${leader[i].spend/100}元</span>
+                                                         <p style="font-size:12px;">
+                                                             <span style="display:inline-block;width:50%;margin-right:10px">${leader[i].type_desc}</span>
+                                                             <span style=display:inline-block;width:20%;"margin-right:10px">${leader[i].spend/100}元</span>
                                                              </p>
                                                      </div>
                                                      <div class="weui-cell__ft">
@@ -143,7 +155,8 @@
                                                                      signType: result["signType"], // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
                                                                      paySign: result["sign"], // 支付签名
                                                                      success: function (res) {
-                                                                         window.open('/component/person.html',"_self")
+                                                                        //  window.open('/component/person.html',"_self")
+                                                                        $.toast('购买成功，我们正在将指定数据发送到您指定的邮箱中!')
                                                                      },
  
                                                                      fail: function (res) {
