@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-30 22:17:16
- * @LastEditTime : 2020-01-19 15:39:17
+ * @LastEditTime : 2020-01-19 15:42:38
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/js/detail.js
@@ -76,6 +76,9 @@ $('#share_btn').on('click',function(){
                   success: function () {
                     // 设置成功
                     alert('success')
+                  },
+                  error:function(err){
+                    console.log('err',error)
                   }
                 })
               }); 
