@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-19 17:08:02
+ * @LastEditTime : 2020-01-19 17:08:55
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -173,8 +173,8 @@
     <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
     <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/swiper.min.js"></script>
     <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/city-picker.min.js"></script>
-    <script src="../js/jwerixin.js"></script>
-    <!-- <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script> -->
+    <!-- <script src="../js/jwerixin.js"></script> -->
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
     <script>
 
 
@@ -228,10 +228,10 @@
                                     timestamp: shareData.timestamp, // 必填，生成签名的时间戳
                                     nonceStr: shareData.noncestr, // 必填，生成签名的随机串
                                     signature: shareData.signature,// 必填，签名
-                                    jsApiList: ['onMenuShareTimeline'] // 必填，需要使用的JS接口列表
+                                    jsApiList: ['updateTimelineShareData'] // 必填，需要使用的JS接口列表
                                 })
                                 wx.ready(function () {      //需在用户可能点击分享按钮前就先调用
-                                    wx.onMenuShareTimeline({
+                                    wx.updateTimelineShareData({
                                         title: 'aaa', // 分享标题
                                         link: `${shareData.url}?token=${data.token}`, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                                         imgUrl: '', // 分享图标
@@ -239,7 +239,7 @@
                                             // 设置成功
                                            setTimeout(function(){
                                             $.toast('分享成功')
-                                           },500)
+                                           },1000)
                                         },
                                         error: function (err) {
                                             console.log('err', error)
