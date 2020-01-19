@@ -1,68 +1,76 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-16 23:06:43
+ * @LastEditTime : 2020-01-19 17:42:31
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
  -->
- <!DOCTYPE html>
- <html lang="en">
- 
- <head>
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0;">
-     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-     <title>知修数据</title>
-     <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
-     <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
-     <link rel="stylesheet" href="../css/person.css">
- </head>
- 
- <body>
-           <div class="weui-panel weui-panel_access" style="margin: 0px;">
-             <div class="weui-panel__hd" id="open">
-                 邀请记录
-             </div>
-             <div id="invite_dom"></div>
-         </div>
- 
-     
-  
-     </div>
-     <div class="weui-tabbar">
-         <a href="/component/search.html" class="weui-tabbar__item">
-             <div class="weui-tabbar__icon">
-                 <img src="../img/icon_nav_button.png" alt="">
-             </div>
-             <p class="weui-tabbar__label">查询</p>
-         </a>
-         <a href="/component/person.html" class="weui-tabbar__item weui-bar__item--on">
-             <div class="weui-tabbar__icon">
-                 <img src="../img/icon_nav_cell.png" alt="">
-             </div>
-             <p class="weui-tabbar__label">个人中心</p>
-         </a>
-     </div>
-     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
-     </script>
-     <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
-     <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/swiper.min.js"></script>
-     <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/city-picker.min.js"></script>
-     <script src="../js/jwerixin.js"></script>
-     <script src="../js/oauth.js"></script>
-     <script>
- 
-   
-      // 我的邀请
-      $.ajax({
-                         url: 'https://stock.zhixiutec.com/api/my_invites',
-                         success: function (res) {
-                             var data = res.data;
-                             var invite = '';
-                             if (data.length > 0) {
-                                 data.forEach(item => {
-                                     invite += `
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0;">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>知修数据</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="../css/person.css">
+</head>
+
+<body>
+    <div class="weui-panel weui-panel_access" style="margin: 0px;">
+        <div class="weui-panel__hd" id="open">
+            邀请记录
+        </div>
+        <div id="invite_dom"></div>
+    </div>
+
+
+
+    </div>
+    <div class="weui-tabbar">
+        <a href="/component/search.html" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="../img/icon_nav_button.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">查询</p>
+        </a>
+        <a href="/component/person.html" class="weui-tabbar__item weui-bar__item--on">
+            <div class="weui-tabbar__icon">
+                <img src="../img/icon_nav_cell.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">个人中心</p>
+        </a>
+    </div>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+    </script>
+    <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/swiper.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/city-picker.min.js"></script>
+    <script src="../js/jwerixin.js"></script>
+    <script src="../js/oauth.js"></script>
+    <script>
+
+
+        // 我的邀请
+        $.ajax({
+            url: 'https://stock.zhixiutec.com/api/user',
+            type: 'get',
+            success: function (res) {
+                var data = res.data;
+                if (res.error_code === 2) {
+                    window.open(data, "_self");
+                } else {
+                    $.ajax({
+                        url: `https://stock.zhixiutec.com/api/my_invites?token=${data.token}`,
+                        success: function (res) {
+                            var data = res.data;
+                            var invite = '';
+                            if (data.length > 0) {
+                                data.forEach(item => {
+                                    invite += `
                                      <div class="weui-panel__bd" id="open_content">
                                          <div class="weui-media-box weui-media-box_small-appmsg">
                                              <div class="weui-cells">
@@ -74,20 +82,24 @@
                                                      <div class="weui-cell__bd weui-cell_primary">
                                                          <p>${item.UserName}</p>
                                                      </div>
-                                                     <span>${item.CreatedAt.substring(0,10)}</span>
+                                                     <span>${item.CreatedAt.substring(0, 10)}</span>
                                                  </a>
                                              </div>
                                          </div>
                                      </div>
                                      `
-                                 })
-                                 $('#invite_dom').append(invite)
-                             } else {
-                                 $('#invite_dom').append(`<div>暂无邀请，快去邀请你的小伙伴吧，赢取查询次数</div>`)
-                             }
-                         }
-                     })
-     </script>
- </body>
- 
- </html>
+                                })
+                                $('#invite_dom').append(invite)
+                            } else {
+                                $('#invite_dom').append(`<div>暂无邀请，快去邀请你的小伙伴吧，赢取查询次数</div>`)
+                            }
+                        }
+                    })
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>

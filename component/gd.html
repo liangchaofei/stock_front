@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-09 22:30:20
- * @LastEditTime : 2020-01-16 22:19:36
+ * @LastEditTime : 2020-01-19 17:41:30
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp2/static/component/feedback.html
@@ -19,11 +19,11 @@
     <link rel="stylesheet" href="./bootstrap/css/bootstrap/bootstrap.css" />
     <link rel="stylesheet" href="./bootstrap-table/bootstrap-table.css" />
     <link rel="stylesheet" href="../css/page.css">
-         <style>
-         #reportTableDiv .fixed-table-container{
-             height: 486px !important;
-         }
-     </style>
+    <style>
+        #reportTableDiv .fixed-table-container {
+            height: 486px !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -55,75 +55,89 @@
             var r = window.location.search.substr(1).match(reg);  //匹配目标参数
             if (r != null) return unescape(r[2]); return null; //返回参数值
         }
-        
+
         var holder_name = escape(getUrlParam('holder_name'));
+
         $.ajax({
-            url: `https://stock.zhixiutec.com/api/top_holder_hold?holder_name=${holder_name}`,
+            url: 'https://stock.zhixiutec.com/api/user',
+            type: 'get',
             success: function (res) {
-                var stockholder = res.data;
-                if(stockholder.length>0){
-                    var cirListColumns = [
-                    [
-                        { field: 'holder_name', title: '股东', width: 180, fixed: true },
-                        { field: 'name', title: '公司', width: 150 },
-                        { field: 'code', title: '股票代号', width: 150 },
-                        { field: 'percent', title: '持有比例', width: 150 },
-                        { field: 'count', title: '本期持有股', width: 150 },
-                        { field: 'change', title: '变化', width: 180 },
-                    ]
-                ];
+                var data = res.data;
+                if (res.error_code === 2) {
+                    window.open(data, "_self");
+                } else {
+                    $.ajax({
+                        url: `https://stock.zhixiutec.com/api/top_holder_hold?holder_name=${holder_name}&token=${data.token}`,
+                        success: function (res) {
+                            var stockholder = res.data;
+                            if (stockholder.length > 0) {
+                                var cirListColumns = [
+                                    [
+                                        { field: 'holder_name', title: '股东', width: 180, fixed: true },
+                                        { field: 'name', title: '公司', width: 150 },
+                                        { field: 'code', title: '股票代号', width: 150 },
+                                        { field: 'percent', title: '持有比例', width: 150 },
+                                        { field: 'count', title: '本期持有股', width: 150 },
+                                        { field: 'change', title: '变化', width: 180 },
+                                    ]
+                                ];
 
-                var stockholderData = [];
-                stockholder.forEach((item, index) => {
-                    stockholderData.push({
-                        holder_name: item.holder_name,
-                        name: item.name,
-                        code: item.code,
-                         percent: item.percent, count: item.count, change: item.change
+                                var stockholderData = [];
+                                stockholder.forEach((item, index) => {
+                                    stockholderData.push({
+                                        holder_name: item.holder_name,
+                                        name: item.name,
+                                        code: item.code,
+                                        percent: item.percent, count: item.count, change: item.change
+                                    })
+
+                                })
+
+
+                                const columns = [
+                                    { field: "holder_name", title: "股东", align: "center", valign: "middle", sortable: "true" },
+                                    { field: "name", title: "公司", align: "center", valign: "middle", sortable: "true" },
+                                    { field: "code", title: "股票代号", align: "center", valign: "middle", sortable: "true" },
+                                    { field: "percent", title: "持有比例", align: "center", valign: "middle", sortable: "true" },
+                                    { field: "count", title: "本期持有股", align: "center", valign: "middle", sortable: "true" },
+                                    { field: "change", title: "变化", align: "center", valign: "middle", sortable: "true" },
+                                ]
+
+                                $('#reportTable').bootstrapTable({
+                                    method: 'get',
+                                    cache: false,
+                                    height: 400,
+                                    striped: true,
+                                    pagination: true,
+                                    pageSize: 10,
+                                    pageNumber: 1,
+                                    pageList: [10, 20, 50, 100, 200, 500],
+                                    search: false,
+                                    showColumns: false,
+                                    showRefresh: false,
+                                    showExport: false,
+                                    exportTypes: ['csv', 'txt', 'xml'],
+                                    search: false,
+                                    clickToSelect: true,
+                                    columns: columns,
+                                    data: stockholderData,
+                                    onPageChange: function (size, number) {
+                                    },
+                                });
+                            } else {
+                                $('#nodata').append(`<span>暂无数据</span>`)
+                            }
+
+                        }
                     })
-
-                })
-            
-
-                const columns = [
-                    { field: "holder_name", title: "股东", align: "center", valign: "middle", sortable: "true" }, 
-                    { field: "name", title: "公司", align: "center", valign: "middle", sortable: "true" },
-                    { field: "code", title: "股票代号", align: "center", valign: "middle", sortable: "true" },
-                    { field: "percent", title: "持有比例", align: "center", valign: "middle", sortable: "true" },
-                    { field: "count", title: "本期持有股", align: "center", valign: "middle", sortable: "true" },
-                    { field: "change", title: "变化", align: "center", valign: "middle", sortable: "true" },
-                ]
-
-                $('#reportTable').bootstrapTable({
-                     method: 'get',
-                     cache: false,
-                     height: 400,
-                     striped: true,
-                     pagination: true,
-                     pageSize: 10,
-                     pageNumber: 1,
-                     pageList: [10, 20, 50, 100, 200, 500],
-                     search: false,
-                     showColumns: false,
-                     showRefresh: false,
-                     showExport: false,
-                     exportTypes: ['csv', 'txt', 'xml'],
-                     search: false,
-                     clickToSelect: true,
-                     columns:columns,
-                     data: stockholderData,
-                     onPageChange: function (size, number) {
-                     },
-                 });
-                }else{
-                    $('#nodata').append(`<span>暂无数据</span>`)
+                    $(window).resize(function () {
+                        $('#reportTable').bootstrapTable('resetView');
+                    });
                 }
-              
             }
         })
-        $(window).resize(function () {
-             $('#reportTable').bootstrapTable('resetView');
-         });
+
+
     </script>
 </body>
 

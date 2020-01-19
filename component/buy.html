@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-19 15:08:26
+ * @LastEditTime : 2020-01-19 17:37:03
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -92,13 +92,13 @@
                          $('#exp_val').text(data.exp)
                          $('#left_count').text(data.query_left)
                          $.ajax({
-                             url: 'https://stock.zhixiutec.com/api/is_member',
+                             url: `https://stock.zhixiutec.com/api/is_member?token=${data.token}`,
                              success: function (res) {
                                  var is_member = res.data;
                                      $('#member_val').css("display", "none")
                                      $('#is_hy').css("display", "none")
                                      $.ajax({
-                                         url: 'https://stock.zhixiutec.com/api/payments?type=data',
+                                         url: `https://stock.zhixiutec.com/api/payments?type=data&token=${data.token}`,
                                          success: function (result) {
                                              var leader = result.data;
                                              var member = '' ,contact_val ='',type_val = '.csv';
