@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-19 17:03:05
+ * @LastEditTime : 2020-01-19 17:05:52
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -21,11 +21,11 @@
 
 <body>
     <div class="person_top">
-       
+
         <img src="" alt="头像" class="tx">
         <div>
             <span class="name" style="padding-bottom: 10px;">
-        
+
             </span>
             <span id="is_hy" style="color: red;font-size: 12px;">
                 会员
@@ -48,7 +48,7 @@
     </div>
 
     <div>
-       
+
         <!-- <div class="weui-cell" style="margin-top: 10px;" id="member_val">
             <div class="weui-cell__hd"><label for="name" class="weui-label" style="padding-right: 10px;color: #999;
                 font-size: 13px;">会员到期时间:</label>
@@ -75,61 +75,61 @@
         </div> -->
         <div class="weui-cells" style="margin: 0px;">
             <a class="weui-cell weui-cell_access" href="/component/pay.html">
-              <div class="weui-cell__bd">
-                <p style="color: #999;
+                <div class="weui-cell__bd">
+                    <p style="color: #999;
                 font-size: 13px;">升级会员/购买查询次数</p>
-              </div>
-              <div class="weui-cell__ft">
-              </div>
+                </div>
+                <div class="weui-cell__ft">
+                </div>
             </a>
-          </div>
-          <div class="weui-cells" style="margin: 0px;">
+        </div>
+        <div class="weui-cells" style="margin: 0px;">
             <a class="weui-cell weui-cell_access" href="/component/buy.html">
-              <div class="weui-cell__bd">
-                <p style="color: #999;
+                <div class="weui-cell__bd">
+                    <p style="color: #999;
                 font-size: 13px;">购买数据</p>
-              </div>
-              <div class="weui-cell__ft">
-              </div>
+                </div>
+                <div class="weui-cell__ft">
+                </div>
             </a>
-          </div>
+        </div>
 
 
-        <div class="weui-cells"style="margin: 0px;" >
+        <div class="weui-cells" style="margin: 0px;">
             <a class="weui-cell weui-cell_access" href="/component/feedback.html">
-              <div class="weui-cell__bd">
-                <p style="color: #999;
+                <div class="weui-cell__bd">
+                    <p style="color: #999;
                 font-size: 13px;">反馈和定制</p>
-              </div>
-              <div class="weui-cell__ft">
-              </div>
+                </div>
+                <div class="weui-cell__ft">
+                </div>
             </a>
-          </div>
+        </div>
 
-          <div class="weui-cells"style="margin: 0px;" >
+        <div class="weui-cells" style="margin: 0px;">
             <a class="weui-cell weui-cell_access" href="/component/invite.html">
-              <div class="weui-cell__bd">
-                <p style="color: #999;
+                <div class="weui-cell__bd">
+                    <p style="color: #999;
                 font-size: 13px;">邀请记录</p>
-              </div>
-              <div class="weui-cell__ft">
-              </div>
+                </div>
+                <div class="weui-cell__ft">
+                </div>
             </a>
-          </div>
-          <div class="weui-cells"style="margin: 0px;" >
+        </div>
+        <div class="weui-cells" style="margin: 0px;">
             <a class="weui-cell weui-cell_access" href="/component/xq.html">
-              <div class="weui-cell__bd">
-                <p style="color: #999;
+                <div class="weui-cell__bd">
+                    <p style="color: #999;
                 font-size: 13px;">我的需求</p>
-              </div>
-              <div class="weui-cell__ft">
-              </div>
+                </div>
+                <div class="weui-cell__ft">
+                </div>
             </a>
-          </div>
+        </div>
 
 
-          <button id="share_btn" style="margin-bottom: 50px;">分享</button>
-<!-- 
+        <button id="share_btn" style="margin-bottom: 50px;">分享</button>
+        <!-- 
           <div class="weui-panel weui-panel_access" style="margin: 0px;">
             <div class="weui-panel__hd" id="open">
                 邀请记录<i class="down"></i><i class="up" style="display:none;"></i>
@@ -146,7 +146,7 @@
             <div id="my_issue"></div>
         </div> -->
 
- 
+
         <!-- <div class="weui-cell">
             <div class="weui-cell__hd"><label for="name" class="weui-label">我的条件</label></div>
             <div class="weui-cell__bd">
@@ -214,47 +214,49 @@
                     $('#time').text(data.member_expire_time.substring(0, 10))
                     $('#exp_val').text(data.exp)
 
-                    wx.ready(function () {  })
-$('#share_btn').on('click',function(){
-    $.ajax({
-        url:`https://stock.zhixiutec.com/api/share?url=https://stock.zhixiutec.com/component/person.html
+                    wx.ready(function () { })
+                    $('#share_btn').on('click', function () {
+                        $.ajax({
+                            url: `https://stock.zhixiutec.com/api/share?url=https://stock.zhixiutec.com/component/person.html
         `,
-        success:function(res){
-            var shareData = res.data;
-            alert('qqq')
-            wx.config({
-                debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-                appId: shareData.appid, // 必填，公众号的唯一标识
-                timestamp: shareData.timestamp, // 必填，生成签名的时间戳
-                nonceStr: shareData.noncestr, // 必填，生成签名的随机串
-                signature: shareData.signature,// 必填，签名
-                jsApiList: ['updateTimelineShareData'] // 必填，需要使用的JS接口列表
-              })
-              wx.ready(function () {      //需在用户可能点击分享按钮前就先调用
-                wx.updateTimelineShareData({ 
-                  title: 'aaa', // 分享标题
-                  link: `${shareData.url}?token=${data.token}`, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-                  imgUrl: '', // 分享图标
-                  success: function () {
-                    // 设置成功
-                    $.toast('分享成功')
-                  },
-                  error:function(err){
-                    console.log('err',error)
-                  }
-                })
-              }); 
-        }
-    })
-})
+                            success: function (res) {
+                                var shareData = res.data;
+                                alert('qqq')
+                                wx.config({
+                                    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                                    appId: shareData.appid, // 必填，公众号的唯一标识
+                                    timestamp: shareData.timestamp, // 必填，生成签名的时间戳
+                                    nonceStr: shareData.noncestr, // 必填，生成签名的随机串
+                                    signature: shareData.signature,// 必填，签名
+                                    jsApiList: ['updateTimelineShareData'] // 必填，需要使用的JS接口列表
+                                })
+                                wx.ready(function () {      //需在用户可能点击分享按钮前就先调用
+                                    wx.updateTimelineShareData({
+                                        title: 'aaa', // 分享标题
+                                        link: `${shareData.url}?token=${data.token}`, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                                        imgUrl: '', // 分享图标
+                                        success: function () {
+                                            // 设置成功
+                                           setTimeout(function(){
+                                            $.toast('分享成功')
+                                           },500)
+                                        },
+                                        error: function (err) {
+                                            console.log('err', error)
+                                        }
+                                    })
+                                });
+                            }
+                        })
+                    })
 
                     // 获取我的需求
                     $.ajax({
-                        url:'https://stock.zhixiutec.com/api/my_comments',
-                        success:function(res){
+                        url: 'https://stock.zhixiutec.com/api/my_comments',
+                        success: function (res) {
                             var issue = res.data;
                             var issue_val = ''
-                            if(issue.length>0){
+                            if (issue.length > 0) {
                                 issue.forEach(item => {
                                     issue_val += `
                                     <div class="weui-panel__bd" id="open_content">
@@ -262,7 +264,7 @@ $('#share_btn').on('click',function(){
                                             <div class="weui-cells">
                                                 <a class="weui-cell weui-cell_access" href="javascript:;">
                                                     <div class="weui-cell__hd" style="font-size:14px;color:#333;margin-right:10px;">
-                                                        ${item.CreatedAt.substring(0,10)}:</div>
+                                                        ${item.CreatedAt.substring(0, 10)}:</div>
                                                     <div class="weui-cell__bd weui-cell_primary">
                                                         <p style="font-size:14px;color:#333">${item.content}</p>
                                                         <p style="font-size:14px;color:#333">${item.response}</p>
@@ -274,7 +276,7 @@ $('#share_btn').on('click',function(){
                                     `
                                 })
                                 $('#my_issue').append(issue_val)
-                            }else{
+                            } else {
 
                             }
                         }
@@ -285,8 +287,8 @@ $('#share_btn').on('click',function(){
                             var is_member = res.data;
 
                             if (is_member === false) {
-                                $('#member_val').css("display","none")
-                                $('#is_hy').css("display","none")
+                                $('#member_val').css("display", "none")
+                                $('#is_hy').css("display", "none")
                                 $.ajax({
                                     url: 'https://stock.zhixiutec.com/api/payments',
                                     success: function (result) {
@@ -371,7 +373,7 @@ $('#share_btn').on('click',function(){
                                                     <div class="weui-cell__bd weui-cell_primary">
                                                         <p>${item.UserName}</p>
                                                     </div>
-                                                    <span>${item.CreatedAt.substring(0,10)}</span>
+                                                    <span>${item.CreatedAt.substring(0, 10)}</span>
                                                 </a>
                                             </div>
                                         </div>
