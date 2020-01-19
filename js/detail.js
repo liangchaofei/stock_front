@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-30 22:17:16
- * @LastEditTime : 2020-01-07 17:40:49
+ * @LastEditTime : 2020-01-19 15:23:11
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/js/detail.js
@@ -52,6 +52,35 @@ $('#yl_open').on('click',function(){
     $('#yl_content').slideToggle("fast");
     $("#yl_open .up_open").toggle();
     $("#yl_open .down_open").toggle();
+})
+
+$('#share_btn').on('click',function(){
+    $.ajax({
+        url:`https://stock.zhixiutec.com/api/share?url=${window.location.href}?code=${code}
+        `,
+        success:function(res){
+            var shareData = res.data;
+            wx.config({
+                debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                appId: shareData.appId, // 必填，公众号的唯一标识
+                timestamp: shareData.timestamp, // 必填，生成签名的时间戳
+                nonceStr: shareData.noncestr, // 必填，生成签名的随机串
+                signature: shareData.signature,// 必填，签名
+                jsApiList: ['updateTimelineShareData'] // 必填，需要使用的JS接口列表
+              })
+              wx.ready(function () {      //需在用户可能点击分享按钮前就先调用
+                wx.updateTimelineShareData({ 
+                  title: 'aaa', // 分享标题
+                  link: shareData.url, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                  imgUrl: '', // 分享图标
+                  success: function () {
+                    // 设置成功
+                    alert('success')
+                  }
+                })
+              }); 
+        }
+    })
 })
 // function renderTable(current){
 //     $.ajax({
