@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-19 14:33:23
+ * @LastEditTime : 2020-01-19 14:36:29
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -148,42 +148,30 @@
                                                              });
                                                              wx.ready(function () {
                                                                
-                                                                wx.updateTimelineShareData({ 
-    title: 'aaa', // 分享标题
-    link: 'aa', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-    imgUrl: 'aaa', // 分享图标
-    success: function () {
-      // 设置成功
-      alert('success')
-    },
-    error:function(){
-        alert('err')
-    }
-  })
-                                                                //  wx.chooseWXPay({
-                                                                //      appId: result["appId"],
-                                                                //      timestamp: result["timeStamp"], // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
-                                                                //      nonceStr: result["nonceStr"], // 支付签名随机串，不长于 32 位
-                                                                //      package: result["package"], // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
-                                                                //      signType: result["signType"], // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
-                                                                //      paySign: result["sign"], // 支付签名
-                                                                //      success: function (res) {
-                                                                //         //  window.open('/component/person.html',"_self")
-                                                                //         $.toast('购买成功，我们正在将指定数据发送到您指定的邮箱中!')
-                                                                //      },
+                                                                 wx.chooseWXPay({
+                                                                     appId: result["appId"],
+                                                                     timestamp: result["timeStamp"], // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+                                                                     nonceStr: result["nonceStr"], // 支付签名随机串，不长于 32 位
+                                                                     package: result["package"], // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
+                                                                     signType: result["signType"], // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+                                                                     paySign: result["sign"], // 支付签名
+                                                                     success: function (res) {
+                                                                        //  window.open('/component/person.html',"_self")
+                                                                        $.toast('购买成功，我们正在将指定数据发送到您指定的邮箱中!')
+                                                                     },
  
-                                                                //      fail: function (res) {
-                                                                //          $.hideLoading()
-                                                                //          // alert('支付失败!');
-                                                                //          toast("支付失败！请检查微信配置");
-                                                                //      },
-                                                                //      cancel: function (res) {
+                                                                     fail: function (res) {
+                                                                         $.hideLoading()
+                                                                         // alert('支付失败!');
+                                                                         toast("支付失败！请检查微信配置");
+                                                                     },
+                                                                     cancel: function (res) {
  
-                                                                //          // //支付取消
-                                                                //          $.hideLoading()
-                                                                //          toast("已取消支付！");
-                                                                //      }
-                                                                //  });
+                                                                         // //支付取消
+                                                                         $.hideLoading()
+                                                                         toast("已取消支付！");
+                                                                     }
+                                                                 });
                                                              });
  
                                                          }
