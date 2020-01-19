@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-30 22:17:16
- * @LastEditTime : 2020-01-19 15:42:38
+ * @LastEditTime : 2020-01-19 15:53:07
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/js/detail.js
@@ -56,7 +56,7 @@ $('#yl_open').on('click',function(){
 wx.ready(function () {  })
 $('#share_btn').on('click',function(){
     $.ajax({
-        url:`https://stock.zhixiutec.com/api/share?url=${window.location.href}?code=${code}
+        url:`https://stock.zhixiutec.com/api/share?url=stock.zhixiutec.com
         `,
         success:function(res){
             var shareData = res.data;
