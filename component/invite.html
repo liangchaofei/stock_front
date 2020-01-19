@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-19 18:37:51
+ * @LastEditTime : 2020-01-19 18:56:16
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -61,7 +61,7 @@
             success: function (res) {
                 var data = res.data;
                     $.ajax({
-                        url: `https://stock.zhixiutec.com/api/my_invites?token=${data.token}`,
+                        url: `https://stock.zhixiutec.com/api/my_invites?token=${data}`,
                         success: function (res) {
                             var data = res.data;
                             var invite = '';

@@ -78,7 +78,7 @@
                   
                      
                         $.ajax({
-                            url: `https://stock.zhixiutec.com/api/is_member?token=${data.token}`,
+                            url: `https://stock.zhixiutec.com/api/is_member?token=${data}`,
                             success: function (res) {
                                 var is_member = res.data;
                                     $('#member_val').css("display", "none")
@@ -87,7 +87,7 @@
                                         $('#showTooltips').text('续费')
                                     }
                                     $.ajax({
-                                        url: `https://stock.zhixiutec.com/api/payments?token=${data.token}`,
+                                        url: `https://stock.zhixiutec.com/api/payments?token=${data}`,
                                         success: function (result) {
                                             var leader = result.data;
                                             var member = '';

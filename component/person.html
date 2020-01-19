@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-19 18:44:15
+ * @LastEditTime : 2020-01-19 18:56:32
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -223,7 +223,7 @@
                 var data = res.data;
                 // 获取我的需求
                 $.ajax({
-                    url: `https://stock.zhixiutec.com/api/my_comments?token=${data.token}`,
+                    url: `https://stock.zhixiutec.com/api/my_comments?token=${data}`,
                     success: function (res) {
                         var issue = res.data;
                         var issue_val = ''
@@ -253,7 +253,7 @@
                     }
                 })
                 $.ajax({
-                    url: `https://stock.zhixiutec.com/api/is_member?token=${data.token}`,
+                    url: `https://stock.zhixiutec.com/api/is_member?token=${data}`,
                     success: function (res) {
                         var is_member = res.data;
 

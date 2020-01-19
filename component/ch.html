@@ -60,7 +60,7 @@
             success: function (res) {
                 var data = res.data;
                     $.ajax({
-                        url: `https://stock.zhixiutec.com/api/stock/fund?code=${code}&token=${data.token}`,
+                        url: `https://stock.zhixiutec.com/api/stock/fund?code=${code}&token=${data}`,
                         success: function (res) {
                             var data = res.data;
                             var zfData = []
