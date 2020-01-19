@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-30 22:17:16
- * @LastEditTime : 2020-01-19 15:53:07
+ * @LastEditTime : 2020-01-19 15:54:09
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/js/detail.js
@@ -55,10 +55,12 @@ $('#yl_open').on('click',function(){
 })
 wx.ready(function () {  })
 $('#share_btn').on('click',function(){
+    alert('dddd')
     $.ajax({
         url:`https://stock.zhixiutec.com/api/share?url=stock.zhixiutec.com
         `,
         success:function(res){
+            alert('aaaa')
             var shareData = res.data;
             wx.config({
                 debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
