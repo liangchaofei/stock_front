@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-16 23:10:58
+ * @LastEditTime : 2020-01-19 14:11:55
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -54,6 +54,8 @@
          </div>
              <a style="margin-top: 20px;" class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">确认支付</a>
          </div>
+
+        <button id="share_btn">分享</button>
      </div>
      <div style="font-size: 12px;color:#999;margin-left:15px;margin-top:20px;">
             <div style="margin-bottom: 5px;">数据介绍:</div>
@@ -74,6 +76,21 @@
      <script>
  
          $('.weui-check__label').on('click', function (e) {
+         })
+
+         $('#share_btn').on('click',function(){
+            wx.onMenuShareTimeline({
+    title: 'aaa', // 分享标题
+    link: window.location.href, // 分享链接
+    success: function () { 
+        // 用户确认分享后执行的回调函数
+        alert('success')
+    },
+    cancel: function () { 
+        // 用户取消分享后执行的回调函数
+        alert('error')
+    }
+});
          })
              $.ajax({
                  url: 'https://stock.zhixiutec.com/api/user',
