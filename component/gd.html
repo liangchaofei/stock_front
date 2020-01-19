@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-09 22:30:20
- * @LastEditTime : 2020-01-19 17:41:30
+ * @LastEditTime : 2020-01-19 18:37:34
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp2/static/component/feedback.html
@@ -59,13 +59,10 @@
         var holder_name = escape(getUrlParam('holder_name'));
 
         $.ajax({
-            url: 'https://stock.zhixiutec.com/api/user',
+            url: 'https://stock.zhixiutec.com/api/token',
             type: 'get',
             success: function (res) {
                 var data = res.data;
-                if (res.error_code === 2) {
-                    window.open(data, "_self");
-                } else {
                     $.ajax({
                         url: `https://stock.zhixiutec.com/api/top_holder_hold?holder_name=${holder_name}&token=${data.token}`,
                         success: function (res) {
@@ -133,7 +130,6 @@
                     $(window).resize(function () {
                         $('#reportTable').bootstrapTable('resetView');
                     });
-                }
             }
         })
 
