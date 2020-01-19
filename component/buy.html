@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-19 14:19:57
+ * @LastEditTime : 2020-01-19 14:24:39
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -71,7 +71,8 @@
      <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
      <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/swiper.min.js"></script>
      <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/city-picker.min.js"></script>
-     <script src="../js/jwerixin.js"></script>
+     <!-- <script src="../js/jwerixin.js"></script> -->
+     <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
      <script>
  
          $('.weui-check__label').on('click', function (e) {
@@ -143,11 +144,11 @@
                                                                  signature: result["signature"],
                                                                  jsApiList: [
                                                                      'chooseWXPay',
-                                                                     'onMenuShareTimeline'
+                                                                     'updateAppMessageShareData'
                                                                  ]
                                                              });
                                                              wx.ready(function () {
-                                                                wx.onMenuShareTimeline({
+                                                                wx.updateAppMessageShareData({
     title: 'aaa', // 分享标题
     link: window.location.href, // 分享链接
     imgUrl: '', // 分享图标
