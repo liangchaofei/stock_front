@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-30 22:17:16
- * @LastEditTime : 2020-01-19 15:23:11
+ * @LastEditTime : 2020-01-19 15:30:48
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/js/detail.js
@@ -53,7 +53,9 @@ $('#yl_open').on('click',function(){
     $("#yl_open .up_open").toggle();
     $("#yl_open .down_open").toggle();
 })
-
+wx.ready(function () {      //需在用户可能点击分享按钮前就先调用
+ 
+  });
 $('#share_btn').on('click',function(){
     $.ajax({
         url:`https://stock.zhixiutec.com/api/share?url=${window.location.href}?code=${code}
@@ -66,10 +68,10 @@ $('#share_btn').on('click',function(){
                 timestamp: shareData.timestamp, // 必填，生成签名的时间戳
                 nonceStr: shareData.noncestr, // 必填，生成签名的随机串
                 signature: shareData.signature,// 必填，签名
-                jsApiList: ['updateTimelineShareData'] // 必填，需要使用的JS接口列表
+                jsApiList: ['onMenuShareTimeline'] // 必填，需要使用的JS接口列表
               })
               wx.ready(function () {      //需在用户可能点击分享按钮前就先调用
-                wx.updateTimelineShareData({ 
+                wx.onMenuShareTimeline({ 
                   title: 'aaa', // 分享标题
                   link: shareData.url, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                   imgUrl: '', // 分享图标
