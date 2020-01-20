@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-20 14:15:33
+ * @LastEditTime : 2020-01-20 18:32:43
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -978,14 +978,14 @@
         function searchPg(currentPage) {
             var data = {
                 "query": {
-                    "predicts": predicts,
+                    "predicts": Array.from(new Set(predicts)),
                     "order_type":order_type,
                     "order":order,
-                    "belongs": belongs,
-                    "locations": locations,
-                    "forms": forms,
-                    "concepts": concepts,
-                    "labels": labels,
+                    "belongs": Array.from(new Set(belongs)),
+                    "locations": Array.from(new Set(locations)),
+                    "forms": Array.from(new Set(forms)),
+                    "concepts": Array.from(new Set(concepts)),
+                    "labels": Array.from(new Set(labels)),
                     "per_tickets": {
                         "shouyiafter": {
                             min: firstMin,
