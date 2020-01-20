@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-20 14:09:50
+ * @LastEditTime : 2020-01-20 14:13:40
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -604,10 +604,6 @@
             </div>
             <div class="weui-cells gp_list" style="overflow:auto;height: 100%">
             </div>
-            <div class="weui-infinite-scroll" id="scroll">
-                    <div class="infinite-preloader"></div>
-                     正在加载...
-                 </div>
         </div>
     </div>
 
@@ -1105,7 +1101,7 @@
                 // "save": true
             }
 
-            var url = `https://stock.zhixiutec.com/api/predicts_list?page=${currentPage}`;
+            var url = `https://stock.zhixiutec.com/api/predicts_list`;
             $.ajax({
                 type: 'POST',
                 url: url,
