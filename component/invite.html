@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-19 18:56:16
+ * @LastEditTime : 2020-01-20 14:04:50
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -54,14 +54,8 @@
     <script>
 
 
-        // 我的邀请
-        $.ajax({
-            url: 'https://stock.zhixiutec.com/api/token',
-            type: 'get',
-            success: function (res) {
-                var data = res.data;
-                    $.ajax({
-                        url: `https://stock.zhixiutec.com/api/my_invites?token=${data}`,
+$.ajax({
+                        url: `https://stock.zhixiutec.com/api/my_invites`,
                         success: function (res) {
                             var data = res.data;
                             var invite = '';
@@ -92,8 +86,6 @@
                             }
                         }
                     })
-            }
-        })
 
     </script>
 </body>

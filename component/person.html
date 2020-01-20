@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-19 18:56:32
+ * @LastEditTime : 2020-01-20 14:08:34
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -217,19 +217,15 @@
 
             }
         })
+        // 获取我的需求
         $.ajax({
-            url: 'https://stock.zhixiutec.com/api/token',
+            url: `https://stock.zhixiutec.com/api/my_comments`,
             success: function (res) {
-                var data = res.data;
-                // 获取我的需求
-                $.ajax({
-                    url: `https://stock.zhixiutec.com/api/my_comments?token=${data}`,
-                    success: function (res) {
-                        var issue = res.data;
-                        var issue_val = ''
-                        if (issue.length > 0) {
-                            issue.forEach(item => {
-                                issue_val += `
+                var issue = res.data;
+                var issue_val = ''
+                if (issue.length > 0) {
+                    issue.forEach(item => {
+                        issue_val += `
                                     <div class="weui-panel__bd" id="open_content">
                                         <div class="weui-media-box weui-media-box_small-appmsg">
                                             <div class="weui-cells">
@@ -245,84 +241,82 @@
                                         </div>
                                     </div>
                                     `
-                            })
-                            $('#my_issue').append(issue_val)
-                        } else {
+                    })
+                    $('#my_issue').append(issue_val)
+                } else {
 
-                        }
-                    }
-                })
-                $.ajax({
-                    url: `https://stock.zhixiutec.com/api/is_member?token=${data}`,
-                    success: function (res) {
-                        var is_member = res.data;
+                }
+            }
+        })
+        $.ajax({
+            url: `https://stock.zhixiutec.com/api/is_member`,
+            success: function (res) {
+                var is_member = res.data;
 
-                        if (is_member === false) {
-                            $('#member_val').css("display", "none")
-                            $('#is_hy').css("display", "none")
-                            $.ajax({
-                                url: 'https://stock.zhixiutec.com/api/payments',
-                                success: function (result) {
-                                    var leader = result.data;
-                                    var member = '';
-                                    for (var i = 0; i < leader.length; i++) {
-                                        $("#wechat").append(`<option value=${leader[i].id}>${leader[i].type_desc}</option>`);
-                                    }
-                                    $('#wechat').on('change', function (e) {
-                                        member = parseInt(e.target.value);
-                                        $('#pay_btn').on('click', function () {
-                                            $.ajax({
-                                                url: 'https://stock.zhixiutec.com/api/jsapi_pay',
-                                                type: 'post',
-                                                data: JSON.stringify({ "id": member }),
-                                                success: function (res) {
-                                                    var result = res.data;
-                                                    wx.config({
-                                                        debug: false,
-                                                        appId: result["appId"],
-                                                        timestamp: result["timeStamp"],
-                                                        nonceStr: result["nonceStr"],
-                                                        signature: result["signature"],
-                                                        jsApiList: [
-                                                            'chooseWXPay',
-                                                        ]
-                                                    });
-                                                    wx.ready(function () {
-                                                        wx.chooseWXPay({
-                                                            appId: result["appId"],
-                                                            timestamp: result["timeStamp"], // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
-                                                            nonceStr: result["nonceStr"], // 支付签名随机串，不长于 32 位
-                                                            package: result["package"], // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
-                                                            signType: result["signType"], // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
-                                                            paySign: result["sign"], // 支付签名
-                                                            success: function (res) {
-                                                            },
+                if (is_member === false) {
+                    $('#member_val').css("display", "none")
+                    $('#is_hy').css("display", "none")
+                    $.ajax({
+                        url: 'https://stock.zhixiutec.com/api/payments',
+                        success: function (result) {
+                            var leader = result.data;
+                            var member = '';
+                            for (var i = 0; i < leader.length; i++) {
+                                $("#wechat").append(`<option value=${leader[i].id}>${leader[i].type_desc}</option>`);
+                            }
+                            $('#wechat').on('change', function (e) {
+                                member = parseInt(e.target.value);
+                                $('#pay_btn').on('click', function () {
+                                    $.ajax({
+                                        url: 'https://stock.zhixiutec.com/api/jsapi_pay',
+                                        type: 'post',
+                                        data: JSON.stringify({ "id": member }),
+                                        success: function (res) {
+                                            var result = res.data;
+                                            wx.config({
+                                                debug: false,
+                                                appId: result["appId"],
+                                                timestamp: result["timeStamp"],
+                                                nonceStr: result["nonceStr"],
+                                                signature: result["signature"],
+                                                jsApiList: [
+                                                    'chooseWXPay',
+                                                ]
+                                            });
+                                            wx.ready(function () {
+                                                wx.chooseWXPay({
+                                                    appId: result["appId"],
+                                                    timestamp: result["timeStamp"], // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+                                                    nonceStr: result["nonceStr"], // 支付签名随机串，不长于 32 位
+                                                    package: result["package"], // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
+                                                    signType: result["signType"], // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+                                                    paySign: result["sign"], // 支付签名
+                                                    success: function (res) {
+                                                    },
 
-                                                            fail: function (res) {
-                                                                $.hideLoading()
-                                                                // alert('支付失败!');
-                                                                toast("支付失败！请检查微信配置");
-                                                            },
-                                                            cancel: function (res) {
+                                                    fail: function (res) {
+                                                        $.hideLoading()
+                                                        // alert('支付失败!');
+                                                        toast("支付失败！请检查微信配置");
+                                                    },
+                                                    cancel: function (res) {
 
-                                                                // //支付取消
-                                                                $.hideLoading()
-                                                                toast("已取消支付！");
-                                                            }
-                                                        });
-                                                    });
+                                                        // //支付取消
+                                                        $.hideLoading()
+                                                        toast("已取消支付！");
+                                                    }
+                                                });
+                                            });
 
-                                                }
-                                            })
-                                        })
-
+                                        }
                                     })
+                                })
 
-                                }
                             })
+
                         }
-                    }
-                })
+                    })
+                }
             }
         })
     </script>

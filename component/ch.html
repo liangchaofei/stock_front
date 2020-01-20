@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-09 22:30:20
- * @LastEditTime : 2020-01-19 18:36:53
+ * @LastEditTime : 2020-01-20 14:03:51
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp2/static/component/feedback.html
@@ -53,14 +53,8 @@
         }
 
         var code = getUrlParam('code');
-        // 增发
         $.ajax({
-            url: 'https://stock.zhixiutec.com/api/token',
-            type: 'get',
-            success: function (res) {
-                var data = res.data;
-                    $.ajax({
-                        url: `https://stock.zhixiutec.com/api/stock/fund?code=${code}&token=${data}`,
+                        url: `https://stock.zhixiutec.com/api/stock/fund?code=${code}`,
                         success: function (res) {
                             var data = res.data;
                             var zfData = []
@@ -109,8 +103,6 @@
                     $(window).resize(function () {
                         $('#reportTable').bootstrapTable('resetView');
                     });
-            }
-        })
 
 
     </script>

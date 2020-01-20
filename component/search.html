@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-19 17:47:28
+ * @LastEditTime : 2020-01-20 14:09:50
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -665,32 +665,32 @@
         $('#back').on('click', function () {
             window.history.go(-1)
         })
-        var loading = false,dataList=[];
-        $(document.body).infinite(100);
-        $('.gp_list').infinite().on("infinite", function () {
-            // if (dataList == null) return;
-            if(loading) return;
-          loading = true;
-            // loading = true;
-            currentPage++
-            searchPg(currentPage)
+        // var loading = false,dataList=[];
+        // $(document.body).infinite(100);
+        // $('.gp_list').infinite().on("infinite", function () {
+        //     // if (dataList == null) return;
+        //     if(loading) return;
+        //   loading = true;
+        //     // loading = true;
+        //     currentPage++
+        //     searchPg(currentPage)
 
 
-            setTimeout(function() {
-            var length = dataList  &&  dataList.length;
-            if(length > 0 && havaData){
-                // 还有数据，继续加载
-                currentPage++
-            searchPg(currentPage)
-            }else{  
-                havaData = false;
-                $(document.body).destroyInfinite();
-                $("#scroll").hide();
-                return;
-            }
-            loading = false;
-          },500);   //模拟延迟
-        });
+        //     setTimeout(function() {
+        //     var length = dataList  &&  dataList.length;
+        //     if(length > 0 && havaData){
+        //         // 还有数据，继续加载
+        //         currentPage++
+        //     searchPg(currentPage)
+        //     }else{  
+        //         havaData = false;
+        //         $(document.body).destroyInfinite();
+        //         $("#scroll").hide();
+        //         return;
+        //     }
+        //     loading = false;
+        //   },500);   //模拟延迟
+        // });
 
 
    
@@ -1183,12 +1183,12 @@
                     } else if (err_code === 1) {
                         $("#scroll").hide();
                         $('.gp_list').append(`<div style="text-align:center;padding: 10px 0;">${err_msg}</div>`)
-                        $(document.body).destroyInfinite();
+                        // $(document.body).destroyInfinite();
                     }
                     else if (dataList === null) {
                         $("#scroll").hide();
                         $('.gp_list').append(`<div style="text-align:center;padding: 10px 0;">暂未查询到数据， 可能是条件过于严苛</div>`)
-                        $(document.body).destroyInfinite();
+                        // $(document.body).destroyInfinite();
                     }
                 },
             })
