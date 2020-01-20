@@ -28,7 +28,7 @@ function splitData(rawData) {
 
 function calculateMA(dayCount, data) {
     var result = [];
-    for (var i = 0, len = data.values.length; i < len; i++) {
+    for (var i = 0, len = data && data.values &&data.values.length; i < len; i++) {
         if (i < dayCount) {
             result.push('-');
             continue;
@@ -44,7 +44,6 @@ function calculateMA(dayCount, data) {
 
 
 var ua = navigator.userAgent.toLowerCase();
-console.log('aaa',ua.match(/MicroMessenger/i) == "micromessenger")
 var code = getUrlParam('code');
 var date = getUrlParam('date');
 var stock_cash_flowData = [], stock_liabilitiesData = [], stock_profitData = [];
@@ -409,8 +408,6 @@ $.ajax({
                         })
                         // week
                         var ticket_history_weekly = data.ticket_history_weekly;
-                        console.log('data',data)
-            console.log('calculateMA(60, data)',calculateMA(60, data))
                         var myChart_stock_cash_flow = echarts.init(document.getElementById('stock_cash_flow'))
             
                         var stock_cash_flow = {
