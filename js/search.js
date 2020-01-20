@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-01-03 14:26:48
- * @LastEditTime : 2020-01-20 14:17:30
+ * @LastEditTime : 2020-01-20 14:28:17
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/js/search.js
@@ -16,11 +16,11 @@ $(function () {
         })
 
         $('#sort_content').css({ "display": "none" })
-        $('#sort_open').on('click', function () {
-                $('#sort_content').slideToggle("slow");
-                $("#sort_open .up").toggle();
-                $("#sort_open .down").toggle();
-        })
+        // $('#sort_open').on('click', function () {
+        //         $('#sort_content').slideToggle("slow");
+        //         $("#sort_open .up").toggle();
+        //         $("#sort_open .down").toggle();
+        // })
         // 概念划分开关
         $('#concect_content').css({ "display": "none" })
         $('#concect_open').on('click', function () {
@@ -63,6 +63,29 @@ $(function () {
      
 
         $('#yy_content').css({ "display": "none" })
+
+
+        $('#mg_zb').on('click', function () {
+                console.log('123')
+                $('#zb_content').slideToggle("slow");
+                $("#mg_zb .up").toggle();
+                $("#mg_zb .down").toggle();
+        })
+        $('#cz_nl').on('click', function () {
+                $('#cz_content').slideToggle("slow");
+                $("#cz_nl .up").toggle();
+                $("#cz_nl .down").toggle();
+        })
+        $('#yl_nl').on('click', function () {
+                $('#yl_content').slideToggle("slow");
+                $("#yl_nl .up").toggle();
+                $("#yl_nl .down").toggle();
+        })
+        $('#yy_nl').on('click', function () {
+                $('#yy_content').slideToggle("slow");
+                $("#yy_nl .up").toggle();
+                $("#yy_nl .down").toggle();
+        })
        
         $.ajax({
                 url: 'https://stock.zhixiutec.com/api/is_member',
@@ -90,26 +113,7 @@ $(function () {
                                         $('#sort_open').css("pointer-events", "none")
                                 })
                         }else{
-                                $('#mg_zb').on('click', function () {
-                                        $('#zb_content').slideToggle("slow");
-                                        $("#mg_zb .up").toggle();
-                                        $("#mg_zb .down").toggle();
-                                })
-                                $('#cz_nl').on('click', function () {
-                                        $('#cz_content').slideToggle("slow");
-                                        $("#cz_nl .up").toggle();
-                                        $("#cz_nl .down").toggle();
-                                })
-                                $('#yl_nl').on('click', function () {
-                                        $('#yl_content').slideToggle("slow");
-                                        $("#yl_nl .up").toggle();
-                                        $("#yl_nl .down").toggle();
-                                })
-                                $('#yy_nl').on('click', function () {
-                                        $('#yy_content').slideToggle("slow");
-                                        $("#yy_nl .up").toggle();
-                                        $("#yy_nl .down").toggle();
-                                })
+                               
                                 $('#sort_open').on('click', function () {
                                         $('#sort_content').slideToggle("slow");
                                         $("#sort_open .up").toggle();
