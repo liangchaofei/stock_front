@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-01-03 14:26:48
- * @LastEditTime : 2020-01-20 14:28:17
+ * @LastEditTime : 2020-01-20 19:44:47
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/js/search.js
@@ -108,9 +108,14 @@ $(function () {
                                 //         $.toast("该搜索条件只对会员开放", "forbidden");
                                 //         $('#yy_nl').css("pointer-events", "none")
                                 // })
-                                $('#sort_open').on('click',function(){
-                                        $.toast("该搜索条件只对会员开放", "forbidden");
-                                        $('#sort_open').css("pointer-events", "none")
+                                // $('#sort_open').on('click',function(){
+                                //         $.toast("该搜索条件只对会员开放", "forbidden");
+                                //         $('#sort_open').css("pointer-events", "none")
+                                // })
+                                $('#sort_open').on('click', function () {
+                                        $('#sort_content').slideToggle("slow");
+                                        $("#sort_open .up").toggle();
+                                        $("#sort_open .down").toggle();
                                 })
                         }else{
                                
