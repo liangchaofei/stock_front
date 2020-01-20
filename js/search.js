@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-01-03 14:26:48
- * @LastEditTime : 2020-01-16 22:42:14
+ * @LastEditTime : 2020-01-20 14:17:30
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/js/search.js
@@ -69,24 +69,26 @@ $(function () {
                 success: function (res) {
                         var is_member = res.data;
                         if (is_member === false) {
-                                $('#mg_zb').on('click',function(){
+                                // $('#mg_zb').on('click',function(){
+                                //         $.toast("该搜索条件只对会员开放", "forbidden");
+                                //         $('#mg_zb').css("pointer-events", "none")
+                                // })
+                                // $('#cz_nl').on('click',function(){
+                                //         $.toast("该搜索条件只对会员开放", "forbidden");
+                                //         $('#cz_nl').css("pointer-events", "none")
+                                // })
+                                // $('#yl_nl').on('click',function(){
+                                //         $.toast("该搜索条件只对会员开放", "forbidden");
+                                //         $('#yl_nl').css("pointer-events", "none")
+                                // })
+                                // $('#yy_nl').on('click',function(){
+                                //         $.toast("该搜索条件只对会员开放", "forbidden");
+                                //         $('#yy_nl').css("pointer-events", "none")
+                                // })
+                                $('#sort_open').on('click',function(){
                                         $.toast("该搜索条件只对会员开放", "forbidden");
-                                        $('#mg_zb').css("pointer-events", "none")
+                                        $('#sort_open').css("pointer-events", "none")
                                 })
-                                $('#cz_nl').on('click',function(){
-                                        $.toast("该搜索条件只对会员开放", "forbidden");
-                                        $('#cz_nl').css("pointer-events", "none")
-                                })
-                                $('#yl_nl').on('click',function(){
-                                        $.toast("该搜索条件只对会员开放", "forbidden");
-                                        $('#yl_nl').css("pointer-events", "none")
-                                })
-                                $('#yy_nl').on('click',function(){
-                                        $.toast("该搜索条件只对会员开放", "forbidden");
-                                        $('#yy_nl').css("pointer-events", "none")
-                                })
-
-                               
                         }else{
                                 $('#mg_zb').on('click', function () {
                                         $('#zb_content').slideToggle("slow");
@@ -107,6 +109,11 @@ $(function () {
                                         $('#yy_content').slideToggle("slow");
                                         $("#yy_nl .up").toggle();
                                         $("#yy_nl .down").toggle();
+                                })
+                                $('#sort_open').on('click', function () {
+                                        $('#sort_content').slideToggle("slow");
+                                        $("#sort_open .up").toggle();
+                                        $("#sort_open .down").toggle();
                                 })
                         }
                 }

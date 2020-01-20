@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-20 14:13:40
+ * @LastEditTime : 2020-01-20 14:15:33
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -197,29 +197,7 @@
             </div>
           
             <div class="weui-panel__bd" id="high_content">
-                    <!-- 排序 -->
-            <div class="weui-panel__hd" id="sort_open" style="font-size: 15px;">
-                    排序<i class="down"></i><i class="up" style="display:none;"></i>
-                    <!-- <span style="float:right">
-                    共
-                    <span class="concect_count" style="color: red;">0</span>
-                    查询条件
-                   </span> -->
-                </div>
-                <div class="weui-panel__bd" id="sort_content">
-                        <div class="weui-cell">
-                                <div class="weui-cell__hd"><label for="name" class="weui-label">排序类型</label></div>
-                                <div class="weui-cell__bd">
-                                    <input class="weui-input" id="sort_type" type="text" value="" readonly="" data-values="1,2,3">
-                                </div>
-                            </div>
-                    <div class="weui-cell">
-                        <div class="weui-cell__hd"><label for="name" class="weui-label">排序方式</label></div>
-                        <div class="weui-cell__bd">
-                            <input class="weui-input" id="sort_way" type="text" value="" readonly="" data-values="1,2,3">
-                        </div>
-                    </div>
-                </div>
+         
 
                   <!-- 收盘情况 -->
                   <div class="weui-panel__hd" id="sp_qk">
@@ -568,7 +546,24 @@
                         </div>
                     </div>
                 </div>
-
+                           <!-- 排序 -->
+            <div class="weui-panel__hd" id="sort_open" style="font-size: 15px;">
+                排序<i class="down"></i><i class="up" style="display:none;"></i>
+            </div>
+            <div class="weui-panel__bd" id="sort_content">
+                    <div class="weui-cell">
+                            <div class="weui-cell__hd"><label for="name" class="weui-label">排序类型</label></div>
+                            <div class="weui-cell__bd">
+                                <input class="weui-input" id="sort_type" type="text" value="" readonly="" data-values="1,2,3">
+                            </div>
+                        </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label for="name" class="weui-label">排序方式</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" id="sort_way" type="text" value="" readonly="" data-values="1,2,3">
+                    </div>
+                </div>
+            </div>
             </div>
         </div>
         <!-- 查询条件 -->
