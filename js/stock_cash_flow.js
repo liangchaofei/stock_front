@@ -409,7 +409,8 @@ $.ajax({
                         })
                         // week
                         var ticket_history_weekly = data.ticket_history_weekly;
-            
+                        console.log('data',data)
+            console.log('calculateMA(60, data)',calculateMA(60, data))
                         var myChart_stock_cash_flow = echarts.init(document.getElementById('stock_cash_flow'))
             
                         var stock_cash_flow = {

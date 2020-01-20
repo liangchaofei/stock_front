@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-20 14:21:01
+ * @LastEditTime : 2020-01-20 17:11:05
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -177,6 +177,10 @@
     <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
     <script>
 
+function isWeixin () { //判断是否是微信
+    var ua = navigator.userAgent.toLowerCase();
+    return ua.match(/MicroMessenger/i) == "micromessenger";
+};
 
 
 
