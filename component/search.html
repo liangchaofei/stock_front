@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-20 19:50:08
+ * @LastEditTime : 2020-01-20 20:13:06
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -979,12 +979,13 @@
 
         document.getElementById('search_form').onsubmit = function () {
             var searchVal = $("#searchInput").val()
-            $.ajax({
-                url: `https://stock.zhixiutec.com/api/stock/detail?code=${searchVal}`,
-                success: function (res) {
-                    window.open(`/component/detail.html?code=${searchVal}`, "_self")
-                }
-            })
+            window.open(`/component/detail.html?code=${decodeURIComponent(searchVal)}`, "_self")
+            // $.ajax({
+            //     url: `https://stock.zhixiutec.com/api/stock/detail?code=${searchVal}`,
+            //     success: function (res) {
+            //         window.open(`/component/detail.html?code=${searchVal}`, "_self")
+            //     }
+            // })
         }
         var havaData = false;
 

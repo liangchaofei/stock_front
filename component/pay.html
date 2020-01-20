@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-20 14:17:51
+ * @LastEditTime : 2020-01-20 20:49:53
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -22,13 +22,12 @@
 <body>
 
 
-    <div style="margin:12px;">当前剩余查询次数：<span style="color: red;" id="left_count"></span></div>
-    <div class="weui-cells__title">请选择充值：</div>
+    <div class="weui-cells__title">请选择</div>
     <div class="weui-cells weui-cells_form">
-        <div style="font-size: 12px;">
-            <span style="display: inline-block;width: 50%;margin-left: 15px;">种类</span>
-            <span style="display: inline-block;width: 20%;">金额</span>
-            <span>时间</span>
+        <div style="font-size: 12px;margin-top: 22px;">
+            <span style="display: inline-block;width: 40%;margin-left: 22px;">种类</span>
+            <span style="display: inline-block;width: 30%;">金额</span>
+            <span>数量</span>
         </div>
         <div class="weui-cells weui-cells_radio" id="wechat" style="margin-top: 10px;">
             
@@ -53,11 +52,11 @@
     <div style="font-size: 12px;color:#999;margin-left:20px;margin-top:20px;">
         <div style="margin-bottom: 5px;">功能须知：</div>
         <div style="margin-bottom: 15px;">由于数据算力对服务器资源,性能,成本的影响，知修数据服务对功能使用做了如下的规格:</div>
-        <ul>
+        <ol>
             <li>普通用户可以购买查询套餐补充查询次数, 查询次数不会过期</li>
             <li>普通用户每次发起查询搜索功能会消耗一次查询次数，邀请好友并首次登陆成功会获得额外的20次查询机会</li>
             <li>会员可无限制使用查询，搜索， 获取股票最新详情信息， 且不消耗查询次数，如已经是会员， 再次购买会延长对应的过期时间</li>
-        </ul>
+        </ol>
     </div>
 
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
@@ -89,8 +88,22 @@
                                                 <label style="color:#333;font-size:13px" class="weui-cell weui-check__label" for="${leader[i].id}">
                                                     <div class="weui-cell__bd">
                                                         <p style="font-size: 12px;">
-                                                            <span style="display:inline-block;width:50%;margin-right:10px;font-size:12px;">${leader[i].type_desc}</span>
-                                                            <span style="display:inline-block;width:20%;margin-right:10px;font-size:12px">${leader[i].spend/100}元</span>
+                                                            ${leader[i].type === 'member' ?
+                                                            '<svg t="1579523748337" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2165" width="16" height="16"><path d="M842.666667 864h-119.466667c249.6-285.866667 262.4-469.333333 189.866667-554.666667-74.666667-89.6-217.6-87.466667-330.666667-21.333333h-140.8c-115.2-64-262.4-72.533333-330.666667 21.333333-66.133333 91.733333-59.733333 268.8 189.866667 554.666667H181.333333v64h661.333334v-64z m-456.533334 0C206.933333 674.133333 83.2 443.733333 160 347.733333c51.2-64 157.866667-55.466667 243.2-8.533333-36.266667 155.733333-14.933333 381.866667 32 524.8h-49.066667z m134.4 0h-17.066666c-51.2-125.866667-74.666667-362.666667-38.4-512h93.866666c36.266667 149.333333 10.666667 384-38.4 512z m66.133334 0c49.066667-142.933333 70.4-369.066667 32-524.8 85.333333-46.933333 192-55.466667 243.2 8.533333 74.666667 96-46.933333 326.4-226.133334 514.133334h-49.066666z m-74.666667-640c34.133333 0 64-29.866667 64-64s-27.733333-64-64-64c-34.133333 0-64 27.733333-64 64 0 34.133333 27.733333 64 64 64z" fill="#d81e06" p-id="2166"></path></svg>'
+                                                       :'<svg t="1579523825737" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3099" width="16" height="16"><path d="M511.953455-0.046545c-282.763636 0-512 229.236364-512 512.046545 0 282.763636 229.236364 512 512 512s512-229.236364 512-512c0-282.810182-229.236364-512.046545-512-512.046545z m0 967.121454A454.981818 454.981818 0 0 1 56.832 512a454.981818 454.981818 0 0 1 455.121455-455.121455A454.981818 454.981818 0 0 1 967.074909 512a454.981818 454.981818 0 0 1-455.121454 455.074909z m246.690909-626.082909a165.376 165.376 0 0 0-117.108364-48.034909c-41.565091 0-81.454545 15.36-112.267636 43.147636l-18.944 16.989091-18.944-16.989091a167.703273 167.703273 0 0 0-112.314182-43.147636c-44.218182 0-85.783273 17.128727-117.108364 48.034909A163.374545 163.374545 0 0 0 213.178182 457.867636c0 44.218182 17.314909 85.643636 48.872727 116.875637l224.674909 217.460363a33.373091 33.373091 0 0 0 47.010909 0.139637l224.907637-217.6a163.374545 163.374545 0 0 0 48.779636-116.875637 162.955636 162.955636 0 0 0-48.779636-116.875636z m-462.568728 128.977455h-0.232727a12.8 12.8 0 0 1-12.660364-13.125819 99.421091 99.421091 0 0 1 28.439273-67.537454c21.690182-21.690182 50.967273-26.996364 65.536-25.320727a12.939636 12.939636 0 0 1-2.978909 25.646545c-7.447273-0.884364-28.765091 2.466909-44.218182 17.873455a73.169455 73.169455 0 0 0-20.898909 49.710545 13.079273 13.079273 0 0 1-12.986182 12.753455z" fill="#1296db" p-id="3100"></path></svg>'
+                                                        }
+                                                            
+                                                            <span style="display:inline-block;width:40%;margin-right:10px;font-size:12px;">${leader[i].type_desc}</span>
+                                                       
+                                                         
+                                                            <span style="display:inline-block;width:30%;margin-right:10px;font-size:13px">
+                                                                ${
+                                                                leader[i].type === 'member' && i>0 ? 
+                                                                `   <span style="display:inline-block;width:100%;margin-right:10px;font-size:12px;color:#aaa">
+                                                                <s>${79*leader[i].count}元</s>
+                                                                </span>`:''
+                                                            }
+                                                                ${leader[i].spend/100}元</span>
                                                             <span style=""font-size:12px>${leader[i].count}${leader[i].type === 'query' ? '次':'个月'}</span>
                                                             </p>
                                                     </div>

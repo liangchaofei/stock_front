@@ -2,7 +2,7 @@
 function getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
     var r = window.location.search.substr(1).match(reg);  //匹配目标参数
-    if (r != null) return unescape(r[2]); return null; //返回参数值
+    if (r != null) return decodeURIComponent(r[2]); return null; //返回参数值
 }
 
 var upColor = '#00da3c';
@@ -41,10 +41,14 @@ function calculateMA(dayCount, data) {
     }
     return result;
 }
-
+function getQueryString(name) { 
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+    var r = window.location.search.substr(1).match(reg); 
+    if (r != null) return decodeURIComponent(r[2]); return null; 
+}
 
 var ua = navigator.userAgent.toLowerCase();
-var code = getUrlParam('code');
+var code =getQueryString('code');
 var date = getUrlParam('date');
 var stock_cash_flowData = [], stock_liabilitiesData = [], stock_profitData = [];
 $('#loadimg').css("display","block")
@@ -890,7 +894,7 @@ $.ajax({
             
             
             $.ajax({
-                url:`https://stock.zhixiutec.com/api/stock/k/detail?code=${code}&type=week&token=${data.token}`,
+                url:`https://stock.zhixiutec.com/api/stock/k/detail?code=${encodeURIComponent(code)}&type=week&token=${data.token}`,
                 success:function(res){
                     var data = res.data;
                     var dayData = [];
@@ -926,25 +930,7 @@ $.ajax({
                                 color: '#fff'
                             }
                         },
-                        tooltip: {
-                            // trigger: 'axis',
-                            // axisPointer: {
-                            //     type: 'cross'
-                            // },
-                            // backgroundColor: 'rgba(245, 245, 245, 0.8)',
-                            // borderWidth: 1,
-                            // borderColor: '#ccc',
-                            // padding: 10,
-                            // textStyle: {
-                            //     color: '#000'
-                            // },
-                            // position: function (pos, params, el, elRect, size) {
-                            //     var obj = {top: 10};
-                            //     obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 30;
-                            //     return obj;
-                            // },
-                            // extraCssText: 'width: 170px'
-                        },
+                    
                         axisPointer: {
                             link: { xAxisIndex: 'all' },
                             label: {
