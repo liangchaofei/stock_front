@@ -62,7 +62,8 @@ $.ajax({
             window.open(data, "_self");
         }else{
             $.ajax({
-                url: `https://stock.zhixiutec.com/api/stock/detail?code=${escape(code)}&date=${date}&token=${data.token}`,
+                url: `https://stock.zhixiutec.com/api/stock/detail?code=${escape(code)}`,
+                async:false,
                 success: function (res) {
                     if (res.error_code === 1) {
                         $('#search_detail').css("display", "none")
@@ -209,6 +210,7 @@ $.ajax({
                         if(predict.zengfa_count === 0 ){
                             $('#zf_count').css("display","none")
                         }
+                        window.gpName = predict.name
                         $('#per_fund_count').text(`${predict.fund_count}个`)
                         $('#per_subcomp_count').text(`${predict.subcomp_count}个`)
                         $('#per_fenghong_count').text(`${predict.fenghong_count}次`)
@@ -219,10 +221,10 @@ $.ajax({
                         // 基本数据
                         $('#percits_date').text('本数据更新于' + predict.date)
                         $('#percits_name').text(predict.name)
-                        // var title = document.createElement('title');
-                        // title.setAttribute()
-                        // document.head.appendChild(title);
-                        $('head').append(`<title>${predict.name}-知修数据</title>`)
+                        var title = document.createElement('title');
+                        title.append(`${predict.name}-知修数据`)
+                        document.head.appendChild(title);
+               
                         $('#percits_code').text(predict.code)
             
                         $('#percits_location').text(stock.location)
