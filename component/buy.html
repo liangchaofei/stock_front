@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-21 17:34:19
+ * @LastEditTime : 2020-01-21 19:16:34
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -116,6 +116,10 @@
                                                 type_val = $(this).children('option:selected').val()
                                              })
                                              $('#showTooltips').on('click', function () {
+                                                 if(!$('#email').val()){
+                                                     $.toast('请输入邮箱','cancel')
+                                                     return;
+                                                 }
                                                  if(member && $('#weuiAgree').is(':checked') && contact_val){
                                                      $.ajax({
                                                          url: 'https://stock.zhixiutec.com/api/jsapi_pay',
