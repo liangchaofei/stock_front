@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-01-03 14:26:48
- * @LastEditTime : 2020-01-21 09:52:37
+ * @LastEditTime : 2020-01-21 09:53:41
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/js/search.js
@@ -115,7 +115,7 @@ $(function () {
                                 })
                               
                         }else{
-                               
+                               alert('qqq')
                                 $('#sort_open').on('click', function () {
                                         $('#sort_content').slideToggle("slow");
                                         $("#sort_open .up").toggle();
