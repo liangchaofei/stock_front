@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-15 18:33:06
- * @LastEditTime : 2020-01-21 10:40:20
+ * @LastEditTime : 2020-01-21 10:56:19
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/index2.html
@@ -28,7 +28,7 @@ $(function () {
 		}
 	});
 	$('.text3').textillate({
-		initialDelay: 9000,
+		initialDelay: 4500,
 		in: { effect: 'bounceInDown' }
 	});
 })
@@ -38,9 +38,13 @@ $(function () {
 body {background:red;}
 div {width:100%;margin:0 auto;font-size: 100px;}
 .text1,.text2,.text3 {visibility:hidden;}
-.text1,.text2 {color:#fff;color:#fff;}
-.text1 {margin:50px;text-align:center;font-size:1.5rem;text-shadow:0.025em 0.025em 0.025em rgba(0, 0, 0, 0.8);}
-.text2 {font-family:microsoft yahei;font-size:1.5rem;line-height:4rem;text-shadow:0.1em 0.1em 0.1em rgba(0, 0, 0, 0.8)}
+.text1,.text2 {color:#fff;}
+.text1 {margin:50px;text-align:center;font-size:1rem;text-shadow:0.025em 0.025em 0.025em rgba(0, 0, 0, 0.8);}
+.text2{font-family:microsoft yahei;font-size:1rem;line-height:4rem;text-shadow:0.1em 0.1em 0.1em rgba(0, 0, 0, 0.8)}
+.text3 {
+	color: #fff;
+	font-size: 1rem;
+}
 .go_div{
 	text-align: center;
 }
@@ -81,7 +85,8 @@ div {width:100%;margin:0 auto;font-size: 100px;}
     <div>
 		<div>
 			<p class="text1">知修数据</p>
-			<p class="text2">知修数据是通过精准的大数据分析的股票</p>
+			<p class="text2">短期股市的预测是毒药，应该要把他们摆在最安全的地方，远离儿童以及那些在股市中的行为像小孩般幼稚的投资人。</p>
+			<p class="text3" style="text-align: right;">-- 巴菲特</p>
 		</div>
 		<div class="go_div">
 				<button class="go_btn" onclick="goList()">点击进入</button>
