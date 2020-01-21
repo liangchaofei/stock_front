@@ -49,6 +49,7 @@ function getQueryString(name) {
 
 var ua = navigator.userAgent.toLowerCase();
 var code =getQueryString('code');
+console.log('ccc',code)
 var date = getUrlParam('date');
 var stock_cash_flowData = [], stock_liabilitiesData = [], stock_profitData = [];
 $('#loadimg').css("display","block")
@@ -62,7 +63,7 @@ $.ajax({
             window.open(data, "_self");
         }else{
             $.ajax({
-                url: `https://stock.zhixiutec.com/api/stock/detail?code=${code}&date=${date}&token=${data.token}`,
+                url: `https://stock.zhixiutec.com/api/stock/detail?code=${escape(code)}&date=${date}&token=${data.token}`,
                 success: function (res) {
                     if (res.error_code === 1) {
                         $('#search_detail').css("display", "none")
@@ -894,7 +895,7 @@ $.ajax({
             
             
             $.ajax({
-                url:`https://stock.zhixiutec.com/api/stock/k/detail?code=${encodeURIComponent(code)}&type=week&token=${data.token}`,
+                url:`https://stock.zhixiutec.com/api/stock/k/detail?code=${escape(code)}&type=week&token=${data.token}`,
                 success:function(res){
                     var data = res.data;
                     var dayData = [];
@@ -1170,7 +1171,7 @@ $.ajax({
             })
             
             $.ajax({
-                url:`https://stock.zhixiutec.com/api/stock/k/detail?code=${code}&type=month&token=${data.token}`,
+                url:`https://stock.zhixiutec.com/api/stock/k/detail?code=${escape(code)}&type=month&token=${data.token}`,
                 success:function(res){
                     var data = res.data;
                     var dayData = [];
