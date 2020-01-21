@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-09 22:30:20
- * @LastEditTime : 2020-01-15 21:32:38
+ * @LastEditTime : 2020-01-21 09:48:43
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp2/static/component/feedback.html
@@ -56,7 +56,7 @@
                 success:function(res){
                     if(res.error_code === 0 ){
                         $.toast(res.data);
-                        window.open('/component/person.html','_self')
+                        // window.open('/component/person.html','_self')
                     }else{
                         $.toast(res.err_msg);
                     }
