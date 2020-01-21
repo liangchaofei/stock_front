@@ -222,6 +222,7 @@ $.ajax({
                         // var title = document.createElement('title');
                         // title.setAttribute()
                         // document.head.appendChild(title);
+                        $('head').append(`<title>${predict.name}-知修数据</title>`)
                         $('#percits_code').text(predict.code)
             
                         $('#percits_location').text(stock.location)
