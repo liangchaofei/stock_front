@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-01-03 14:26:48
- * @LastEditTime : 2020-01-21 09:53:41
+ * @LastEditTime : 2020-01-21 09:56:01
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/js/search.js
@@ -92,7 +92,6 @@ $(function () {
                 success: function (res) {
                         var is_member = res.data;
                         if (is_member === false) {
-                                alert('aaaa')
                                 // $('#mg_zb').on('click',function(){
                                 //         $.toast("该搜索条件只对会员开放", "forbidden");
                                 //         $('#mg_zb').css("pointer-events", "none")
@@ -115,7 +114,6 @@ $(function () {
                                 })
                               
                         }else{
-                               alert('qqq')
                                 $('#sort_open').on('click', function () {
                                         $('#sort_content').slideToggle("slow");
                                         $("#sort_open .up").toggle();
