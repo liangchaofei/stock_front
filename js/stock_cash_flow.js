@@ -49,7 +49,6 @@ function getQueryString(name) {
 
 var ua = navigator.userAgent.toLowerCase();
 var code =getQueryString('code');
-console.log('ccc',code)
 var date = getUrlParam('date');
 var stock_cash_flowData = [], stock_liabilitiesData = [], stock_profitData = [];
 $('#loadimg').css("display","block")
@@ -220,6 +219,9 @@ $.ajax({
                         // 基本数据
                         $('#percits_date').text('本数据更新于' + predict.date)
                         $('#percits_name').text(predict.name)
+                        // var title = document.createElement('title');
+                        // title.setAttribute()
+                        // document.head.appendChild(title);
                         $('#percits_code').text(predict.code)
             
                         $('#percits_location').text(stock.location)
