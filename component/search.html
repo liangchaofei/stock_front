@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-01-21 17:34:57
+ * @LastEditTime : 2020-02-04 10:34:01
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -251,6 +251,19 @@
                             <input class="weui-input" id="nineMax" placeholder="请输入最大值">
                         </div>
                     </div>
+
+
+                    <div class="weui-cell weui-cell_vcode">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">对昨量比(倍数) </label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" id="last_day_range_min" placeholder="请输入最小值">
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" id="last_day_range_max" placeholder="请输入最大值">
+                        </div>
+                    </div>
                 </div>
                 <!-- 每股指标 -->
                 <div class="weui-panel__hd" id="mg_zb">
@@ -268,6 +281,20 @@
                             <input class="weui-input" id="fisrtMax" placeholder="请输入最大值">
                         </div>
                     </div>
+
+                    <div class="weui-cell weui-cell_vcode">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">每股加权收益(元) </label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" id="jiaquanshouyiMin" placeholder="请输入最小值">
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" id="jiaquanshouyiMax" placeholder="请输入最大值">
+                        </div>
+                    </div>
+
+
                     <div class="weui-cell weui-cell_vcode">
                         <div class="weui-cell__hd">
                             <label class="weui-label">每股净资产范围 </label>
@@ -667,35 +694,14 @@
         $('#back').on('click', function () {
             window.history.go(-1)
         })
-        // var loading = false,dataList=[];
-        // $(document.body).infinite(100);
-        // $('.gp_list').infinite().on("infinite", function () {
-        //     // if (dataList == null) return;
-        //     if(loading) return;
-        //   loading = true;
-        //     // loading = true;
-        //     currentPage++
-        //     searchPg(currentPage)
 
-
-        //     setTimeout(function() {
-        //     var length = dataList  &&  dataList.length;
-        //     if(length > 0 && havaData){
-        //         // 还有数据，继续加载
-        //         currentPage++
-        //     searchPg(currentPage)
-        //     }else{  
-        //         havaData = false;
-        //         $(document.body).destroyInfinite();
-        //         $("#scroll").hide();
-        //         return;
-        //     }
-        //     loading = false;
-        //   },500);   //模拟延迟
-        // });
-
-
-
+        // 渲染高级条件
+        $.ajax({
+            url:'https://stock.zhixiutec.com/api/high_conditions',
+            success:function(res){
+                console.log('res',res)
+            }
+        })
         var date = '',
             belongs = [],
             order_type = '',
@@ -757,7 +763,8 @@
         var seventMin = -10000, sevenMax = 10000;
         var eightMin = -10000, eightMax = 10000;
         var nineMin = -10000, nineMax = 10000;
-
+        var last_day_range_min = -10000,last_day_range_max = 10000;
+        var jiaquanshouyiMin = -10000,jiaquanshouyiMax = 10000;
 
         var tenMin = -10000, tenMax = 10000;
         var elevenMin = -10000, elevenMax = 10000;
@@ -916,6 +923,14 @@
         $('#nineMax').bind('input propertychange', function (e) {
             nineMax = parseInt(e.delegateTarget.value)
         })
+        last_day_range_min
+
+        $('#last_day_range_min').bind('input propertychange', function (e) {
+            last_day_range_min = parseInt(e.delegateTarget.value)
+        })
+        $('#last_day_range_max').bind('input propertychange', function (e) {
+            last_day_range_max = parseInt(e.delegateTarget.value)
+        })
 
 
         $('#eightMin').bind('input propertychange', function (e) {
@@ -978,16 +993,16 @@
         })
 
 
+        $('#jiaquanshouyiMin').bind('input propertychange', function (e) {
+            jiaquanshouyiMin = parseInt(e.delegateTarget.value)
+        })
+        $('#jiaquanshouyiMax').bind('input propertychange', function (e) {
+            jiaquanshouyiMax = parseInt(e.delegateTarget.value)
+        })
 
         document.getElementById('search_form').onsubmit = function () {
             var searchVal = $("#searchInput").val()
             window.open(`/component/detail.html?code=${decodeURIComponent(searchVal)}`, "_self")
-            // $.ajax({
-            //     url: `https://stock.zhixiutec.com/api/stock/detail?code=${searchVal}`,
-            //     success: function (res) {
-            //         window.open(`/component/detail.html?code=${searchVal}`, "_self")
-            //     }
-            // })
         }
         var havaData = false;
 
@@ -1007,6 +1022,10 @@
                         "shouyiafter": {
                             min: firstMin,
                             max: firstMax
+                        },
+                        "jiaquanshouyi":{
+                            min:jiaquanshouyiMin,
+                            max:jiaquanshouyiMax
                         },
                         "jinzichanafter": {
                             min: secondMin,
@@ -1029,7 +1048,8 @@
                         "last_percent": { "min": sixMin, "max": sixMax },
                         "last_amplitude": { "min": seventMin, "max": sevenMax },
                         "last_turnoverrate": { "min": eightMin, "max": eightMax },
-                        "last_price": { "min": nineMin, "max": nineMax }
+                        "last_price": { "min": nineMin, "max": nineMax },
+                        "last_day_range":{"min":last_day_range_min,"max":last_day_range_max}
                     },
 
 
