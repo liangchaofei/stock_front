@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-09 22:30:20
- * @LastEditTime : 2020-01-21 17:35:04
+ * @LastEditTime : 2020-02-04 10:10:37
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp2/static/component/feedback.html
@@ -49,58 +49,52 @@
 
         var code = getUrlParam('code');
         var type = getUrlParam('type')
-   
+
         // 增发
         $.ajax({
-            url: 'https://stock.zhixiutec.com/api/token',
-            success: function (res) {
-                var data = res.data;
-                $.ajax({
-            url: `https://stock.zhixiutec.com/api/stock/pgzf?code=${code}&type=${type}`,
-            success: function (res) {
-                var data = res.data;
-                var zfData = []
-                data.forEach(item => {
-                    zfData.push({
-                        way: item.way,
-                        price: item.price,
-                        cost_price: item.cost_price,
-                        all_price: item.all_price,
-                        all_count: item.all_count
-                    })
+                    url: `https://stock.zhixiutec.com/api/stock/pgzf?code=${code}&type=${type}`,
+                    success: function (res) {
+                        var data = res.data;
+                        var zfData = []
+                        data.forEach(item => {
+                            zfData.push({
+                                way: item.way,
+                                price: item.price,
+                                cost_price: item.cost_price,
+                                all_price: item.all_price,
+                                all_count: item.all_count
+                            })
+                        })
+                        $('#reportTable').bootstrapTable({
+                            method: 'get',
+                            cache: false,
+                            height: 400,
+                            striped: true,
+                            pagination: true,
+                            pageSize: 10,
+                            pageNumber: 1,
+                            pageList: [10, 20, 50, 100, 200, 500],
+                            search: false,
+                            showColumns: false,
+                            showRefresh: false,
+                            showExport: false,
+                            exportTypes: ['csv', 'txt', 'xml'],
+                            search: false,
+                            clickToSelect: true,
+                            columns: [{ field: "way", title: "发行方式", align: "center", valign: "middle", sortable: "true" }, { field: "price", title: "发行价格", align: "center", valign: "middle", sortable: "true" }, { field: "cost_price", title: "实际公司募集资金总额", align: "center", valign: "middle", sortable: "true" }, { field: "all_price", title: "发行费用总额", align: "center", valign: "middle", sortable: "true" }, { field: "all_count", title: "实际发行数量(每10股)", align: "center", valign: "middle", sortable: "true" }],
+                            data: zfData,
+                            onPageChange: function (size, number) {
+                                console.log('size', size)
+                                console.log('num', number)
+                            },
+                        });
+                    }
                 })
-                $('#reportTable').bootstrapTable({
-                    method: 'get',
-                    cache: false,
-                    height: 400,
-                    striped: true,
-                    pagination: true,
-                    pageSize: 10,
-                    pageNumber: 1,
-                    pageList: [10, 20, 50, 100, 200, 500],
-                    search: false,
-                    showColumns: false,
-                    showRefresh: false,
-                    showExport: false,
-                    exportTypes: ['csv', 'txt', 'xml'],
-                    search: false,
-                    clickToSelect: true,
-                    columns: [{ field: "way", title: "发行方式", align: "center", valign: "middle", sortable: "true" }, { field: "price", title: "发行价格", align: "center", valign: "middle", sortable: "true" }, { field: "cost_price", title: "实际公司募集资金总额", align: "center", valign: "middle", sortable: "true" }, { field: "all_price", title: "发行费用总额", align: "center", valign: "middle", sortable: "true" }, { field: "all_count", title: "实际发行数量(每10股)", align: "center", valign: "middle", sortable: "true" }],
-                    data: zfData,
-                    onPageChange: function (size, number) {
-                        console.log('size', size)
-                        console.log('num', number)
-                    },
+
+
+                $(window).resize(function () {
+                    $('#reportTable').bootstrapTable('resetView');
                 });
-            }
-        })
-
-
-        $(window).resize(function () {
-            $('#reportTable').bootstrapTable('resetView');
-        });
-            }
-        })
 
 
     </script>
