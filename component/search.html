@@ -582,6 +582,16 @@
 
             </div>
         </div>
+
+        <div class="weui-cell weui-cell_vcode">
+            <div class="weui-cell__hd">
+                <label class="weui-label">主营业务关键词 </label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" id="keyword" placeholder="关键词">
+            </div>
+        </div>
+
         <!-- 查询条件 -->
         <div class="weui-panel weui-panel_access" id="sort_open">
             <div class="weui-panel__hd"  style="font-size: 15px;">
@@ -617,8 +627,8 @@
             <div class="weui-btn-area">
                 <a style="height: 3em;
                 line-height: 3em;
-                font-size: 0.8em;" href="javascript:;" class="weui-btn weui-btn_primary open-popup" data-target="#full"
-                    onclick="searchPg(1)" id="showTooltips">查询</a>
+                font-size: 0.8em;" href="javascript:;" class="weui-btn weui-btn_warn open-popup" data-target="#full"
+                    onclick="searchPg(1)" id="showTooltips">查找股票</a>
             </div>
         </div>
     </div>
@@ -650,7 +660,7 @@
             <div class="weui-tabbar__icon">
                 <img src="../img/icon_nav_button.png" alt="">
             </div>
-            <p class="weui-tabbar__label">查询</p>
+            <p class="weui-tabbar__label">搜索页</p>
         </a>
         <a href="/component/person.html" class="weui-tabbar__item">
             <div class="weui-tabbar__icon">
@@ -717,6 +727,7 @@
             concepts = [],
             labels = [],
             forms = [],
+            tapes = [],
             shouyiafter = {},
             jinzichanafter = {},
             jingyingxianjinliu = {},
@@ -1022,6 +1033,7 @@
                     "belongs": Array.from(new Set(belongs)),
                     "locations": Array.from(new Set(locations)),
                     "forms": Array.from(new Set(forms)),
+                    "tapes": Array.from(new Set(tapes)), 
                     "concepts": Array.from(new Set(concepts)),
                     "labels": Array.from(new Set(labels)),
                     "per_tickets": {
@@ -1371,7 +1383,7 @@
                     items: tape,
                     onChange: function (e) {
                         var tapesData = e.values;
-                        forms = tapesData.split(',')
+                        tapes = tapesData.split(',')
                     }
                 });
             }
