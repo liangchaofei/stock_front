@@ -72,7 +72,7 @@
 
         <div class="weui-panel weui-panel_access">
             <div class="weui-panel__hd" id="open" style="font-size: 15px;">
-                基础信息<i class="down"></i><i class="up" style="display:none;"></i>
+                股票性质<i class="down"></i><i class="up" style="display:none;"></i>
                 <!-- <span style="float:right">
             共
             <span class="basic_count" style="color: red;">0</span>
@@ -81,21 +81,27 @@
             </div>
             <div class="weui-panel__bd" id="open_content">
                 <div class="weui-cell">
-                    <div class="weui-cell__hd"><label for="name" class="weui-label">所属行业</label></div>
+                    <div class="weui-cell__hd"><label for="name" class="weui-label">所属行业(多选)</label></div>
                     <div class="weui-cell__bd">
                         <input class="weui-input" id="job" type="text" value="" readonly="">
                     </div>
                 </div>
                 <div class="weui-cell">
-                    <div class="weui-cell__hd"><label for="name" class="weui-label">省份/城市</label></div>
+                    <div class="weui-cell__hd"><label for="name" class="weui-label">省份/城市(多选)</label></div>
                     <div class="weui-cell__bd">
                         <input class="weui-input" id="city" type="text" value="" readonly="" data-values="1,2,3">
                     </div>
                 </div>
                 <div class="weui-cell">
-                    <div class="weui-cell__hd"><label for="name" class="weui-label">组织形式</label></div>
+                    <div class="weui-cell__hd"><label for="name" class="weui-label">组织形式(多选)</label></div>
                     <div class="weui-cell__bd">
                         <input class="weui-input" id="froms" type="text" value="" readonly="" data-values="1,2,3">
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label for="name" class="weui-label">盘口(多选)</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" id="tapes" type="text" value="" readonly="" data-values="1,2,3">
                     </div>
                 </div>
             </div>
@@ -104,7 +110,7 @@
         <!-- 概念划分 -->
         <div class="weui-panel weui-panel_access">
             <div class="weui-panel__hd" id="concect_open" style="font-size: 15px;">
-                概念划分<i class="down"></i><i class="up" style="display:none;"></i>
+                行业概念<i class="down"></i><i class="up" style="display:none;"></i>
                 <!-- <span style="float:right">
                 共
                 <span class="concect_count" style="color: red;">0</span>
@@ -113,13 +119,13 @@
             </div>
             <div class="weui-panel__bd" id="concect_content">
                 <div class="weui-cell">
-                    <div class="weui-cell__hd"><label for="name" class="weui-label">所属概念</label></div>
+                    <div class="weui-cell__hd"><label for="name" class="weui-label">所属概念(多选)</label></div>
                     <div class="weui-cell__bd">
                         <input class="weui-input" id="idea" type="text" value="" readonly="" data-values="1,2,3">
                     </div>
                 </div>
                 <div class="weui-cell">
-                    <div class="weui-cell__hd"><label for="name" class="weui-label">行业标签</label></div>
+                    <div class="weui-cell__hd"><label for="name" class="weui-label">行业标签(多选)</label></div>
                     <div class="weui-cell__bd">
                         <input class="weui-input" id="tag" type="text" value="" readonly="" data-values="1,2,3">
                     </div>
@@ -1290,6 +1296,7 @@
                 var formsData = data.forms;
                 var label = data.label;
                 var location = data.location;
+                var tape = data.tape;
                 $("#job").select({
                     title: "选择行业",
                     multi: true,
@@ -1355,6 +1362,16 @@
                     onChange: function (e) {
                         var labelsData = e.values;
                         forms = labelsData.split(',')
+                    }
+                });
+
+                $("#tapes").select({
+                    title: "选择组织形式",
+                    multi: true,
+                    items: tape,
+                    onChange: function (e) {
+                        var tapesData = e.values;
+                        forms = tapesData.split(',')
                     }
                 });
             }
