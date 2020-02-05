@@ -106,9 +106,9 @@
                 </div>
 
                 <div class="weui-cell">
-                    <div class="weui-cell__hd"><label for="name" class="weui-label">主营业务关键词</label></div>
+                    <div class="weui-cell__hd"><label for="name" class="weui-label">主营业务关键词匹配</label></div>
                     <div class="weui-cell__bd">
-                        <input class="weui-input" id="keyword" placeholder="请输入关键词" maxlength="4">
+                        <input class="weui-input" id="majorkeyword" placeholder="请输入关键词" maxlength="4">
                     </div>
                 </div>
             </div>
@@ -720,6 +720,7 @@
             belongs = [],
             order_type = '',
             order = '',
+            majorkeyword = '',
             locations = [],
             organizational_form = [],
             concepts = [],
@@ -802,10 +803,10 @@
         var twentyfourMin = -10000, twentyfourMax = 10000;
         var twentyfiveMin = -10000, twentyfiveMax = 10000;
         var twentysixMin = -10000, twentysixMax = 10000;
-
-
-
-
+        
+        $('#majorkeyword').bind('input propertychange', function (e) {
+            majorkeyword = e.delegateTarget.value
+        })
         $('#twentysixMin').bind('input propertychange', function (e) {
             twentysixMin = parseInt(e.delegateTarget.value)
         })
@@ -1032,6 +1033,7 @@
                     "locations": Array.from(new Set(locations)),
                     "forms": Array.from(new Set(forms)),
                     "tapes": Array.from(new Set(tapes)), 
+                    "majorkeyword": majorkeyword,
                     "concepts": Array.from(new Set(concepts)),
                     "labels": Array.from(new Set(labels)),
                     "per_tickets": {
