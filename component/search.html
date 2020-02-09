@@ -192,23 +192,13 @@
                     </div>
                 </div>
 
-                <!-- <div class="weui-cell">
-                    <div class="weui-cell__hd"><label for="name" class="weui-label">创新低</label></div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label for="name" class="weui-label">创新高/低</label></div>
                     <div class="weui-cell__bd">
-                        <input class="weui-input" id="dcountlow" placeholder="日线数量" maxlength="2" type="number">
-                        <input class="weui-input" id="wcountlow" placeholder="周线数量" maxlength="2" type="number">
-                        <input class="weui-input" id="mcountlow" placeholder="月线数量" maxlength="2" type="number">
+                        <input class="weui-input" id="newpriceData" type="text" value="" readonly="" data-values="1,2,3">
                     </div>
                 </div>
 
-                <div class="weui-cell">
-                    <div class="weui-cell__hd"><label for="name" class="weui-label">创新高</label></div>
-                    <div class="weui-cell__bd">
-                        <input class="weui-input" id="dcounthigh" placeholder="日线数量" maxlength="2" type="number">
-                        <input class="weui-input" id="wcounthigh" placeholder="周线数量" maxlength="2" type="number">
-                        <input class="weui-input" id="mcounthigh" placeholder="月线数量" maxlength="2" type="number">
-                    </div>
-                </div> -->
                 <!-- <div class="weui-cell">
                 <div class="weui-cell__hd"><label for="name" class="weui-label">其他</label></div>
                 <div class="weui-cell__bd">
@@ -754,6 +744,7 @@
             week = [],
             month = [],
             price = [],
+            newprice = [],
 
             last_percent = {},
             last_amplitude = {},
@@ -1062,22 +1053,13 @@
             var data = {
                 "query": {
                     "predicts": {
-                        day, week, month, price
+                        day, week, month, price, new_price
                     },
-                
                     "belongs": Array.from(new Set(belongs)),
                     "locations": Array.from(new Set(locations)),
                     "forms": Array.from(new Set(forms)),
-                    "tapes": Array.from(new Set(tapes)), 
+                    "tapes": Array.from(new Set(tapes)),
                     "majorkeyword": majorkeyword,
-                    // "new_price" : {
-                    //     "dcountlow" : dcountlow, 
-                    //     "wcountlow" : wcountlow, 
-                    //     "mcountlow" : mcountlow, 
-                    //     "dcounthigh" : dcounthigh, 
-                    //     "wcounthigh" : wcounthigh, 
-                    //     "mcounthigh" : mcounthigh,
-                    // },
                     "concepts": Array.from(new Set(concepts)),
                     "labels": Array.from(new Set(labels)),
                     "per_tickets": {
@@ -1293,6 +1275,7 @@
                 var data = res.data;
                 var moneyArr = data['月线形态'];
                 var priceArr = data['量价形态'];
+                var newpriceArr = data['新价位'];
                 var kData = data['日线形态'];
                 var otherData = data['其它'];
                 var jigouchicang = data['机构持仓情况'];
@@ -1336,6 +1319,14 @@
                     }
                 });
 
+                $("#newpriceData").select({
+                    title: "选择创新高/低股票",
+                    multi: true,
+                    items: newpriceArr,
+                    onChange: function (e) {
+                        newprice = e.values.split(',')
+                    }
+                });
 
             }
         })
