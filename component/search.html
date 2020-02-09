@@ -192,7 +192,7 @@
                     </div>
                 </div>
 
-                <div class="weui-cell">
+                <!-- <div class="weui-cell">
                     <div class="weui-cell__hd"><label for="name" class="weui-label">创新低</label></div>
                     <div class="weui-cell__bd">
                         <input class="weui-input" id="dcountlow" placeholder="日线数量" maxlength="2" type="number">
@@ -208,7 +208,7 @@
                         <input class="weui-input" id="wcounthigh" placeholder="周线数量" maxlength="2" type="number">
                         <input class="weui-input" id="mcounthigh" placeholder="月线数量" maxlength="2" type="number">
                     </div>
-                </div>
+                </div> -->
                 <!-- <div class="weui-cell">
                 <div class="weui-cell__hd"><label for="name" class="weui-label">其他</label></div>
                 <div class="weui-cell__bd">
@@ -819,10 +819,30 @@
         var twentyfourMin = -10000, twentyfourMax = 10000;
         var twentyfiveMin = -10000, twentyfiveMax = 10000;
         var twentysixMin = -10000, twentysixMax = 10000;
+
+        // var dcountlow = 0, wcountlow =0, mcountlow = 0, dcounthigh=0, wcounthigh=0, mcounthigh=0;
         
         $('#majorkeyword').bind('input propertychange', function (e) {
             majorkeyword = e.delegateTarget.value
         })
+        // $('#dcountlow').bind('input propertychange', function (e) {
+        //     dcountlow = parseInt(e.delegateTarget.value)
+        // })
+        // $('#wcountlow').bind('input propertychange', function (e) {
+        //     wcountlow = parseInt(e.delegateTarget.value)
+        // })
+        // $('#mcountlow').bind('input propertychange', function (e) {
+        //     mcountlow = parseInt(e.delegateTarget.value)
+        // })
+        // $('#dcounthigh').bind('input propertychange', function (e) {
+        //     dcounthigh = parseInt(e.delegateTarget.value)
+        // })
+        // $('#wcounthigh').bind('input propertychange', function (e) {
+        //     wcounthigh = parseInt(e.delegateTarget.value)
+        // })
+        // $('#mcounthigh').bind('input propertychange', function (e) {
+        //     mcounthigh = parseInt(e.delegateTarget.value)
+        // })
         $('#twentysixMin').bind('input propertychange', function (e) {
             twentysixMin = parseInt(e.delegateTarget.value)
         })
@@ -1050,6 +1070,14 @@
                     "forms": Array.from(new Set(forms)),
                     "tapes": Array.from(new Set(tapes)), 
                     "majorkeyword": majorkeyword,
+                    // "new_price" : {
+                    //     "dcountlow" : dcountlow, 
+                    //     "wcountlow" : wcountlow, 
+                    //     "mcountlow" : mcountlow, 
+                    //     "dcounthigh" : dcounthigh, 
+                    //     "wcounthigh" : wcounthigh, 
+                    //     "mcounthigh" : mcounthigh,
+                    // },
                     "concepts": Array.from(new Set(concepts)),
                     "labels": Array.from(new Set(labels)),
                     "per_tickets": {
@@ -1085,8 +1113,6 @@
                         "last_price": { "min": nineMin, "max": nineMax },
                         "last_day_range":{"min":last_day_range_min,"max":last_day_range_max}
                     },
-
-
                     "yl_ability": {
                         "yl_zongzichanlirunlv": {
                             min: tenMin,
@@ -1121,7 +1147,6 @@
                             max: seventeenMax
                         }
                     },
-
                     "cz_ability": {
                         "cz_zhuyingyewushouruzengzhanglv": {
                             min: eighteenMin,
