@@ -67,6 +67,7 @@
                                     percent_liutong: item.percent_liutong,
                                     price: item.price,
                                     number: item.number,
+                                    percent_stock_liutong: item.percent_signal_stock,
                                 })
                             })
                             $('#reportTable').bootstrapTable({
@@ -87,11 +88,11 @@
                                 clickToSelect: true,
                                 columns: [
                                     { field: "fund_name", title: "基金名称", align: "center", valign: "middle", sortable: "true" },
-                                    { field: "count", title: "持股数量(手)", align: "center", valign: "middle", sortable: "true" },
+                                    { field: "percent_stock_liutong", title: "股票流通占比", align: "center", valign: "middle", sortable: "true" },
                                     { field: "change", title: "变化趋势", align: "center", valign: "middle", sortable: "true" },
+                                    { field: "count", title: "持股数量(股)", align: "center", valign: "middle", sortable: "true" },
                                     { field: "percent_jingzhi", title: "占基金的净值比例", align: "center", valign: "middle", sortable: "true" },
-                                    { field: "percent_liutong", title: "占股票流通比例", align: "center", valign: "middle", sortable: "true" },
-
+                                    { field: "percent_liutong", title: "占基金流通比例", align: "center", valign: "middle", sortable: "true" },
                                     { field: "price", title: "持股市值(万元)", align: "center", valign: "middle", sortable: "true" },
                                 ],
                                 data: zfData,
