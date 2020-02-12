@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-02-12 15:35:42
- * @LastEditTime : 2020-02-12 20:26:40
+ * @LastEditTime : 2020-02-12 20:29:47
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp2/static/component/zxg.html
@@ -73,33 +73,34 @@
                         data: JSON.stringify(jsonData),
                         success: function (res) {
                             $.toast(res.data)
-                            $('#zxg').html('')
-                            $.ajax({
-                                url: 'https://stock.zhixiutec.com/api/my_select',
-                                success: function (res) {
-                                    var data = res.data;
-                                    var str = '';
-                                    data.forEach(item => {
-                                        str += `
-                      <div class="weui-cell weui-cell_swiped">
-                        <div class="weui-cell__bd" style="transform: translate3d(0px, 0px, 0px);">
-                            <div class="weui-cell">
-                            <div class="weui-cell__bd">
-                                <p>${item.name}</p>
-                            </div>
-                            <div class="weui-cell__ft"><<<</div>
-                            </div>
-                        </div>
-                        <div class="weui-cell__ft">
-                            <a data-id=${item.ID} class="weui-swiped-btn weui-swiped-btn_warn delete-swipeout" href="javascript:">删除</a>
-                        </div>
-                        </div>
-                      `
-                                    })
-                                    $('#zxg').append(str)
-                                    $('.weui-cell_swiped').swipeout();
-                                }
-                            })
+                            location.reload() 
+                    //         $('#zxg').html('')
+                    //         $.ajax({
+                    //             url: 'https://stock.zhixiutec.com/api/my_select',
+                    //             success: function (res) {
+                    //                 var data = res.data;
+                    //                 var str = '';
+                    //                 data.forEach(item => {
+                    //                     str += `
+                    //   <div class="weui-cell weui-cell_swiped">
+                    //     <div class="weui-cell__bd" style="transform: translate3d(0px, 0px, 0px);">
+                    //         <div class="weui-cell">
+                    //         <div class="weui-cell__bd">
+                    //             <p>${item.name}</p>
+                    //         </div>
+                    //         <div class="weui-cell__ft"><<<</div>
+                    //         </div>
+                    //     </div>
+                    //     <div class="weui-cell__ft">
+                    //         <a data-id=${item.ID} class="weui-swiped-btn weui-swiped-btn_warn delete-swipeout" href="javascript:">删除</a>
+                    //     </div>
+                    //     </div>
+                    //   `
+                    //                 })
+                    //                 $('#zxg').append(str)
+                    //                 $('.weui-cell_swiped').swipeout();
+                    //             }
+                    //         })
                         }
                     })
                 })
