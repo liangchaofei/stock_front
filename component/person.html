@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime : 2020-02-12 15:38:25
+ * @LastEditTime : 2020-02-12 15:56:53
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -235,13 +235,7 @@
 
             }
         })
-        // 我的自选股
-        $.ajax({
-            url:'https://stock.zhixiutec.com/api/my_select',
-            success:function(res){
-                console.log('res',res)
-            }
-        })
+     
         // 获取我的需求
         $.ajax({
             url: `https://stock.zhixiutec.com/api/my_comments`,
