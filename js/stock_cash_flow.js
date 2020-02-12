@@ -28,7 +28,7 @@ function splitData(rawData) {
 
 function calculateMA(dayCount, data) {
     var result = [];
-    for (var i = 0, len = data && data.values &&data.values.length; i < len; i++) {
+    for (var i = 0, len = data && data.values && data.values.length; i < len; i++) {
         if (i < dayCount) {
             result.push('-');
             continue;
@@ -41,17 +41,17 @@ function calculateMA(dayCount, data) {
     }
     return result;
 }
-function getQueryString(name) { 
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
-    var r = window.location.search.substr(1).match(reg); 
-    if (r != null) return decodeURIComponent(r[2]); return null; 
+function getQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return decodeURIComponent(r[2]); return null;
 }
 
 var ua = navigator.userAgent.toLowerCase();
-var code =getQueryString('code');
+var code = getQueryString('code');
 var date = getUrlParam('date');
 var stock_cash_flowData = [], stock_liabilitiesData = [], stock_profitData = [];
-$('#loadimg').css("display","block")
+$('#loadimg').css("display", "block")
 
 $.ajax({
     url: 'https://stock.zhixiutec.com/api/user',
@@ -60,26 +60,26 @@ $.ajax({
         var data = res.data;
         if (res.error_code === 2) {
             window.open(data, "_self");
-        }else{
+        } else {
             $.ajax({
                 url: `https://stock.zhixiutec.com/api/stock/detail?code=${escape(code)}`,
-                async:false,
+                async: false,
                 success: function (res) {
                     if (res.error_code === 1) {
                         $('#search_detail').css("display", "none")
                         $('#search_count').append(`<div>${res.err_msg}</div>`)
                     } else {
-                        $('#loadimg').css("display","none")
+                        $('#loadimg').css("display", "none")
                         $('#search_detail').css("display", "block")
                         $('#search_count').css("display", "none")
                         // 设置href
-                        $('#ch_count').attr('href',`/component/ch.html?code=${code}`)
-                        $('#zf_count').attr('href',`/component/table.html?code=${code}&type=zf`)
-                        $('#pg_count').attr('href',`/component/pg.html?code=${code}&type=pg`)
-                        $('#zz_count').attr('href',`/component/zz.html?code=${code}&type=zz`)
-                        $('#sg_count').attr('href',`/component/sg.html?code=${code}&type=sg`)
-                        $('#fh_count').attr('href',`/component/fh.html?code=${code}&type=fh`)
-                        $('#kg_count').attr('href',`/component/kg.html?code=${code}`)
+                        $('#ch_count').attr('href', `/component/ch.html?code=${code}`)
+                        $('#zf_count').attr('href', `/component/table.html?code=${code}&type=zf`)
+                        $('#pg_count').attr('href', `/component/pg.html?code=${code}&type=pg`)
+                        $('#zz_count').attr('href', `/component/zz.html?code=${code}&type=zz`)
+                        $('#sg_count').attr('href', `/component/sg.html?code=${code}&type=sg`)
+                        $('#fh_count').attr('href', `/component/fh.html?code=${code}&type=fh`)
+                        $('#kg_count').attr('href', `/component/kg.html?code=${code}`)
                         var data = res.data;
                         // 股东
                         var stockholder = data.stockholder;
@@ -93,7 +93,7 @@ $.ajax({
                         } else {
                             $('#percits_price').addClass('loser')
                         }
-            
+
                         // 十大流动股东
                         var cirListColumns = [
                             [
@@ -103,23 +103,124 @@ $.ajax({
                                 { field: 'change', title: '变化', width: 180 },
                             ]
                         ];
-            
+
                         var stockholderData = [];
                         stockholder.forEach((item, index) => {
                             stockholderData.push({
-                                holder_name: item.holder_name, percent: item.percent,count:item.count, change: item.change
+                                holder_name: item.holder_name, percent: item.percent, count: item.count, change: item.change
                             })
-            
-                        })   
+
+                        })
                         var config = {
                             "data": stockholderData,
                             "columns": cirListColumns,
                             "click": function (index, row) {
-                                window.open(`/component/gd.html?holder_name=${encodeURIComponent(row.holder_name)}`,"_self")
+                                window.open(`/component/gd.html?holder_name=${encodeURIComponent(row.holder_name)}`, "_self")
                             }
                         };
                         $("#test").mobileTable(config);
-            
+
+
+                        // 近期公告
+                        $.ajax({
+                            url: `https://stock.zhixiutec.com/api/stock/public?type=news&code=${code}`,
+                            success: function (res) {
+                                console.log('res', res)
+                                var data = res.data;
+                                var zfData = []
+                                data.forEach(item => {
+                                    zfData.push({
+                                        title:item.title,
+                                        time:item.time,
+                                        type:item.type,
+                                        url:item.url
+                                    })
+                                })
+                                $('#currTable').bootstrapTable({
+                                    method: 'get',
+                                    cache: false,
+                                    height: 400,
+                                    striped: true,
+                                    pagination: true,
+                                    pageSize: 10,
+                                    pageNumber: 1,
+                                    pageList: [10, 20, 50, 100, 200, 500],
+                                    search: false,
+                                    showColumns: false,
+                                    showRefresh: false,
+                                    showExport: false,
+                                    exportTypes: ['csv', 'txt', 'xml'],
+                                    search: false,
+                                    clickToSelect: true,
+                                    columns: [
+                                        { field: "title", title: "标题", align: "center", valign: "middle", sortable: "true" },
+                                        { field: "time", title: "日期", align: "center", valign: "middle", sortable: "true" },
+                                        { field: "type", title: "类型", align: "center", valign: "middle", sortable: "true" },
+                                    ],
+                                    data: zfData,
+                                    onPageChange: function (size, number) {
+                                    },
+                                    onClickRow:function(row){
+                                        window.open(row.url,'_self')
+                                    }
+                                });
+                             
+                            }
+                        })
+                        $(window).resize(function () {
+                            $('#currTable').bootstrapTable('resetView');
+                        });
+
+                        // 季度公告
+                        
+                        $.ajax({
+                            url: `https://stock.zhixiutec.com/api/stock/public?type=reports&code=${code}`,
+                            success: function (res) {
+                                console.log('res', res)
+                                var data = res.data;
+                                var zfData = []
+                                data.forEach(item => {
+                                    zfData.push({
+                                        title:item.title,
+                                        time:item.time,
+                                        type:item.type,
+                                        url:item.url
+                                    })
+                                })
+                                $('#jdTable').bootstrapTable({
+                                    method: 'get',
+                                    cache: false,
+                                    height: 400,
+                                    striped: true,
+                                    pagination: true,
+                                    pageSize: 10,
+                                    pageNumber: 1,
+                                    pageList: [10, 20, 50, 100, 200, 500],
+                                    search: false,
+                                    showColumns: false,
+                                    showRefresh: false,
+                                    showExport: false,
+                                    exportTypes: ['csv', 'txt', 'xml'],
+                                    search: false,
+                                    clickToSelect: true,
+                                    columns: [
+                                        { field: "title", title: "标题", align: "center", valign: "middle", sortable: "true" },
+                                        { field: "time", title: "日期", align: "center", valign: "middle", sortable: "true" },
+                                        { field: "type", title: "类型", align: "center", valign: "middle", sortable: "true" },
+                                    ],
+                                    data: zfData,
+                                    onPageChange: function (size, number) {
+                                    },
+                                    onClickRow:function(row){
+                                        window.open(row.url,'_self')
+                                    }
+                                });
+                             
+                            }
+                        })
+                        $(window).resize(function () {
+                            $('#jdTable').bootstrapTable('resetView');
+                        });
                         // 财务数据
                         // 运营能力
                         var yy_data = per_ticket.yy;
@@ -137,7 +238,7 @@ $.ajax({
                             `
                         })
                         $('#yy_content').append(yy_str)
-            
+
                         // 成长能力
                         var cz_data = per_ticket.cz;
                         var cz_str = '';
@@ -154,7 +255,7 @@ $.ajax({
                             `
                         })
                         $('#cz_content').append(cz_str)
-            
+
                         // 每股指标
                         var mg_data = per_ticket.mg;
                         var mg_str = '';
@@ -171,7 +272,7 @@ $.ajax({
                             `
                         })
                         $('#mg_content').append(mg_str)
-            
+
                         // 盈利能力
                         var yl_data = per_ticket.yl;
                         var yl_str = '';
@@ -189,26 +290,26 @@ $.ajax({
                         })
                         $('#yl_content').append(yl_str)
                         // 数量统计
-                        if(predict.fund_count === 0 ){
-                            $('#cc_count').css("display","none")
+                        if (predict.fund_count === 0) {
+                            $('#cc_count').css("display", "none")
                         }
-                        if(predict.subcomp_count === 0 ){
-                            $('#kk_company').css("display","none")
+                        if (predict.subcomp_count === 0) {
+                            $('#kk_company').css("display", "none")
                         }
-                        if(predict.fenghong_count === 0 ){
-                            $('#fg_count').css("display","none")
+                        if (predict.fenghong_count === 0) {
+                            $('#fg_count').css("display", "none")
                         }
-                        if(predict.songgu_count === 0 ){
-                            $('#sg_count').css("display","none")
+                        if (predict.songgu_count === 0) {
+                            $('#sg_count').css("display", "none")
                         }
-                        if(predict.zhuangzeng_count === 0 ){
-                            $('#zz_count').css("display","none")
+                        if (predict.zhuangzeng_count === 0) {
+                            $('#zz_count').css("display", "none")
                         }
-                        if(predict.peigu_count === 0 ){
-                            $('#pg_count').css("display","none")
+                        if (predict.peigu_count === 0) {
+                            $('#pg_count').css("display", "none")
                         }
-                        if(predict.zengfa_count === 0 ){
-                            $('#zf_count').css("display","none")
+                        if (predict.zengfa_count === 0) {
+                            $('#zf_count').css("display", "none")
                         }
                         window.gpName = predict.name
                         $('#per_fund_count').text(`${predict.fund_count}个`)
@@ -224,20 +325,20 @@ $.ajax({
                         var title = document.createElement('title');
                         title.append(`${predict.name}-知修数据`)
                         document.head.appendChild(title);
-               
+
                         $('#percits_code').text(predict.code)
-            
+
                         $('#percits_location').text(stock.location)
                         $('#percits_belong').text(stock.belong)
                         $('#percits_organizational_form').text(stock.organizational_form)
-            
-            
+
+
                         $('#stock_company_name').text(stock.company_name)
                         $('#stock_institutional_type').text(stock.institutional_type)
                         $('#stock_establishment_time').text(stock.establishment_time)
-            
-            
-            
+
+
+
                         var conditionText = "";
                         predict.condition.split('; ').map(item => {
                             conditionText += `<span class=${item ? 'ant-tag-red' : ''}>${item}</span>`
@@ -248,21 +349,21 @@ $.ajax({
                             badconditionText += `<span class=${item ? 'ant-tag-green' : ''}>${item}</span>`
                         })
                         $('#percits_bad_condition').html(badconditionText)
-            
+
                         var financeText = "";
                         predict.finance.split('; ').map(item => {
                             financeText += `<span class=${item ? 'ant-tag-gold' : ''}>${item}</span>`
                         })
                         $('#percits_finance').html(financeText)
-            
-            
+
+
                         var conceptText = "";
                         stock.concept.split(',').map(item => {
                             conceptText += `<span class=${item ? 'ant-tag-blue' : ''}>${item}</span>`
                         })
                         $('#percits_concept').html(conceptText)
-            
-            
+
+
                         $('#percits_price').html(`<span style="margin-right:10px">${predict.price}¥</span>${str}${predict.percent}%`)
                         $('#percits_sm_count').text(predict.sm_count)
                         $('#percits_fund_count').text(predict.fund_count)
@@ -271,15 +372,15 @@ $.ajax({
                         $('#detail_address').text(stock.address);
                         $('#detail_belong').text(stock.belong);
                         $('#detail_address').text(stock.address);
-            
-            
-            
-            
+
+
+
+
                         $('#detail_business_scope').text(stock.business_scope);
                         $('#detail_code').text(stock.code);
                         $('#detail_company_name').text(stock.company_name);
-            
-            
+
+
                         $('#detail_concept').text(stock.concept);
                         $('#detail_establishment_time').text(stock.establishment_time);
                         $('#detail_history_names').text(stock.history_names);
@@ -321,7 +422,7 @@ $.ajax({
                             stack: '总量',
                             data: cash_remain
                         }]
-            
+
                         // 资产负债表
                         var stock_liabilities = data.stock_liabilities;
                         var current_assets = [], not_current_assets = [], total_assets = [], current_liabilities = [], not_current_liabilities = [], total_liabilities = [];
@@ -403,9 +504,9 @@ $.ajax({
                         // setInterval(function () {
                         //     document.getElementById("right_div").style.width = "" + document.documentElement.clientWidth - 130 + "px";
                         // }, 0);
-            
-            
-            
+
+
+
                         // for (var i = 0; i < stockholder.length; i++) {
                         //     $("#left_table2").append(`<tr><th>${stockholder[i].holder_name}</th></tr>`);
                         //     $("#right_table2").append("<tr><td>" + stockholder[i].count + "</td><td>" + stockholder[i].percent + "</td><td>" + stockholder[i].change + "</td></tr>");
@@ -419,7 +520,7 @@ $.ajax({
                         // week
                         var ticket_history_weekly = data.ticket_history_weekly;
                         var myChart_stock_cash_flow = echarts.init(document.getElementById('stock_cash_flow'))
-            
+
                         var stock_cash_flow = {
                             backgroundColor: '#000',
                             title: {
@@ -470,14 +571,14 @@ $.ajax({
                             },
                             series: stock_cash_flowData
                         };
-            
-            
+
+
                         myChart_stock_cash_flow.setOption(stock_cash_flow)
-            
-            
-            
+
+
+
                         var myChart_stock_liabilities = echarts.init(document.getElementById('stock_liabilities'))
-            
+
                         var stock_liabilities = {
                             backgroundColor: '#000',
                             title: {
@@ -519,15 +620,15 @@ $.ajax({
                             },
                             series: stock_liabilitiesData
                         };
-            
-            
+
+
                         myChart_stock_liabilities.setOption(stock_liabilities)
-            
-            
-            
+
+
+
                         // 分数
                         var myChart_stock_score = echarts.init(document.getElementById('stock_score'))
-            
+
                         var stock_score = {
                             tooltip: {
                                 formatter: '{a} <br/>{b} : {c}%'
@@ -555,13 +656,13 @@ $.ajax({
                                 }
                             ]
                         };
-            
+
                         // option.series[0].data[0].value = (Math.random() * 100).toFixed(2) - 0;
                         myChart_stock_score.setOption(stock_score, true);
-            
+
                         // 利润
                         var myChart_stock_profit = echarts.init(document.getElementById('stock_profit'))
-            
+
                         var stock_profit = {
                             backgroundColor: '#000',
                             title: {
@@ -603,10 +704,10 @@ $.ajax({
                             },
                             series: stock_profitData
                         };
-            
-            
+
+
                         myChart_stock_profit.setOption(stock_profit)
-            
+
                         var mainContainer = document.getElementById('daykline');
                         var resizeMainContainer = function () {
                             mainContainer.style.width = window.innerWidth + 'px';
@@ -886,22 +987,22 @@ $.ajax({
                                 }
                             ]
                         }
-            
-            
+
+
                         // 使用刚指定的配置项和数据显示图表。
                         mainChart.setOption(option, true);
-            
+
                     }
-            
-            
-            
+
+
+
                 }
             })
-            
-            
+
+
             $.ajax({
-                url:`https://stock.zhixiutec.com/api/stock/k/detail?code=${escape(code)}&type=week&token=${data.token}`,
-                success:function(res){
+                url: `https://stock.zhixiutec.com/api/stock/k/detail?code=${escape(code)}&type=week&token=${data.token}`,
+                success: function (res) {
                     var data = res.data;
                     var dayData = [];
                     data.forEach(item => {
@@ -936,7 +1037,7 @@ $.ajax({
                                 color: '#fff'
                             }
                         },
-                    
+
                         axisPointer: {
                             link: { xAxisIndex: 'all' },
                             label: {
@@ -1168,16 +1269,16 @@ $.ajax({
                             }
                         ]
                     }
-            
-            
+
+
                     // 使用刚指定的配置项和数据显示图表。
                     mainChart.setOption(option, true);
                 }
             })
-            
+
             $.ajax({
-                url:`https://stock.zhixiutec.com/api/stock/k/detail?code=${escape(code)}&type=month&token=${data.token}`,
-                success:function(res){
+                url: `https://stock.zhixiutec.com/api/stock/k/detail?code=${escape(code)}&type=month&token=${data.token}`,
+                success: function (res) {
                     var data = res.data;
                     var dayData = [];
                     data.forEach(item => {
@@ -1462,8 +1563,8 @@ $.ajax({
                             }
                         ]
                     }
-            
-            
+
+
                     // 使用刚指定的配置项和数据显示图表。
                     mainChart.setOption(option, true);
                 }
