@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-30 22:17:16
- * @LastEditTime : 2020-01-19 15:57:17
+ * @LastEditTime : 2020-02-12 18:41:01
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/js/detail.js
@@ -18,7 +18,7 @@ var code = getUrlParam('code');
 
 // 基础信息开关
 $('#basic_info_content').css({"display":"none"})
-$('.stock_btn').on('click',function(){
+$('#stock_btn').on('click',function(){
     $('#basic_info_content').slideToggle("fast");
     $(".stock_btn .up").toggle();
     $(".stock_btn .down").toggle();
