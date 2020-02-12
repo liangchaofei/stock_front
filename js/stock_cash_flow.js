@@ -72,6 +72,10 @@ $.ajax({
                         $('#loadimg').css("display", "none")
                         $('#search_detail').css("display", "block")
                         $('#search_count').css("display", "none")
+
+
+                      
+
                         // 设置href
                         $('#ch_count').attr('href', `/component/ch.html?code=${code}`)
                         $('#zf_count').attr('href', `/component/table.html?code=${code}&type=zf`)
@@ -81,6 +85,7 @@ $.ajax({
                         $('#fh_count').attr('href', `/component/fh.html?code=${code}&type=fh`)
                         $('#kg_count').attr('href', `/component/kg.html?code=${code}`)
                         var data = res.data;
+                      
                         // 股东
                         var stockholder = data.stockholder;
                         var per_ticket = data.per_ticket;
@@ -326,6 +331,19 @@ $.ajax({
                         title.append(`${predict.name}-知修数据`)
                         document.head.appendChild(title);
 
+
+                        // 加入自选股
+                       $('#joinBtn').on('click',function(){
+                        var joinBtnData = {"code":code, "name":predict.name}
+                        $.ajax({
+                            url:'https://stock.zhixiutec.com/api/add_stock',
+                            type:'post',
+                            data:JSON.stringify(joinBtnData),
+                            success:function(res){
+                                $.toast(res.data)
+                            }
+                        })
+                       })
                         $('#percits_code').text(predict.code)
 
                         $('#percits_location').text(stock.location)
