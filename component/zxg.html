@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-02-12 15:35:42
- * @LastEditTime : 2020-02-12 20:29:47
+ * @LastEditTime : 2020-02-13 09:39:11
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp2/static/component/zxg.html
@@ -33,10 +33,11 @@
                 var data = res.data;
                 var str = '';
                 data.forEach(item => {
+                    console.log('item',item)
                     str += `
                       <div class="weui-cell weui-cell_swiped gogogo" data-code=${item.code}>
                        
-                            <div class="weui-cell__bd" style="transform: translate3d(0px, 0px, 0px);">
+                        <div class="weui-cell__bd" style="transform: translate3d(0px, 0px, 0px);">
                             <div class="weui-cell">
                             <div class="weui-cell__bd goCode">
                                 <p>${item.name} ${item.code}</p>
@@ -58,8 +59,8 @@
                 }
                 
                 $('.weui-cell_swiped').swipeout();
-                $('.goCode').on('click',function(){
-                    var code = $('.gogogo').attr('data-code');
+                $('.gogogo').on('click',function(){
+                    var code = $(this).attr('data-code');
                     window.open(`/component/detail.html?code=${code}`,"_self")
                 })
                 $('.delete-swipeout').on('click', function (res) {
