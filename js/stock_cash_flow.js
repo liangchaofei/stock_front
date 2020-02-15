@@ -51,6 +51,8 @@ var ua = navigator.userAgent.toLowerCase();
 var code = getQueryString('code');
 var date = getUrlParam('date');
 var stock_cash_flowData = [], stock_liabilitiesData = [], stock_profitData = [];
+
+console.log('aaa',escape(code))
 $('#loadimg').css("display", "block")
 
 $.ajax({
@@ -77,13 +79,13 @@ $.ajax({
                       
 
                         // 设置href
-                        $('#ch_count').attr('href', `/component/ch.html?code=${code}`)
-                        $('#zf_count').attr('href', `/component/table.html?code=${code}&type=zf`)
-                        $('#pg_count').attr('href', `/component/pg.html?code=${code}&type=pg`)
-                        $('#zz_count').attr('href', `/component/zz.html?code=${code}&type=zz`)
-                        $('#sg_count').attr('href', `/component/sg.html?code=${code}&type=sg`)
-                        $('#fh_count').attr('href', `/component/fh.html?code=${code}&type=fh`)
-                        $('#kg_count').attr('href', `/component/kg.html?code=${code}`)
+                        $('#ch_count').attr('href', `/component/ch.html?code=${escape(code)}`)
+                        $('#zf_count').attr('href', `/component/table.html?code=${escape(code)}&type=zf`)
+                        $('#pg_count').attr('href', `/component/pg.html?code=${escape(code)}&type=pg`)
+                        $('#zz_count').attr('href', `/component/zz.html?code=${escape(code)}&type=zz`)
+                        $('#sg_count').attr('href', `/component/sg.html?code=${escape(code)}&type=sg`)
+                        $('#fh_count').attr('href', `/component/fh.html?code=${escape(code)}&type=fh`)
+                        $('#kg_count').attr('href', `/component/kg.html?code=${escape(code)}`)
                         var data = res.data;
                       
                         // 股东

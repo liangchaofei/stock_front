@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-09 22:30:20
- * @LastEditTime : 2020-01-21 11:45:12
+ * @LastEditTime : 2020-02-15 15:42:40
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp2/static/component/feedback.html
@@ -56,7 +56,7 @@
         var type = getUrlParam('type')
         // 增发
         $.ajax({
-                        url: `https://stock.zhixiutec.com/api/stock/subcomp?code=${code}`,
+                        url: `https://stock.zhixiutec.com/api/stock/subcomp?code=${escape(code)}`,
                         success: function (res) {
                             var data = res.data;
                             var zfData = []

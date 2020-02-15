@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-09 22:30:20
- * @LastEditTime : 2020-01-21 11:44:43
+ * @LastEditTime : 2020-02-15 15:41:43
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp2/static/component/feedback.html
@@ -54,7 +54,7 @@
 
         var code = getUrlParam('code');
         $.ajax({
-                        url: `https://stock.zhixiutec.com/api/stock/fund?code=${code}`,
+                        url: `https://stock.zhixiutec.com/api/stock/fund?code=${escape(code)}`,
                         success: function (res) {
                             var data = res.data;
                             var zfData = []
