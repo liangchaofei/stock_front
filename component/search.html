@@ -1203,18 +1203,25 @@
                                 <span style="font-size:16px;display:inline-block;width:5rem">${dataList[i].name}
                                     <span style="font-size:12px;color:#aaa">${dataList[i].tape}</span>
                                 </span>
-        
+                               
                                 <span class=${bigPercent}>${dataList[i].price}元</span>
                                 <span class=${bigPercent}>${str}${dataList[i].percent}%</span>
+                               
+                               
                                 <span class="score">${dataList[i].score}分</span>
                             </div>
                             <div class="weui-cell__bd">
                                 <span style="display:inline-block;width:4rem;font-size:12px">${dataList[i].code}</span>
-                                <span style="display:inline-block;width:4rem;font-size:12px;">${dataList[i].location}</span>    
+                                <span style="display:inline-block;width:2rem;font-size:13px">${dataList[i].location}</span>    
                                 <span class="form" style="display:inline-block;width:6rem;font-size:13px">${dataList[i].form}</span>
                                 <span class="belong" style="display:inline-block;font-size:13px;width:3rem">${dataList[i].belong}</span>
                             </div>
-                        
+                               
+                            <div class="weui-cell__bd">
+                                <span>数量统计：</span>
+                                <span><span class="static">基金</span>(${dataList[i].fund_count})</span>
+                                <span><span class="static">私募</span>(${dataList[i].simu_count})</span>
+                            </div>
 
                             <div class="weui-cell__bd">
                                 <span class="conditions"><span style="color:blue">
@@ -1236,7 +1243,7 @@
                                     <span style=${lowScore}>${dataList[i].bad_conditions}</span
                                 </span>
                             </div>
-                    
+                            
                             
                         </a>
                         `
@@ -1254,7 +1261,7 @@
                     }
                     else if (dataList === null) {
                         $("#scroll").hide();
-                        $('.gp_list').append(`<div style="text-align:center;padding: 10px 0;">暂无相关匹配结果</div>`)
+                        $('.gp_list').append(`<div style="text-align:center;padding: 10px 0;">暂无相关数据匹配</div>`)
                         // $(document.body).destroyInfinite();
                     }
                 },
