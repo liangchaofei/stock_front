@@ -539,111 +539,110 @@ $.ajax({
                         })
                         // week
                         var ticket_history_weekly = data.ticket_history_weekly;
-                        var myChart_stock_cash_flow = echarts.init(document.getElementById('stock_cash_flow'))
+                        // var myChart_stock_cash_flow = echarts.init(document.getElementById('stock_cash_flow'))
 
-                        var stock_cash_flow = {
-                            backgroundColor: '#000',
-                            title: {
-                                text: '现金流量表趋势',
-                                textStyle: {
-                                    color: '#fff'
-                                }
-                            },
-                            tooltip: {
-                                trigger: 'axis'
-                            },
-                            // legend: {
-                            //     data: ['经营活动产生的现金流量净额', '投资活动产生的现金流量净额', '筹资活动产生的现金流量净额', '期末现金及现金等价物余额']
-                            // },
-                            grid: {
-                                left: '3%',
-                                right: '4%',
-                                // bottom: '1%',
-                                // top:'1%',
-                                containLabel: true,
-                                height: '150px',
-                                padding: '0px'
-                            },
-                            toolbox: {
-                                show: false,
-                                feature: {
-                                    dataZoom: {
-                                        yAxisIndex: 'none'
-                                    },
-                                    dataView: { readOnly: false },
-                                    magicType: { type: ['line', 'bar'] },
-                                    restore: {},
-                                    saveAsImage: {}
-                                }
-                            },
-                            xAxis: {
-                                type: 'category',
-                                boundaryGap: false,
-                                data: date,
-                                axisLine: { lineStyle: { color: '#8392A5' } }
-                            },
-                            yAxis: {
-                                type: 'value',
-                                splitLine: {
-                                    show: false
-                                },
-                                axisLine: { lineStyle: { color: '#8392A5' } },
-                            },
-                            series: stock_cash_flowData
-                        };
-
-
-                        myChart_stock_cash_flow.setOption(stock_cash_flow)
+                        // var stock_cash_flow = {
+                        //     backgroundColor: '#000',
+                        //     title: {
+                        //         text: '现金流量表趋势',
+                        //         textStyle: {
+                        //             color: '#fff'
+                        //         }
+                        //     },
+                        //     tooltip: {
+                        //         trigger: 'axis'
+                        //     },
+                        //     // legend: {
+                        //     //     data: ['经营活动产生的现金流量净额', '投资活动产生的现金流量净额', '筹资活动产生的现金流量净额', '期末现金及现金等价物余额']
+                        //     // },
+                        //     grid: {
+                        //         left: '3%',
+                        //         right: '4%',
+                        //         // bottom: '1%',
+                        //         // top:'1%',
+                        //         containLabel: true,
+                        //         height: '150px',
+                        //         padding: '0px'
+                        //     },
+                        //     toolbox: {
+                        //         show: false,
+                        //         feature: {
+                        //             dataZoom: {
+                        //                 yAxisIndex: 'none'
+                        //             },
+                        //             dataView: { readOnly: false },
+                        //             magicType: { type: ['line', 'bar'] },
+                        //             restore: {},
+                        //             saveAsImage: {}
+                        //         }
+                        //     },
+                        //     xAxis: {
+                        //         type: 'category',
+                        //         boundaryGap: false,
+                        //         data: date,
+                        //         axisLine: { lineStyle: { color: '#8392A5' } }
+                        //     },
+                        //     yAxis: {
+                        //         type: 'value',
+                        //         splitLine: {
+                        //             show: false
+                        //         },
+                        //         axisLine: { lineStyle: { color: '#8392A5' } },
+                        //     },
+                        //     series: stock_cash_flowData
+                        // };
 
 
-
-                        var myChart_stock_liabilities = echarts.init(document.getElementById('stock_liabilities'))
-
-                        var stock_liabilities = {
-                            backgroundColor: '#000',
-                            title: {
-                                text: '资产负债趋势',
-                                textStyle: {
-                                    color: '#fff'
-                                }
-                            },
-                            tooltip: {
-                                trigger: 'axis'
-                            },
-                            // legend: {
-                            //     data: ['经营活动产生的现金流量净额', '投资活动产生的现金流量净额', '筹资活动产生的现金流量净额', '期末现金及现金等价物余额']
-                            // },
-                            grid: {
-                                left: '3%',
-                                right: '4%',
-                                bottom: '3%',
-                                containLabel: true
-                            },
-                            toolbox: {
-                                show: false,
-                                feature: {
-                                    saveAsImage: {}
-                                }
-                            },
-                            xAxis: {
-                                type: 'category',
-                                boundaryGap: false,
-                                data: date,
-                                axisLine: { lineStyle: { color: '#8392A5' } }
-                            },
-                            yAxis: {
-                                type: 'value',
-                                splitLine: {
-                                    show: false
-                                },
-                                axisLine: { lineStyle: { color: '#8392A5' } },
-                            },
-                            series: stock_liabilitiesData
-                        };
+                        // myChart_stock_cash_flow.setOption(stock_cash_flow)
 
 
-                        myChart_stock_liabilities.setOption(stock_liabilities)
 
+                        // var myChart_stock_liabilities = echarts.init(document.getElementById('stock_liabilities'))
+
+                        // var stock_liabilities = {
+                        //     backgroundColor: '#000',
+                        //     title: {
+                        //         text: '资产负债趋势',
+                        //         textStyle: {
+                        //             color: '#fff'
+                        //         }
+                        //     },
+                        //     tooltip: {
+                        //         trigger: 'axis'
+                        //     },
+                        //     // legend: {
+                        //     //     data: ['经营活动产生的现金流量净额', '投资活动产生的现金流量净额', '筹资活动产生的现金流量净额', '期末现金及现金等价物余额']
+                        //     // },
+                        //     grid: {
+                        //         left: '3%',
+                        //         right: '4%',
+                        //         bottom: '3%',
+                        //         containLabel: true
+                        //     },
+                        //     toolbox: {
+                        //         show: false,
+                        //         feature: {
+                        //             saveAsImage: {}
+                        //         }
+                        //     },
+                        //     xAxis: {
+                        //         type: 'category',
+                        //         boundaryGap: false,
+                        //         data: date,
+                        //         axisLine: { lineStyle: { color: '#8392A5' } }
+                        //     },
+                        //     yAxis: {
+                        //         type: 'value',
+                        //         splitLine: {
+                        //             show: false
+                        //         },
+                        //         axisLine: { lineStyle: { color: '#8392A5' } },
+                        //     },
+                        //     series: stock_liabilitiesData
+                        // };
+
+
+                        // myChart_stock_liabilities.setOption(stock_liabilities)
 
 
                         // 分数
@@ -681,52 +680,52 @@ $.ajax({
                         myChart_stock_score.setOption(stock_score, true);
 
                         // 利润
-                        var myChart_stock_profit = echarts.init(document.getElementById('stock_profit'))
+                        // var myChart_stock_profit = echarts.init(document.getElementById('stock_profit'))
 
-                        var stock_profit = {
-                            backgroundColor: '#000',
-                            title: {
-                                text: '利润趋势',
-                                textStyle: {
-                                    color: '#fff'
-                                }
-                            },
-                            tooltip: {
-                                trigger: 'axis'
-                            },
-                            // legend: {
-                            //     data: ['经营活动产生的现金流量净额', '投资活动产生的现金流量净额', '筹资活动产生的现金流量净额', '期末现金及现金等价物余额']
-                            // },
-                            grid: {
-                                left: '3%',
-                                right: '4%',
-                                bottom: '3%',
-                                containLabel: true
-                            },
-                            toolbox: {
-                                show: false,
-                                feature: {
-                                    saveAsImage: {}
-                                }
-                            },
-                            xAxis: {
-                                type: 'category',
-                                boundaryGap: false,
-                                data: date,
-                                axisLine: { lineStyle: { color: '#8392A5' } }
-                            },
-                            yAxis: {
-                                type: 'value',
-                                splitLine: {
-                                    show: false
-                                },
-                                axisLine: { lineStyle: { color: '#8392A5' } },
-                            },
-                            series: stock_profitData
-                        };
+                        // var stock_profit = {
+                        //     backgroundColor: '#000',
+                        //     title: {
+                        //         text: '利润趋势',
+                        //         textStyle: {
+                        //             color: '#fff'
+                        //         }
+                        //     },
+                        //     tooltip: {
+                        //         trigger: 'axis'
+                        //     },
+                        //     // legend: {
+                        //     //     data: ['经营活动产生的现金流量净额', '投资活动产生的现金流量净额', '筹资活动产生的现金流量净额', '期末现金及现金等价物余额']
+                        //     // },
+                        //     grid: {
+                        //         left: '3%',
+                        //         right: '4%',
+                        //         bottom: '3%',
+                        //         containLabel: true
+                        //     },
+                        //     toolbox: {
+                        //         show: false,
+                        //         feature: {
+                        //             saveAsImage: {}
+                        //         }
+                        //     },
+                        //     xAxis: {
+                        //         type: 'category',
+                        //         boundaryGap: false,
+                        //         data: date,
+                        //         axisLine: { lineStyle: { color: '#8392A5' } }
+                        //     },
+                        //     yAxis: {
+                        //         type: 'value',
+                        //         splitLine: {
+                        //             show: false
+                        //         },
+                        //         axisLine: { lineStyle: { color: '#8392A5' } },
+                        //     },
+                        //     series: stock_profitData
+                        // };
 
 
-                        myChart_stock_profit.setOption(stock_profit)
+                        // myChart_stock_profit.setOption(stock_profit)
 
                         var mainContainer = document.getElementById('daykline');
                         var resizeMainContainer = function () {
