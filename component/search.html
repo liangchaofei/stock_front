@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime: 2020-02-23 15:20:25
+ * @LastEditTime: 2020-02-23 16:37:19
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -65,7 +65,25 @@
         <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
     </div>
 
-
+    <div class="swiper-container swiper-container-horizontal">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper" style="transform: translate3d(-1280px, 0px, 0px); transition-duration: 0ms;"><div class="swiper-slide swiper-slide-duplicate swiper-slide-next" data-swiper-slide-index="2" style="width: 320px;"><img src="./images/swiper-3.jpg"></div>
+          <!-- Slides -->
+          <!-- <div class="swiper-slide" data-swiper-slide-index="0" style="width: 320px;height: 150px;">
+                <img src="http://jqweui.com/dist/demos/images/swiper-1.jpg" style="height: 150px;
+                width: 100%;">
+                <div style="position: relative;
+                top: -90px;
+                color: #fff;
+                text-align: center;">111</div>
+        </div>
+          <div class="swiper-slide" data-swiper-slide-index="1" style="width: 320px;height: 150px;"><img src="http://jqweui.com/dist/demos/images/swiper-2.jpg"></div>
+          <div class="swiper-slide swiper-slide-prev" data-swiper-slide-index="2" style="width: 320px;height: 150px;"><img src="http://jqweui.com/dist/demos/images/swiper-3.jpg"></div>
+        <div class="swiper-slide swiper-slide-duplicate swiper-slide-active" data-swiper-slide-index="0" style="width: 320px;height: 150px;"><img src="http://jqweui.com/dist/demos/images/swiper-1.jpg"></div> -->
+    </div>
+        <!-- If we need pagination -->
+        <div class="swiper-pagination swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span></div>
+      </div>
     <div>
         <!-- 基础信息 -->
 
@@ -685,7 +703,7 @@
     <script src="../js/search.js"></script>
     <script src="../js/oauth.js"></script>
     <script src="../js/GoToTop.js"></script>
-
+    <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/swiper.min.js"></script>
 
     <script>
         //示例
@@ -702,9 +720,46 @@
                 'transition': 'transform .5s ease-in-out'
             } //icon动画样式隐藏时
         });
+
+
+        $.ajax({
+            url:"https://stock.zhixiutec.com/api/stock/pics",
+            success:function(res){
+                var data = res.data;
+                var html = '';
+                data.forEach(item => {
+                    html += `
+                    <div class="swiper-slide" data-swiper-slide-index="0" style="width: 320px;height: 150px;">
+                <img src="${item.pic}" style="height: 100px;
+                width: 100%;">
+                <div style="position: relative;
+                top: -90px;
+                color: #fff;
+                text-align: center;">${item.content}</div>
+        </div>
+                    `
+                })
+                $('.swiper-wrapper').append(html)
+            }
+        })
     </script>
 
     <script>
+        var mySwiper = new Swiper('.swiper-container',
+                    {
+                           speed:1500,//播放速度
+                           autoHeight:true,
+                           loop:true,//是否循环播放
+                           setWrapperSize:true,
+                           autoplay:false,
+                        //    {
+                        //      delay: 5000,
+                        //      disableOnInteraction: false,
+                        //    },
+                           pagination:  '.swiper-pagination',//分页
+                           effect : 'slide',//动画效果
+                      }
+                 );
         var currentPage = 1;
         $('#must_data').on('click', function () {
             $.toast("该条件会查找必须满足所选K线条件组合的股票", "text");
