@@ -86,7 +86,14 @@ $.ajax({
                         $('#fh_count').attr('href', `/component/fh.html?code=${escape(code)}&type=fh`)
                         $('#kg_count').attr('href', `/component/kg.html?code=${escape(code)}`)
                         var data = res.data;
-                      
+                        // 两融
+                        var two_r = data.rong;
+                        var rzrq = data.rzrq;
+                        if(two_r){
+                            $('#tow_r').show()
+                        }else{
+                            $('#tow_r').hide()
+                        }
                         // 股东
                         var stockholder = data.stockholder;
                         var per_ticket = data.per_ticket;
@@ -315,6 +322,7 @@ $.ajax({
                         if (predict.zengfa_count === 0) {
                             $('#zf_count').css("display", "none")
                         }
+                        console.log('predict',predict)
                         window.gpName = predict.name
                         $('#per_fund_count').text(`${predict.fund_count}个`)
                         $('#per_subcomp_count').text(`${predict.subcomp_count}个`)
@@ -408,6 +416,27 @@ $.ajax({
                         $('#detail_name').text(stock.name);
                         $('#detail_net_address').text(stock.net_address);
                         $('#detail_organizational_form').text(stock.organizational_form);
+
+                        // 两融
+                        var twoData = data.rzrq;
+                        
+                        var all_count =[], balance = [],tow_date = [];
+                        twoData.length>0 && twoData.forEach(item => {
+                            tow_date.push(item.date.replace(/-/g,'.'))
+                            all_count.push(item.all_count)
+                            balance.push(item.balance)
+                        })
+                        var twoData_arr = [{
+                            name: '融资余额(元)',
+                            type: 'line',
+                            stack: '总量',
+                            data: balance
+                        },{
+                            name: '融券余额(股)',
+                            type: 'line',
+                            stack: '总量',
+                            data: all_count
+                        }]
                         // 现金流量表 
                         // var stock_cash_flow = data.stock_cash_flow;
                         // var date = [], cash_remain = [], fundraising_cash_flow = [], invest_cash_flow = [], manage_cash_flow = [];
@@ -532,65 +561,65 @@ $.ajax({
                         var ticket_history = data.ticket_history;
                         var dayData = [];
                         ticket_history.forEach(item => {
-                            dayData.push([item.date, item.kai, item.shou, item.low, item.high, item.total_count])
+                            dayData.push([item.date.replace(/-/g,'.'), item.kai, item.shou, item.low, item.high, item.total_count])
                         })
                         // week
                         var ticket_history_weekly = data.ticket_history_weekly;
-                        // var myChart_stock_cash_flow = echarts.init(document.getElementById('stock_cash_flow'))
+                        var myChart_stock_cash_flow = echarts.init(document.getElementById('stock_cash_flow'))
 
-                        // var stock_cash_flow = {
-                        //     backgroundColor: '#000',
-                        //     title: {
-                        //         text: '现金流量表趋势',
-                        //         textStyle: {
-                        //             color: '#fff'
-                        //         }
-                        //     },
-                        //     tooltip: {
-                        //         trigger: 'axis'
-                        //     },
-                        //     // legend: {
-                        //     //     data: ['经营活动产生的现金流量净额', '投资活动产生的现金流量净额', '筹资活动产生的现金流量净额', '期末现金及现金等价物余额']
-                        //     // },
-                        //     grid: {
-                        //         left: '3%',
-                        //         right: '4%',
-                        //         // bottom: '1%',
-                        //         // top:'1%',
-                        //         containLabel: true,
-                        //         height: '150px',
-                        //         padding: '0px'
-                        //     },
-                        //     toolbox: {
-                        //         show: false,
-                        //         feature: {
-                        //             dataZoom: {
-                        //                 yAxisIndex: 'none'
-                        //             },
-                        //             dataView: { readOnly: false },
-                        //             magicType: { type: ['line', 'bar'] },
-                        //             restore: {},
-                        //             saveAsImage: {}
-                        //         }
-                        //     },
-                        //     xAxis: {
-                        //         type: 'category',
-                        //         boundaryGap: false,
-                        //         data: date,
-                        //         axisLine: { lineStyle: { color: '#8392A5' } }
-                        //     },
-                        //     yAxis: {
-                        //         type: 'value',
-                        //         splitLine: {
-                        //             show: false
-                        //         },
-                        //         axisLine: { lineStyle: { color: '#8392A5' } },
-                        //     },
-                        //     series: stock_cash_flowData
-                        // };
+                        var stock_cash_flow = {
+                            backgroundColor: '#000',
+                            title: {
+                                text: '融资融券',
+                                textStyle: {
+                                    color: '#fff'
+                                }
+                            },
+                            tooltip: {
+                                trigger: 'axis'
+                            },
+                            // legend: {
+                            //     data: ['经营活动产生的现金流量净额', '投资活动产生的现金流量净额', '筹资活动产生的现金流量净额', '期末现金及现金等价物余额']
+                            // },
+                            grid: {
+                                left: '3%',
+                                right: '4%',
+                                // bottom: '1%',
+                                // top:'1%',
+                                containLabel: true,
+                                height: '150px',
+                                padding: '0px'
+                            },
+                            toolbox: {
+                                show: false,
+                                feature: {
+                                    dataZoom: {
+                                        yAxisIndex: 'none'
+                                    },
+                                    dataView: { readOnly: false },
+                                    magicType: { type: ['line', 'bar'] },
+                                    restore: {},
+                                    saveAsImage: {}
+                                }
+                            },
+                            xAxis: {
+                                type: 'category',
+                                boundaryGap: false,
+                                data: tow_date,
+                                axisLine: { lineStyle: { color: '#8392A5' } }
+                            },
+                            yAxis: {
+                                type: 'value',
+                                splitLine: {
+                                    show: false
+                                },
+                                axisLine: { lineStyle: { color: '#8392A5' } },
+                            },
+                            series: twoData_arr
+                        };
 
 
-                        // myChart_stock_cash_flow.setOption(stock_cash_flow)
+                        myChart_stock_cash_flow.setOption(stock_cash_flow)
 
 
 
@@ -1022,7 +1051,7 @@ $.ajax({
                     var data = res.data;
                     var dayData = [];
                     data.forEach(item => {
-                        dayData.push([item.date, item.kai, item.shou, item.low, item.high, item.total_count])
+                        dayData.push([item.date.replace(/-/g,'.'), item.kai, item.shou, item.low, item.high, item.total_count])
                     })
                     var mainContainer = document.getElementById('weekline');
                     var resizeMainContainer = function () {
@@ -1298,7 +1327,7 @@ $.ajax({
                     var data = res.data;
                     var dayData = [];
                     data.forEach(item => {
-                        dayData.push([item.date, item.kai, item.shou, item.low, item.high, item.total_count])
+                        dayData.push([item.date.replace(/-/g,'.'), item.kai, item.shou, item.low, item.high, item.total_count])
                     })
                     var mainContainer = document.getElementById('monthline');
                     var resizeMainContainer = function () {
