@@ -431,7 +431,8 @@ $.ajax({
                             type: 'line',
                             stack: '总量',
                             data: balance
-                        },{
+                        }]
+                        var towArr = [,{
                             name: '融券余额(股)',
                             type: 'line',
                             stack: '总量',
@@ -570,7 +571,7 @@ $.ajax({
                         var stock_cash_flow = {
                             backgroundColor: '#000',
                             title: {
-                                text: '融资融券',
+                                text: '融资',
                                 textStyle: {
                                     color: '#fff'
                                 }
@@ -623,52 +624,52 @@ $.ajax({
 
 
 
-                        // var myChart_stock_liabilities = echarts.init(document.getElementById('stock_liabilities'))
+                        var myChart_stock_liabilities = echarts.init(document.getElementById('stock_liabilities'))
 
-                        // var stock_liabilities = {
-                        //     backgroundColor: '#000',
-                        //     title: {
-                        //         text: '资产负债趋势',
-                        //         textStyle: {
-                        //             color: '#fff'
-                        //         }
-                        //     },
-                        //     tooltip: {
-                        //         trigger: 'axis'
-                        //     },
-                        //     // legend: {
-                        //     //     data: ['经营活动产生的现金流量净额', '投资活动产生的现金流量净额', '筹资活动产生的现金流量净额', '期末现金及现金等价物余额']
-                        //     // },
-                        //     grid: {
-                        //         left: '3%',
-                        //         right: '4%',
-                        //         bottom: '3%',
-                        //         containLabel: true
-                        //     },
-                        //     toolbox: {
-                        //         show: false,
-                        //         feature: {
-                        //             saveAsImage: {}
-                        //         }
-                        //     },
-                        //     xAxis: {
-                        //         type: 'category',
-                        //         boundaryGap: false,
-                        //         data: date,
-                        //         axisLine: { lineStyle: { color: '#8392A5' } }
-                        //     },
-                        //     yAxis: {
-                        //         type: 'value',
-                        //         splitLine: {
-                        //             show: false
-                        //         },
-                        //         axisLine: { lineStyle: { color: '#8392A5' } },
-                        //     },
-                        //     series: stock_liabilitiesData
-                        // };
+                        var stock_liabilities = {
+                            backgroundColor: '#000',
+                            title: {
+                                text: '融券',
+                                textStyle: {
+                                    color: '#fff'
+                                }
+                            },
+                            tooltip: {
+                                trigger: 'axis'
+                            },
+                            // legend: {
+                            //     data: ['经营活动产生的现金流量净额', '投资活动产生的现金流量净额', '筹资活动产生的现金流量净额', '期末现金及现金等价物余额']
+                            // },
+                            grid: {
+                                left: '3%',
+                                right: '4%',
+                                bottom: '3%',
+                                containLabel: true
+                            },
+                            toolbox: {
+                                show: false,
+                                feature: {
+                                    saveAsImage: {}
+                                }
+                            },
+                            xAxis: {
+                                type: 'category',
+                                boundaryGap: false,
+                                data: tow_date,
+                                axisLine: { lineStyle: { color: '#8392A5' } }
+                            },
+                            yAxis: {
+                                type: 'value',
+                                splitLine: {
+                                    show: false
+                                },
+                                axisLine: { lineStyle: { color: '#8392A5' } },
+                            },
+                            series: towArr
+                        };
 
 
-                        // myChart_stock_liabilities.setOption(stock_liabilities)
+                        myChart_stock_liabilities.setOption(stock_liabilities)
 
 
                         // 分数
