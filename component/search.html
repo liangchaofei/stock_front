@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime: 2020-02-23 16:37:19
+ * @LastEditTime: 2020-02-23 16:38:58
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -751,11 +751,11 @@
                            autoHeight:true,
                            loop:true,//是否循环播放
                            setWrapperSize:true,
-                           autoplay:false,
-                        //    {
-                        //      delay: 5000,
-                        //      disableOnInteraction: false,
-                        //    },
+                           autoplay:
+                           {
+                             delay: 5000,
+                             disableOnInteraction: false,
+                           },
                            pagination:  '.swiper-pagination',//分页
                            effect : 'slide',//动画效果
                       }
