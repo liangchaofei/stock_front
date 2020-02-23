@@ -412,103 +412,103 @@ $.ajax({
                         $('#detail_net_address').text(stock.net_address);
                         $('#detail_organizational_form').text(stock.organizational_form);
                         // 现金流量表 
-                        var stock_cash_flow = data.stock_cash_flow;
-                        var date = [], cash_remain = [], fundraising_cash_flow = [], invest_cash_flow = [], manage_cash_flow = [];
-                        stock_cash_flow.forEach(item => {
-                            date.push(item.date);
-                            cash_remain.push(item.cash_remain);
-                            fundraising_cash_flow.push(item.fundraising_cash_flow)
-                            invest_cash_flow.push(item.invest_cash_flow)
-                            manage_cash_flow.push(item.manage_cash_flow)
-                        })
-                        stock_cash_flowData = [{
-                            name: '经营活动产生的现金流量净额',
-                            type: 'line',
-                            stack: '总量',
-                            data: manage_cash_flow
-                        }, {
-                            name: '投资活动产生的现金流量净额',
-                            type: 'line',
-                            stack: '总量',
-                            data: invest_cash_flow
-                        }, {
-                            name: '筹资活动产生的现金流量净额',
-                            type: 'line',
-                            stack: '总量',
-                            data: fundraising_cash_flow
-                        }, {
-                            name: '期末现金及现金等价物余额',
-                            type: 'line',
-                            stack: '总量',
-                            data: cash_remain
-                        }]
+                        // var stock_cash_flow = data.stock_cash_flow;
+                        // var date = [], cash_remain = [], fundraising_cash_flow = [], invest_cash_flow = [], manage_cash_flow = [];
+                        // stock_cash_flow.forEach(item => {
+                        //     date.push(item.date);
+                        //     cash_remain.push(item.cash_remain);
+                        //     fundraising_cash_flow.push(item.fundraising_cash_flow)
+                        //     invest_cash_flow.push(item.invest_cash_flow)
+                        //     manage_cash_flow.push(item.manage_cash_flow)
+                        // })
+                        // stock_cash_flowData = [{
+                        //     name: '经营活动产生的现金流量净额',
+                        //     type: 'line',
+                        //     stack: '总量',
+                        //     data: manage_cash_flow
+                        // }, {
+                        //     name: '投资活动产生的现金流量净额',
+                        //     type: 'line',
+                        //     stack: '总量',
+                        //     data: invest_cash_flow
+                        // }, {
+                        //     name: '筹资活动产生的现金流量净额',
+                        //     type: 'line',
+                        //     stack: '总量',
+                        //     data: fundraising_cash_flow
+                        // }, {
+                        //     name: '期末现金及现金等价物余额',
+                        //     type: 'line',
+                        //     stack: '总量',
+                        //     data: cash_remain
+                        // }]
 
                         // 资产负债表
-                        var stock_liabilities = data.stock_liabilities;
-                        var current_assets = [], not_current_assets = [], total_assets = [], current_liabilities = [], not_current_liabilities = [], total_liabilities = [];
-                        stock_liabilities.forEach(item => {
-                            current_assets.push(item.current_assets);
-                            not_current_assets.push(item.not_current_assets);
-                            total_assets.push(item.total_assets);
-                            current_liabilities.push(item.current_liabilities);
-                            not_current_liabilities.push(item.not_current_liabilities);
-                            total_liabilities.push(item.total_liabilities);
-                        })
-                        stock_liabilitiesData = [{
-                            name: '流动资产合计',
-                            type: 'line',
-                            stack: '总量',
-                            data: current_assets
-                        }, {
-                            name: '非流动资产合计',
-                            type: 'line',
-                            stack: '总量',
-                            data: not_current_assets
-                        }, {
-                            name: '资产总计',
-                            type: 'line',
-                            stack: '总量',
-                            data: total_assets
-                        }, {
-                            name: '流动负债合计',
-                            type: 'line',
-                            stack: '总量',
-                            data: current_liabilities
-                        }, {
-                            name: '非流动负债合计',
-                            type: 'line',
-                            stack: '总量',
-                            data: not_current_liabilities
-                        }, {
-                            name: '负债合计',
-                            type: 'line',
-                            stack: '总量',
-                            data: total_liabilities
-                        }]
+                        // var stock_liabilities = data.stock_liabilities;
+                        // var current_assets = [], not_current_assets = [], total_assets = [], current_liabilities = [], not_current_liabilities = [], total_liabilities = [];
+                        // stock_liabilities.forEach(item => {
+                        //     current_assets.push(item.current_assets);
+                        //     not_current_assets.push(item.not_current_assets);
+                        //     total_assets.push(item.total_assets);
+                        //     current_liabilities.push(item.current_liabilities);
+                        //     not_current_liabilities.push(item.not_current_liabilities);
+                        //     total_liabilities.push(item.total_liabilities);
+                        // })
+                        // stock_liabilitiesData = [{
+                        //     name: '流动资产合计',
+                        //     type: 'line',
+                        //     stack: '总量',
+                        //     data: current_assets
+                        // }, {
+                        //     name: '非流动资产合计',
+                        //     type: 'line',
+                        //     stack: '总量',
+                        //     data: not_current_assets
+                        // }, {
+                        //     name: '资产总计',
+                        //     type: 'line',
+                        //     stack: '总量',
+                        //     data: total_assets
+                        // }, {
+                        //     name: '流动负债合计',
+                        //     type: 'line',
+                        //     stack: '总量',
+                        //     data: current_liabilities
+                        // }, {
+                        //     name: '非流动负债合计',
+                        //     type: 'line',
+                        //     stack: '总量',
+                        //     data: not_current_liabilities
+                        // }, {
+                        //     name: '负债合计',
+                        //     type: 'line',
+                        //     stack: '总量',
+                        //     data: total_liabilities
+                        // }]
                         // 利润表
-                        var stock_profit = data.stock_profit;
-                        var gross_trading_income = [], total_operating_cost = [], net_profit = [];
-                        stock_profit.forEach(item => {
-                            gross_trading_income.push(item.gross_trading_income);
-                            total_operating_cost.push(item.total_operating_cost);
-                            net_profit.push(item.net_profit);
-                        })
-                        stock_profitData = [{
-                            name: '营业总收入',
-                            type: 'line',
-                            stack: '总量',
-                            data: gross_trading_income
-                        }, {
-                            name: '营业总成本',
-                            type: 'line',
-                            stack: '总量',
-                            data: total_operating_cost
-                        }, {
-                            name: '净利润 ',
-                            type: 'line',
-                            stack: '总量',
-                            data: net_profit
-                        }]
+                        // var stock_profit = data.stock_profit;
+                        // var gross_trading_income = [], total_operating_cost = [], net_profit = [];
+                        // stock_profit.forEach(item => {
+                        //     gross_trading_income.push(item.gross_trading_income);
+                        //     total_operating_cost.push(item.total_operating_cost);
+                        //     net_profit.push(item.net_profit);
+                        // })
+                        // stock_profitData = [{
+                        //     name: '营业总收入',
+                        //     type: 'line',
+                        //     stack: '总量',
+                        //     data: gross_trading_income
+                        // }, {
+                        //     name: '营业总成本',
+                        //     type: 'line',
+                        //     stack: '总量',
+                        //     data: total_operating_cost
+                        // }, {
+                        //     name: '净利润 ',
+                        //     type: 'line',
+                        //     stack: '总量',
+                        //     data: net_profit
+                        // }]
                         // 股票十大流通股东， 主要为了展示想比上一个季度报表的 change 变化情况
                         // var stockholder = data.stockholder;
                         // //固定和滚动
