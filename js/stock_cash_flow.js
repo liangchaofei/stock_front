@@ -421,7 +421,7 @@ $.ajax({
                         var twoData = data.rzrq;
                         
                         var all_count =[], balance = [],tow_date = [];
-                        twoData.length>0 && twoData.forEach(item => {
+                        twoData && twoData.length>0 && twoData.forEach(item => {
                             tow_date.push(item.date.replace(/-/g,'.'))
                             all_count.push(item.all_count)
                             balance.push(item.balance)
@@ -566,6 +566,10 @@ $.ajax({
                         })
                         // week
                         var ticket_history_weekly = data.ticket_history_weekly;
+                        if(twoData === null){
+                            $('#stock_cash_flow').hide()
+                            $('#stock_liabilities').hide()
+                        }
                         var myChart_stock_cash_flow = echarts.init(document.getElementById('stock_cash_flow'))
 
                         var stock_cash_flow = {
