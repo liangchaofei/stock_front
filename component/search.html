@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime: 2020-02-23 17:03:19
+ * @LastEditTime: 2020-02-23 17:14:10
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -71,15 +71,19 @@
             <div class="swiper-slide swiper-slide-duplicate swiper-slide-next" data-swiper-slide-index="2"
                 style="width: 320px;"><img src="./images/swiper-3.jpg"></div>
             <!-- Slides -->
-            <div class="swiper-slide" data-swiper-slide-index="0" style="width: 320px;height: 100px;">
-                <img src="../img/1.png" style="height: 100px;
+            
+            <div class="swiper-slide" data-swiper-slide-index="0" style="width: 320px;height: 100px;" id="a1">
+                
+                    <img src="../img/1.png" style="height: 100px;
                 width: 100%;">
                 <div style="position: relative;
                 top: -90px;
                 color: #fff;
                 text-align: center;">A股新一轮牛市或将开启! 买卖股票一定要用的网页版筛选神器!</div>
+               
             </div>
-            <div class="swiper-slide" data-swiper-slide-index="1" style="width: 320px;height: 100px;"><img
+            <div class="swiper-slide" data-swiper-slide-index="1" style="width: 320px;height: 100px;" id="a2">
+                    <img
                     src="../img/2.jpeg" style="height: 100px;
                     width: 100%;">
                 <div style="position: relative;
@@ -87,8 +91,8 @@
             color: #fff;
             text-align: center;">庚子年地狱开局，如何打好翻身战？</div>
             </div>
-            <div class="swiper-slide swiper-slide-prev" data-swiper-slide-index="2" style="width: 320px;height: 100px;">
-                <img src="../img/3.jpeg" style="height: 100px;
+            <div class="swiper-slide swiper-slide-prev" data-swiper-slide-index="2" style="width: 320px;height: 100px;" id="a3">
+                    <img src="../img/3.jpeg" style="height: 100px;
                 width: 100%;">
                 <div style="position: relative;
             top: -90px;
@@ -740,32 +744,13 @@
         });
 
 
-        // $.ajax({
-        //     url: "https://stock.zhixiutec.com/api/stock/pics",
-        //     success: function (res) {
-        //         var data = res.data;
-        //         var html = '';
-        //         data.forEach(item => {
-        //             html += `
-        //             <div class="swiper-slide" data-swiper-slide-index="0" style="width: 320px;height: 100px;">
-        //         <img src="${item.pic}" style="height: 100px;
-        //         width: 100%;">
-        //         <div style="position: relative;
-        //         top: -90px;
-        //         color: #fff;
-        //         text-align: center;">${item.content}</div>
-        // </div>
-        //             `
-        //         })
-        //         $('.swiper-wrapper').append(html)
-        //     }
-        // })
+  
     </script>
 
     <script>
         var mySwiper = new Swiper('.swiper-container',
             {
-                speed: 1500,//播放速度
+                speed: 2500,//播放速度
                 autoHeight: true,
                 loop: true,//是否循环播放
                 setWrapperSize: true,
@@ -778,6 +763,15 @@
                 effect: 'slide',//动画效果
             }
         );
+        $('#a1').on('click',function(){
+            window.open('https://mp.weixin.qq.com/s?__biz=MzA5NTkxNDk2Nw==&mid=2247483740&idx=1&sn=e592b3a0a143c4a12fbbfcb29ee14c0d&chksm=90b95fe4a7ced6f2dd13179aff31d7cbfa6da78dde8ff35de1384aeee1ece04bd86089e53fff&token=595900241&lang=zh_CN#rd',"_self")
+        })
+        $('#a2').on('click',function(){
+            window.open('https://mp.weixin.qq.com/s?__biz=MzA5NTkxNDk2Nw==&mid=2247483713&idx=1&sn=b7776d8eae0123430e027097e7e399dd&chksm=90b95ff9a7ced6ef3cc4bfdb0ecbf00d4bce8c3731022a6b2a52fca6901a8795202c2a9633be&token=595900241&lang=zh_CN#rd',"_self")
+        })
+        $('#a3').on('click',function(){
+            window.open('https://mp.weixin.qq.com/s?__biz=MzA5NTkxNDk2Nw==&mid=2247483747&idx=1&sn=00ba13c6b508d2d6cd28742d4cbfa571&chksm=90b95fdba7ced6cdab4e32e61d6a8276b4d827a77ee0e662587b7e3cc87e42b34ea41448c3c2&token=595900241&lang=zh_CN#rd',"_self")
+        })
         var currentPage = 1;
         $('#must_data').on('click', function () {
             $.toast("该条件会查找必须满足所选K线条件组合的股票", "text");
