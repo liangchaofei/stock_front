@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime: 2020-02-23 17:00:32
+ * @LastEditTime: 2020-02-23 17:03:19
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -740,26 +740,26 @@
         });
 
 
-        $.ajax({
-            url: "https://stock.zhixiutec.com/api/stock/pics",
-            success: function (res) {
-                var data = res.data;
-                var html = '';
-                data.forEach(item => {
-                    html += `
-                    <div class="swiper-slide" data-swiper-slide-index="0" style="width: 320px;height: 100px;">
-                <img src="${item.pic}" style="height: 100px;
-                width: 100%;">
-                <div style="position: relative;
-                top: -90px;
-                color: #fff;
-                text-align: center;">${item.content}</div>
-        </div>
-                    `
-                })
-                $('.swiper-wrapper').append(html)
-            }
-        })
+        // $.ajax({
+        //     url: "https://stock.zhixiutec.com/api/stock/pics",
+        //     success: function (res) {
+        //         var data = res.data;
+        //         var html = '';
+        //         data.forEach(item => {
+        //             html += `
+        //             <div class="swiper-slide" data-swiper-slide-index="0" style="width: 320px;height: 100px;">
+        //         <img src="${item.pic}" style="height: 100px;
+        //         width: 100%;">
+        //         <div style="position: relative;
+        //         top: -90px;
+        //         color: #fff;
+        //         text-align: center;">${item.content}</div>
+        // </div>
+        //             `
+        //         })
+        //         $('.swiper-wrapper').append(html)
+        //     }
+        // })
     </script>
 
     <script>
