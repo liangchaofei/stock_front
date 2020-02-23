@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime: 2020-02-23 16:43:29
+ * @LastEditTime: 2020-02-23 17:00:32
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -67,23 +67,40 @@
 
     <div class="swiper-container swiper-container-horizontal">
         <!-- Additional required wrapper -->
-        <div class="swiper-wrapper" style="transform: translate3d(-1280px, 0px, 0px); transition-duration: 0ms;"><div class="swiper-slide swiper-slide-duplicate swiper-slide-next" data-swiper-slide-index="2" style="width: 320px;"><img src="./images/swiper-3.jpg"></div>
-          <!-- Slides -->
-          <!-- <div class="swiper-slide" data-swiper-slide-index="0" style="width: 320px;height: 100px;">
-                <img src="http://jqweui.com/dist/demos/images/swiper-1.jpg" style="height: 100px;
+        <div class="swiper-wrapper" style="transform: translate3d(-1280px, 0px, 0px); transition-duration: 0ms;">
+            <div class="swiper-slide swiper-slide-duplicate swiper-slide-next" data-swiper-slide-index="2"
+                style="width: 320px;"><img src="./images/swiper-3.jpg"></div>
+            <!-- Slides -->
+            <div class="swiper-slide" data-swiper-slide-index="0" style="width: 320px;height: 100px;">
+                <img src="../img/1.png" style="height: 100px;
                 width: 100%;">
                 <div style="position: relative;
                 top: -90px;
                 color: #fff;
-                text-align: center;">111</div>
+                text-align: center;">A股新一轮牛市或将开启! 买卖股票一定要用的网页版筛选神器!</div>
+            </div>
+            <div class="swiper-slide" data-swiper-slide-index="1" style="width: 320px;height: 100px;"><img
+                    src="../img/2.jpeg" style="height: 100px;
+                    width: 100%;">
+                <div style="position: relative;
+            top: -90px;
+            color: #fff;
+            text-align: center;">庚子年地狱开局，如何打好翻身战？</div>
+            </div>
+            <div class="swiper-slide swiper-slide-prev" data-swiper-slide-index="2" style="width: 320px;height: 100px;">
+                <img src="../img/3.jpeg" style="height: 100px;
+                width: 100%;">
+                <div style="position: relative;
+            top: -90px;
+            color: #fff;
+            text-align: center;">下周A股周K线上看收阴可能性较大，赚钱效应不明显。长线而言，技术上还需要多空的反复拉锯才能确认牛市行情</div>
+            </div>
         </div>
-          <div class="swiper-slide" data-swiper-slide-index="1" style="width: 320px;height: 100px;"><img src="http://jqweui.com/dist/demos/images/swiper-2.jpg"></div>
-          <div class="swiper-slide swiper-slide-prev" data-swiper-slide-index="2" style="width: 320px;height: 100px;"><img src="http://jqweui.com/dist/demos/images/swiper-3.jpg"></div>
-        <div class="swiper-slide swiper-slide-duplicate swiper-slide-active" data-swiper-slide-index="0" style="width: 320px;height: 100px;"><img src="http://jqweui.com/dist/demos/images/swiper-1.jpg"></div> -->
-    </div>
         <!-- If we need pagination -->
-        <div class="swiper-pagination swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span></div>
-      </div>
+        <div class="swiper-pagination swiper-pagination-bullets"><span
+                class="swiper-pagination-bullet swiper-pagination-bullet-active"></span><span
+                class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span></div>
+    </div>
     <div>
         <!-- 基础信息 -->
 
@@ -213,7 +230,8 @@
                 <div class="weui-cell">
                     <div class="weui-cell__hd"><label for="name" class="weui-label">创新高/低</label></div>
                     <div class="weui-cell__bd">
-                        <input class="weui-input" id="newpriceData" type="text" value="" readonly="" data-values="1,2,3">
+                        <input class="weui-input" id="newpriceData" type="text" value="" readonly=""
+                            data-values="1,2,3">
                     </div>
                 </div>
 
@@ -616,31 +634,31 @@
 
         <!-- 查询条件 -->
         <div class="weui-panel weui-panel_access" id="sort_open">
-            <div class="weui-panel__hd"  style="font-size: 15px;">
+            <div class="weui-panel__hd" style="font-size: 15px;">
                 排序筛选<i class="down"></i><i class="up" style="display:none;"></i>
             </div>
             <div class="weui-panel__bd" id="sort_content">
                 <p style="font-size: 12px;color: #aaa;margin-left: 15px;">该条件只对会员使用</p>
-                                <!-- 排序 -->
-                                <!-- <div class="weui-panel__hd" id="sort_open" style="font-size: 15px;">
+                <!-- 排序 -->
+                <!-- <div class="weui-panel__hd" id="sort_open" style="font-size: 15px;">
                                     排序<i class="down"></i><i class="up" style="display:none;"></i>
                                 </div> -->
-                                <div class="weui-panel__bd" id="sort_content">
-                                    <div class="weui-cell">
-                                        <div class="weui-cell__hd"><label for="name" class="weui-label">排序类型</label></div>
-                                        <div class="weui-cell__bd">
-                                            <input class="weui-input" id="sort_type" type="text" value="" readonly=""
-                                                data-values="1,2,3">
-                                        </div>
-                                    </div>
-                                    <div class="weui-cell">
-                                        <div class="weui-cell__hd"><label for="name" class="weui-label">排序方式</label></div>
-                                        <div class="weui-cell__bd">
-                                            <input class="weui-input" id="sort_way" type="text" value="" readonly=""
-                                                data-values="1,2,3">
-                                        </div>
-                                    </div>
-                                </div>
+                <div class="weui-panel__bd" id="sort_content">
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd"><label for="name" class="weui-label">排序类型</label></div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" id="sort_type" type="text" value="" readonly=""
+                                data-values="1,2,3">
+                        </div>
+                    </div>
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd"><label for="name" class="weui-label">排序方式</label></div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" id="sort_way" type="text" value="" readonly=""
+                                data-values="1,2,3">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -723,8 +741,8 @@
 
 
         $.ajax({
-            url:"https://stock.zhixiutec.com/api/stock/pics",
-            success:function(res){
+            url: "https://stock.zhixiutec.com/api/stock/pics",
+            success: function (res) {
                 var data = res.data;
                 var html = '';
                 data.forEach(item => {
@@ -746,20 +764,20 @@
 
     <script>
         var mySwiper = new Swiper('.swiper-container',
-                    {
-                           speed:1500,//播放速度
-                           autoHeight:true,
-                           loop:true,//是否循环播放
-                           setWrapperSize:true,
-                           autoplay:
-                           {
-                             delay: 5000,
-                             disableOnInteraction: false,
-                           },
-                           pagination:  '.swiper-pagination',//分页
-                           effect : 'slide',//动画效果
-                      }
-                 );
+            {
+                speed: 1500,//播放速度
+                autoHeight: true,
+                loop: true,//是否循环播放
+                setWrapperSize: true,
+                autoplay:
+                {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+                pagination: '.swiper-pagination',//分页
+                effect: 'slide',//动画效果
+            }
+        );
         var currentPage = 1;
         $('#must_data').on('click', function () {
             $.toast("该条件会查找必须满足所选K线条件组合的股票", "text");
@@ -772,9 +790,9 @@
 
         // 渲染高级条件
         $.ajax({
-            url:'https://stock.zhixiutec.com/api/high_conditions',
-            success:function(res){
-                console.log('res',res)
+            url: 'https://stock.zhixiutec.com/api/high_conditions',
+            success: function (res) {
+                console.log('res', res)
             }
         })
         var date = '',
@@ -841,8 +859,8 @@
         var seventMin = -10000, sevenMax = 10000;
         var eightMin = -10000, eightMax = 10000;
         var nineMin = -10000, nineMax = 10000;
-        var last_day_range_min = -10000,last_day_range_max = 10000;
-        var jiaquanshouyiMin = -10000,jiaquanshouyiMax = 10000;
+        var last_day_range_min = -10000, last_day_range_max = 10000;
+        var jiaquanshouyiMin = -10000, jiaquanshouyiMax = 10000;
 
         var tenMin = -10000, tenMax = 10000;
         var elevenMin = -10000, elevenMax = 10000;
@@ -867,7 +885,7 @@
         var twentysixMin = -10000, twentysixMax = 10000;
 
         // var dcountlow = 0, wcountlow =0, mcountlow = 0, dcounthigh=0, wcounthigh=0, mcounthigh=0;
-        
+
         $('#majorkeyword').bind('input propertychange', function (e) {
             majorkeyword = e.delegateTarget.value
         })
@@ -1122,9 +1140,9 @@
                             min: firstMin,
                             max: firstMax
                         },
-                        "jiaquanshouyi":{
-                            min:jiaquanshouyiMin,
-                            max:jiaquanshouyiMax
+                        "jiaquanshouyi": {
+                            min: jiaquanshouyiMin,
+                            max: jiaquanshouyiMax
                         },
                         "jinzichanafter": {
                             min: secondMin,
@@ -1148,7 +1166,7 @@
                         "last_amplitude": { "min": seventMin, "max": sevenMax },
                         "last_turnoverrate": { "min": eightMin, "max": eightMax },
                         "last_price": { "min": nineMin, "max": nineMax },
-                        "last_day_range":{"min":last_day_range_min,"max":last_day_range_max}
+                        "last_day_range": { "min": last_day_range_min, "max": last_day_range_max }
                     },
                     "yl_ability": {
                         "yl_zongzichanlirunlv": {
@@ -1227,7 +1245,7 @@
                 },
                 "date": date,
                 "order_type": order_type,
-                    "order": order,
+                "order": order,
                 // "save": true
             }
 
@@ -1257,7 +1275,7 @@
                             <div class="weui-cell__bd">
                                 <span style="font-size:16px;display:inline-block;width:7rem">${dataList[i].name}
                                     <span style="font-size:12px;color:#aaa">${dataList[i].tape}</span>
-                                    ${dataList[i].rong === true ? '<span style="font-size:12px;color: #fff;display: inline-block;width: 20px;height: 20px;background: red;text-align: center;line-height: 20px;">融</span>':''}
+                                    ${dataList[i].rong === true ? '<span style="font-size:12px;color: #fff;display: inline-block;width: 20px;height: 20px;background: red;text-align: center;line-height: 20px;">融</span>' : ''}
                                     </span>
                               
                                 <span class=${bigPercent}>${dataList[i].price}元</span>
