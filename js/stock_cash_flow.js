@@ -52,7 +52,6 @@ var code = getQueryString('code');
 var date = getUrlParam('date');
 var stock_cash_flowData = [], stock_liabilitiesData = [], stock_profitData = [];
 
-console.log('aaa',escape(code))
 $('#loadimg').css("display", "block")
 
 $.ajax({
@@ -132,7 +131,6 @@ $.ajax({
                         $.ajax({
                             url: `https://stock.zhixiutec.com/api/stock/public?type=news&code=${code}`,
                             success: function (res) {
-                                console.log('res', res)
                                 var data = res.data;
                                 var zfData = []
                                 data.forEach(item => {
@@ -183,7 +181,6 @@ $.ajax({
                         $.ajax({
                             url: `https://stock.zhixiutec.com/api/stock/public?type=reports&code=${code}`,
                             success: function (res) {
-                                console.log('res', res)
                                 var data = res.data;
                                 var zfData = []
                                 data.forEach(item => {
