@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2020-02-12 15:35:42
- * @LastEditTime : 2020-02-15 16:33:31
- * @LastEditors  : Please set LastEditors
+ * @LastEditTime: 2020-02-26 18:46:25
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp2/static/component/zxg.html
  -->
@@ -27,6 +27,7 @@
     <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
     <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/swiper.min.js"></script>
     <script>
+     
         $.ajax({
             url: 'https://stock.zhixiutec.com/api/my_select',
             success: function (res) {
@@ -34,6 +35,7 @@
                 var str = '';
                 data.forEach(item => {
                     console.log('item',item)
+                    
                     str += `
                       <div class="weui-cell weui-cell_swiped gogogo" >
                        

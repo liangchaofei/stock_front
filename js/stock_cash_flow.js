@@ -341,7 +341,7 @@ $.ajax({
 
                         // 加入自选股
                        $('#joinBtn').on('click',function(){
-                        var joinBtnData = {"code":code, "name":predict.name}
+                        var joinBtnData = {"code":predict.code, "name":predict.name}
                         $.ajax({
                             url:'https://stock.zhixiutec.com/api/add_stock',
                             type:'post',
