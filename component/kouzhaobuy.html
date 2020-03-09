@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime: 2020-03-09 20:55:51
+ * @LastEditTime: 2020-03-09 20:57:18
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -120,7 +120,7 @@
                                                          type: 'post',
                                                          data: JSON.stringify({ "id": member,content:`${contact_val}|${phone_val}` }),
                                                          success: function (res) {
-                                                             alert(res)
+                                                             alert('success')
                                                              var result = res.data;
                                                              wx.config({
                                                                  debug: false,
@@ -163,7 +163,7 @@
  
                                                          },
                                                          error:function(err){
-                                                             alert(err)
+                                                             alert('error')
                                                          }
                                                      })
                                                  }else if(!member){
