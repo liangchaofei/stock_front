@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-17 19:52:10
- * @LastEditTime: 2020-03-09 20:52:36
+ * @LastEditTime: 2020-03-09 20:55:51
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gp/static/component/list.html
@@ -114,12 +114,13 @@
                                                      $.toast('请输入联系方式','cancel')
                                                      return;
                                                  }
-                                                 if(member  && contact_val){
+                                                 if(member  && contact_val && phone_val){
                                                      $.ajax({
                                                          url: 'https://stock.zhixiutec.com/api/jsapi_pay',
                                                          type: 'post',
                                                          data: JSON.stringify({ "id": member,content:`${contact_val}|${phone_val}` }),
                                                          success: function (res) {
+                                                             alert(res)
                                                              var result = res.data;
                                                              wx.config({
                                                                  debug: false,
@@ -160,12 +161,13 @@
                                                                  });
                                                              });
  
+                                                         },
+                                                         error:function(err){
+                                                             alert(err)
                                                          }
                                                      })
                                                  }else if(!member){
                                                      $.toast("请选择进行充值", "cancel");
-                                                 }else if(!$('#weuiAgree').is(':checked')){
-                                                     $.toast("请勾选同意并阅读服务条款", "cancel");
                                                  }
                                              })
  
